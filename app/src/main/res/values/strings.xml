@@ -442,4 +442,5 @@
     <string name="not_more_hundred">The percent can\'t be more than hundred.</string>
     <string name="not_more_than_sale_price">Discount amount can\'t be more than sale price.</string>
     <string name="cost_sale_product_tag_image_title">costSaleProductTagImage</string>
+    <string name="intro_kaseb_slang">care your customers</string>
 </resources>

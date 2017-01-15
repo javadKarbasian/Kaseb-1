@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.Others.DrawerActivity;
 
-public class Kaseb extends DrawerActivity {
+public class Dashboard extends DrawerActivity {
 
     private KasebDashBoard kasebDashBoard = new KasebDashBoard();
     private FragmentManager fragmentManager = getSupportFragmentManager();

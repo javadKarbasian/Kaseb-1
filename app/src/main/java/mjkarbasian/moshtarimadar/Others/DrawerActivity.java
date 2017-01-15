@@ -15,8 +15,8 @@ import android.view.MenuItem;
 import mjkarbasian.moshtarimadar.AboutUs.AboutUs;
 import mjkarbasian.moshtarimadar.Costs.Costs;
 import mjkarbasian.moshtarimadar.Customers.Customers;
+import mjkarbasian.moshtarimadar.Dashboard;
 import mjkarbasian.moshtarimadar.Debaters.Debaters;
-import mjkarbasian.moshtarimadar.Kaseb;
 import mjkarbasian.moshtarimadar.Products.Products;
 import mjkarbasian.moshtarimadar.R;
 import mjkarbasian.moshtarimadar.Sales.Sales;
@@ -88,7 +88,7 @@ public class DrawerActivity extends AppCompatActivity
         Intent intent;
         if (id == R.id.nav_dashboard) {
             // Handle the camera action
-            intent = new Intent(this, Kaseb.class);
+            intent = new Intent(this, Dashboard.class);
             finish();
             startActivity(intent);
         }
