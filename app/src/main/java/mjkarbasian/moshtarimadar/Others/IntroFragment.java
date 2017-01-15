@@ -46,6 +46,8 @@ public class IntroFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), Dashboard.class);
                 getActivity().finish();
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
             }
 
             @Override

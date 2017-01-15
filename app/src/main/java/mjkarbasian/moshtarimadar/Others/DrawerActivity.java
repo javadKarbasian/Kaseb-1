@@ -17,6 +17,7 @@ import mjkarbasian.moshtarimadar.Costs.Costs;
 import mjkarbasian.moshtarimadar.Customers.Customers;
 import mjkarbasian.moshtarimadar.Dashboard;
 import mjkarbasian.moshtarimadar.Debaters.Debaters;
+import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.Products.Products;
 import mjkarbasian.moshtarimadar.R;
 import mjkarbasian.moshtarimadar.Sales.Sales;
@@ -91,6 +92,8 @@ public class DrawerActivity extends AppCompatActivity
             intent = new Intent(this, Dashboard.class);
             finish();
             startActivity(intent);
+            Utility.setActivityTransition(this);
+
         }
 
         if (id == R.id.nav_customers) {
@@ -98,34 +101,37 @@ public class DrawerActivity extends AppCompatActivity
             intent = new Intent(this, Customers.class);
             finish();
             startActivity(intent);
+            Utility.setActivityTransition(this);
         } else if (id == R.id.nav_debtors) {
             intent = new Intent(this, Debaters.class);
             finish();
             startActivity(intent);
-
+            Utility.setActivityTransition(this);
         } else if (id == R.id.nav_sales) {
             intent = new Intent(this, Sales.class);
             finish();
             startActivity(intent);
-
+            Utility.setActivityTransition(this);
         } else if (id == R.id.nav_costs) {
             intent = new Intent(this, Costs.class);
             finish();
             startActivity(intent);
-
+            Utility.setActivityTransition(this);
         } else if (id == R.id.nav_products) {
             intent = new Intent(this, Products.class);
             finish();
             startActivity(intent);
-
+            Utility.setActivityTransition(this);
         } else if (id == R.id.nav_setting) {
             intent = new Intent(this, MySetting.class);
             finish();
             startActivity(intent);
-
+            Utility.setActivityTransition(this);
         } else if (id == R.id.nav_about_us) {
             intent = new Intent(this, AboutUs.class);
+            finish();
             startActivity(intent);
+            Utility.setActivityTransition(this);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

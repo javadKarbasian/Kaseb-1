@@ -1,9 +1,11 @@
 package mjkarbasian.moshtarimadar.Helpers;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
@@ -1739,5 +1741,14 @@ public class Utility {
             chars[i] = ch;
         }
         return new String(chars);
+    }
+
+    public static void setActivityTransition(Activity activity) {
+        Configuration config = activity.getResources().getConfiguration();
+        if (config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+            activity.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        } else {
+            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
     }
 }
