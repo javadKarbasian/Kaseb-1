@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
@@ -22,6 +23,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -70,9 +73,11 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
     TypesSettingAdapter cursorAdapter = null;
     ContentValues costValues = new ContentValues();
     ContentValues saleValues = new ContentValues();
+    FloatingActionButton fab;
     private String searchQuery;
     private String sortOrder;
     private int sortId;
+
     //endregion declare Values
 
     public CostSaleProductList() {
@@ -135,6 +140,10 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
         View rootView = inflater.inflate(R.layout.fragment_cost_sale_product, container, false);
         mListView = (ListView) rootView.findViewById(R.id.list_view_cost_sale_product);
         mListView.setAdapter(mAdapter);
+
+        //hide fab to show it as animation
+        fab = (FloatingActionButton) rootView.findViewById(R.id.fab_cost_sale_product);
+        fab.hide();
 
         //region mListView setOnItemClickListener
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -464,6 +473,15 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
         Log.d(LOG_TAG, "onStart");
         super.onStart();
         updateList();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //define animation for scaling fab
+        Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
+        fab.startAnimation(hyperspaceJumpAnimation);
+        fab.show();
     }
 
     @Override

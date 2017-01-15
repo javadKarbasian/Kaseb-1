@@ -21,6 +21,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -292,6 +294,10 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                 productCode.setEnabled(true);
                 productUnit.setEnabled(true);
                 productDescription.setEnabled(true);
+
+                //set fab animation and show
+                Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
+                fab.startAnimation(hyperspaceJumpAnimation);
                 fab.show();
 
                 break;

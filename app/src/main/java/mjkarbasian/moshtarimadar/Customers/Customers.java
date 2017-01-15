@@ -20,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -46,6 +48,7 @@ public class Customers extends DrawerActivity {
     Fragment customerInsert = new CustomerInsert();
     Bitmap photo;
     Long customerId;
+
 
 
     android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
@@ -90,6 +93,9 @@ public class Customers extends DrawerActivity {
     }
 
     public void fab_customers(View v) {
+        Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(this, R.anim.fab_on_click);
+        v.startAnimation(hyperspaceJumpAnimation);
+        
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, customerInsert);
         fragmentTransaction.addToBackStack(null);

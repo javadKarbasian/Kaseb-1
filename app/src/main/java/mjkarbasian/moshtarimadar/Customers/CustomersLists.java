@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -16,6 +17,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -33,7 +36,7 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
     final static int FRAGMENT_CUSTOMER_LOADER = 2;
     private final String LOG_TAG = CustomersLists.class.getSimpleName();
     String searchQuery;
-
+    FloatingActionButton fab;
     CustomerAdapter mCustomerAdapter = null;
     ListView mListView;
     String[] mProjection;
@@ -64,6 +67,9 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
                 0);
 
         View rootView = inflater.inflate(R.layout.fragment_customers, container, false);
+        //hide fab to show it as animation
+        fab = (FloatingActionButton) rootView.findViewById(R.id.fab_customers);
+        fab.hide();
         mListView = (ListView) rootView.findViewById(R.id.list_view_customers);
         mListView.setAdapter(mCustomerAdapter);
 
@@ -132,7 +138,6 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
             }
         });
         //endregion mListView setOnItemLongClickListener
-
         return rootView;
     }
 
@@ -168,6 +173,15 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
         Log.d(LOG_TAG, "onStart");
         super.onStart();
         updateList();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //define animation for scaling fab
+        Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
+        fab.startAnimation(hyperspaceJumpAnimation);
+        fab.show();
     }
 
     @Override
