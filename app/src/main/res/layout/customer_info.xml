@@ -2,7 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -173,67 +175,6 @@
                 android:layout_weight="2"
                 android:onClick="share_customer"
                 android:src="@drawable/share_variant" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:orientation="horizontal">
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:textColorHint="@color/colorAccent">
-
-                <EditText
-                    android:id="@+id/customer_birth_day"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="8"
-                    android:hint="@string/hint_birth_day"
-                    android:inputType="date"
-                    android:maxLength="10"
-                    android:textAppearance="?android:textAppearanceMedium" />
-
-            </android.support.design.widget.TextInputLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:orientation="horizontal">
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:textColorHint="@color/colorAccent">
-
-                <EditText
-                    android:id="@+id/customer_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="8"
-                    android:hint="@string/hint_description"
-                    android:inputType="text"
-                    android:textAppearance="?android:textAppearanceMedium" />
-
-            </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
 
@@ -444,6 +385,37 @@
                 android:textColorHint="@color/colorAccent">
 
                 <EditText
+                    android:id="@+id/customer_birth_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="8"
+                    android:hint="@string/hint_birth_day"
+                    android:inputType="date"
+                    android:maxLength="10"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:textColorHint="@color/colorAccent">
+
+                <EditText
                     android:id="@+id/customer_address_country"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -543,6 +515,41 @@
                     android:layout_weight="8"
                     android:hint="@string/hint_address_postal_code"
                     android:inputType="textPostalAddress"
+                    android:textAppearance="?android:textAppearanceMedium" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:textColorHint="@color/colorAccent">
+
+                <EditText
+                    android:id="@+id/customer_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="8"
+                    android:gravity="top|start"
+                    android:hint="@string/hint_description"
+                    android:inputType="textMultiLine"
+                    android:lines="4"
+                    android:maxLines="4"
+                    android:minLines="1"
+                    android:scrollbars="vertical"
                     android:textAppearance="?android:textAppearanceMedium" />
 
             </android.support.design.widget.TextInputLayout>

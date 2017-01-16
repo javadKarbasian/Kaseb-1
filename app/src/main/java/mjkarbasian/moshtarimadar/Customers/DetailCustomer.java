@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
@@ -63,12 +62,29 @@ public class DetailCustomer extends AppCompatActivity {
         setContentView(R.layout.activity_detail_customer);
         mToolbar = (Toolbar) findViewById(R.id.customer_detail_toolbar);
         setSupportActionBar(mToolbar);
-
+        getSupportActionBar().setTitle(getResources().getString(R.string.detail_customer_toolbar_title));
         if (!(Utility.getLocale(this).equals("IR"))) {
             mToolbar.setNavigationIcon(R.drawable.arrow_left);
         } else {
             mToolbar.setNavigationIcon(R.drawable.arrow_right);
         }
+        //region define and cast views
+        customerFirstName = (EditText) findViewById(R.id.customer_first_name);
+        customerLastName = (EditText) findViewById(R.id.customer_last_name);
+        customerBirthDay = (EditText) findViewById(R.id.customer_birth_day);
+        customerPhoneMobile = (EditText) findViewById(R.id.customer_phone_mobile);
+        customerDescription = (EditText) findViewById(R.id.customer_description);
+        customerEmail = (EditText) findViewById(R.id.customer_email_txt);
+        customerPhoneWork = (EditText) findViewById(R.id.customer_phone_work);
+        customerPhoneHome = (EditText) findViewById(R.id.customer_phone_home);
+        customerPhoneOther = (EditText) findViewById(R.id.customer_phone_other);
+        customerPhoneFax = (EditText) findViewById(R.id.customer_phone_fax);
+        customerAddressCountry = (EditText) findViewById(R.id.customer_address_country);
+        customerAddressCity = (EditText) findViewById(R.id.customer_address_city);
+        customerAddressStreet = (EditText) findViewById(R.id.customer_address_street);
+        customerAddressPostalCode = (EditText) findViewById(R.id.customer_address_postal_code);
+        mCustomerAvatar = (ImageView) findViewById(R.id.image_toolbar);
+        //endregion
 
         Intent intent = getIntent();
         Uri uri = intent.getData();
@@ -94,9 +110,6 @@ public class DetailCustomer extends AppCompatActivity {
                 familyCustomer = customerCursor.getString(customerCursor.getColumnIndex(KasebContract.Customers.COLUMN_LAST_NAME));
                 mStateId = customerCursor.getInt(customerCursor.getColumnIndex(KasebContract.Customers.COLUMN_STATE_ID));
                 imagegBytes = customerCursor.getBlob(customerCursor.getColumnIndex(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE));
-
-                ((CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout))
-                        .setTitle(nameCustomer + "  " + familyCustomer);
             }
         }
 
@@ -134,24 +147,11 @@ public class DetailCustomer extends AppCompatActivity {
         });
         customerCursor.close();
 
-        customerFirstName = (EditText) findViewById(R.id.customer_first_name);
-        customerLastName = (EditText) findViewById(R.id.customer_last_name);
-        customerBirthDay = (EditText) findViewById(R.id.customer_birth_day);
-        customerPhoneMobile = (EditText) findViewById(R.id.customer_phone_mobile);
-        customerDescription = (EditText) findViewById(R.id.customer_description);
-        customerEmail = (EditText) findViewById(R.id.customer_email_txt);
-        customerPhoneWork = (EditText) findViewById(R.id.customer_phone_work);
-        customerPhoneHome = (EditText) findViewById(R.id.customer_phone_home);
-        customerPhoneOther = (EditText) findViewById(R.id.customer_phone_other);
-        customerPhoneFax = (EditText) findViewById(R.id.customer_phone_fax);
-        customerAddressCountry = (EditText) findViewById(R.id.customer_address_country);
-        customerAddressCity = (EditText) findViewById(R.id.customer_address_city);
-        customerAddressStreet = (EditText) findViewById(R.id.customer_address_street);
-        customerAddressPostalCode = (EditText) findViewById(R.id.customer_address_postal_code);
-
-
-        mCustomerAvatar = (ImageView) findViewById(R.id.image_toolbar);
-
+        //region set customer Toolbar attributes
+        customerFirstName.setText(nameCustomer);
+        customerFirstName.setEnabled(false);
+        customerLastName.setText(familyCustomer);
+        customerLastName.setEnabled(false);
         try {
             if (imagegBytes.length == 0)
                 mCustomerAvatar.setImageDrawable(getBaseContext().getResources().getDrawable(
@@ -161,6 +161,8 @@ public class DetailCustomer extends AppCompatActivity {
             }
         } catch (Exception e) {
         }
+        //endregion
+
     }
 
     @Override
