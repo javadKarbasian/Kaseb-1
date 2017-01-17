@@ -95,7 +95,7 @@ public class Customers extends DrawerActivity {
     public void fab_customers(View v) {
         Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(this, R.anim.fab_on_click);
         v.startAnimation(hyperspaceJumpAnimation);
-        
+
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, customerInsert);
         fragmentTransaction.addToBackStack(null);

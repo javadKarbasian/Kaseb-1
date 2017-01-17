@@ -27,7 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:onClick="pic_selector"
-                android:src="@drawable/kaseb_pic" />
+                android:src="@drawable/kaseb_pic"
+                android:transitionName="@string/customer_image_transition" />
         </LinearLayout>
 
         <LinearLayout

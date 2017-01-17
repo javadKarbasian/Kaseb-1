@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:gravity="center"
         android:onClick="fab_customers"
         android:src="@drawable/plus" />
 

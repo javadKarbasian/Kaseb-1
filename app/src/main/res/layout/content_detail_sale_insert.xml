@@ -62,10 +62,11 @@
                             android:nestedScrollingEnabled="false"
                             android:paddingLeft="@dimen/padding_left_text_view"
                             android:textAppearance="?android:textAppearanceMedium"
-
                             android:textColor="@color/colorBlack"
+
                             android:textColorHint="@color/colorBlack"
-                            android:textSize="@dimen/text_size_in_list_sub_title" />
+                            android:textSize="@dimen/text_size_in_list_sub_title"
+                            android:transitionName="@string/code_text_transition" />
 
                     </android.support.design.widget.TextInputLayout>
 

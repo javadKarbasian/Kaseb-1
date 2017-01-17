@@ -1,5 +1,6 @@
 package mjkarbasian.moshtarimadar.Customers;
 
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -77,13 +78,16 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //animation bundle
+                View sharedView = view.findViewById(R.id.item_list_customer_avatar);
+                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity(), sharedView, sharedView.getTransitionName()).toBundle();
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                 if (cursor != null) {
                     Intent intent = new Intent(getActivity(), DetailCustomer.class)
                             .setData(KasebContract.Customers.buildCustomerUri(
                                     Long.parseLong(cursor.getString(cursor.getColumnIndex(KasebContract.Customers._ID)))
                             ));
-                    startActivity(intent);
+                    startActivity(intent, bundle);
                 }
             }
         });

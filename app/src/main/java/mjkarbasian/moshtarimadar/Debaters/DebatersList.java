@@ -1,5 +1,6 @@
 package mjkarbasian.moshtarimadar.Debaters;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -59,10 +60,13 @@ public class DebatersList extends Fragment implements LoaderManager.LoaderCallba
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                 if (cursor != null) {
+                    View sharedView = view.findViewById(R.id.item_card_customer_avater);
+                    Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity(), sharedView, sharedView.getTransitionName()).toBundle();
+
                     Intent intent = new Intent(getActivity(), DetailCustomer.class)
                             .setData(KasebContract.Customers.buildCustomerUri(cursor.
                                     getLong(cursor.getColumnIndex(KasebContract.Sales.TABLE_NAME + "." + KasebContract.Sales.COLUMN_CUSTOMER_ID))));
-                    startActivity(intent);
+                    startActivity(intent, bundle);
                 }
             }
         });

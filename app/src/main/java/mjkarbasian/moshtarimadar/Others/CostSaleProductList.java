@@ -1,6 +1,7 @@
 package mjkarbasian.moshtarimadar.Others;
 
 
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -270,25 +271,32 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
                         //region Sale
                         mCursor = (Cursor) parent.getItemAtPosition(position);
                         if (mCursor != null) {
+                            View sharedView = view.findViewById(R.id.item_list_code);
+                            Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity(), sharedView, sharedView.getTransitionName()).toBundle();
+
                             Intent detailSale;
                             detailSale = new Intent(getActivity(), DetailSaleView.class);
                             detailSale.putExtra("forViewAndUpdateSales", true);
                             detailSale.putExtra("saleId", mCursor.getString(mCursor.getColumnIndex(KasebContract.Sales._ID)));
                             detailSale.putExtra("saleCode", mCursor.getString(mCursor.getColumnIndex(KasebContract.Sales.COLUMN_SALE_CODE)));
                             detailSale.putExtra("customerId", mCursor.getLong(mCursor.getColumnIndex(KasebContract.Sales.COLUMN_CUSTOMER_ID)));
-                            startActivity(detailSale);
+                            startActivity(detailSale, bundle);
                         }
                         //endregion Sale
                         break;
                     }
                     case "product": {
                         //region Product
+                        View sharedView = view.findViewById(R.id.item_list_code);
                         mCursor = (Cursor) parent.getItemAtPosition(position);
                         if (mCursor != null) {
                             productHistoryBundle.putString("productId", mCursor.getString(mCursor.getColumnIndex(KasebContract.Products._ID)));
                             productHistory.setArguments(productHistoryBundle);
                             fragmentManager = getActivity().getSupportFragmentManager();
-                            fragmentManager.beginTransaction().addToBackStack(null).replace(R.id.container, productHistory).commit();
+                            fragmentManager.beginTransaction()
+                                    .addSharedElement(sharedView, sharedView.getTransitionName())
+                                    .addToBackStack(null)
+                                    .replace(R.id.container, productHistory).commit();
                         }
                         //endregion Product
                         break;

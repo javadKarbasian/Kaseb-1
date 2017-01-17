@@ -29,7 +29,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:layout_weight="1"
-                android:src="@drawable/kaseb_pic" />
+                android:src="@drawable/kaseb_pic"
+                android:transitionName="@string/customer_image_transition" />
 
             <TextView
                 android:id="@+id/item_card_debator_name"
