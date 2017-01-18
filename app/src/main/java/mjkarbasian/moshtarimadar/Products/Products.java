@@ -3,7 +3,6 @@ package mjkarbasian.moshtarimadar.Products;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -62,6 +61,7 @@ public class Products extends DrawerActivity {
 
     public void fab_cost_sale_product(View v) {
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down, R.anim.slide_in_down, R.anim.slide_out_up);
         fragmentTransaction.replace(R.id.container, productInsert);
         fragmentTransaction.addToBackStack(null);
         int callBackStack = fragmentTransaction.commit();

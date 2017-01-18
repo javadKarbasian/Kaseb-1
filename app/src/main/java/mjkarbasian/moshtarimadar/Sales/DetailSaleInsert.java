@@ -127,6 +127,13 @@ public class DetailSaleInsert extends AppCompatActivity {
     //endregion declare Values
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_up);
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_sale_insert);

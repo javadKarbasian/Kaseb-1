@@ -62,6 +62,7 @@ public class Costs extends DrawerActivity {
     public void fab_cost_sale_product(View v) {
         costInsert = new CostInsert();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down, R.anim.slide_in_down, R.anim.slide_out_up);
         fragmentTransaction.replace(R.id.container, costInsert);
         fragmentTransaction.addToBackStack(null);
         int callBackStack = fragmentTransaction.commit();

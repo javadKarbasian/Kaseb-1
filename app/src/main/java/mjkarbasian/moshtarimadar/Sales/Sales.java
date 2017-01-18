@@ -64,6 +64,8 @@ public class Sales extends DrawerActivity {
         Intent intent = null;
         intent = new Intent(getBaseContext(), DetailSaleInsert.class);
         startActivity(intent);
+        this.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_down);
+
     }
 
     @Override

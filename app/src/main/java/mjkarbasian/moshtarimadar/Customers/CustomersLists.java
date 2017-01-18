@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -71,6 +72,16 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
         //hide fab to show it as animation
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab_customers);
         fab.hide();
+        final Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_on_click);
+        fab.setAnimation(hyperspaceJumpAnimation);
+        fab.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (hyperspaceJumpAnimation.getRepeatCount() < 2)
+                    v.startAnimation(hyperspaceJumpAnimation);
+                return false;
+            }
+        });
         mListView = (ListView) rootView.findViewById(R.id.list_view_customers);
         mListView.setAdapter(mCustomerAdapter);
 
