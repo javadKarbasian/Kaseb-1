@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,16 +25,23 @@ import mjkarbasian.moshtarimadar.R;
  * Created by family on 10/19/2016.
  */
 public class CostInsert extends Fragment {
+
+    //region declare values
     private static final String LOG_TAG = CostInsert.class.getSimpleName();
+    ContentValues costValues = new ContentValues();
+    View rootView;
+    Spinner costType;
     EditText costName;
     EditText costCode;
     EditText costAmount;
-    Spinner costType;
     EditText costDate;
     EditText costDescription;
-    ContentValues costValues = new ContentValues();
-    View rootView;
+    TextInputLayout costNameTextInputLayout;
+    TextInputLayout costAmountTextInputLayout;
+    TextInputLayout costDateTextInputLayout;
+    TextInputLayout costCodeTextInputLayout;
     private Uri insertUri;
+    //endregion declare values
 
     public CostInsert() {
         setHasOptionsMenu(true);
@@ -50,8 +58,16 @@ public class CostInsert extends Fragment {
         costAmount = (EditText) rootView.findViewById(R.id.input_cost_amount);
         costDate = (EditText) rootView.findViewById(R.id.input_cost_date);
         costDate.setText(Utility.preInsertDate(getActivity()));
-
         costDescription = (EditText) rootView.findViewById(R.id.input_cost_description);
+
+        costNameTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_cost_name);
+        costCodeTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_cost_code);
+        costAmountTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_cost_amount);
+        costDateTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_cost_date);
+
+        setHelperText();
+
+        costName.requestFocus();
 
         Cursor cursor = getContext().getContentResolver().query(KasebContract.CostTypes.CONTENT_URI
                 , null, null, null, null);
@@ -78,7 +94,7 @@ public class CostInsert extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.save_inputs: {
-                if (CheckForValidity()) {
+                if (checkValidityWithChangeColorOfHelperText()) {
                     costValues.put(KasebContract.Costs.COLUMN_COST_NAME, costName.getText().toString());
                     costValues.put(KasebContract.Costs.COLUMN_COST_CODE, costCode.getText().toString());
                     costValues.put(KasebContract.Costs.COLUMN_AMOUNT,
@@ -110,14 +126,55 @@ public class CostInsert extends Fragment {
         getFragmentManager().popBackStackImmediate();
     }
 
+    private void setHelperText() {
+
+        costNameTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+
+        costCodeTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+
+        costAmountTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+
+        costDateTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
+                + getResources().getString(R.string.date_format_error));
+    }
+
     // this method check the validation and correct entries. its check fill first and then check the validation rules.
-    private boolean CheckForValidity() {
-        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), costName))
+    private boolean checkValidityWithChangeColorOfHelperText() {
+        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), costName)) {
+            Utility.changeColorOfHelperText(getActivity(), costNameTextInputLayout, Utility.mIdOfColorSetError);
+            costName.setSelectAllOnFocus(true);
+            costName.selectAll();
+            costName.requestFocus();
             return false;
-        else if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), costAmount))
+        } else
+            Utility.changeColorOfHelperText(getActivity(), costNameTextInputLayout, Utility.mIdOfColorGetError);
+
+        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), costCode)) {
+            Utility.changeColorOfHelperText(getActivity(), costCodeTextInputLayout, Utility.mIdOfColorSetError);
+            costCode.setSelectAllOnFocus(true);
+            costCode.selectAll();
+            costCode.requestFocus();
             return false;
-        else if (!Utility.checkForValidityForEditTextDate(getActivity(), costDate))
+        } else
+            Utility.changeColorOfHelperText(getActivity(), costCodeTextInputLayout, Utility.mIdOfColorGetError);
+
+        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), costAmount)) {
+            Utility.changeColorOfHelperText(getActivity(), costAmountTextInputLayout, Utility.mIdOfColorSetError);
+            costAmount.setSelectAllOnFocus(true);
+            costAmount.selectAll();
+            costAmount.requestFocus();
             return false;
+        } else
+            Utility.changeColorOfHelperText(getActivity(), costAmountTextInputLayout, Utility.mIdOfColorGetError);
+
+        if (!Utility.checkForValidityForEditTextDate(getActivity(), costDate)) {
+            Utility.changeColorOfHelperText(getActivity(), costDateTextInputLayout, Utility.mIdOfColorSetError);
+            costDate.setSelectAllOnFocus(true);
+            costDate.selectAll();
+            costDate.requestFocus();
+            return false;
+        } else
+            Utility.changeColorOfHelperText(getActivity(), costDateTextInputLayout, Utility.mIdOfColorGetError);
 
         return true;
     }

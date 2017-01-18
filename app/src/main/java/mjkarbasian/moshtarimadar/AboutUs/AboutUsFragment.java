@@ -30,6 +30,7 @@ public class AboutUsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about_us, container, false);
+        yourText = (EditText) view.findViewById(R.id.about_us_your_text);
         // Inflate the layout for this fragment
         return view;
     }
@@ -43,7 +44,6 @@ public class AboutUsFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_about_us_send: {
 
-                yourText = (EditText) getView().findViewById(R.id.about_us_your_text);
                 if (yourText.getText().toString().equals("") || yourText.getText().toString().equals(null))
                     Toast.makeText(getContext(), "Please write your Opinion, Next try send it!", Toast.LENGTH_SHORT).show();
                 else {

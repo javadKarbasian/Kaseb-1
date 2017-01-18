@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -13,25 +14,23 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorAccent">
+            app:errorTextAppearance="@style/text_input_layout_style_not_error">
 
             <EditText
                 android:id="@+id/add_payment_for_sale_text1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:hint="@string/hint_payment_amount"
                 android:inputType="numberDecimal"
-                android:maxLength="15"
-                android:textColor="@color/colorBlack"
-                android:textColorHint="@color/colorBlack" />
+                android:maxLength="15" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorAccent">
+            app:errorTextAppearance="@style/text_input_layout_style_not_error">
 
             <EditText
                 android:id="@+id/input_buy_date"
@@ -40,9 +39,7 @@
                 android:gravity="left"
                 android:hint="@string/hint_due_date"
                 android:inputType="date"
-                android:maxLength="10"
-                android:textColor="@color/colorBlack"
-                android:textColorHint="@color/colorBlack" />
+                android:maxLength="10" />
 
         </android.support.design.widget.TextInputLayout>
 

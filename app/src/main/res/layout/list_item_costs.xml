@@ -33,6 +33,17 @@
                 android:textSize="@dimen/text_size_in_list" />
 
             <TextView
+                android:id="@+id/item_list_cost_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/top_of_list_margin_in_row"
+                android:text="@string/sample_2_invoice_code"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorBlack"
+                android:textSize="@dimen/text_size_in_list" />
+
+            <TextView
                 android:id="@+id/item_list_cost_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,16 +54,6 @@
                 android:textColorHint="@color/colorBlack"
                 android:textSize="@dimen/text_size_in_list" />
 
-            <TextView
-                android:id="@+id/item_list_cost_code"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/top_of_list_margin_in_row"
-                android:text="@string/sample_2_invoice_code"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/colorBlack"
-                android:textColorHint="@color/colorBlack"
-                android:textSize="@dimen/text_size_in_list" />
         </LinearLayout>
 
         <LinearLayout

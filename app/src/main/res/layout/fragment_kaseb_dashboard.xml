@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
@@ -84,14 +84,17 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="3"
-                            android:textAppearance="?android:textAppearanceMedium" />
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textColor="@color/colorAccent" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/kaseb_dashboard_customer_qty_gold"
-                            android:textAppearance="?android:textAppearanceSmall" />
+                            android:textAppearance="?android:textAppearanceLarge"
+                            android:textColor="@color/gold"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/kaseb_dashboard_customer_qty_silver"
@@ -99,14 +102,17 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="8"
-                            android:textAppearance="?android:textAppearanceMedium" />
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textColor="@color/colorAccent" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/kaseb_dashboard_customer_qty_silver"
-                            android:textAppearance="?android:textAppearanceSmall" />
+                            android:textAppearance="?android:textAppearanceLarge"
+                            android:textColor="@color/silver"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/kaseb_dashboard_customer_qty_bronze"
@@ -114,14 +120,17 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="5"
-                            android:textAppearance="?android:textAppearanceMedium" />
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textColor="@color/colorAccent" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/kaseb_dashboard_customer_qty_bronze"
-                            android:textAppearance="?android:textAppearanceSmall" />
+                            android:textAppearance="?android:textAppearanceLarge"
+                            android:textColor="@color/bronze"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/kaseb_dashboard_customer_qty_instart"
@@ -129,7 +138,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="10"
-                            android:textAppearance="?android:textAppearanceMedium" />
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textColor="@color/colorAccent" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -137,7 +147,9 @@
                             android:layout_marginBottom="2dp"
                             android:layout_marginTop="2dp"
                             android:text="@string/kaseb_dashboard_customer_qty_instart"
-                            android:textAppearance="?android:textAppearanceSmall" />
+                            android:textAppearance="?android:textAppearanceLarge"
+                            android:textColor="@color/normalState"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -213,14 +225,17 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="3"
-                            android:textAppearance="?android:textAppearanceMedium" />
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textColor="@color/colorAccent" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/kaseb_dashboard_customer_qty_gold"
-                            android:textAppearance="?android:textAppearanceSmall" />
+                            android:textAppearance="?android:textAppearanceLarge"
+                            android:textColor="@color/gold"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/kaseb_dashboard_Sale_total_silver"
@@ -228,14 +243,17 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="8"
-                            android:textAppearance="?android:textAppearanceMedium" />
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textColor="@color/colorAccent" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/kaseb_dashboard_customer_qty_silver"
-                            android:textAppearance="?android:textAppearanceSmall" />
+                            android:textAppearance="?android:textAppearanceLarge"
+                            android:textColor="@color/silver"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/kaseb_dashboard_Sale_total_bronze"
@@ -243,14 +261,17 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="5"
-                            android:textAppearance="?android:textAppearanceMedium" />
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textColor="@color/colorAccent" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/kaseb_dashboard_customer_qty_bronze"
-                            android:textAppearance="?android:textAppearanceSmall" />
+                            android:textAppearance="?android:textAppearanceLarge"
+                            android:textColor="@color/bronze"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/kaseb_dashboard_Sale_total_instart"
@@ -258,7 +279,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="10"
-                            android:textAppearance="?android:textAppearanceMedium" />
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textColor="@color/colorAccent" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -266,7 +288,9 @@
                             android:layout_marginBottom="2dp"
                             android:layout_marginTop="2dp"
                             android:text="@string/kaseb_dashboard_customer_qty_instart"
-                            android:textAppearance="?android:textAppearanceSmall" />
+                            android:textAppearance="?android:textAppearanceLarge"
+                            android:textColor="@color/normalState"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -340,14 +364,17 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="3"
-                            android:textAppearance="?android:textAppearanceMedium" />
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textColor="@color/colorAccent" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/kaseb_dashboard_others_total_recievables_gold"
-                            android:textAppearance="?android:textAppearanceSmall" />
+                            android:textAppearance="?android:textAppearanceLarge"
+                            android:textColor="@color/gold"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/kaseb_dashboard_others_total_recievables_silver"
@@ -355,14 +382,17 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="8"
-                            android:textAppearance="?android:textAppearanceMedium" />
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textColor="@color/colorAccent" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/kaseb_dashboard_others_total_recievables_silver"
-                            android:textAppearance="?android:textAppearanceSmall" />
+                            android:textAppearance="?android:textAppearanceLarge"
+                            android:textColor="@color/silver"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/kaseb_dashboard_others_total_recievables_bronze"
@@ -370,14 +400,17 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="5"
-                            android:textAppearance="?android:textAppearanceMedium" />
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textColor="@color/colorAccent" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="@string/kaseb_dashboard_others_total_recievables_bronze"
-                            android:textAppearance="?android:textAppearanceSmall" />
+                            android:textAppearance="?android:textAppearanceLarge"
+                            android:textColor="@color/bronze"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/kaseb_dashboard_others_total_recievables_instart"
@@ -385,7 +418,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="10"
-                            android:textAppearance="?android:textAppearanceMedium" />
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textColor="@color/colorAccent" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -393,7 +427,9 @@
                             android:layout_marginBottom="2dp"
                             android:layout_marginTop="2dp"
                             android:text="@string/kaseb_dashboard_others_total_recievables_instart"
-                            android:textAppearance="?android:textAppearanceSmall" />
+                            android:textAppearance="?android:textAppearanceLarge"
+                            android:textColor="@color/normalState"
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
 

@@ -9,6 +9,6 @@
         android:id="@+id/list_view_fragment_card_view_products"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@null"></ListView>
+        android:divider="@null" />
 
 </FrameLayout>

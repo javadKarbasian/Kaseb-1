@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -23,9 +24,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import mjkarbasian.moshtarimadar.Adapters.DetailProductAdapter;
@@ -45,10 +46,8 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
     DetailProductAdapter mAdapter = null;
     Long productId;
     FloatingActionButton fab;
-
     ContentValues productHistoryValues = new ContentValues();
     ContentValues productValues = new ContentValues();
-
     EditText productName;
     EditText productCode;
     EditText productUnit;
@@ -59,13 +58,22 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
     EditText buyDate;
     EditText discountAmount;
     EditText discountPercent;
-
+    TextView productStock;
     MenuItem saveItem;
     MenuItem editItem;
-
     AlertDialog.Builder builder;
     AlertDialog dialogView;
-
+    Long stockProduct = 0l;
+    TextInputLayout productNameTextInputLayout;
+    TextInputLayout productCodeTextInputLayout;
+    TextInputLayout productUnitTextInputLayout;
+    TextInputLayout productDescriptionTextInputLayout;
+    TextInputLayout salePriceTextInputLayout;
+    TextInputLayout quantityTextInputLayout;
+    TextInputLayout buyPriceTextInputLayout;
+    TextInputLayout buyDateTextInputLayout;
+    TextInputLayout discountAmountTextInputLayout;
+    TextInputLayout discountPercentTextInputLayout;
     private Uri insertUri;
     //endregion Declare Values & Views
 
@@ -100,20 +108,20 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
         mListView = (ListView) rootView.findViewById(R.id.listview_detail_product);
         mListView.setAdapter(mAdapter);
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        mListView.post(new Runnable() {
+            public void run() {
+                mListView.setSelection(mListView.getCount() - 1);
             }
         });
 
+        Utility.setHeightOfListView(mListView);
+
         //region Fab Add ProductHistory
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab_detail_product);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                final Dialog dialog = Utility.dialogBuilder(getActivity()
-//                        , R.layout.dialog_add_product_history
-//                        , R.string.title_add_product_history);
 
                 //region create alert dialog
                 builder = new AlertDialog.Builder(getActivity())
@@ -137,7 +145,7 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                         Boolean wantToCloseDialog = false;
 
                         //region edit product
-                        if (CheckForValidityInsertProductHistory()) {
+                        if (checkValidityWithChangeColorOfHelperTextForProductHistoryInsert()) {
                             productHistoryValues.put(KasebContract.ProductHistory.COLUMN_COST,
                                     Utility.convertFarsiNumbersToDecimal(buyPrice.getText().toString()));
                             productHistoryValues.put(KasebContract.ProductHistory.COLUMN_QUANTITY,
@@ -154,6 +162,8 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                             Toast.makeText(getActivity(), getResources().getString(R.string.msg_insert_succeed), Toast.LENGTH_LONG).show();
 
                             wantToCloseDialog = true;
+
+                            Utility.setHeightOfListView(mListView);
                         }
                         //endregion edit product
 
@@ -171,7 +181,16 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                 discountAmount = (EditText) dialogView.findViewById(R.id.add_product_history_discount_amount);
                 discountPercent = (EditText) dialogView.findViewById(R.id.add_product_history_discount_percent);
 
+                salePriceTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.text_input_layout_add_product_history_sale_price);
+                quantityTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.text_input_layout_add_product_history_quantity);
+                buyPriceTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.text_input_layout_add_product_history_buy_price);
+                buyDateTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.text_input_layout_add_product_history_buy_date);
+                discountAmountTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.text_input_layout_add_product_history_discount_amount);
+                discountPercentTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.text_input_layout_add_product_history_discount_percent);
+
                 buyDate.setText(Utility.preInsertDate(getActivity()));
+
+                setHelperTextForProductHistory();
 
                 //region discountAmount addTextChangedListener
                 discountAmount.addTextChangedListener(new TextWatcher() {
@@ -193,10 +212,13 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                                 discountAmount.selectAll();
                             }
                         } catch (Exception e) {
-                            if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals(""))
-                                Utility.setErrorForEditText(getActivity(), salePrice, "");
-                            else
+                            if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
+                                Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
+                                salePrice.requestFocus();
+                            } else {
                                 Utility.setErrorForEditText(getActivity(), discountAmount, "");
+                                Utility.changeColorOfHelperText(getActivity(), discountAmountTextInputLayout, R.color.colorPrimaryLight);
+                            }
                         }
                     }
 
@@ -208,14 +230,19 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
 
                             buyPrice.setText(String.format("%.2f", Float.valueOf(mSalePrice - mDiscountAmount)));
                         } catch (Exception e) {
-                            if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals(""))
-                                Utility.setErrorForEditText(getActivity(), salePrice, "");
-                            else
+                            if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
+                                Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
+                                salePrice.requestFocus();
+                            } else {
                                 Utility.setErrorForEditText(getActivity(), discountAmount, "");
+                                Utility.changeColorOfHelperText(getActivity(), discountAmountTextInputLayout, R.color.colorPrimaryLight);
+                            }
                         }
                     }
                 });
+                //endregion discountAmount addTextChangedListener
 
+                //region discountPercent addTextChangedListener
                 discountPercent.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -237,10 +264,13 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                                 discountPercent.selectAll();
                             }
                         } catch (Exception e) {
-                            if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals(""))
-                                Utility.setErrorForEditText(getActivity(), salePrice, "");
-                            else
+                            if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
+                                Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
+                                salePrice.requestFocus();
+                            } else {
                                 Utility.setErrorForEditText(getActivity(), discountPercent, "");
+                                Utility.changeColorOfHelperText(getActivity(), discountPercentTextInputLayout, R.color.colorPrimaryLight);
+                            }
                         }
                     }
 
@@ -254,14 +284,17 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                                     Float.valueOf((float) ((Float.valueOf(100 - mDiscountPercent) / 100.0) * mSalePrice))));
                             discountAmount.setText(String.format("%.2f", Float.valueOf(mDiscountPercent * mSalePrice / 100)));
                         } catch (Exception e) {
-                            if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals(""))
-                                Utility.setErrorForEditText(getActivity(), salePrice, "");
-                            else
+                            if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
+                                Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
+                                salePrice.requestFocus();
+                            } else {
                                 Utility.setErrorForEditText(getActivity(), discountPercent, "");
+                                Utility.changeColorOfHelperText(getActivity(), discountPercentTextInputLayout, R.color.colorPrimaryLight);
+                            }
                         }
                     }
                 });
-                //endregion discountAmount addTextChangedListener
+                //endregion discountPercent addTextChangedListener
 
                 //endregion Declare Views in dialog
             }
@@ -283,6 +316,16 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        //set fab animation and show
+        Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
+        fab.startAnimation(hyperspaceJumpAnimation);
+        fab.show();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
@@ -295,17 +338,11 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                 productUnit.setEnabled(true);
                 productDescription.setEnabled(true);
 
-                //set fab animation and show
-                Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
-                fab.startAnimation(hyperspaceJumpAnimation);
-                fab.show();
+                Utility.setHeightOfListView(mListView);
 
                 break;
             case R.id.action_detail_product_save:
-                if (Utility.checkForValidityForEditTextNullOrEmptyAndItterative(
-                        getActivity(), productName, KasebContract.Products.CONTENT_URI,
-                        KasebContract.Products.COLUMN_PRODUCT_NAME + " = ? and " + KasebContract.Products._ID + " != ? ",
-                        KasebContract.Products._ID, new String[]{productName.getText().toString(), String.valueOf(productId)})) {
+                if (checkValidityWithChangeColorOfHelperTextForProductInsert()) {
                     editItem.setVisible(isVisible());
                     saveItem.setVisible(isHidden());
 
@@ -329,7 +366,6 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                     productCode.setEnabled(false);
                     productUnit.setEnabled(false);
                     productDescription.setEnabled(false);
-                    fab.hide();
                 }
                 break;
             default:
@@ -346,6 +382,20 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
         productCode = (EditText) getActivity().findViewById(R.id.detail_product_code);
         productUnit = (EditText) getActivity().findViewById(R.id.detail_product_unit);
         productDescription = (EditText) getActivity().findViewById(R.id.detail_product_description);
+        productStock = (TextView) getActivity().findViewById(R.id.detail_product_stock);
+
+        productNameTextInputLayout = (TextInputLayout) getActivity().findViewById(R.id.text_input_layout_detail_product_name);
+        productCodeTextInputLayout = (TextInputLayout) getActivity().findViewById(R.id.text_input_layout_detail_product_code);
+        productUnitTextInputLayout = (TextInputLayout) getActivity().findViewById(R.id.text_input_layout_detail_product_unit);
+        productDescriptionTextInputLayout = (TextInputLayout) getActivity().findViewById(R.id.text_input_layout_detail_product_description);
+
+        setHelperTextForProduct();
+
+        //in this line does not matter post 0l to second parameter of function because not use in this case
+        stockProduct = Utility.checkNumberOfProductsForDetailSale(getActivity(),
+                0l, "SaleInsert", Long.parseLong(String.valueOf(productId)));
+
+        productStock.setText(String.valueOf(stockProduct));
 
         mCursor = getContext().getContentResolver().query(
                 KasebContract.Products.buildProductsUri(productId),
@@ -412,16 +462,105 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
         mAdapter.swapCursor(null);
     }
 
+    private void setHelperTextForProduct() {
+
+        productNameTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
+                + getResources().getString(R.string.non_repetitive));
+
+        productCodeTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        productUnitTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        productDescriptionTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+    }
+
+    private void setHelperTextForProductHistory() {
+
+        salePriceTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        quantityTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+
+        buyPriceTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
+                + getResources().getString(R.string.not_more_than_sale_price));
+
+        buyDateTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
+                + getResources().getString(R.string.date_format_error));
+
+        discountAmountTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
+                + getResources().getString(R.string.not_more_than_sale_price));
+
+        discountPercentTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
+                + getResources().getString(R.string.not_more_hundred));
+    }
+
     // this method check the validation and correct entries. its check fill first and then check the validation rules.
-    private boolean CheckForValidityInsertProductHistory() {
-        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), salePrice))
+    private boolean checkValidityWithChangeColorOfHelperTextForProductInsert() {
+
+        if (!Utility.checkForValidityForEditTextNullOrEmptyAndItterative(
+                getActivity(), productName, productNameTextInputLayout, KasebContract.Products.CONTENT_URI,
+                KasebContract.Products.COLUMN_PRODUCT_NAME + " = ? and " + KasebContract.Products._ID + " != ? ",
+                KasebContract.Products._ID, new String[]{productName.getText().toString(), String.valueOf(productId)}))
             return false;
-        else if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), quantity))
+
+        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), productCode)) {
+            Utility.changeColorOfHelperText(getActivity(), productCodeTextInputLayout, Utility.mIdOfColorSetError);
+            productCode.setSelectAllOnFocus(true);
+            productCode.selectAll();
+            productCode.requestFocus();
             return false;
-        else if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), buyPrice))
+        } else
+            Utility.changeColorOfHelperText(getActivity(), productCodeTextInputLayout, Utility.mIdOfColorGetError);
+
+        return true;
+    }
+
+    // this method check the validation and correct entries. its check fill first and then check the validation rules.
+    private boolean checkValidityWithChangeColorOfHelperTextForProductHistoryInsert() {
+
+        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), salePrice)) {
+            Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, Utility.mIdOfColorSetError);
+            salePrice.setSelectAllOnFocus(true);
+            salePrice.selectAll();
+            salePrice.requestFocus();
             return false;
-        else if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), buyDate))
+        } else
+            Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, Utility.mIdOfColorGetError);
+
+        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), quantity)) {
+            Utility.changeColorOfHelperText(getActivity(), quantityTextInputLayout, Utility.mIdOfColorSetError);
+            quantity.setSelectAllOnFocus(true);
+            quantity.selectAll();
+            quantity.requestFocus();
             return false;
+        } else
+            Utility.changeColorOfHelperText(getActivity(), quantityTextInputLayout, Utility.mIdOfColorGetError);
+
+        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), buyPrice)) {
+            Utility.changeColorOfHelperText(getActivity(), buyPriceTextInputLayout, Utility.mIdOfColorSetError);
+            buyPrice.setSelectAllOnFocus(true);
+            buyPrice.selectAll();
+            buyPrice.requestFocus();
+            return false;
+        } else {
+            Float mBuyPrice = Float.valueOf(buyPrice.getText().toString());
+            Float mSalePrice = Float.valueOf(salePrice.getText().toString());
+
+            if (mBuyPrice > mSalePrice) {
+                Utility.changeColorOfHelperText(getActivity(), buyPriceTextInputLayout, Utility.mIdOfColorSetError);
+                buyPrice.setSelectAllOnFocus(true);
+                buyPrice.selectAll();
+                buyPrice.requestFocus();
+                return false;
+            } else
+                Utility.changeColorOfHelperText(getActivity(), buyPriceTextInputLayout, Utility.mIdOfColorGetError);
+        }
+
+        if (!Utility.checkForValidityForEditTextDate(getActivity(), buyDate)) {
+            Utility.changeColorOfHelperText(getActivity(), buyDateTextInputLayout, Utility.mIdOfColorSetError);
+            buyDate.setSelectAllOnFocus(true);
+            buyDate.selectAll();
+            buyDate.requestFocus();
+            return false;
+        } else
+            Utility.changeColorOfHelperText(getActivity(), buyDateTextInputLayout, Utility.mIdOfColorGetError);
+
         return true;
     }
 }

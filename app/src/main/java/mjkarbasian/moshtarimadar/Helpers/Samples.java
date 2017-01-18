@@ -932,7 +932,7 @@ public class Samples {
 
     public static void setProduct_history(Context context) {
         product_history.putInt(KasebContract.ProductHistory.COLUMN_PRODUCT_ID, 1);
-        product_history.putInt(KasebContract.ProductHistory.COLUMN_QUANTITY, 10);
+        product_history.putInt(KasebContract.ProductHistory.COLUMN_QUANTITY, 4000);
         product_history.putString(KasebContract.ProductHistory.COLUMN_DATE, Utility.preInsertDate(context));
         product_history.putFloat(KasebContract.ProductHistory.COLUMN_COST, 1100);
         product_history.putFloat(KasebContract.ProductHistory.COLUMN_SALE_PRICE, product_1_sale_price);

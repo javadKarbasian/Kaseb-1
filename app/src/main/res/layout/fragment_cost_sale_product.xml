@@ -6,7 +6,7 @@
     <ListView
         android:id="@+id/list_view_cost_sale_product"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_cost_sale_product"

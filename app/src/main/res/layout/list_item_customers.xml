@@ -25,10 +25,12 @@
             <ImageView
                 android:id="@+id/item_list_customer_avatar"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/avatar_customer_insert"
                 android:onClick="pic_selector"
-                android:src="@drawable/kaseb_pic"
+                android:src="@drawable/add_image"
                 android:transitionName="@string/customer_image_transition" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -76,5 +78,7 @@
                 android:src="@drawable/star"
                 android:tint="@color/colorBlack" />
         </LinearLayout>
+
     </LinearLayout>
+
 </FrameLayout>

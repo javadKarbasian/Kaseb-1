@@ -11,20 +11,30 @@
         android:layout_margin="@dimen/design_snackbar_padding_vertical_2lines"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/add_number_of_product_for_sale_number"
-            android:layout_width="fill_parent"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayoutOfEditTextQuantity"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorBlack"
-            android:visibility="gone" />
+            android:textColorHint="@color/colorAccent">
+
+            <EditText
+                android:id="@+id/add_number_of_product_for_sale_number"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:inputType="number"
+                android:maxLength="10"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorAccent"
+                android:visibility="gone" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <ListView
             android:id="@+id/list_view_product_for_sale_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:divider="@null"></ListView>
+            android:divider="@null" />
     </LinearLayout>
 
 </LinearLayout>

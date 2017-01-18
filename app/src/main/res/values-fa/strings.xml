@@ -120,11 +120,13 @@
     <string name="edit_detail_product_action_description">این دکمه به شما اجازه تغییر در اطلاعات محصول/خدمت را می دهد</string>
 
     <string name="about_us_my_info">
-        ما یک تیم نرم افزاری هستیم که قصد توسعه نرم افزارهای آندروید را داریم.
-در این پروژه ما به سراغ یک گروه نرم افزاری رفتیم که در دهه های گذشته مورد توجه تمام افرادی قرار گرفته است که به نوعی با حساب و کتاب سر و کار دارند.
-CRM یا همان نرم افزار مدیریت ارتباط با مشتری بحث اصلی ما می باشد.
-ما امیدواریم که این برنامه به شما کاربر گرامی در بازاریابی، مدیریت فروش و مدیریت مشتری کمک کند.
+        کاسب عزیز، کاسب نرم افزاری جهت مدیریت ارتباط شما با مشتریان شما است و باید گفت یک نرم افزار حسابداری نیست! نرم افزار کاسب رو برای شما توسعه دادیم تا شما به این دارایی مهمتون، یعنی مشتریانتون، بیش از پیش توجه کنید تا دو دستاورد مهم حاصل شود :\n
+اول اینکه وضعیت کسب و کار شما براتون روشن بشه تا بتونید برای ارتقای اون بهتر برنامه ریزی کنید.\n
+دوم اینکه با برنامه ریزی بهتر، تعداد مشتریان طلاییتون افزایش پیدا کنه و در نتیجه سودآوری کسب و کارتون بیشتر بشه.\n
+امیدواریم بتونیم این هدف رو محقق کنیم.\n
+اگر اشکالی در نرم افزار دیدید یا ایده ای داشتید که به ارتقای قابلیت های نرم افزار و همچنین به شما کمک کنه خوشحال می شیم اون رو به ما بگید. امیدواریم بتونیم سریع تغییرات رو اجرا کنیم و برنامه رو براتون به روز رسانی کنیم.
     </string>
+
     <string name="Add">افزودن</string>
     <string name="about_us_hint_your_email">ایمیلت رو یادداشت کن</string>
     <string name="about_us_hint_your_text">ایده ات رو یادداشت کن</string>
@@ -192,7 +194,7 @@ CRM یا همان نرم افزار مدیریت ارتباط با مشتری ب
     <string name="hint_payment_amount">مبلغ پرداخت</string>
     <string name="hint_phone_fax">فکس</string>
     <string name="hint_phone_home">شماره تماس منزل</string>
-    <string name="hint_phone_mobile">شماره موبایل</string>
+    <string name="hint_mobile_number">شماره موبایل</string>
     <string name="hint_phone_other">شماره تماس دیگر</string>
     <string name="hint_phone_work">شماره تماس محل کار</string>
     <string name="hint_product_code">کد محصول</string>
@@ -230,13 +232,9 @@ CRM یا همان نرم افزار مدیریت ارتباط با مشتری ب
     <string name="pref_header_backup">پشتیبان گیری یا بازیابی</string>
     <string name="pref_header_cost">انواع هزینه</string>
     <string name="pref_header_customer">انواع عضویت </string>
-    <string name="pref_header_data_sync"></string>
-    <string name="pref_header_general"></string>
     <string name="pref_header_import_contacts">وارد کردن مشتری از دفترچه تماس</string>
     <string name="pref_header_payment">مدلهای پرداخت</string>
     <string name="pref_header_tax">انواع مالیات یاتخفیف</string>
-    <string name="pref_title_add_friends_to_messages"></string>
-    <string name="pref_title_display_name"></string>
     <string name="print_your_factor">این دکمه فاکتور را پرینت میگیرد.</string>
     <string name="quantity">تعداد</string>
     <string name="sale_code_prefix">کد- </string>
@@ -260,7 +258,7 @@ CRM یا همان نرم افزار مدیریت ارتباط با مشتری ب
     <string name="save_your_factor">به شما اجازه میدهد فاکتور را ذخیره کنید.</string>
     <string name="search_title_cost">نام هزینه رو وارد کن!</string>
     <string name="search_title_products">نام محصول رو وارد کن.</string>
-    <string name="search_title_sale">فقط کد فروش...</string>
+    <string name="search_title_sale">فقط کد فروش…</string>
     <string name="sort_name">نام نحوه چینش</string>
     <string name="states_bronze">برنزی</string>
     <string name="states_gold">طلایی</string>
@@ -307,7 +305,7 @@ CRM یا همان نرم افزار مدیریت ارتباط با مشتری ب
     <string name="title_of_payments">پرداخت های فاکتور</string>
     <string name="title_of_invoice_summary">خلاصه فاکتور</string>
     <string name="save_factor_then_print">ابتدا فاکتور را ذخیره کنید، سپس دوباره سعی کنید.</string>
-    <string name="not_itterative">(تکراری نباشد)</string>
+    <string name="non_repetitive">(تکراری نباشد)</string>
     <string name="title_of_taxes">مالیات ها</string>
     <string name="total_amount_title">مبلغ کل</string>
     <string name="total_discount_title">تخفیف کل</string>
@@ -326,7 +324,7 @@ CRM یا همان نرم افزار مدیریت ارتباط با مشتری ب
     <string name="invoice_sale_code">کد فروش :  </string>
     <string name="good_title">محصول</string>
     <string name="customer_info">مشتری : </string>
-    <string name="choose_appropriate_data">داده مناسب وارد کنید</string>
+    <string name="choose_appropriate_data">داده مناسب وارد کنید. </string>
     <string name="buyer_title">خریدار</string>
     <string name="amount_title">مبلغ</string>
     <string name="seller_address">آدرس کاسب : </string>
@@ -341,9 +339,10 @@ CRM یا همان نرم افزار مدیریت ارتباط با مشتری ب
     <string name="cheque_title">چکی</string>
     //endregion Sales Invoice Print
 
-    <string name="date_format_error">\n(YYYY/M/D : 1395/1/1)</string>
+    <string name="date_format_error">\n(روز/ماه/سال : 01/01/1395)</string>
     <string name="not_minus_number">این مقدار نباید کم تر از صفر باشد.</string>
     <string name="more_than_balance_amount">این مقدار نباید از مانده فاکتور بیشتر باشد.</string>
+    <string name="more_than_total_amount">این مقدار نباید از مبلغ کل بیشتر باشد.</string>
     <string name="stock_product">تعداد (مقدار) موجود : </string>
     <string name="not_enough_stock">متعداد (مقدار) کافی موجود نیست.</string>
     <string name="less_than_stock_explain_text">تعداد (مقدار) کالای انتخاب شده را وارد کنید.\nاین عدد نباید از موجودی انبار بیشتر باسد.</string>
@@ -351,4 +350,7 @@ CRM یا همان نرم افزار مدیریت ارتباط با مشتری ب
     <string name="discard_button">انصراف</string>
     <string name="not_more_hundred">درصد مشخص شده نمی تواند بیشتر از 100 باشد.</string>
     <string name="not_more_than_sale_price">تخفیف گرفته شده در خرید کالا نمی تواند بیشتر از قیمت فروش باشد.</string>
+    <string name="click_here_choose_customer">برای انتخاب مشتری، کلیک کنید …</string>
+    <string name="detail_sales_products_items_total">کل</string>
+    <string name="title_product_stock">موجودی</string>
 </resources>

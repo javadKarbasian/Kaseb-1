@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="@dimen/top_of_list_margin_in_row"
             android:orientation="horizontal">
 
@@ -45,7 +45,6 @@
                 android:focusableInTouchMode="false"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
-                android:hint="25 %"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorBlack"
@@ -62,7 +61,6 @@
                 android:focusableInTouchMode="false"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
-                android:hint="VAS"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorBlack"

@@ -1,179 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="8dp"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginTop="16dp"
     android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/colorAccent">
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/input_product_name"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_input_product_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_product_name"
-            android:maxLength="30"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorBlack" />
+            app:counterEnabled="true"
+            app:counterMaxLength="30"
+            app:errorTextAppearance="@style/text_input_layout_style_not_error">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/input_product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_product_name"
+                android:maxLength="30" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/colorAccent">
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/input_product_code"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_input_product_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_product_code"
-            android:inputType="number"
-            android:maxLength="15"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorBlack" />
+            app:errorTextAppearance="@style/text_input_layout_style_not_error"
+            app:hintAnimationEnabled="true">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/input_product_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_product_code"
+                android:inputType="text"
+                android:maxLength="15" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/colorAccent">
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/input_product_unit"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_input_product_unit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_product_unit"
-            android:maxLength="15"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorBlack" />
+            app:errorTextAppearance="@style/text_input_layout_style_not_error">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/input_product_unit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_product_unit"
+                android:maxLength="15" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/colorAccent">
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/input_product_description"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_input_product_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_product_description"
-            android:maxLength="50"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorBlack" />
+            app:counterEnabled="true"
+            app:counterMaxLength="50"
+            app:errorTextAppearance="@style/text_input_layout_style_not_error">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/input_product_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_product_description"
+                android:maxLength="50" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/colorAccent">
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/input_sale_price"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_input_sale_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_sale_price"
-            android:inputType="numberDecimal"
-            android:maxLength="15"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorBlack" />
+            app:errorTextAppearance="@style/text_input_layout_style_not_error">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/input_sale_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_sale_price"
+                android:inputType="numberDecimal"
+                android:maxLength="15" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/colorAccent">
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/input_quantity"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_input_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_quantity"
-            android:inputType="number"
-            android:maxLength="10"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorBlack" />
+            app:errorTextAppearance="@style/text_input_layout_style_not_error">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/input_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_quantity"
+                android:inputType="number"
+                android:maxLength="10" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/colorAccent">
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/input_buy_price"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_input_buy_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_buy_price"
-            android:inputType="numberDecimal"
-            android:maxLength="15"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorBlack" />
+            app:errorTextAppearance="@style/text_input_layout_style_not_error">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/input_buy_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_buy_price"
+                android:inputType="numberDecimal"
+                android:maxLength="15" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/colorAccent">
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/input_buy_date"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_input_buy_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_date"
-            android:inputType="date"
-            android:maxLength="10"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorBlack" />
+            app:errorTextAppearance="@style/text_input_layout_style_not_error">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/input_buy_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_date"
+                android:inputType="date"
+                android:maxLength="10" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/colorAccent">
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/input_discount_amount"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_input_discount_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_buy_price_discount_amount"
-            android:inputType="numberDecimal"
-            android:maxLength="10"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorBlack" />
+            app:errorTextAppearance="@style/text_input_layout_style_not_error">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/input_discount_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_buy_price_discount_amount"
+                android:inputType="numberDecimal"
+                android:maxLength="10" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/colorAccent">
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/input_discount_percent"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_input_discount_percent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:hint="@string/hint_buy_price_discount_percent"
-            android:inputType="numberDecimal"
-            android:maxLength="10"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorBlack" />
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            app:errorTextAppearance="@style/text_input_layout_style_not_error">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/input_discount_percent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:hint="@string/hint_buy_price_discount_percent"
+                android:inputType="numberDecimal"
+                android:maxLength="10" />
 
-</LinearLayout>
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+</ScrollView>

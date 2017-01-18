@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:text="@string/sale_date"
+                    android:text="@string/buy_date"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorBlack" />
 

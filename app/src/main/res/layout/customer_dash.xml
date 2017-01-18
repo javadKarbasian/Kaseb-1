@@ -62,6 +62,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="4dp"
             android:layout_weight="5"
+            android:gravity="center"
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/colorBlack" />
@@ -94,6 +95,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="4dp"
             android:layout_weight="5"
+            android:gravity="center"
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/colorBlack" />
@@ -126,6 +128,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="4dp"
             android:layout_weight="5"
+            android:gravity="center"
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/colorBlack" />

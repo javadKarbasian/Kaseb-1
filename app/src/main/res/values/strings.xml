@@ -131,7 +131,7 @@
     <!-- CostInsert Hints-->
     <string name="hint_cost_name">Cost name</string>
     <string name="hint_description">Description</string>
-    <string name="hint_date_picker">Date: yyyy/mm/dd</string>
+    <string name="hint_date_picker">Date: YYYY/M/D</string>
     <string name="hint_cost_amount">Amount</string>
     <string name="hint_cost_code">Cost code</string>
     <string name="msg_insert_succeed">Data successfully added.</string>
@@ -165,13 +165,13 @@
     <!-- CustomerInsert Hints-->
     <string name="hint_first_name">First name</string>
     <string name="hint_last_name">Last name</string>
-    <string name="hint_birth_day">BirthDay: yyyy/mm/dd</string>
+    <string name="hint_birth_day">BirthDay: YYYY/M/D</string>
     <string-array name="state_types">
         <item>Gold</item>
         <item>Silver</item>
         <item>Yellow</item>
     </string-array>
-    <string name="hint_phone_mobile">Phone mobile</string>
+    <string name="hint_mobile_number">Mobile number</string>
     <string name="hint_email">Email</string>
     <string name="hint_phone_work">Phone work</string>
     <string name="hint_phone_home">Phone home</string>
@@ -190,12 +190,12 @@
     <string name="hint_buy_price">Buy Price</string>
     <string name="hint_quantity">Quantity</string>
     <string name="hint_sale_price">Sale Price</string>
-    <string name="hint_date">Date: yyyy/mm/dd</string>
+    <string name="hint_date">Date: YYYY/M/D</string>
     <string name="hint_product_history_save">Save</string>
     <string name="hint_buy_price_discount_amount">Discount Amount For Just One Item</string>
     <string name="hint_buy_price_discount_percent">Discount Percent For Just One Item</string>
     <!-- Sale&DetailSaleInsert -->
-    <string name="title_add_product_for_sale">Choose Your Product ...</string>
+    <string name="title_add_product_for_sale">Choose Your Product …</string>
     <string name="title_add_product_history">Product History</string>
     <string name="save_button">Save</string>
 
@@ -298,7 +298,7 @@
     <string name="dialog_select_restore">Restore</string>
     <string name="dialog_select_cancel">Cancel</string>
     <string-array name="payment_method">
-        <item>Czech</item>
+        <item>Cheque</item>
         <item>Cash</item>
     </string-array>
     <string name="payment_list_for_sale_amount_title">Amount :</string>
@@ -354,8 +354,8 @@
         CRM : Customer Relationship Management softwares are our main discuss.
 
         We hope this app help you Dear user in marketing, sales management and customer management.</string>
-    <string name="about_us_hint_your_text">Your mind ...</string>
-    <string name="about_us_hint_your_email">Write Your Email ...</string>
+    <string name="about_us_hint_your_text">Your mind …</string>
+    <string name="about_us_hint_your_email">Write Your Email …</string>
     <string name="search_title_sale">Enter Sale Code</string>
     <string name="search_title_products">Enter Product name</string>
     <string name="search_title_cost">Enter Cost Name</string>
@@ -367,10 +367,11 @@
     <string name="title_of_discounts">Invoice Discounts</string>
     <string name="title_of_payments">Invoice Payments</string>
     <string name="title_of_invoice_summary">Invoice Summary</string>
-    <string name="choose_appropriate_data">Choose apropriate data.</string>
+    <string name="choose_appropriate_data">Choose appropriate data. </string>
     <string name="more_than_balance_amount">Can\'t be more than balance amount.</string>
+    <string name="more_than_total_amount">Can\'t be more than total amount.</string>
     <string name="save_factor_then_print">Please Save Invoice Then RETRY.</string>
-    <string name="not_itterative">(Not Itterative)</string>
+    <string name="non_repetitive">\n(Non-repetitive)</string>
     <string name="register_message_copyright">Registered By KASEB. \n@COPYRIGHT</string>
     <string name="seller_info">"Kaseb : "</string>
     <string name="seller_tell">"Kaseb phone : "</string>
@@ -413,9 +414,6 @@
     <string name="title_dialog_add_state">Add state type</string>
     <string name="cost_code_prefix">C-</string>
     <string name="product_code_prefix">P-</string>
-    <string name="validity_error_customer_phone_mobile_duplicate">Entered mobile number is duplicate.</string>
-    <string name="validity_error_product_name_duplicate">Entered Product name is duplicate</string>
-    <string name="validity_error_dsale_code_duplicate">Entered sale code is duplicate</string>
     <string name="validity_error_dsale_select_product">Choose some PRODUCTS for SALE.</string>
     <string name="confirm_title">Confirmation</string>
     <string name="confirm_message_delete_customer_image">"Do You Really Want to Delete This Customer's Image?\n\nCustomer Name : "</string>
@@ -428,7 +426,7 @@
     <string name="confirm_delete_product_list">"Do You Really Want to Delete This PRODUCT?\n\nProduct Name : "</string>
     <string name="confirm_delete_tax">"Do You Really Want to Delete This TAX?\n\nTax Amount : "</string>
     <string name="payment_model_cheque">Cheque</string>
-    <string name="date_format_error">\n(YYYY/M/D : 1990/1/1</string>
+    <string name="date_format_error">\n(YYYY/M/D : 1990/1/1)</string>
     <string name="not_minus_number">Can\'t be less than zero.</string>
     <string name="choose_customer_error_for_sale">You must choose a customer from list.</string>
     <string name="cheque_title">Cheque</string>
@@ -442,6 +440,13 @@
     <string name="not_more_hundred">The percent can\'t be more than hundred.</string>
     <string name="not_more_than_sale_price">Discount amount can\'t be more than sale price.</string>
     <string name="cost_sale_product_tag_image_title">costSaleProductTagImage</string>
+    <string name="click_here_choose_customer">Click here, choose customer …</string>
+    <string name="image_avatar_title">image_avatar_title</string>
+    <string name="content_detail_sale_insert_add_product_image_button">content_detail_sale_insert_add_product_image_button</string>
+    <string name="detail_sales_products_items_total">Total</string>
+    <string name="avatar_customer_insert">avatar_customer_insert</string>
+    <string name="title_product_stock">Stock</string>
+    <string name="buy_date">Buy Date :</string>
     <string name="intro_kaseb_slang">care your customers</string>
     <string name="detail_customer_toolbar_title">Customer Info</string>
     <string name="customer_image_transition">customer_image_transition</string>

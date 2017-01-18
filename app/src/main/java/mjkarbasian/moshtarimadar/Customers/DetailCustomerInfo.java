@@ -70,7 +70,7 @@ public class DetailCustomerInfo extends Fragment {
         customerBirthDay = (EditText) view.findViewById(R.id.customer_birth_day);
         customerPhoneMobile = (EditText) view.findViewById(R.id.customer_phone_mobile);
         customerDescription = (EditText) view.findViewById(R.id.customer_description);
-        customerEmail = (EditText) view.findViewById(R.id.customer_email_txt);
+        customerEmail = (EditText) view.findViewById(R.id.customer_email);
         customerPhoneWork = (EditText) view.findViewById(R.id.customer_phone_work);
         customerPhoneHome = (EditText) view.findViewById(R.id.customer_phone_home);
         customerPhoneOther = (EditText) view.findViewById(R.id.customer_phone_other);

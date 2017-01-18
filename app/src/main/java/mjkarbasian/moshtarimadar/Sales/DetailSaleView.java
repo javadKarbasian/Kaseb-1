@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -133,6 +134,8 @@ public class DetailSaleView extends AppCompatActivity {
     EditText saleDate;
     EditText quantityEditText;
 
+    TextInputLayout saleCodeTextInputLayout;
+    TextInputLayout saleDateTextInputLayout;
 
     ListView modeList;
     ListView mProductListView;
@@ -173,8 +176,12 @@ public class DetailSaleView extends AppCompatActivity {
         frm = getSupportFragmentManager();
 
         saleCode = (EditText) findViewById(R.id.detail_sales_info_sale_code);
+        saleCodeTextInputLayout = (TextInputLayout) findViewById(R.id.text_input_layout_detail_sales_info_sale_code);
         saleDate = (EditText) findViewById(R.id.detail_sales_info_sale_date);
+        saleDateTextInputLayout = (TextInputLayout) findViewById(R.id.text_input_layout_detail_sales_info_sale_date);
         addCustomerLayout = (LinearLayout) findViewById(R.id.content_detail_sale_insert_linear_layout_add_customer);
+
+        setHelperText();
         //endregion Initialize Some Views & Values
 
         //region Get SaleId
@@ -528,11 +535,11 @@ public class DetailSaleView extends AppCompatActivity {
                     Toast.makeText(DetailSaleView.this, R.string.save_factor_then_print, Toast.LENGTH_LONG).show();
                 break;
             case R.id.menu_detail_sale_view_save:
-                if (CheckForValidity() && Utility.checkForValidityForEditTextNullOrEmptyAndItterative(
-                        getBaseContext(), saleCode, KasebContract.Sales.CONTENT_URI,
+                if (Utility.checkForValidityForEditTextNullOrEmptyAndItterative(
+                        getBaseContext(), saleCode, saleCodeTextInputLayout, KasebContract.Sales.CONTENT_URI,
                         KasebContract.Sales.COLUMN_SALE_CODE + " = ? and " + KasebContract.Sales._ID + " != ? ",
                         KasebContract.Sales._ID,
-                        new String[]{saleCode.getText().toString(), String.valueOf(whichSaleId)})) {
+                        new String[]{saleCode.getText().toString(), String.valueOf(whichSaleId)}) && checkValidityWithChangeColorOfHelperText()) {
 
                     mDb.beginTransaction();
 
@@ -936,7 +943,8 @@ public class DetailSaleView extends AppCompatActivity {
                                 if (mCursor.moveToLast())
                                     cost = mCursor.getLong(mCursor.getColumnIndex(KasebContract.ProductHistory.COLUMN_SALE_PRICE));
 
-                            quantityEditText.setHint(getString(R.string.stock_product) + differneceOfBuy_Sale);
+                            TextInputLayout textInputLayout = (TextInputLayout) dialogView.findViewById(R.id.textInputLayoutOfEditTextQuantity);
+                            textInputLayout.setHint(getString(R.string.stock_product) + differneceOfBuy_Sale);
                             quantityEditText.setVisibility(View.VISIBLE);
                         }
                     }
@@ -956,37 +964,49 @@ public class DetailSaleView extends AppCompatActivity {
                     }
                 }).setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //region insert payment
-                        paymentMapRow.put("amount", paymentAmount.getText().toString());
-                        paymentMapRow.put("duedate", paymentDueDate.getText().toString());
-
-                        try {
-                            Float amount = Utility.createFloatNumberWithString(DetailSaleView.this, paymentAmount.getText().toString());
-
-                            if (amount > sFinalAmount) {
-                                Toast.makeText(DetailSaleView.this, getString(R.string.more_than_balance_amount), Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-
-                            if (!paymentMapRow.get("type").equals(getResources().getString(R.string.payment_method_cheque)))
-                                paymentMapRow.put("isPass", "true");
-                            else
-                                paymentMapRow.put("isPass", String.valueOf(isPassCheckBox.isChecked()));
-
-                            mPaymentListMap.add(paymentMapRow);
-                            mCardViewPayments.getPaymentAdapter(mPaymentListMap);
-
-                            dialog.dismiss();
-
-                        } catch (Exception e) {
-                            Toast.makeText(DetailSaleView.this, getString(R.string.choose_appropriate_data), Toast.LENGTH_SHORT).show();
-                        }
-                        //endregion insert payment
                     }
                 })
                 .setTitle(R.string.fab_add_product);
         dialogView = builder.create();
         dialogView.show();
+
+        dialogView.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean wantToCloseDialog = false;
+
+                //region insert payment
+                paymentMapRow.put("amount", paymentAmount.getText().toString());
+                paymentMapRow.put("duedate", paymentDueDate.getText().toString());
+
+                try {
+                    Float amount = Utility.createFloatNumberWithString(DetailSaleView.this, paymentAmount.getText().toString());
+
+                    if (amount > sFinalAmount) {
+                        Utility.setErrorForEditText(DetailSaleView.this, quantityEditText, getString(R.string.more_than_balance_amount));
+                        return;
+                    } else if (!Utility.checkForValidityForEditTextDate(DetailSaleView.this, paymentDueDate))
+                        return;
+
+                    if (!paymentMapRow.get("type").equals(getResources().getString(R.string.payment_method_cheque)))
+                        paymentMapRow.put("isPass", "true");
+                    else
+                        paymentMapRow.put("isPass", String.valueOf(isPassCheckBox.isChecked()));
+
+                    mPaymentListMap.add(paymentMapRow);
+                    mCardViewPayments.getPaymentAdapter(mPaymentListMap);
+
+                    wantToCloseDialog = true;
+
+                } catch (Exception e) {
+                    Utility.setErrorForEditText(DetailSaleView.this, paymentAmount, "");
+                }
+                //endregion insert payment
+
+                if (wantToCloseDialog)
+                    dialogView.dismiss();
+            }
+        });
         //endregion create payment dialog
 
         //region declare views in dialog
@@ -1041,7 +1061,7 @@ public class DetailSaleView extends AppCompatActivity {
 
     public void fab_detail_sale_add_taxDiscount(View v) {
 
-        //region create payment dialog
+        //region create taxDiscount dialog
         builder = new AlertDialog.Builder(DetailSaleView.this)
                 .setView(getLayoutInflater().inflate(R.layout.dialog_add_tax_for_sale, null))
                 .setNegativeButton(R.string.discard_button, new DialogInterface.OnClickListener() {
@@ -1050,33 +1070,45 @@ public class DetailSaleView extends AppCompatActivity {
                     }
                 }).setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //region insert payment
-                        taxMapRow.put("amount", taxAmount.getText().toString());
-                        taxMapRow.put("percent", taxPercent.getText().toString());
-
-                        try {
-                            Float amount = Utility.createFloatNumberWithString(DetailSaleView.this, taxAmount.getText().toString());
-
-                            if (amount > sTotalAmount) {
-                                Toast.makeText(DetailSaleView.this, getString(R.string.more_than_balance_amount), Toast.LENGTH_SHORT).show();
-                                return;
-                            } else if (taxPercent.getText().toString().length() == 0)
-                                taxMapRow.put("percent", String.format("%.2f", 100 * amount / sTotalAmount));
-
-                            mTaxListMap.add(taxMapRow);
-                            mCardViewTaxes.getTaxAdapter(mTaxListMap);
-                            dialog.dismiss();
-
-                        } catch (Exception e) {
-                            taxPercent.setText("");
-                        }
-                        //endregion insert payment
                     }
                 })
                 .setTitle(R.string.fab_add_product);
         dialogView = builder.create();
         dialogView.show();
-        //endregion create payment dialog
+
+        dialogView.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean wantToCloseDialog = false;
+
+                //region insert taxDiscount
+                taxMapRow.put("amount", taxAmount.getText().toString());
+                taxMapRow.put("percent", taxPercent.getText().toString());
+
+                try {
+                    Float amount = Utility.createFloatNumberWithString(DetailSaleView.this, taxAmount.getText().toString());
+
+                    if (amount > sTotalAmount) {
+                        Utility.setErrorForEditText(DetailSaleView.this, taxAmount, getString(R.string.more_than_total_amount));
+                        return;
+                    } else if (taxPercent.getText().toString().length() == 0)
+                        taxMapRow.put("percent", String.format("%.2f", 100 * amount / sTotalAmount));
+
+                    mTaxListMap.add(taxMapRow);
+                    mCardViewTaxes.getTaxAdapter(mTaxListMap);
+
+                    wantToCloseDialog = true;
+
+                } catch (Exception e) {
+                    Utility.setErrorForEditText(DetailSaleView.this, taxAmount, "");
+                }
+                //endregion insert taxDiscount
+
+                if (wantToCloseDialog)
+                    dialogView.dismiss();
+            }
+        });
+        //endregion create taxDiscount dialog
 
         //region declare views in dialog
         taxMapRow = new HashMap<>();
@@ -1215,17 +1247,31 @@ public class DetailSaleView extends AppCompatActivity {
         mPaymentListMap = list;
     }
 
+    private void setHelperText() {
+
+        saleCodeTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
+                + getResources().getString(R.string.non_repetitive));
+
+        saleDateTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
+                + getResources().getString(R.string.date_format_error));
+    }
+
     // this method check the validation and correct entries. its check fill first and then check the validation rules.
-    private boolean CheckForValidity() {
-        if (!Utility.checkForValidityForEditTextNullOrEmpty(getBaseContext(), saleCode))
+    private boolean checkValidityWithChangeColorOfHelperText() {
+        if (!Utility.checkForValidityForEditTextDate(DetailSaleView.this, saleDate)) {
+            Utility.changeColorOfHelperText(DetailSaleView.this, saleDateTextInputLayout, Utility.mIdOfColorSetError);
+            saleDate.setSelectAllOnFocus(true);
+            saleDate.selectAll();
+            saleDate.requestFocus();
             return false;
-        else if (customerId == 0) {
+        } else
+            Utility.changeColorOfHelperText(DetailSaleView.this, saleDateTextInputLayout, Utility.mIdOfColorGetError);
+
+        if (customerId == 0) {
             Utility.setErrorForTextView(nameCustomer);
             Toast.makeText(mContext, R.string.choose_customer_error_for_sale, Toast.LENGTH_SHORT).show();
             return false;
-        } else if (!Utility.checkForValidityForEditTextNullOrEmpty(getBaseContext(), saleDate))
-            return false;
-        else if (mChosenProductListMap.size() == 0) {
+        } else if (mChosenProductListMap.size() == 0) {
             Toast.makeText(mContext, R.string.validity_error_dsale_select_product, Toast.LENGTH_SHORT).show();
             return false;
         } else if (sFinalAmount < 0) {

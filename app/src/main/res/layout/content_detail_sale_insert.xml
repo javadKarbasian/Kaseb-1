@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -45,10 +45,12 @@
                         android:textSize="@dimen/text_size_in_list" />
 
                     <android.support.design.widget.TextInputLayout
+                        android:id="@+id/text_input_layout_detail_sales_info_sale_code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/top_of_list_margin"
-                        android:textColorHint="@color/colorAccent">
+                        android:paddingLeft="@dimen/padding_left_text_view"
+                        app:errorTextAppearance="@style/text_input_layout_style_not_error">
 
                         <EditText
                             android:id="@+id/detail_sales_info_sale_code"
@@ -60,21 +62,19 @@
                             android:inputType="text"
                             android:maxLength="15"
                             android:nestedScrollingEnabled="false"
-                            android:paddingLeft="@dimen/padding_left_text_view"
                             android:textAppearance="?android:textAppearanceMedium"
-                            android:textColor="@color/colorBlack"
-
-                            android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title"
                             android:transitionName="@string/code_text_transition" />
 
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
+                        android:id="@+id/text_input_layout_detail_sales_info_sale_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/top_of_list_margin_in_row"
-                        android:textColorHint="@color/colorAccent">
+                        android:paddingLeft="@dimen/padding_left_text_view"
+                        app:errorTextAppearance="@style/text_input_layout_style_not_error">
 
                         <EditText
                             android:id="@+id/detail_sales_info_sale_date"
@@ -87,10 +87,6 @@
                             android:inputType="date"
                             android:maxLength="10"
                             android:nestedScrollingEnabled="false"
-                            android:paddingLeft="@dimen/padding_left_text_view"
-
-                            android:textColor="@color/colorBlack"
-                            android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
 
                     </android.support.design.widget.TextInputLayout>
@@ -108,34 +104,31 @@
 
                         <TextView
                             android:id="@+id/detail_sales_info_customer_name"
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_marginRight="@dimen/top_of_list_margin"
                             android:layout_weight="5"
                             android:gravity="center_vertical|start"
-                            android:hint="@string/detail_sales_info_customer_name"
+                            android:hint="@string/click_here_choose_customer"
                             android:paddingLeft="@dimen/padding_left_text_view"
                             android:textAppearance="?android:textAppearanceMedium"
-
                             android:textColor="@color/colorBlack"
-                            android:textColorHint="@color/colorBlack"
+                            android:textColorHint="@color/colorAccent"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
 
                         <TextView
                             android:id="@+id/detail_sales_info_customer_family"
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_weight="5"
                             android:gravity="center_vertical|start"
-                            android:hint="@string/detail_sales_info_customer_family"
                             android:paddingLeft="@dimen/padding_left_text_view"
                             android:textAppearance="?android:textAppearanceMedium"
-
                             android:textColor="@color/colorBlack"
-                            android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -182,6 +175,7 @@
                             android:layout_height="@dimen/height_of_card_view_title"
                             android:layout_marginStart="4dp"
                             android:background="@color/colorPrimary"
+                            android:contentDescription="@string/content_detail_sale_insert_add_product_image_button"
                             android:onClick="fab_detail_sale_add_product"
                             android:src="@drawable/plus" />
 
@@ -204,7 +198,6 @@
                                 android:layout_marginRight="@dimen/top_of_list_margin_in_row"
                                 android:layout_weight="7"
                                 android:gravity="center"
-                                android:paddingLeft="@dimen/activity_horizontal_margin"
                                 android:text="@string/detail_sales_products_items_name"
                                 android:textAppearance="?android:textAppearanceMedium"
                                 android:textColor="@color/colorWhite"
@@ -235,13 +228,27 @@
                                 android:textColorHint="@color/colorWhite"
                                 android:textSize="@dimen/text_size_in_list" />
 
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="@dimen/top_of_list_margin_in_row"
+                                android:layout_weight="4"
+                                android:gravity="center"
+                                android:text="@string/detail_sales_products_items_total"
+                                android:textAppearance="?android:textAppearanceMedium"
+                                android:textColor="@color/colorWhite"
+                                android:textColorHint="@color/colorWhite"
+                                android:textSize="@dimen/text_size_in_list" />
+
                         </LinearLayout>
+
                     </LinearLayout>
 
                     <FrameLayout
                         android:id="@+id/my_container_1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></FrameLayout>
+                        android:layout_height="wrap_content" />
+
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -494,13 +501,14 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/top_of_list_margin"
                             android:layout_marginRight="@dimen/top_of_list_margin_in_row"
                             android:layout_marginTop="@dimen/top_of_list_margin_in_row"
                             android:layout_weight="1"
                             android:gravity="start"
                             android:text="@string/detail_sales_summary_total_amount"
-                            android:textAppearance="?android:textAppearanceMedium"
 
+                            android:textAppearance="?android:textAppearanceMedium"
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
@@ -527,13 +535,14 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/top_of_list_margin"
                             android:layout_marginRight="@dimen/top_of_list_margin_in_row"
                             android:layout_marginTop="@dimen/top_of_list_margin_in_row"
                             android:layout_weight="1"
                             android:gravity="start"
                             android:text="@string/detail_sales_summary_tax"
-                            android:textAppearance="?android:textAppearanceMedium"
 
+                            android:textAppearance="?android:textAppearanceMedium"
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
@@ -560,13 +569,14 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/top_of_list_margin"
                             android:layout_marginRight="@dimen/top_of_list_margin_in_row"
                             android:layout_marginTop="@dimen/top_of_list_margin_in_row"
                             android:layout_weight="1"
                             android:gravity="start"
                             android:text="@string/detail_sales_summary_discount"
-                            android:textAppearance="?android:textAppearanceMedium"
 
+                            android:textAppearance="?android:textAppearanceMedium"
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
@@ -594,6 +604,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/top_of_list_margin"
                             android:layout_marginRight="@dimen/top_of_list_margin_in_row"
                             android:layout_marginTop="@dimen/top_of_list_margin_in_row"
                             android:layout_weight="1"
@@ -625,6 +636,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/top_of_list_margin"
                             android:layout_marginRight="@dimen/top_of_list_margin_in_row"
                             android:layout_marginTop="@dimen/top_of_list_margin_in_row"
                             android:layout_weight="1"
@@ -658,6 +670,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/top_of_list_margin"
                             android:layout_marginRight="@dimen/top_of_list_margin_in_row"
                             android:layout_marginTop="@dimen/top_of_list_margin_in_row"
                             android:layout_weight="1"
@@ -682,7 +695,9 @@
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
         </LinearLayout>
 
     </LinearLayout>
+
 </ScrollView>

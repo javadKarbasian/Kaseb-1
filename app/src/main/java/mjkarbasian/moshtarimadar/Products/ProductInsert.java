@@ -3,6 +3,7 @@ package mjkarbasian.moshtarimadar.Products;
 import android.content.ContentValues;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +26,8 @@ import mjkarbasian.moshtarimadar.R;
  * Created by Unique on 10/25/2016.
  */
 public class ProductInsert extends Fragment {
+
+    //region declare values
     private static final String LOG_TAG = CostInsert.class.getSimpleName();
     View rootView;
     ContentValues productValues = new ContentValues();
@@ -39,7 +42,18 @@ public class ProductInsert extends Fragment {
     EditText buyDate;
     EditText discountAmount;
     EditText discountPercent;
+    TextInputLayout productNameTextInputLayout;
+    TextInputLayout salePriceTextInputLayout;
+    TextInputLayout quantityTextInputLayout;
+    TextInputLayout buyPriceTextInputLayout;
+    TextInputLayout buyDateTextInputLayout;
+    TextInputLayout productCodeTextInputLayout;
+    TextInputLayout productUnitTextInputLayout;
+    TextInputLayout productDescriptionTextInputLayout;
+    TextInputLayout discountAmountTextInputLayout;
+    TextInputLayout discountPercentTextInputLayout;
     private Uri insertUri;
+    //endregion declare values
 
     public ProductInsert() {
         setHasOptionsMenu(true);
@@ -62,8 +76,22 @@ public class ProductInsert extends Fragment {
         discountAmount = (EditText) rootView.findViewById(R.id.input_discount_amount);
         discountPercent = (EditText) rootView.findViewById(R.id.input_discount_percent);
 
+        productNameTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_product_name);
+        salePriceTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_sale_price);
+        quantityTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_quantity);
+        buyPriceTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_buy_price);
+        buyDateTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_buy_date);
+        productCodeTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_product_code);
+        productUnitTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_product_unit);
+        productDescriptionTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_product_description);
+        discountAmountTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_discount_amount);
+        discountPercentTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_discount_percent);
+
         buyDate.setText(Utility.preInsertDate(getActivity()));
 
+        setHelperText();
+
+        //region discountAmount addTextChangedListener
         discountAmount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -83,10 +111,13 @@ public class ProductInsert extends Fragment {
                         discountAmount.selectAll();
                     }
                 } catch (Exception e) {
-                    if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals(""))
-                        Utility.setErrorForEditText(getActivity(), salePrice, "");
-                    else
+                    if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
+                        Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
+                        salePrice.requestFocus();
+                    } else {
                         Utility.setErrorForEditText(getActivity(), discountAmount, "");
+                        Utility.changeColorOfHelperText(getActivity(), discountAmountTextInputLayout, R.color.colorPrimaryLight);
+                    }
                 }
             }
 
@@ -98,14 +129,19 @@ public class ProductInsert extends Fragment {
 
                     buyPrice.setText(String.format("%.2f", Float.valueOf(mSalePrice - mDiscountAmount)));
                 } catch (Exception e) {
-                    if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals(""))
-                        Utility.setErrorForEditText(getActivity(), salePrice, "");
-                    else
+                    if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
+                        Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
+                        salePrice.requestFocus();
+                    } else {
                         Utility.setErrorForEditText(getActivity(), discountAmount, "");
+                        Utility.changeColorOfHelperText(getActivity(), discountAmountTextInputLayout, R.color.colorPrimaryLight);
+                    }
                 }
             }
         });
+        //endregion discountAmount addTextChangedListener
 
+        //region discountPercent addTextChangedListener
         discountPercent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -127,10 +163,13 @@ public class ProductInsert extends Fragment {
                         discountPercent.selectAll();
                     }
                 } catch (Exception e) {
-                    if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals(""))
-                        Utility.setErrorForEditText(getActivity(), salePrice, "");
-                    else
+                    if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
+                        Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
+                        salePrice.requestFocus();
+                    } else {
                         Utility.setErrorForEditText(getActivity(), discountPercent, "");
+                        Utility.changeColorOfHelperText(getActivity(), discountPercentTextInputLayout, R.color.colorPrimaryLight);
+                    }
                 }
             }
 
@@ -144,13 +183,17 @@ public class ProductInsert extends Fragment {
                             Float.valueOf((float) ((Float.valueOf(100 - mDiscountPercent) / 100.0) * mSalePrice))));
                     discountAmount.setText(String.format("%.2f", Float.valueOf(mDiscountPercent * mSalePrice / 100)));
                 } catch (Exception e) {
-                    if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals(""))
-                        Utility.setErrorForEditText(getActivity(), salePrice, "");
-                    else
+                    if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
+                        Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
+                        salePrice.requestFocus();
+                    } else {
                         Utility.setErrorForEditText(getActivity(), discountPercent, "");
+                        Utility.changeColorOfHelperText(getActivity(), discountPercentTextInputLayout, R.color.colorPrimaryLight);
+                    }
                 }
             }
         });
+        //endregion discountPercent addTextChangedListener
 
         return rootView;
     }
@@ -165,11 +208,7 @@ public class ProductInsert extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.save_inputs: {
-                if (Utility.checkForValidityForEditTextNullOrEmptyAndItterative(
-                        getActivity(), productName, KasebContract.Products.CONTENT_URI,
-                        KasebContract.Products.COLUMN_PRODUCT_NAME + " = ? ",
-                        KasebContract.Products._ID, new String[]{productName.getText().toString()})
-                        && CheckForValidity()) {
+                if (checkValidityWithChangeColorOfHelperText()) {
 
                     productValues.put(KasebContract.Products.COLUMN_PRODUCT_NAME, productName.getText().toString());
                     productValues.put(KasebContract.Products.COLUMN_PRODUCT_CODE, productCode.getText().toString());
@@ -217,23 +256,102 @@ public class ProductInsert extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    // this method check the validation and correct entries. its check fill first and then check the validation rules.
-    private boolean CheckForValidity() {
-        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), salePrice))
-            return false;
-        else if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), quantity))
-            return false;
-        else if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), buyPrice))
-            return false;
-        else if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), buyDate))
-            return false;
-
-        return true;
-    }
-
     // this method back to the activity view. this must be a utility method.
     private void backToLastPage() {
         Utility.clearForm((ViewGroup) rootView);
         getFragmentManager().popBackStackImmediate();
+    }
+
+    private void setHelperText() {
+
+        productNameTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
+                + getResources().getString(R.string.non_repetitive));
+
+        salePriceTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        quantityTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+
+        buyPriceTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
+                + getResources().getString(R.string.not_more_than_sale_price));
+
+        productCodeTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        productUnitTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        productDescriptionTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+
+        buyDateTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
+                + getResources().getString(R.string.date_format_error));
+
+        discountAmountTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
+                + getResources().getString(R.string.not_more_than_sale_price));
+
+        discountPercentTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
+                + getResources().getString(R.string.not_more_hundred));
+    }
+
+    // this method check the validation and correct entries. its check fill first and then check the validation rules.
+    private boolean checkValidityWithChangeColorOfHelperText() {
+
+        if (!Utility.checkForValidityForEditTextNullOrEmptyAndItterative(
+                getActivity(), productName, productNameTextInputLayout, KasebContract.Products.CONTENT_URI,
+                KasebContract.Products.COLUMN_PRODUCT_NAME + " = ? ",
+                KasebContract.Products._ID, new String[]{productName.getText().toString()}))
+            return false;
+
+        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), productCode)) {
+            Utility.changeColorOfHelperText(getActivity(), productCodeTextInputLayout, Utility.mIdOfColorSetError);
+            productCode.setSelectAllOnFocus(true);
+            productCode.selectAll();
+            productCode.requestFocus();
+            return false;
+        } else
+            Utility.changeColorOfHelperText(getActivity(), productCodeTextInputLayout, Utility.mIdOfColorGetError);
+
+        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), salePrice)) {
+            Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, Utility.mIdOfColorSetError);
+            salePrice.setSelectAllOnFocus(true);
+            salePrice.selectAll();
+            salePrice.requestFocus();
+            return false;
+        } else
+            Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, Utility.mIdOfColorGetError);
+
+        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), quantity)) {
+            Utility.changeColorOfHelperText(getActivity(), quantityTextInputLayout, Utility.mIdOfColorSetError);
+            quantity.setSelectAllOnFocus(true);
+            quantity.selectAll();
+            quantity.requestFocus();
+            return false;
+        } else
+            Utility.changeColorOfHelperText(getActivity(), quantityTextInputLayout, Utility.mIdOfColorGetError);
+
+        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), buyPrice)) {
+            Utility.changeColorOfHelperText(getActivity(), buyPriceTextInputLayout, Utility.mIdOfColorSetError);
+            buyPrice.setSelectAllOnFocus(true);
+            buyPrice.selectAll();
+            buyPrice.requestFocus();
+            return false;
+        } else {
+            Float mBuyPrice = Float.valueOf(buyPrice.getText().toString());
+            Float mSalePrice = Float.valueOf(salePrice.getText().toString());
+
+            if (mBuyPrice > mSalePrice) {
+                Utility.changeColorOfHelperText(getActivity(), buyPriceTextInputLayout, Utility.mIdOfColorSetError);
+                buyPrice.setSelectAllOnFocus(true);
+                buyPrice.selectAll();
+                buyPrice.requestFocus();
+                return false;
+            } else
+                Utility.changeColorOfHelperText(getActivity(), buyPriceTextInputLayout, Utility.mIdOfColorGetError);
+        }
+
+        if (!Utility.checkForValidityForEditTextDate(getActivity(), buyDate)) {
+            Utility.changeColorOfHelperText(getActivity(), buyDateTextInputLayout, Utility.mIdOfColorSetError);
+            buyDate.setSelectAllOnFocus(true);
+            buyDate.selectAll();
+            buyDate.requestFocus();
+            return false;
+        } else
+            Utility.changeColorOfHelperText(getActivity(), buyDateTextInputLayout, Utility.mIdOfColorGetError);
+
+        return true;
     }
 }
