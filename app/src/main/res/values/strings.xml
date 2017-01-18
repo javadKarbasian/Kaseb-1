@@ -446,4 +446,5 @@
     <string name="detail_customer_toolbar_title">Customer Info</string>
     <string name="customer_image_transition">customer_image_transition</string>
     <string name="code_text_transition">code_text_transition</string>
+    <string name="no_data_text_customers_states">no customers...! please add some.</string>
 </resources>
