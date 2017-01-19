@@ -104,7 +104,7 @@ public class KasebDashBoard extends android.support.v4.app.Fragment {
         assert recievCurs != null;
         if (recievCurs.moveToFirst())
 //            totalRecievable.setText(recievCurs.getString(0) == null ? Utility.formatPurchase(getActivity(), cursor.getString(0)) : Utility.formatPurchase(getActivity(), Utility.DecimalSeperation(getActivity(), cursor.getLong(0) - recievCurs.getLong(0))));
-              totalRec = cursor.getString(0) == null ? 0f : cursor.getLong(0) - recievCurs.getLong(0);
+            totalRec = cursor.getString(0) == null ? 0f : cursor.getLong(0) - recievCurs.getLong(0);
 
         //endregion
         //region defining views
@@ -140,14 +140,14 @@ public class KasebDashBoard extends android.support.v4.app.Fragment {
             }
         }
         //region setViews of membership
-        totalSalesGold = totalDue[1] == null ? 0f:totalDue[1];
-        totalSalesSilv = totalDue[2] == null ? 0f:totalDue[2];
-        totalSalesBronz = totalDue[3] == null ? 0f:totalDue[3];
-        totalSalesNew = totalDue[4] == null ? 0f:totalDue[4];
-        totalRecGold = totalDue[1] == null ? 0f: (totalDue[1] - totalPaid[1]);
-        totalRecSilv = totalDue[2] == null ? 0f: (totalDue[2] - totalPaid[2]);
-        totalRecBronz = totalDue[3] == null ? 0f: (totalDue[3] - totalPaid[3]);
-        totalRecNew = totalDue[4] == null ? 0f: (totalDue[4] - totalPaid[4]);
+        totalSalesGold = totalDue[1] == null ? 0f : totalDue[1];
+        totalSalesSilv = totalDue[2] == null ? 0f : totalDue[2];
+        totalSalesBronz = totalDue[3] == null ? 0f : totalDue[3];
+        totalSalesNew = totalDue[4] == null ? 0f : totalDue[4];
+        totalRecGold = totalDue[1] == null ? 0f : (totalDue[1] - totalPaid[1]);
+        totalRecSilv = totalDue[2] == null ? 0f : (totalDue[2] - totalPaid[2]);
+        totalRecBronz = totalDue[3] == null ? 0f : (totalDue[3] - totalPaid[3]);
+        totalRecNew = totalDue[4] == null ? 0f : (totalDue[4] - totalPaid[4]);
         //endregion
 
         //region define customer state pie chart
@@ -191,17 +191,30 @@ public class KasebDashBoard extends android.support.v4.app.Fragment {
         //endregion
         //region define sales pie chart
         List<PieEntry> saleEntries = new ArrayList<>();
-        if (totalSalesGold != 0)
-           saleEntries.add(new PieEntry(totalSalesGold, getActivity().getResources().getString(R.string.states_gold)));
-        if (totalSalesSilv != 0)
+        List<Integer> saleDataColors = new ArrayList<>();
+
+        if (totalSalesGold != 0) {
+            saleEntries.add(new PieEntry(totalSalesGold, getActivity().getResources().getString(R.string.states_gold)));
+            saleDataColors.add(ContextCompat.getColor(getContext(), R.color.gold));
+        }
+
+        if (totalSalesSilv != 0) {
             saleEntries.add(new PieEntry(totalSalesSilv, getActivity().getResources().getString(R.string.states_silver)));
-        if (totalSalesBronz != 0)
+            saleDataColors.add(ContextCompat.getColor(getContext(), R.color.silver));
+        }
+        if (totalSalesBronz != 0) {
             saleEntries.add(new PieEntry(totalSalesGold, getActivity().getResources().getString(R.string.states_bronze)));
-        if (totalSalesNew != 0)
+            saleDataColors.add(ContextCompat.getColor(getContext(), R.color.bronze));
+        }
+
+        if (totalSalesNew != 0) {
             saleEntries.add(new PieEntry(totalSalesNew, getActivity().getResources().getString(R.string.states_instart)));
+            saleDataColors.add(ContextCompat.getColor(getContext(), R.color.in_start));
+        }
+
 
         PieDataSet saleSet = new PieDataSet(saleEntries, null);
-        saleSet.setColors(dataColors);
+        saleSet.setColors(saleDataColors);
         saleSet.setSliceSpace(2f);
         saleSet.setValueTextSize(14f);
         PieData saleData = new PieData(saleSet);
@@ -219,17 +232,30 @@ public class KasebDashBoard extends android.support.v4.app.Fragment {
 
         //region define recievables pie chart
         List<PieEntry> recEntries = new ArrayList<>();
-        if (totalRecGold != 0)
+        List<Integer> recDataColors = new ArrayList<>();
+
+        if (totalRecGold != 0) {
             recEntries.add(new PieEntry(totalRecGold, getActivity().getResources().getString(R.string.states_gold)));
-        if (totalRecSilv != 0)
+            recDataColors.add(ContextCompat.getColor(getContext(), R.color.gold));
+        }
+        if (totalRecSilv != 0) {
             recEntries.add(new PieEntry(totalRecSilv, getActivity().getResources().getString(R.string.states_silver)));
-        if (totalRecBronz != 0)
+            recDataColors.add(ContextCompat.getColor(getContext(), R.color.silver));
+
+        }
+        if (totalRecBronz != 0) {
             recEntries.add(new PieEntry(totalRecBronz, getActivity().getResources().getString(R.string.states_bronze)));
-        if (totalRecNew != 0)
+            recDataColors.add(ContextCompat.getColor(getContext(), R.color.bronze));
+
+        }
+        if (totalRecNew != 0) {
             recEntries.add(new PieEntry(totalRecNew, getActivity().getResources().getString(R.string.states_instart)));
+            recDataColors.add(ContextCompat.getColor(getContext(), R.color.in_start));
+
+        }
 
         PieDataSet recSet = new PieDataSet(recEntries, null);
-        recSet.setColors(dataColors);
+        recSet.setColors(recDataColors);
         recSet.setSliceSpace(2f);
         recSet.setValueTextSize(14f);
         PieData recData = new PieData(recSet);
@@ -245,7 +271,7 @@ public class KasebDashBoard extends android.support.v4.app.Fragment {
         Utility.styleLegend(pieLegend);
         //endregion
 
-            //endregion
+        //endregion
         recievCurs.close();
         customerCurs.close();
         cursor.close();
