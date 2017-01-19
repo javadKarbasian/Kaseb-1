@@ -117,6 +117,7 @@ public class DetailSaleInsert extends AppCompatActivity {
 
     TextInputLayout saleCodeTextInputLayout;
     TextInputLayout saleDateTextInputLayout;
+    TextInputLayout quantityTextInputLayout;
 
     EditText saleCode;
     EditText paymentAmount;
@@ -229,10 +230,7 @@ public class DetailSaleInsert extends AppCompatActivity {
                 saleCode = (EditText) findViewById(R.id.detail_sales_info_sale_code);
                 //endregion
 
-                if (Utility.checkForValidityForEditTextNullOrEmptyAndItterative(
-                        mContext, saleCode, saleCodeTextInputLayout, KasebContract.Sales.CONTENT_URI,
-                        KasebContract.Sales.COLUMN_SALE_CODE + " = ? ",
-                        KasebContract.Sales._ID, new String[]{saleCode.getText().toString()}) && checkValidityWithChangeColorOfHelperText()) {
+                if (checkValidityWithChangeColorOfHelperText()) {
 
                     mDb.beginTransaction();
 
@@ -482,10 +480,14 @@ public class DetailSaleInsert extends AppCompatActivity {
 
                             wantToCloseDialog = true;
                         }
-                    } else
-                        Utility.setErrorForEditText(DetailSaleInsert.this, quantityEditText, getResources().getString(R.string.not_enough_stock));
-                } else
-                    Utility.setErrorForEditText(DetailSaleInsert.this, quantityEditText, "");
+                    } else {
+                        Utility.changeColorOfHelperText(DetailSaleInsert.this, saleDateTextInputLayout, Utility.mIdOfColorSetError);
+                        quantityTextInputLayout.setError(getResources().getString(R.string.not_enough_stock));
+                    }
+                } else {
+                    Utility.changeColorOfHelperText(DetailSaleInsert.this, saleDateTextInputLayout, Utility.mIdOfColorSetError);
+                    quantityTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+                }
                 //endregion insert product
 
                 if (wantToCloseDialog)
@@ -526,6 +528,7 @@ public class DetailSaleInsert extends AppCompatActivity {
         modeList.setAdapter(mAdapter);
 
         quantityEditText = (EditText) dialogView.findViewById(R.id.add_number_of_product_for_sale_number);
+        quantityTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.text_input_layout_number_of_product_for_sale_number);
         //endregion Set Adapter To Dialog
 
         //region ClickListener ListView Dialog
@@ -559,9 +562,12 @@ public class DetailSaleInsert extends AppCompatActivity {
                                 if (mCursor.moveToLast())
                                     cost = mCursor.getLong(mCursor.getColumnIndex(KasebContract.ProductHistory.COLUMN_SALE_PRICE));
 
-                            TextInputLayout textInputLayout = (TextInputLayout) dialogView.findViewById(R.id.textInputLayoutOfEditTextQuantity);
-                            textInputLayout.setHint(getString(R.string.stock_product) + differneceOfBuy_Sale);
+                            quantityTextInputLayout.setHint(getString(R.string.stock_product) + " " + differneceOfBuy_Sale);
                             quantityEditText.setVisibility(View.VISIBLE);
+
+                            quantityEditText.setSelectAllOnFocus(true);
+                            quantityEditText.selectAll();
+                            quantityEditText.requestFocus();
                         }
                     }
                 }
@@ -871,6 +877,13 @@ public class DetailSaleInsert extends AppCompatActivity {
 
     // this method check the validation and correct entries. its check fill first and then check the validation rules.
     private boolean checkValidityWithChangeColorOfHelperText() {
+
+        if (!Utility.checkForValidityForEditTextNullOrEmptyAndItterative(
+                mContext, saleCode, saleCodeTextInputLayout, KasebContract.Sales.CONTENT_URI,
+                KasebContract.Sales.COLUMN_SALE_CODE + " = ? ",
+                KasebContract.Sales._ID, new String[]{saleCode.getText().toString()}))
+            return false;
+
         if (!Utility.checkForValidityForEditTextDate(DetailSaleInsert.this, saleDate)) {
             Utility.changeColorOfHelperText(DetailSaleInsert.this, saleDateTextInputLayout, Utility.mIdOfColorSetError);
             saleDate.setSelectAllOnFocus(true);

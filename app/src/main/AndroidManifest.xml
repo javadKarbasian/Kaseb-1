@@ -161,6 +161,7 @@
         </activity>
 
         <activity android:name=".Helpers.GalleryUtil" />
+
         <activity android:name=".Helpers.ImageSelector" />
 
         <provider

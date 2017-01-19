@@ -14,8 +14,8 @@
             android:id="@+id/image_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="intro_anim_click"
             android:layout_gravity="center"
+            android:onClick="intro_anim_click"
             android:src="@drawable/kaseb_center" />
 
         <TextView

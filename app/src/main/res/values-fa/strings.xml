@@ -76,7 +76,7 @@
     <string name="customer_tab_dash">وضعیت</string>
     <string name="customer_tab_info">اطلاعات</string>
     <string name="back_arrow">برگشت</string>
-    <string name="edit_action_description">این دکمه شما را به صفحه تغییر اطلاعات مشتری هدایت می کند</string>
+    <string name="edit_action_description">این دکمه شما را به صفحه تغییر اطلاعات مشتری هدایت می کند.</string>
     <string name="bronze_member">عضو برنزی</string>
     <string name="gold_member">عضو طلایی</string>
     <string name="non_member">عضو جدید</string>
@@ -92,7 +92,7 @@
     <string name="detail_sales_summary_tax">مالیات</string>
     <string name="detail_sales_summary_total_amount">مبلغ کل</string>
     <string name="detail_sales_summary_total_balance">مانده</string>
-    <string name="edit_detail_sale_action_description">این دکمه به شما اجازه تغییر در فاکتور ذخیره شده را می دهد</string>
+    <string name="edit_detail_sale_action_description">این دکمه به شما اجازه تغییر در فاکتور ذخیره شده را می دهد.</string>
     <string name="fab_add_discount">ثبت تخفیف</string>
     <string name="fab_add_payment">ثبت پرداخت</string>
     <string name="fab_add_tax">ثبت مالیات</string>
@@ -100,7 +100,7 @@
     <string name="payment_model_cheque">چک</string>
     <string name="payment_model_credit">امانی یااعتباری</string>
     <string name="print_button">چاپ</string>
-    <string name="print_detail_sale_action_description">این دکمه به شما امکان پرینت از فکتور را می دهد</string>
+    <string name="print_detail_sale_action_description">این دکمه به شما امکان پرینت از فکتور را می دهد.</string>
     <string name="sale_tax_off_stick">تخفیف</string>
     <string name="sale_tax_tax_stick">مالیات</string>
     <string name="save">ذخیره</string>
@@ -114,10 +114,10 @@
     <string name="sample_unit">دستگاه</string>
     <string name="title_card_price_list_buy_price">قیمت خرید</string>
     <string name="title_card_price_list_sale_price">قیمت فروش</string>
-    <string name="detail_product_action_description">این دکمه به شما امکان ثبت قیمت خرید و قیمت فروش را می دهد</string>
+    <string name="detail_product_action_description">این دکمه به شما امکان ثبت قیمت خرید و قیمت فروش را می دهد.</string>
     <string name="title_card_detail_product">مشخصات کالا</string>
-    <string name="share_action_description">این دکمه به شما امکان اشتراک گذاری اطلاعات محصول را می دهد</string>
-    <string name="edit_detail_product_action_description">این دکمه به شما اجازه تغییر در اطلاعات محصول/خدمت را می دهد</string>
+    <string name="share_action_description">این دکمه به شما امکان اشتراک گذاری اطلاعات محصول را می دهد.</string>
+    <string name="edit_detail_product_action_description">این دکمه به شما اجازه تغییر در اطلاعات محصول/خدمت را می دهد.</string>
 
     <string name="about_us_my_info">
         کاسب عزیز، کاسب نرم افزاری جهت مدیریت ارتباط شما با مشتریان شما است و باید گفت یک نرم افزار حسابداری نیست! نرم افزار کاسب رو برای شما توسعه دادیم تا شما به این دارایی مهمتون، یعنی مشتریانتون، بیش از پیش توجه کنید تا دو دستاورد مهم حاصل شود :\n
@@ -235,7 +235,7 @@
     <string name="pref_header_import_contacts">وارد کردن مشتری از دفترچه تماس</string>
     <string name="pref_header_payment">مدلهای پرداخت</string>
     <string name="pref_header_tax">انواع مالیات یاتخفیف</string>
-    <string name="print_your_factor">این دکمه فاکتور را پرینت میگیرد.</string>
+    <string name="print_your_factor">این دکمه فاکتور را پرینت می گیرد.</string>
     <string name="quantity">تعداد</string>
     <string name="sale_code_prefix">کد- </string>
     <string name="sale_date">تاریخ فروش</string>
@@ -255,10 +255,10 @@
     <string name="sample_product_name_9">سونی 2020</string>
     <string name="sample_sale_code_2">کد- 2</string>
     <string name="save_button">ذخیره</string>
-    <string name="save_your_factor">به شما اجازه میدهد فاکتور را ذخیره کنید.</string>
+    <string name="save_your_factor">به شما اجازه می دهد فاکتور را ذخیره کنید.</string>
     <string name="search_title_cost">نام هزینه رو وارد کن!</string>
     <string name="search_title_products">نام محصول رو وارد کن.</string>
-    <string name="search_title_sale">فقط کد فروش…</string>
+    <string name="search_title_sale">فقط کد فروش …</string>
     <string name="sort_name">نام نحوه چینش</string>
     <string name="states_bronze">برنزی</string>
     <string name="states_gold">طلایی</string>
@@ -285,7 +285,7 @@
     <string name="pref_header_kaseb">کاسب</string>
     <string name="cost_code_prefix">کد- </string>
     <string name="product_code_prefix">کد- </string>
-    <string name="validity_error_dsale_select_product">برای ثبت فروش باید محصول وارد کنی</string>
+    <string name="validity_error_dsale_select_product">برای ثبت فروش باید محصول وارد کنی.</string>
     <string name="confirm_delete_customer_list_factors">فاکتور ثبت شده </string>
     <string name="confirm_delete_customer_list_it_has">نمیتونی پاکش کنی، چون این مشتری در </string>
     <string name="confirm_delete_product_list">میخوای این محصول رو پاک کنی؟\n</string>
@@ -305,7 +305,7 @@
     <string name="title_of_payments">پرداخت های فاکتور</string>
     <string name="title_of_invoice_summary">خلاصه فاکتور</string>
     <string name="save_factor_then_print">ابتدا فاکتور را ذخیره کنید، سپس دوباره سعی کنید.</string>
-    <string name="non_repetitive">(تکراری نباشد)</string>
+    <string name="non_repetitive">(تکراری نباشد.)</string>
     <string name="title_of_taxes">مالیات ها</string>
     <string name="total_amount_title">مبلغ کل</string>
     <string name="total_discount_title">تخفیف کل</string>
@@ -315,7 +315,7 @@
     <string name="total_unpaied_title">مجموع پرداخت نشده</string>
     <string name="type_title">نوع</string>
     <string name="quantity_title">تعداد</string>
-    <string name="register_message_copyright">ثبت شده توسط کاسب</string>
+    <string name="register_message_copyright">ثبت شده توسط کاسب. ©</string>
     <string name="row_title">سطر</string>
     <string name="price_title">قیمت</string>
     <string name="percent_title">درصد</string>
@@ -344,13 +344,14 @@
     <string name="more_than_balance_amount">این مقدار نباید از مانده فاکتور بیشتر باشد.</string>
     <string name="more_than_total_amount">این مقدار نباید از مبلغ کل بیشتر باشد.</string>
     <string name="stock_product">تعداد (مقدار) موجود : </string>
-    <string name="not_enough_stock">متعداد (مقدار) کافی موجود نیست.</string>
-    <string name="less_than_stock_explain_text">تعداد (مقدار) کالای انتخاب شده را وارد کنید.\nاین عدد نباید از موجودی انبار بیشتر باسد.</string>
+    <string name="not_enough_stock">مقدار (تعداد) کالای موجود، کافی نیست.</string>
+    <string name="less_than_stock_explain_text">تعداد (مقدار) کالای انتخاب شده را وارد کنید.\nاین عدد نباید از موجودی انبار بیشتر باشد.</string>
     <string name="edit_quantity">تغییر تعداد (مقدار) کالا</string>
     <string name="discard_button">انصراف</string>
     <string name="not_more_hundred">درصد مشخص شده نمی تواند بیشتر از 100 باشد.</string>
     <string name="not_more_than_sale_price">تخفیف گرفته شده در خرید کالا نمی تواند بیشتر از قیمت فروش باشد.</string>
-    <string name="click_here_choose_customer">برای انتخاب مشتری، کلیک کنید …</string>
+    <string name="click_here_choose_customer">انتخاب مشتری</string>
+    <string name="pref_header_edit_profile">اطلاعات کاسب</string>
     <string name="detail_sales_products_items_total">کل</string>
     <string name="title_product_stock">موجودی</string>
 </resources>

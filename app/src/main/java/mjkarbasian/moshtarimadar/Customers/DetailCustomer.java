@@ -181,6 +181,9 @@ public class DetailCustomer extends AppCompatActivity {
         customerFirstName.setText(nameCustomer);
         customerLastName.setText(familyCustomer);
 
+        customerFirstName.setEnabled(false);
+        customerLastName.setEnabled(false);
+
         try {
             if (imagegBytes.length == 0)
                 mCustomerAvatar.setImageDrawable(getBaseContext().getResources().getDrawable(

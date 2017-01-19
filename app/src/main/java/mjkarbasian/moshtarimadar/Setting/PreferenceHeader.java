@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,6 +37,8 @@ import mjkarbasian.moshtarimadar.R;
  * Created by family on 11/3/2016.
  */
 public class PreferenceHeader extends Fragment {
+
+    //region declare values
     private static final int RESULT_PICK_CONTACT = 1;
     private static final String LOG_TAG = PreferenceHeader.class.getSimpleName();
     ListView mListView;
@@ -43,6 +46,10 @@ public class PreferenceHeader extends Fragment {
     ArrayList<Integer> headerIcons = new ArrayList<>();
     ArrayList<String> headerTitle = new ArrayList<>();
     ArrayList<String> headerSummary = new ArrayList<>();
+
+    android.app.AlertDialog.Builder builder;
+    android.app.AlertDialog dialogView;
+    //endregion declare values
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +63,12 @@ public class PreferenceHeader extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        //region handle sharepreference
+        SharedPreferences sharedpreferences = getContext().getSharedPreferences("kasebProfile", getContext().MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedpreferences.edit();
+
+        //endregion handle sharepreference
         View rootView = inflater.inflate(R.layout.fragment_setting_types, container, false);
         mListView = (ListView) rootView.findViewById(R.id.list_view_setting_types);
         headerAdaper = new HeaderAdapter(getActivity(), headerIcons, headerTitle, headerSummary);
@@ -130,6 +143,42 @@ public class PreferenceHeader extends Fragment {
                                     })
                                     .show();
                         }
+                        case 6: {
+                            //region List all products
+                            builder = new android.app.AlertDialog.Builder(getActivity())
+                                    .setView(getActivity().getLayoutInflater().inflate(R.layout.dialog_edit_profile_of_kaseb, null))
+                                    .setNegativeButton(R.string.discard_button, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            dialogView.dismiss();
+                                        }
+                                    }).setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                        }
+                                    })
+                                    .setTitle(R.string.fab_add_product)
+                                    .setMessage(R.string.less_than_stock_explain_text);
+
+                            dialogView = builder.create();
+                            dialogView.show();
+
+                            dialogView.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Boolean wantToCloseDialog = false;
+
+                                    //region save info of kaseb profile
+                                    editor.putString("firstName", "value");
+                                    editor.putString("lastName", "value");
+                                    editor.putString("mobileNumber", "value");
+                                    editor.commit();
+                                    //endregion save info of kaseb profile
+
+                                    if (wantToCloseDialog) ;
+                                    dialogView.dismiss();
+                                }
+                            });
+                            //endregion List all products
+                        }
                     }
                 }
             }
@@ -140,7 +189,6 @@ public class PreferenceHeader extends Fragment {
     private void doRestore() {
         try {
             File sd = Environment.getExternalStorageDirectory();
-            File data = Environment.getDataDirectory();
             if (sd.canWrite()) {
                 final String currentDBPath = getActivity().getDatabasePath("kaseb.db").getPath();
                 String backupDBPath = Environment.getExternalStorageDirectory() + "/kaseb_copy.db";
@@ -160,7 +208,6 @@ public class PreferenceHeader extends Fragment {
                     .show();
 
         }
-
     }
 
     private void doBackup() throws IOException {
@@ -298,8 +345,7 @@ public class PreferenceHeader extends Fragment {
         headerTitle.add(getActivity().getResources().getString(R.string.pref_header_customer));
         headerTitle.add(getActivity().getResources().getString(R.string.pref_header_backup));
         headerTitle.add(getActivity().getResources().getString(R.string.pref_header_import_contacts));
-//        headerTitle.add(getActivity().getResources().getString(R.string.pref_header_kaseb));
-//        headerTitle.add(getActivity().getResources().getString(R.string.pref_header_notifications));
+        headerTitle.add(getActivity().getResources().getString(R.string.pref_header_edit_profile));
         return headerTitle;
     }
 
@@ -311,8 +357,7 @@ public class PreferenceHeader extends Fragment {
         headerIcons.add(R.drawable.statetype);
         headerIcons.add(R.drawable.backuprestore);
         headerIcons.add(R.drawable.importcontact);
-//        headerIcons.add(R.drawable.information);
-//        headerIcons.add(R.drawable.information);
+        headerIcons.add(R.drawable.kaseb_profile);
         return headerIcons;
     }
 

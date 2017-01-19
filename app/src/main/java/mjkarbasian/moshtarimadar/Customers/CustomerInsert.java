@@ -97,7 +97,7 @@ public class CustomerInsert extends Fragment {
         });
 
         stateType = (Spinner) rootView.findViewById(R.id.input_state_type_spinner);
-        stateType.setPadding(Utility.dipConverter(4,getActivity()),Utility.dipConverter(4,getActivity()),Utility.dipConverter(4,getActivity()),Utility.dipConverter(4,getActivity()));
+        stateType.setPadding(Utility.dipConverter(4, getActivity()), Utility.dipConverter(4, getActivity()), Utility.dipConverter(4, getActivity()), Utility.dipConverter(4, getActivity()));
         firstName = (EditText) rootView.findViewById(R.id.input_first_name);
         lastName = (EditText) rootView.findViewById(R.id.input_last_name);
         birthDay = (EditText) rootView.findViewById(R.id.input_birth_day);
