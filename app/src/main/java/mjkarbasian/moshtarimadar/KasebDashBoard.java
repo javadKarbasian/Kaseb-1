@@ -106,6 +106,7 @@ public class KasebDashBoard extends android.support.v4.app.Fragment {
 //            totalRecievable.setText(recievCurs.getString(0) == null ? Utility.formatPurchase(getActivity(), cursor.getString(0)) : Utility.formatPurchase(getActivity(), Utility.DecimalSeperation(getActivity(), cursor.getLong(0) - recievCurs.getLong(0))));
             totalRec = cursor.getString(0) == null ? 0f : cursor.getLong(0) - recievCurs.getLong(0);
 
+
         //endregion
         //region defining views
         PieChart statePie = (PieChart) rootView.findViewById(R.id.pie_chart_customer_state);
