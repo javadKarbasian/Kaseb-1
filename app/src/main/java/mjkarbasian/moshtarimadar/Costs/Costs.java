@@ -107,8 +107,8 @@ public class Costs extends DrawerActivity {
             case R.id.menu_sort_code:
                 sortFragment.getSortOrder(R.id.menu_sort_code);
                 break;
-            case R.id.menu_sort_date:
-                sortFragment.getSortOrder(R.id.menu_sort_date);
+            case R.id.menu_sort_name:
+                sortFragment.getSortOrder(R.id.menu_sort_name);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

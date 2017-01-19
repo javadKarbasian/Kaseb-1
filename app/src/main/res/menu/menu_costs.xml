@@ -18,8 +18,8 @@
                 android:id="@+id/menu_sort_code"
                 android:title="@string/sort_cost_code" />
             <item
-                android:id="@+id/menu_sort_date"
-                android:title="@string/sort_date" />
+                android:id="@+id/menu_sort_name"
+                android:title="@string/sort_name" />
         </menu>
     </item>
 </menu>

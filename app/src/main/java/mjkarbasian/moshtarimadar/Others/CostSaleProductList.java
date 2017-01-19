@@ -547,7 +547,7 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
                     case R.id.menu_sort_code:
                         sortOrder = KasebContract.Costs.COLUMN_COST_CODE + " ASC," + KasebContract.Costs.COLUMN_COST_NAME + " ASC";
                         break;
-                    case R.id.menu_sort_date:
+                    case R.id.menu_sort_name:
                         sortOrder = KasebContract.Costs.COLUMN_DATE + " ASC," + KasebContract.Costs.COLUMN_COST_NAME + " ASC";
                         break;
                 }
@@ -568,9 +568,9 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
                     case R.id.menu_sort_code:
                         sortOrder = KasebContract.Sales.COLUMN_SALE_CODE + " ASC";
                         break;
-                    case R.id.menu_sort_date:
-                        sortOrder = null;
-                        break;
+//                    case R.id.menu_sort_name:
+//                        sortOrder = null;
+//                        break;
                 }
                 break;
             }

@@ -52,7 +52,7 @@ public class Debaters extends DrawerActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_customers, menu);
+        inflater.inflate(R.menu.menu_debaters, menu);
 
         // Associate searchable configuration with the SearchView
         SearchManager searchManager =
