@@ -19,6 +19,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -1749,5 +1751,19 @@ public class Utility {
         } else {
             activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
+    }
+
+    public static void stylePie(PieChart statePie,String noDataTxt) {
+        statePie.setNoDataText(noDataTxt);
+        statePie.setCenterTextSize(16f);
+        statePie.invalidate(); // refresh
+        statePie.notifyDataSetChanged();
+        statePie.setDescription(null);
+    }
+
+    public static void styleLegend(Legend pieLegend) {
+        pieLegend.setTextSize(14f);
+        if(pieLegend!=null)
+        pieLegend.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
     }
 }

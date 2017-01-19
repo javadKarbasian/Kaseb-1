@@ -11,28 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_dashboard_pie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="6dp"
-            android:nestedScrollingEnabled="true">
-
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/pie_chart_customer_state"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:elevation="8dp"
-                />
-
-        </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
             android:id="@+id/card_dashboard_customers"
@@ -58,120 +39,13 @@
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@color/colorWhite" />
 
-                <LinearLayout
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pie_chart_customer_state"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="1dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-
-                        <TextView
-                            android:id="@+id/kaseb_dashboard_customer_qty"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="3dp"
-                            android:text="41"
-                            android:textAppearance="?android:textAppearanceLarge" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/kaseb_dashboard_customer_qty"
-                            android:textAppearance="?android:textAppearanceSmall" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="1dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/kaseb_dashboard_customer_qty_gold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="3"
-                            android:textAppearance="?android:textAppearanceMedium"
-                            android:textColor="@color/colorAccent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="@string/kaseb_dashboard_customer_qty_gold"
-                            android:textAppearance="?android:textAppearanceLarge"
-                            android:textColor="@color/gold"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/kaseb_dashboard_customer_qty_silver"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="8"
-                            android:textAppearance="?android:textAppearanceMedium"
-                            android:textColor="@color/colorAccent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="@string/kaseb_dashboard_customer_qty_silver"
-                            android:textAppearance="?android:textAppearanceLarge"
-                            android:textColor="@color/silver"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/kaseb_dashboard_customer_qty_bronze"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="5"
-                            android:textAppearance="?android:textAppearanceMedium"
-                            android:textColor="@color/colorAccent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="@string/kaseb_dashboard_customer_qty_bronze"
-                            android:textAppearance="?android:textAppearanceLarge"
-                            android:textColor="@color/bronze"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/kaseb_dashboard_customer_qty_instart"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="10"
-                            android:textAppearance="?android:textAppearanceMedium"
-                            android:textColor="@color/colorAccent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="2dp"
-                            android:layout_marginTop="2dp"
-                            android:text="@string/kaseb_dashboard_customer_qty_instart"
-                            android:textAppearance="?android:textAppearanceLarge"
-                            android:textColor="@color/normalState"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </LinearLayout>
-
+                    android:layout_height="300dp"
+                    android:padding="8dp"
+                    android:elevation="8dp"
+                    />
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
@@ -200,119 +74,13 @@
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@color/colorWhite" />
 
-                <LinearLayout
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pie_chart_sale"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="1dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/kaseb_dashboard_sale_total"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="3dp"
-                            android:text="41"
-                            android:textAppearance="?android:textAppearanceLarge" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/kaseb_dashboard_sale_total"
-                            android:textAppearance="?android:textAppearanceSmall" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="1dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/kaseb_dashboard_Sale_total_gold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="3"
-                            android:textAppearance="?android:textAppearanceMedium"
-                            android:textColor="@color/colorAccent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="@string/kaseb_dashboard_customer_qty_gold"
-                            android:textAppearance="?android:textAppearanceLarge"
-                            android:textColor="@color/gold"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/kaseb_dashboard_Sale_total_silver"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="8"
-                            android:textAppearance="?android:textAppearanceMedium"
-                            android:textColor="@color/colorAccent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="@string/kaseb_dashboard_customer_qty_silver"
-                            android:textAppearance="?android:textAppearanceLarge"
-                            android:textColor="@color/silver"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/kaseb_dashboard_Sale_total_bronze"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="5"
-                            android:textAppearance="?android:textAppearanceMedium"
-                            android:textColor="@color/colorAccent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="@string/kaseb_dashboard_customer_qty_bronze"
-                            android:textAppearance="?android:textAppearanceLarge"
-                            android:textColor="@color/bronze"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/kaseb_dashboard_Sale_total_instart"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="10"
-                            android:textAppearance="?android:textAppearanceMedium"
-                            android:textColor="@color/colorAccent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="2dp"
-                            android:layout_marginTop="2dp"
-                            android:text="@string/kaseb_dashboard_customer_qty_instart"
-                            android:textAppearance="?android:textAppearanceLarge"
-                            android:textColor="@color/normalState"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
+                    android:layout_height="300dp"
+                    android:padding="8dp"
+                    android:elevation="8dp"
+                    />            </LinearLayout>
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
@@ -322,6 +90,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="6dp"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:nestedScrollingEnabled="true">
 
             <LinearLayout
@@ -339,121 +108,16 @@
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@color/colorWhite" />
 
-                <LinearLayout
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pie_chart_recievable"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="1dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/kaseb_dashboard_others_total_recievables"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="3dp"
-                            android:text="41"
-                            android:textAppearance="?android:textAppearanceLarge" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/kaseb_dashboard_recievables_total"
-                            android:textAppearance="?android:textAppearanceSmall" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="1dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/kaseb_dashboard_others_total_recievables_gold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="3"
-                            android:textAppearance="?android:textAppearanceMedium"
-                            android:textColor="@color/colorAccent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="@string/kaseb_dashboard_others_total_recievables_gold"
-                            android:textAppearance="?android:textAppearanceLarge"
-                            android:textColor="@color/gold"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/kaseb_dashboard_others_total_recievables_silver"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="8"
-                            android:textAppearance="?android:textAppearanceMedium"
-                            android:textColor="@color/colorAccent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="@string/kaseb_dashboard_others_total_recievables_silver"
-                            android:textAppearance="?android:textAppearanceLarge"
-                            android:textColor="@color/silver"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/kaseb_dashboard_others_total_recievables_bronze"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="5"
-                            android:textAppearance="?android:textAppearanceMedium"
-                            android:textColor="@color/colorAccent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="@string/kaseb_dashboard_others_total_recievables_bronze"
-                            android:textAppearance="?android:textAppearanceLarge"
-                            android:textColor="@color/bronze"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/kaseb_dashboard_others_total_recievables_instart"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="10"
-                            android:textAppearance="?android:textAppearanceMedium"
-                            android:textColor="@color/colorAccent" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="2dp"
-                            android:layout_marginTop="2dp"
-                            android:text="@string/kaseb_dashboard_others_total_recievables_instart"
-                            android:textAppearance="?android:textAppearanceLarge"
-                            android:textColor="@color/normalState"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </LinearLayout>
-
+                    android:layout_height="300dp"
+                    android:padding="8dp"
+                    android:elevation="8dp"
+                    />
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
     </LinearLayout>
+
 </ScrollView>

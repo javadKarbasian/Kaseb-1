@@ -207,7 +207,7 @@
     <string name="hint_tax_amount">مبلغ مالیات</string>
     <string name="hint_tax_percent">درصد مالیات</string>
     <string name="how_many">تعداد یا مقدار محصول</string>
-    <string name="kaseb_dashboard_customer_qty">تعداد مشتریان</string>
+    <string name="kaseb_dashboard_customer_qty">مجموع</string>
     <string name="kaseb_dashboard_customer_qty_bronze">برنزی</string>
     <string name="kaseb_dashboard_customer_qty_gold">طلایی</string>
     <string name="kaseb_dashboard_customer_qty_instart">جدید</string>

@@ -335,7 +335,7 @@
     <string name="card_dashboard_customers">Customers Status</string>
     <string name="card_dashboard_sales">Sales status</string>
     <string name="card_dashboard_other">Recievables</string>
-    <string name="kaseb_dashboard_customer_qty">Total Customers</string>
+    <string name="kaseb_dashboard_customer_qty">Total</string>
     <string name="kaseb_dashboard_customer_qty_gold">Golden</string>
     <string name="kaseb_dashboard_customer_qty_silver">Silver</string>
     <string name="kaseb_dashboard_customer_qty_bronze">Bronze</string>
@@ -452,4 +452,5 @@
     <string name="customer_image_transition">customer_image_transition</string>
     <string name="code_text_transition">code_text_transition</string>
     <string name="no_data_text_customers_states">no customers...! please add some.</string>
+    <string name="no_data_text_sale">No Sale..! please add ones.</string>
 </resources>

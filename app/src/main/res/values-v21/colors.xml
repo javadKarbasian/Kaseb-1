@@ -11,5 +11,5 @@
     <color name="gold">#ffd700</color>
     <color name="silver">#c0c0c0</color>
     <color name="bronze">#daa520</color>
-    <color name="normalState">#b0e0e6</color>
+    <color name="in_start">#b0e0e6</color>
 </resources>

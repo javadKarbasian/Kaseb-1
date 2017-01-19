@@ -14,14 +14,10 @@
             android:id="@+id/image_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="intro_anim_click"
             android:layout_gravity="center"
             android:src="@drawable/kaseb_center" />
-        <!--<ImageView-->
-        <!--android:id="@+id/care_image"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:src="@drawable/care_800width" />-->
+
         <TextView
             android:id="@+id/care_image"
             android:layout_width="match_parent"

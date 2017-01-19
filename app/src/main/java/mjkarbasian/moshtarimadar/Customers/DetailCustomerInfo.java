@@ -124,8 +124,6 @@ public class DetailCustomerInfo extends Fragment {
             }
         }
 
-        customerFirstName.setText(sCustomerFirstName);
-        customerLastName.setText(sCustomerLastName);
         customerBirthDay.setText(sCustomerBirthDay);
         customerPhoneMobile.setText(sCustomerPhoneMobile);
         customerDescription.setText(sCustomerDescription);
@@ -139,8 +137,6 @@ public class DetailCustomerInfo extends Fragment {
         customerAddressStreet.setText(sCustomerAddressStreet);
         customerAddressPostalCode.setText(sCustomerAddressPostalCode);
 
-        customerFirstName.setEnabled(false);
-        customerLastName.setEnabled(false);
         customerBirthDay.setEnabled(false);
         customerPhoneMobile.setEnabled(false);
         customerDescription.setEnabled(false);
