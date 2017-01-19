@@ -204,7 +204,7 @@ public class KasebDashBoard extends android.support.v4.app.Fragment {
             saleDataColors.add(ContextCompat.getColor(getContext(), R.color.silver));
         }
         if (totalSalesBronz != 0) {
-            saleEntries.add(new PieEntry(totalSalesGold, getActivity().getResources().getString(R.string.states_bronze)));
+            saleEntries.add(new PieEntry(totalSalesBronz, getActivity().getResources().getString(R.string.states_bronze)));
             saleDataColors.add(ContextCompat.getColor(getContext(), R.color.bronze));
         }
 
