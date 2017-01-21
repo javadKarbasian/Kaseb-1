@@ -47,13 +47,13 @@ public class AboutUsFragment extends Fragment {
                 if (yourText.getText().toString().equals("") || yourText.getText().toString().equals(null))
                     Toast.makeText(getContext(), "Please write your Opinion, Next try send it!", Toast.LENGTH_SHORT).show();
                 else {
-                    Intent i = new Intent(Intent.ACTION_SEND);
-                    i.setType("message/rfc822");
-                    i.putExtra(Intent.EXTRA_EMAIL, new String[]{"androidteam@chmail.ir"});
-                    i.putExtra(Intent.EXTRA_SUBJECT, "Opinion from customer");
-                    i.putExtra(Intent.EXTRA_TEXT, yourText.getText().toString());
+                    Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                    emailIntent.setType("message/rfc822");
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"androidteam@chmail.ir"});
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Opinion from customer");
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, yourText.getText().toString());
                     try {
-                        startActivity(Intent.createChooser(i, "Send mail..."));
+                        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
                     } catch (android.content.ActivityNotFoundException ex) {
                         Toast.makeText(getContext(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
                     }

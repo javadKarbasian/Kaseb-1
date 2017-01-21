@@ -72,7 +72,7 @@ public class ProductInsert extends Fragment {
         buyPrice = (EditText) rootView.findViewById(R.id.input_buy_price);
         quantity = (EditText) rootView.findViewById(R.id.input_quantity);
         salePrice = (EditText) rootView.findViewById(R.id.input_sale_price);
-        buyDate = (EditText) rootView.findViewById(R.id.input_buy_date);
+        buyDate = (EditText) rootView.findViewById(R.id.dialog_add_payment_for_sale_input_due_date);
         discountAmount = (EditText) rootView.findViewById(R.id.input_discount_amount);
         discountPercent = (EditText) rootView.findViewById(R.id.input_discount_percent);
 
@@ -105,17 +105,17 @@ public class ProductInsert extends Fragment {
 
                     if (mDiscountAmount > mSalePrice) {
                         discountAmount.setText(salePrice.getText().toString());
-                        Utility.setErrorForEditText(getActivity(), discountAmount,
-                                getResources().getString(R.string.not_more_than_sale_price));
+                        discountAmountTextInputLayout.setError(getResources().getString(R.string.not_more_than_sale_price));
                         discountAmount.setSelectAllOnFocus(true);
                         discountAmount.selectAll();
+                        discountAmount.requestFocus();
                     }
                 } catch (Exception e) {
                     if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
                         Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
                         salePrice.requestFocus();
                     } else {
-                        Utility.setErrorForEditText(getActivity(), discountAmount, "");
+                        discountAmount.setError(getResources().getString(R.string.choose_appropriate_data));
                         Utility.changeColorOfHelperText(getActivity(), discountAmountTextInputLayout, R.color.colorPrimaryLight);
                     }
                 }
@@ -133,7 +133,7 @@ public class ProductInsert extends Fragment {
                         Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
                         salePrice.requestFocus();
                     } else {
-                        Utility.setErrorForEditText(getActivity(), discountAmount, "");
+                        discountAmountTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
                         Utility.changeColorOfHelperText(getActivity(), discountAmountTextInputLayout, R.color.colorPrimaryLight);
                     }
                 }
@@ -157,8 +157,7 @@ public class ProductInsert extends Fragment {
                         discountAmount.setText(String.format("%.2f", Float.valueOf(mDiscountPercent * mSalePrice / 100)));
 
                         discountPercent.setText(Utility.doubleFormatter(100));
-                        Utility.setErrorForEditText(getActivity(), discountPercent,
-                                getResources().getString(R.string.not_more_hundred));
+                        discountPercentTextInputLayout.setError(getResources().getString(R.string.not_more_hundred));
                         discountPercent.setSelectAllOnFocus(true);
                         discountPercent.selectAll();
                     }
@@ -167,7 +166,7 @@ public class ProductInsert extends Fragment {
                         Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
                         salePrice.requestFocus();
                     } else {
-                        Utility.setErrorForEditText(getActivity(), discountPercent, "");
+                        discountPercentTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
                         Utility.changeColorOfHelperText(getActivity(), discountPercentTextInputLayout, R.color.colorPrimaryLight);
                     }
                 }
@@ -187,7 +186,7 @@ public class ProductInsert extends Fragment {
                         Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
                         salePrice.requestFocus();
                     } else {
-                        Utility.setErrorForEditText(getActivity(), discountPercent, "");
+                        discountPercentTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
                         Utility.changeColorOfHelperText(getActivity(), discountPercentTextInputLayout, R.color.colorPrimaryLight);
                     }
                 }

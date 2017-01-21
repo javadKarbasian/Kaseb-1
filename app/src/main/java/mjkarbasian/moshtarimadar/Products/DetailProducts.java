@@ -206,17 +206,17 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
 
                             if (mDiscountAmount > mSalePrice) {
                                 discountAmount.setText(salePrice.getText().toString());
-                                Utility.setErrorForEditText(getActivity(), discountAmount,
-                                        getResources().getString(R.string.not_more_than_sale_price));
+                                discountAmountTextInputLayout.setError(getResources().getString(R.string.not_more_than_sale_price));
                                 discountAmount.setSelectAllOnFocus(true);
                                 discountAmount.selectAll();
+                                discountAmount.requestFocus();
                             }
                         } catch (Exception e) {
                             if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
                                 Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
                                 salePrice.requestFocus();
                             } else {
-                                Utility.setErrorForEditText(getActivity(), discountAmount, "");
+                                discountAmount.setError(getResources().getString(R.string.choose_appropriate_data));
                                 Utility.changeColorOfHelperText(getActivity(), discountAmountTextInputLayout, R.color.colorPrimaryLight);
                             }
                         }
@@ -234,7 +234,7 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                                 Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
                                 salePrice.requestFocus();
                             } else {
-                                Utility.setErrorForEditText(getActivity(), discountAmount, "");
+                                discountAmountTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
                                 Utility.changeColorOfHelperText(getActivity(), discountAmountTextInputLayout, R.color.colorPrimaryLight);
                             }
                         }
@@ -258,8 +258,7 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                                 discountAmount.setText(String.format("%.2f", Float.valueOf(mDiscountPercent * mSalePrice / 100)));
 
                                 discountPercent.setText(Utility.doubleFormatter(100));
-                                Utility.setErrorForEditText(getActivity(), discountPercent,
-                                        getResources().getString(R.string.not_more_hundred));
+                                discountPercentTextInputLayout.setError(getResources().getString(R.string.not_more_hundred));
                                 discountPercent.setSelectAllOnFocus(true);
                                 discountPercent.selectAll();
                             }
@@ -268,7 +267,7 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                                 Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
                                 salePrice.requestFocus();
                             } else {
-                                Utility.setErrorForEditText(getActivity(), discountPercent, "");
+                                discountPercentTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
                                 Utility.changeColorOfHelperText(getActivity(), discountPercentTextInputLayout, R.color.colorPrimaryLight);
                             }
                         }
@@ -288,7 +287,7 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                                 Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
                                 salePrice.requestFocus();
                             } else {
-                                Utility.setErrorForEditText(getActivity(), discountPercent, "");
+                                discountPercentTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
                                 Utility.changeColorOfHelperText(getActivity(), discountPercentTextInputLayout, R.color.colorPrimaryLight);
                             }
                         }

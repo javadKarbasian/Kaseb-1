@@ -260,7 +260,7 @@ public class CustomerInsert extends Fragment {
                         e.printStackTrace();
                     }
                 } else {
-                    Toast toast = Toast.makeText(getActivity(), "There is some problem in croping app", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getActivity(), R.string.problem_in_crop_image, Toast.LENGTH_LONG);
                     toast.show();
                 }
                 if (data.getExtras() != null) {
@@ -290,7 +290,7 @@ public class CustomerInsert extends Fragment {
                         e.printStackTrace();
                     }
                 } else {
-                    Toast toast = Toast.makeText(getActivity(), "There is some problem in croping app", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getActivity(), R.string.problem_in_crop_image, Toast.LENGTH_LONG);
                     toast.show();
                 }
             }
@@ -324,8 +324,7 @@ public class CustomerInsert extends Fragment {
         // respond to users whose devices do not support the crop action
         catch (ActivityNotFoundException anfe) {
             // display an error message
-            String errorMessage = "your device doesn't support the crop action!";
-            Toast toast = Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getActivity(), R.string.does_not_support_crop_action, Toast.LENGTH_SHORT);
             toast.show();
         }
     }

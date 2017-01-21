@@ -6,7 +6,7 @@
 
     <string name="action_settings">تنظیمات</string>
     <string name="kaseb_hadith">کاسب حبیب خداست</string>
-    <string name="kaseb_name">علی قربانی</string>
+    <string name="kaseb_name">مشخص نشده</string>
     <string name="title_customer">مشتریان</string>
     <string name="title_debtors">بدهکاران</string>
     <string name="title_sales">فروشها</string>
@@ -232,7 +232,7 @@
     <string name="pref_header_backup">پشتیبان گیری یا بازیابی</string>
     <string name="pref_header_cost">انواع هزینه</string>
     <string name="pref_header_customer">انواع عضویت </string>
-    <string name="pref_header_import_contacts">وارد کردن مشتری از دفترچه تماس</string>
+    <string name="pref_header_import_contacts">افزودن مشتری از لیست مخاطبین</string>
     <string name="pref_header_payment">مدلهای پرداخت</string>
     <string name="pref_header_tax">انواع مالیات یاتخفیف</string>
     <string name="print_your_factor">این دکمه فاکتور را پرینت می گیرد.</string>
@@ -365,4 +365,10 @@
     <string name="sales_pdf_meta_data_subject">نسخه  اول کاسب</string>
     <string name="sales_pdf_meta_data_title">فاکتور فروش</string>
     <string name="title_product_stock">موجودی</string>
+    <string name="import_successful">مخاطب اضافه شد!</string>
+    <string name="import_contact_failed">مشکل در افزودن مخاطب</string>
+    <string name="backup_successful">پشتیبان گیری موفق بود!</string>
+    <string name="problem_in_crop_image">تعیین محدوده تصویر با مشکل مواجه شد.</string>
+    <string name="does_not_support_crop_action">تلفن همراه شما، از عملیات تعیین محدوده تصویر پشتیبانی نمی کند.</string>
+    <string name="complete_profile_kaseb">ابتدا باید اطلاعات ضروری خود را ذخیره کنید، سپس وارد برنامه شوید.</string>
 </resources>

@@ -137,6 +137,10 @@ public class DetailSaleView extends AppCompatActivity {
     TextInputLayout saleCodeTextInputLayout;
     TextInputLayout saleDateTextInputLayout;
     TextInputLayout quantityTextInputLayout;
+    TextInputLayout paymentAmountTextInputLayout;
+    TextInputLayout paymentDueDateTextInputLayout;
+    TextInputLayout taxDiscountAmountTextInputLayout;
+    TextInputLayout taxDiscountPercentTextInputLayout;
 
     ListView modeList;
     ListView mProductListView;
@@ -147,6 +151,12 @@ public class DetailSaleView extends AppCompatActivity {
     CostSaleProductAdapter mAdapter = null;
     CustomerAdapter mCAdapter = null;
     //endregion declare Values
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_up);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -863,12 +873,16 @@ public class DetailSaleView extends AppCompatActivity {
                             wantToCloseDialog = true;
                         }
                     } else {
-                        Utility.changeColorOfHelperText(DetailSaleView.this, saleDateTextInputLayout, Utility.mIdOfColorSetError);
                         quantityTextInputLayout.setError(getResources().getString(R.string.not_enough_stock));
+                        quantityEditText.setSelectAllOnFocus(true);
+                        quantityEditText.selectAll();
+                        quantityEditText.requestFocus();
                     }
                 } else {
-                    Utility.changeColorOfHelperText(DetailSaleView.this, saleDateTextInputLayout, Utility.mIdOfColorSetError);
                     quantityTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+                    quantityEditText.setSelectAllOnFocus(true);
+                    quantityEditText.selectAll();
+                    quantityEditText.requestFocus();
                 }
                 //endregion insert product
 
@@ -946,6 +960,10 @@ public class DetailSaleView extends AppCompatActivity {
 
                             quantityTextInputLayout.setHint(getString(R.string.stock_product) + " " + differneceOfBuy_Sale);
                             quantityEditText.setVisibility(View.VISIBLE);
+
+                            quantityEditText.setSelectAllOnFocus(true);
+                            quantityEditText.selectAll();
+                            quantityEditText.requestFocus();
                         }
                     }
                 }
@@ -983,10 +1001,21 @@ public class DetailSaleView extends AppCompatActivity {
                     Float amount = Utility.createFloatNumberWithString(DetailSaleView.this, paymentAmount.getText().toString());
 
                     if (amount > sFinalAmount) {
-                        Utility.setErrorForEditText(DetailSaleView.this, quantityEditText, getString(R.string.more_than_balance_amount));
+                        paymentAmountTextInputLayout.setError(getResources().getString(R.string.more_than_balance_amount));
+                        paymentAmount.setSelectAllOnFocus(true);
+                        paymentAmount.selectAll();
+                        paymentAmount.requestFocus();
                         return;
-                    } else if (!Utility.checkForValidityForEditTextDate(DetailSaleView.this, paymentDueDate))
+                    } else if (!Utility.checkForValidityForEditTextDate(DetailSaleView.this, paymentDueDate)) {
+                        paymentDueDateTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+                        paymentDueDate.setSelectAllOnFocus(true);
+                        paymentDueDate.selectAll();
+                        paymentDueDate.requestFocus();
                         return;
+                    }
+
+                    paymentAmountTextInputLayout.setError(null);
+                    paymentDueDateTextInputLayout.setError(null);
 
                     if (!paymentMapRow.get("type").equals(getResources().getString(R.string.payment_method_cheque)))
                         paymentMapRow.put("isPass", "true");
@@ -999,7 +1028,10 @@ public class DetailSaleView extends AppCompatActivity {
                     wantToCloseDialog = true;
 
                 } catch (Exception e) {
-                    Utility.setErrorForEditText(DetailSaleView.this, paymentAmount, "");
+                    paymentAmountTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+                    paymentAmount.setSelectAllOnFocus(true);
+                    paymentAmount.selectAll();
+                    paymentAmount.requestFocus();
                 }
                 //endregion insert payment
 
@@ -1012,10 +1044,12 @@ public class DetailSaleView extends AppCompatActivity {
         //region declare views in dialog
         paymentMapRow = new HashMap<>();
 
-        paymentAmount = (EditText) dialogView.findViewById(R.id.add_payment_for_sale_text1);
-        paymentDueDate = (EditText) dialogView.findViewById(R.id.input_buy_date);
+        paymentAmount = (EditText) dialogView.findViewById(R.id.dialog_add_payment_for_sale_payment_amount);
+        paymentDueDate = (EditText) dialogView.findViewById(R.id.dialog_add_payment_for_sale_input_due_date);
         paymentDueDate.setText(Utility.preInsertDate(mContext));
         isPassCheckBox = (CheckBox) dialogView.findViewById(R.id.dialog_add_payment_is_passed_check_box);
+        paymentAmountTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.text_input_layout_dialog_add_payment_for_sale_payment_amount);
+        paymentDueDateTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.text_input_layout_dialog_add_payment_for_sale_input_due_date);
 
         paymentMethod = (Spinner) dialogView.findViewById(R.id.input_payment_method_spinner);
         mCursor1 = getContentResolver().query(KasebContract.PaymentMethods.CONTENT_URI
@@ -1089,10 +1123,15 @@ public class DetailSaleView extends AppCompatActivity {
                     Float amount = Utility.createFloatNumberWithString(DetailSaleView.this, taxAmount.getText().toString());
 
                     if (amount > sTotalAmount) {
-                        Utility.setErrorForEditText(DetailSaleView.this, taxAmount, getString(R.string.more_than_total_amount));
+                        taxDiscountAmountTextInputLayout.setError(getResources().getString(R.string.more_than_total_amount));
+                        taxAmount.setSelectAllOnFocus(true);
+                        taxAmount.selectAll();
+                        taxAmount.requestFocus();
                         return;
                     } else if (taxPercent.getText().toString().length() == 0)
                         taxMapRow.put("percent", String.format("%.2f", 100 * amount / sTotalAmount));
+
+                    taxDiscountAmountTextInputLayout.setError(null);
 
                     mTaxListMap.add(taxMapRow);
                     mCardViewTaxes.getTaxAdapter(mTaxListMap);
@@ -1100,7 +1139,10 @@ public class DetailSaleView extends AppCompatActivity {
                     wantToCloseDialog = true;
 
                 } catch (Exception e) {
-                    Utility.setErrorForEditText(DetailSaleView.this, taxAmount, "");
+                    taxDiscountAmountTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+                    taxAmount.setSelectAllOnFocus(true);
+                    taxAmount.selectAll();
+                    taxAmount.requestFocus();
                 }
                 //endregion insert taxDiscount
 
@@ -1113,8 +1155,10 @@ public class DetailSaleView extends AppCompatActivity {
         //region declare views in dialog
         taxMapRow = new HashMap<>();
 
-        taxAmount = (EditText) dialogView.findViewById(R.id.add_tax_for_sale_text1);
-        taxPercent = (EditText) dialogView.findViewById(R.id.add_tax_for_sale_text2);
+        taxAmount = (EditText) dialogView.findViewById(R.id.dialog_add_tax_for_sale_tax_discount_amount);
+        taxPercent = (EditText) dialogView.findViewById(R.id.dialog_add_tax_for_sale_tax_discount_percent);
+        taxDiscountAmountTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.text_input_layout_dialog_add_tax_for_sale_tax_discount_amount);
+        taxDiscountPercentTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.text_input_layout_dialog_add_tax_for_sale_tax_discount_percent);
 
         taxPercent.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1143,7 +1187,7 @@ public class DetailSaleView extends AppCompatActivity {
             }
         });
 
-        taxTypes = (Spinner) dialogView.findViewById(R.id.input_tax_type_spinner);
+        taxTypes = (Spinner) dialogView.findViewById(R.id.dialog_add_tax_input_tax_type_spinner);
         mCursor2 = getContentResolver().query(KasebContract.TaxTypes.CONTENT_URI
                 , null, null, null, null);
 

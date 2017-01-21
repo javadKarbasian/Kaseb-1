@@ -134,7 +134,7 @@
             app:errorTextAppearance="@style/text_input_layout_style_not_error">
 
             <EditText
-                android:id="@+id/input_buy_date"
+                android:id="@+id/dialog_add_payment_for_sale_input_due_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_date"

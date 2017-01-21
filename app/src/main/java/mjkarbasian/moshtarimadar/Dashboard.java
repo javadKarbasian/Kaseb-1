@@ -9,8 +9,10 @@ import mjkarbasian.moshtarimadar.Others.DrawerActivity;
 
 public class Dashboard extends DrawerActivity {
 
+    //region declare values
     private KasebDashBoard kasebDashBoard = new KasebDashBoard();
     private FragmentManager fragmentManager = getSupportFragmentManager();
+    //endregion declare values
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -5,8 +5,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="kaseb_hadith">Businessman Habib Allah</string>
-    <string name="kaseb_name">Ali Ghorbani</string>
+    <string name="kaseb_hadith">Tradesman Habib Allah</string>
+    <string name="kaseb_name">Not Set</string>
     <string name="title_customer">Customers</string>
     <string name="title_Debtors">Debaters</string>
     <string name="title_invoice">Invoices</string>
@@ -454,4 +454,10 @@
     <string name="pref_header_edit_profile">Edit Profile</string>
     <string name="no_data_text_customers_states">no customers...! please add some.</string>
     <string name="no_data_text_sale">No Sale..! please add ones.</string>
+    <string name="import_successful">Import Successful!</string>
+    <string name="import_contact_failed">Import Failed!</string>
+    <string name="backup_successful">BackUp Successful!</string>
+    <string name="problem_in_crop_image">There is some problem in croping app</string>
+    <string name="does_not_support_crop_action">your device doesn\'t support the crop action!</string>
+    <string name="complete_profile_kaseb">Your profile must be completed then you can go!</string>
 </resources>

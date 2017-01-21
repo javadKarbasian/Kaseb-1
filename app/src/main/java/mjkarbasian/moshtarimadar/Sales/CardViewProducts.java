@@ -3,6 +3,7 @@ package mjkarbasian.moshtarimadar.Sales;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ public class CardViewProducts extends Fragment {
     View view;
     Map<String, String> cursor;
     EditText howManyEditTextForEdit;
+    TextInputLayout textInputLayouthowManyEditTextForEdit;
     int index;
 
     String _id;
@@ -86,31 +88,38 @@ public class CardViewProducts extends Fragment {
                     public void onClick(View v) {
                         Boolean wantToCloseDialog = false;
 
-                        Long num = Long.parseLong(howManyEditTextForEdit.getText().toString());
+                        try {
+                            Long num = Long.parseLong(howManyEditTextForEdit.getText().toString());
 
-                        if (differneceOfBuy_Sale >= num) {
-                            mProductListHashMap.set(index,
-                                    Utility.setValueWithIndexInKeyOfMapRow(
-                                            cursor,
-                                            "quantity",
-                                            String.valueOf(num)
-                                    ));
+                            if (differneceOfBuy_Sale >= num) {
+                                mProductListHashMap.set(index,
+                                        Utility.setValueWithIndexInKeyOfMapRow(
+                                                cursor,
+                                                "quantity",
+                                                String.valueOf(num)
+                                        ));
 
-                            productListView.setAdapter(mChosenProductAdapter);
+                                productListView.setAdapter(mChosenProductAdapter);
 
-                            if (activity.equals("insert"))
-                                ((DetailSaleInsert) getActivity()).setValuesOfFactor();
-                            else if (activity.equals("view"))
-                                ((DetailSaleView) getActivity()).setValuesOfFactor();
+                                if (activity.equals("insert"))
+                                    ((DetailSaleInsert) getActivity()).setValuesOfFactor();
+                                else if (activity.equals("view"))
+                                    ((DetailSaleView) getActivity()).setValuesOfFactor();
 
-                            Utility.setHeightOfListView(productListView);
+                                Utility.setHeightOfListView(productListView);
 
-                            wantToCloseDialog = true;
-                        } else
-                            Utility.setErrorForEditText(getActivity(), howManyEditTextForEdit, getResources().getString(R.string.not_enough_stock));
+                                wantToCloseDialog = true;
+                            } else
+                                textInputLayouthowManyEditTextForEdit.setError(getResources().getString(R.string.not_enough_stock));
 
-                        if (wantToCloseDialog)
-                            dialogView.dismiss();
+                            if (wantToCloseDialog)
+                                dialogView.dismiss();
+                        } catch (Exception e) {
+                            textInputLayouthowManyEditTextForEdit.setError(getResources().getString(R.string.choose_appropriate_data));
+                            howManyEditTextForEdit.setSelectAllOnFocus(true);
+                            howManyEditTextForEdit.selectAll();
+                            howManyEditTextForEdit.requestFocus();
+                        }
                     }
                 });
                 //endregion Create AlertDialog
@@ -131,6 +140,9 @@ public class CardViewProducts extends Fragment {
 
                     howManyEditTextForEdit = (EditText) dialogView
                             .findViewById(R.id.edit_chosen_product_for_sale_number);
+
+                    textInputLayouthowManyEditTextForEdit = (TextInputLayout) dialogView
+                            .findViewById(R.id.text_input_layout_edit_chosen_product_for_sale_number);
 
                     howManyEditTextForEdit.setHint(getString(R.string.stock_product) + differneceOfBuy_Sale);
                 }

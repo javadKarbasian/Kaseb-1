@@ -1,6 +1,7 @@
 package mjkarbasian.moshtarimadar.Others;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -11,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import mjkarbasian.moshtarimadar.AboutUs.AboutUs;
 import mjkarbasian.moshtarimadar.Costs.Costs;
@@ -23,8 +26,7 @@ import mjkarbasian.moshtarimadar.R;
 import mjkarbasian.moshtarimadar.Sales.Sales;
 import mjkarbasian.moshtarimadar.Setting.MySetting;
 
-public class DrawerActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout mDrawer;
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -43,16 +45,27 @@ public class DrawerActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //region handle sharepreference
+        View header = navigationView.getHeaderView(0);
+        TextView kasebProfileTextView = (TextView) header.findViewById(R.id.kaseb_name_text);
+        String kasebPREFERENCES = "kasebProfile";
+        SharedPreferences kasebSharedPreferences = getSharedPreferences(kasebPREFERENCES, MODE_PRIVATE);
+
+        if (kasebSharedPreferences.getString("firstName", null) != null)
+            kasebProfileTextView.setText(
+                    kasebSharedPreferences.getString("firstName", null) + "  " +
+                            kasebSharedPreferences.getString("lastName", null));
+        //endregion handle sharepreference
     }
 
     @Override
     public void onBackPressed() {
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+        if (mDrawer.isDrawerOpen(GravityCompat.START))
             mDrawer.closeDrawer(GravityCompat.START);
-        } else {
+        else
             super.onBackPressed();
-        }
     }
 
     @Override
@@ -69,14 +82,8 @@ public class DrawerActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
+        if (mDrawerToggle.onOptionsItemSelected(item))
             return true;
-        }
-
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -93,7 +100,6 @@ public class DrawerActivity extends AppCompatActivity
             finish();
             startActivity(intent);
             Utility.setActivityTransition(this);
-
         }
 
         if (id == R.id.nav_customers) {
@@ -151,5 +157,4 @@ public class DrawerActivity extends AppCompatActivity
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-
 }

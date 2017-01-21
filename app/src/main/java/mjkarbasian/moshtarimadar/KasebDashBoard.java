@@ -1,5 +1,6 @@
 package mjkarbasian.moshtarimadar;
 
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,16 +20,27 @@ import java.util.List;
 
 import mjkarbasian.moshtarimadar.Data.KasebContract;
 import mjkarbasian.moshtarimadar.Helpers.Utility;
+import mjkarbasian.moshtarimadar.Setting.PreferenceHeader;
 
 /**
  * Created by family on 12/30/2016.
  */
 public class KasebDashBoard extends android.support.v4.app.Fragment {
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //region handle sharepreference
+        String kasebPREFERENCES = "kasebProfile";
+        SharedPreferences kasebSharedPreferences = getContext().getSharedPreferences(kasebPREFERENCES, getContext().MODE_PRIVATE);
+        SharedPreferences.Editor editor = kasebSharedPreferences.edit();
+
+        android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+        if (kasebSharedPreferences.getString("firstName", null) == null)
+            fragmentManager.beginTransaction().replace(R.id.container, new PreferenceHeader()).commit();
+        //endregion handle sharepreference
     }
 
     @Nullable
@@ -53,8 +65,8 @@ public class KasebDashBoard extends android.support.v4.app.Fragment {
         Float totalRecNew = 0f;
         //endregion
 
-
         View rootView = inflater.inflate(R.layout.fragment_kaseb_dashboard, container, false);
+
         //region set customers dashboard
         Cursor cursor = getContext().getContentResolver().query(KasebContract.Customers.CONTENT_URI, null, null, null, null);
         if (cursor != null) {
@@ -86,6 +98,7 @@ public class KasebDashBoard extends android.support.v4.app.Fragment {
         }
 
         //endregion
+
         //region set Total Sales and recievables
         String[] projection = new String[]{"sum(" + KasebContract.DetailSale.TABLE_NAME + "." + KasebContract.DetailSale.COLUMN_TOTAL_DUE + ") as total"};
         String[] recievProj = new String[]{"sum(" + KasebContract.DetailSale.TABLE_NAME + "." + KasebContract.DetailSale.COLUMN_TOTAL_PAID + ") as total"};
@@ -108,12 +121,12 @@ public class KasebDashBoard extends android.support.v4.app.Fragment {
 
 
         //endregion
+
         //region defining views
         PieChart statePie = (PieChart) rootView.findViewById(R.id.pie_chart_customer_state);
         PieChart salePie = (PieChart) rootView.findViewById(R.id.pie_chart_sale);
         PieChart recPie = (PieChart) rootView.findViewById(R.id.pie_chart_recievable);
         //endregion defining views
-
 
         //region defining variables
         selection = KasebContract.Sales.TABLE_NAME + "." + KasebContract.Sales.COLUMN_IS_DELETED + " =? " + " AND " +
@@ -123,6 +136,7 @@ public class KasebDashBoard extends android.support.v4.app.Fragment {
         Long[] totalPaid = new Long[5];
         Cursor customerCurs = null;
         //endregion defining variables
+
         //region set memberships due and recievables
         for (int i = 0; i < 5; i++) {
             totalDue[i] = 0l;
@@ -273,10 +287,10 @@ public class KasebDashBoard extends android.support.v4.app.Fragment {
         //endregion
 
         //endregion
+
         recievCurs.close();
         customerCurs.close();
         cursor.close();
-
 
         return rootView;
     }
@@ -285,6 +299,4 @@ public class KasebDashBoard extends android.support.v4.app.Fragment {
     public void onResume() {
         super.onResume();
     }
-
-
 }

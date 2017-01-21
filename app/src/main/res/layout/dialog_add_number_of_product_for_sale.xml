@@ -14,8 +14,7 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/text_input_layout_number_of_product_for_sale_number"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="@color/colorAccent">
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/add_number_of_product_for_sale_number"

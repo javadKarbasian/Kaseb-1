@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -129,6 +130,11 @@ public class Utility {
                                     ArrayList<Map<String, String>> mPaymentListMap) throws IOException, DocumentException {
         _mContext = mContext;
 
+        //region handle sharepreference
+        String kasebPREFERENCES = "kasebProfile";
+        SharedPreferences kasebSharedPreferences = mContext.getSharedPreferences(kasebPREFERENCES, mContext.MODE_PRIVATE);
+        //endregion handle sharepreference
+
         HashMap<String, String> mTextFactor = new HashMap<String, String>();
         mTextFactor.put("firstTitle", _mContext.getString(R.string.title_of_print_invoice));
         mTextFactor.put("secondTitle", _mContext.getString(R.string.title_of_invoice_items));
@@ -139,6 +145,30 @@ public class Utility {
         mTextFactor.put("sellerInfo", " ... ");
         mTextFactor.put("sellerTell", " ... ");
         mTextFactor.put("sellerAddress", " ... ");
+
+        if (kasebSharedPreferences.getString("firstName", null) != null) {
+            mTextFactor.put("sellerInfo",
+                    kasebSharedPreferences.getString("firstName", null) + "  " +
+                            kasebSharedPreferences.getString("lastName", null));
+
+            mTextFactor.put("sellerTell",
+                    kasebSharedPreferences.getString("phoneMobile", null) +
+                            (kasebSharedPreferences.getString("phoneWork", null) != null
+                                    && kasebSharedPreferences.getString("phoneWork", null) != "" ? " - " +
+                                    kasebSharedPreferences.getString("phoneWork", null) : ""));
+
+            mTextFactor.put("sellerAddress",
+                    (kasebSharedPreferences.getString("addressCountry", null) != null
+                            && kasebSharedPreferences.getString("addressCountry", null) != "" ?
+                            kasebSharedPreferences.getString("addressCountry", null) : " ... ")
+                            + (kasebSharedPreferences.getString("addressCity", null) != null
+                            && kasebSharedPreferences.getString("addressCity", null) != "" ? " - " +
+                            kasebSharedPreferences.getString("addressCity", null) : " ... ")
+                            + (kasebSharedPreferences.getString("addressStreet", null) != null
+                            && kasebSharedPreferences.getString("addressStreet", null) != "" ? " - " +
+                            kasebSharedPreferences.getString("addressStreet", null) : " ... "));
+        }
+
         mTextFactor.put("saleCode", mSaleCode);
         mTextFactor.put("saleDate", mSaleDate);
         mTextFactor.put("customerInfo", mNameCustomer + "   " + mFamilyCustomer);
@@ -227,11 +257,6 @@ public class Utility {
     public static void setErrorForTextView(TextView mTextView) {
         mTextView.setError("");
         mTextView.requestFocus();
-    }
-
-    public static void setErrorForEditText(Context mContext, EditText mEditText, String mMessage) {
-        mEditText.setError(mContext.getString(R.string.choose_appropriate_data) + mMessage);
-        mEditText.requestFocus();
     }
 
     public static boolean checkForValidityForEditTextNullOrEmptyAndItterative(
@@ -1057,50 +1082,59 @@ public class Utility {
         PdfPTable table = new PdfPTable(2);
         table.setWidths(new int[]{105, 105});
 
-        PdfPCell mCell = new PdfPCell();
+        PdfPCell mCell1 = new PdfPCell();
         Phrase mElement;
         mElement = new Phrase(_mContext.getString(R.string.seller_info), createFontWithSize(mMiddleSize));
-        mCell.addElement(mElement);
+        mCell1.addElement(mElement);
         mElement = new Phrase(mTextHashMapTitles.get("sellerInfo"),
                 (checkStringIfHasAsciiCharacter(mTextHashMapTitles.get("sellerInfo")) ?
                         createEnglishFontWithSize(mSmallSize) : createFontWithSize(mSmallSize)));
-        mCell.addElement(mElement);
+        mCell1.addElement(mElement);
         mElement = new Phrase(_mContext.getString(R.string.seller_tell), createFontWithSize(mMiddleSize));
-        mCell.addElement(mElement);
+        mCell1.addElement(mElement);
         mElement = new Phrase(mTextHashMapTitles.get("sellerTell"),
                 (checkStringIfHasAsciiCharacter(mTextHashMapTitles.get("sellerTell")) ?
                         createEnglishFontWithSize(mSmallSize) : createFontWithSize(mSmallSize)));
-        mCell.addElement(mElement);
+        mCell1.addElement(mElement);
         mElement = new Phrase(_mContext.getString(R.string.seller_address), createFontWithSize(mMiddleSize));
-        mCell.addElement(mElement);
+        mCell1.addElement(mElement);
         mElement = new Phrase(mTextHashMapTitles.get("sellerAddress"),
                 (checkStringIfHasAsciiCharacter(mTextHashMapTitles.get("sellerAddress")) ?
                         createEnglishFontWithSize(mSmallSize) : createFontWithSize(mSmallSize)));
-        mCell.addElement(mElement);
+        mCell1.addElement(mElement);
 
-        setBackGroundColor_P_BW_HA_VA(mCell, mainTitleColorTables, 10, 3, Element.ALIGN_LEFT, Element.ALIGN_CENTER);
-        table.addCell(mCell);
+        setBackGroundColor_P_BW_HA_VA(mCell1, mainTitleColorTables, 10, 3, Element.ALIGN_LEFT, Element.ALIGN_CENTER);
 
-        mCell = new PdfPCell();
+        PdfPCell mCell2 = new PdfPCell();
         mElement = new Phrase(_mContext.getString(R.string.customer_info), createFontWithSize(mMiddleSize));
-        mCell.addElement(mElement);
+        mCell2.addElement(mElement);
         mElement = new Phrase(mTextHashMapTitles.get("customerInfo"),
                 (checkStringIfHasAsciiCharacter(mTextHashMapTitles.get("customerInfo")) ?
                         createEnglishFontWithSize(mSmallSize) : createFontWithSize(mSmallSize)));
-        mCell.addElement(mElement);
+        mCell2.addElement(mElement);
         mElement = new Phrase(_mContext.getString(R.string.invoice_date), createFontWithSize(mMiddleSize));
-        mCell.addElement(mElement);
+        mCell2.addElement(mElement);
         mElement = new Phrase(mTextHashMapTitles.get("saleDate"), createFontWithSize(mSmallSize));
-        mCell.addElement(mElement);
+        mCell2.addElement(mElement);
         mElement = new Phrase(_mContext.getString(R.string.invoice_sale_code), createFontWithSize(mMiddleSize));
-        mCell.addElement(mElement);
+        mCell2.addElement(mElement);
         mElement = new Phrase(mTextHashMapTitles.get("saleCode"),
                 (checkStringIfHasAsciiCharacter(mTextHashMapTitles.get("saleCode")) ?
                         createEnglishFontWithSize(mSmallSize) : createFontWithSize(mSmallSize)));
-        mCell.addElement(mElement);
+        mCell2.addElement(mElement);
 
-        setBackGroundColor_P_BW_HA_VA(mCell, mainTitleColorTables, 10, 3, Element.ALIGN_LEFT, Element.ALIGN_CENTER);
-        table.addCell(mCell);
+        setBackGroundColor_P_BW_HA_VA(mCell2, mainTitleColorTables, 10, 3, Element.ALIGN_LEFT, Element.ALIGN_CENTER);
+
+        //region Add Columns
+        if (_mContext.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+            table.addCell(mCell2);
+            table.addCell(mCell1);
+        } else {
+            table.addCell(mCell1);
+            table.addCell(mCell2);
+        }
+        //endregion Add Columns
+
         _mDocument.add(table);
     }
 
@@ -1253,8 +1287,8 @@ public class Utility {
                                 )), createFontWithSize(mSmallSize)));
                 setBackGroundColor_P_BW_HA_VA(mCell2, mainTitleColorTables, 5, 3, Element.ALIGN_CENTER, Element.ALIGN_CENTER);
 
-                mCell3 = new PdfPCell(new Phrase(String.format("%.2f",
-                        createFloatNumberWithString(_mContext, mTaxListMap.get(i).get("percent").toString()))
+                mCell3 = new PdfPCell(new Phrase(
+                        createFloatNumberWithString(_mContext, mTaxListMap.get(i).get("percent").toString())
                         + " %", createFontWithSize(mSmallSize)));
 
                 setBackGroundColor_P_BW_HA_VA(mCell3, mainTitleColorTables, 5, 3, Element.ALIGN_CENTER, Element.ALIGN_CENTER);
@@ -1326,8 +1360,8 @@ public class Utility {
                                 )), createFontWithSize(mSmallSize)));
                 setBackGroundColor_P_BW_HA_VA(mCell2, mainTitleColorTables, 5, 3, Element.ALIGN_CENTER, Element.ALIGN_CENTER);
 
-                mCell3 = new PdfPCell(new Phrase(String.format("%.2f",
-                        createFloatNumberWithString(_mContext, mTaxListMap.get(i).get("percent")))
+                mCell3 = new PdfPCell(new Phrase(
+                        createFloatNumberWithString(_mContext, mTaxListMap.get(i).get("percent"))
                         + " %", createFontWithSize(mSmallSize)));
 
                 mCell3.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -1593,7 +1627,7 @@ public class Utility {
     }
 
     public static float createFloatNumberWithString(Context mContext, String mNumber) throws ParseException {
-        if (_mContext.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL)
+        if (mContext.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL)
             return NumberFormat.getInstance(Locale.forLanguageTag("es")).parse(mNumber).floatValue();
         else
             return Float.valueOf(mNumber);
