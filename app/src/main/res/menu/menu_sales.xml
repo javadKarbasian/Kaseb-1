@@ -1,10 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/search_button"
-        android:title="@string/search_title_sale"
         android:icon="@drawable/search"
-        app:showAsAction="always"
+        android:title="@string/search_title_sale"
         app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always"
         />
     <item
         android:id="@+id/sort_button"

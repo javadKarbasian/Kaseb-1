@@ -1,16 +1,20 @@
 package mjkarbasian.moshtarimadar.Setting;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -18,19 +22,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 
 import mjkarbasian.moshtarimadar.Adapters.HeaderAdapter;
 import mjkarbasian.moshtarimadar.Data.KasebContract;
+import mjkarbasian.moshtarimadar.Helpers.GalleryUtil;
+import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.R;
 
 /**
@@ -40,6 +52,8 @@ public class PreferenceHeader extends Fragment {
 
     //region declare values
     private static final int RESULT_PICK_CONTACT = 1;
+    private static final int GALLERY_ACTIVITY_CODE = 2;
+    private static final int RESULT_CROP = 3;
     private static final String LOG_TAG = PreferenceHeader.class.getSimpleName();
     ListView mListView;
     HeaderAdapter headerAdaper;
@@ -49,6 +63,37 @@ public class PreferenceHeader extends Fragment {
 
     android.app.AlertDialog.Builder builder;
     android.app.AlertDialog dialogView;
+
+    ImageView mCustomerAvatar;
+    Bitmap photo;
+    EditText firstName;
+    EditText lastName;
+    EditText birthDay;
+    EditText phoneMobile;
+    EditText customerDescription;
+    EditText email;
+    EditText phoneWork;
+    EditText phoneHome;
+    EditText phoneOther;
+    EditText phoneFax;
+    EditText addressCountry;
+    EditText addressCity;
+    EditText addressStreet;
+    EditText addressPostalCode;
+    TextInputLayout firstNameTextInputLayout;
+    TextInputLayout lastNameTextInputLayout;
+    TextInputLayout phoneMobileTextInputLayout;
+    TextInputLayout birthDayTextInputLayout;
+    TextInputLayout customerDescriptionTextInputLayout;
+    TextInputLayout emailTextInputLayout;
+    TextInputLayout phoneWorkTextInputLayout;
+    TextInputLayout phoneHomeTextInputLayout;
+    TextInputLayout phoneFaxTextInputLayout;
+    TextInputLayout phoneOtherTextInputLayout;
+    TextInputLayout addressCountryTextInputLayout;
+    TextInputLayout addressCityTextInputLayout;
+    TextInputLayout addressStreetTextInputLayout;
+    TextInputLayout addressPostalCodeTextInputLayout;
     //endregion declare values
 
     @Override
@@ -65,10 +110,11 @@ public class PreferenceHeader extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //region handle sharepreference
-        SharedPreferences sharedpreferences = getContext().getSharedPreferences("kasebProfile", getContext().MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedpreferences.edit();
-
+        String kasebPREFERENCES = "kasebProfile";
+        final SharedPreferences kasebSharedPreferences = getContext().getSharedPreferences(kasebPREFERENCES, getContext().MODE_PRIVATE);
+        final SharedPreferences.Editor editor = kasebSharedPreferences.edit();
         //endregion handle sharepreference
+
         View rootView = inflater.inflate(R.layout.fragment_setting_types, container, false);
         mListView = (ListView) rootView.findViewById(R.id.list_view_setting_types);
         headerAdaper = new HeaderAdapter(getActivity(), headerIcons, headerTitle, headerSummary);
@@ -144,7 +190,7 @@ public class PreferenceHeader extends Fragment {
                                     .show();
                         }
                         case 6: {
-                            //region List all products
+                            //region create alert dialog
                             builder = new android.app.AlertDialog.Builder(getActivity())
                                     .setView(getActivity().getLayoutInflater().inflate(R.layout.dialog_edit_profile_of_kaseb, null))
                                     .setNegativeButton(R.string.discard_button, new DialogInterface.OnClickListener() {
@@ -166,18 +212,87 @@ public class PreferenceHeader extends Fragment {
                                 public void onClick(View v) {
                                     Boolean wantToCloseDialog = false;
 
-                                    //region save info of kaseb profile
-                                    editor.putString("firstName", "value");
-                                    editor.putString("lastName", "value");
-                                    editor.putString("mobileNumber", "value");
-                                    editor.commit();
-                                    //endregion save info of kaseb profile
+                                    if (checkValidityWithChangeColorOfHelperText()) {
+                                        //region save info of kaseb profile
+                                        editor.putString("firstName", firstName.getText().toString());
+                                        editor.putString("lastName", lastName.getText().toString());
+                                        editor.putString("birthDay", birthDay.getText().toString());
+                                        editor.putString("phoneMobile", phoneMobile.getText().toString());
+                                        editor.putString("phoneWork", phoneWork.getText().toString());
+                                        editor.putString("phoneHome", phoneHome.getText().toString());
+                                        editor.putString("phoneFax", phoneFax.getText().toString());
+                                        editor.putString("phoneOther", phoneOther.getText().toString());
+                                        editor.putString("customerDescription", customerDescription.getText().toString());
+                                        editor.putString("email", email.getText().toString());
+                                        editor.putString("addressCountry", addressCountry.getText().toString());
+                                        editor.putString("addressCity", addressCity.getText().toString());
+                                        editor.putString("addressStreet", addressStreet.getText().toString());
+                                        editor.putString("addressPostalCode", addressPostalCode.getText().toString());
+                                        editor.commit();
 
-                                    if (wantToCloseDialog) ;
-                                    dialogView.dismiss();
+                                        Toast.makeText(getActivity(), "Ok!", Toast.LENGTH_SHORT).show();
+                                        //endregion save info of kaseb profile
+
+                                        wantToCloseDialog = true;
+                                    }
+
+                                    if (wantToCloseDialog)
+                                        dialogView.dismiss();
                                 }
                             });
-                            //endregion List all products
+                            //endregion create alert dialog
+
+                            //region define views
+                            firstName = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_first_name);
+                            lastName = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_last_name);
+                            birthDay = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_birth_day);
+                            phoneMobile = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_phone_mobile);
+                            customerDescription = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_description);
+                            email = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_email);
+                            phoneWork = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_phone_work);
+                            phoneHome = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_phone_home);
+                            phoneOther = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_phone_other);
+                            phoneFax = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_phone_fax);
+                            addressCountry = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_address_country);
+                            addressCity = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_address_city);
+                            addressStreet = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_address_street);
+                            addressPostalCode = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_address_postal_code);
+
+                            firstNameTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_first_name);
+                            lastNameTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_last_name);
+                            phoneMobileTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_phone_mobile);
+                            birthDayTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_birth_day);
+                            customerDescriptionTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_description);
+                            emailTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_email);
+                            phoneWorkTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_phone_work);
+                            phoneHomeTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_phone_home);
+                            phoneOtherTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_phone_other);
+                            phoneFaxTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_phone_fax);
+                            addressCountryTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_address_country);
+                            addressCityTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_address_city);
+                            addressStreetTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_address_street);
+                            addressPostalCodeTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_address_postal_code);
+
+                            setHelperText();
+
+                            //region show info of kaseb profile
+                            firstName.setText(kasebSharedPreferences.getString("firstName", null));
+                            lastName.setText(kasebSharedPreferences.getString("lastName", null));
+                            birthDay.setText(kasebSharedPreferences.getString("birthDay", null));
+                            phoneMobile.setText(kasebSharedPreferences.getString("phoneMobile", null));
+                            phoneWork.setText(kasebSharedPreferences.getString("phoneWork", null));
+                            phoneHome.setText(kasebSharedPreferences.getString("phoneHome", null));
+                            phoneFax.setText(kasebSharedPreferences.getString("phoneFax", null));
+                            phoneOther.setText(kasebSharedPreferences.getString("phoneOther", null));
+                            customerDescription.setText(kasebSharedPreferences.getString("customerDescription", null));
+                            email.setText(kasebSharedPreferences.getString("email", null));
+                            addressCountry.setText(kasebSharedPreferences.getString("addressCountry", null));
+                            addressCity.setText(kasebSharedPreferences.getString("addressCity", null));
+                            addressStreet.setText(kasebSharedPreferences.getString("addressStreet", null));
+                            addressPostalCode.setText(kasebSharedPreferences.getString("addressPostalCode", null));
+                            //endregion show info of kaseb profile
+
+                            //endregion define views
                         }
                     }
                 }
@@ -276,7 +391,73 @@ public class PreferenceHeader extends Fragment {
                     }
                     break;
                 }
+            }
+            case (GALLERY_ACTIVITY_CODE): {
+                if (resultCode == Activity.RESULT_OK) {
+                    String picturePath = data.getStringExtra("picturePath");
+                    //perform Crop on the Image Selected from Gallery
+                    performCrop(picturePath);
+                }
+            }
+            case (RESULT_CROP): {
+                if (resultCode == Activity.RESULT_OK) {
+                    if (data.getExtras() != null) {
+                        photo = data.getExtras().getParcelable("data");
+                        mCustomerAvatar.setImageBitmap(photo);
 
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                        photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
+                        byte[] imagegBytes = byteArrayOutputStream.toByteArray();
+                    } else if (data.getData() != null) {
+                        Uri picUri = data.getData();
+                        BufferedInputStream bufferInputStream = null;
+                        try {
+                            URLConnection connection = new URL(picUri.toString()).openConnection();
+                            connection.connect();
+                            bufferInputStream = new BufferedInputStream(connection.getInputStream(), 8192);
+                            photo = BitmapFactory.decodeStream(bufferInputStream);
+
+                            mCustomerAvatar.setImageBitmap(photo);
+
+                            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                            photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
+                            byte[] imagegBytes = byteArrayOutputStream.toByteArray();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast toast = Toast.makeText(getActivity(), "There is some problem in croping app", Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                    if (data.getExtras() != null) {
+                        photo = data.getExtras().getParcelable("data");
+                        mCustomerAvatar.setImageBitmap(photo);
+
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                        photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
+                        byte[] imagegBytes = byteArrayOutputStream.toByteArray();
+                    } else if (data.getData() != null) {
+                        Uri picUri = data.getData();
+                        BufferedInputStream bufferInputStream = null;
+                        try {
+                            URLConnection connection = new URL(picUri.toString()).openConnection();
+                            connection.connect();
+                            bufferInputStream = new BufferedInputStream(connection.getInputStream(), 8192);
+                            photo = BitmapFactory.decodeStream(bufferInputStream);
+
+                            mCustomerAvatar.setImageBitmap(photo);
+
+                            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                            photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
+                            byte[] imagegBytes = byteArrayOutputStream.toByteArray();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast toast = Toast.makeText(getActivity(), "There is some problem in croping app", Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                }
             }
         }
     }
@@ -293,7 +474,6 @@ public class PreferenceHeader extends Fragment {
                     }
                 })
                 .show();
-
     }
 
     private String getEmail(String contactId) {
@@ -361,5 +541,118 @@ public class PreferenceHeader extends Fragment {
         return headerIcons;
     }
 
+    public void pic_selector_on_profile_kaseb(View view) {
+        mCustomerAvatar = (ImageView) view;
+        Intent gallery_Intent = new Intent(getContext(), GalleryUtil.class);
+        startActivityForResult(gallery_Intent, GALLERY_ACTIVITY_CODE);
+    }
 
+    private void performCrop(String picUri) {
+        try {
+            //Start Crop Activity
+
+            Intent cropIntent = new Intent("com.android.camera.action.CROP");
+            // indicate image type and Uri
+            File f = new File(picUri);
+            Uri contentUri = Uri.fromFile(f);
+
+            cropIntent.setDataAndType(contentUri, "image/*");
+            // set crop properties
+            cropIntent.putExtra("crop", "true");
+            // indicate aspect of desired crop
+            cropIntent.putExtra("aspectX", 1);
+            cropIntent.putExtra("aspectY", 1);
+            // indicate output X and Y
+            cropIntent.putExtra("outputX", 280);
+            cropIntent.putExtra("outputY", 280);
+
+            // retrieve data on return
+            cropIntent.putExtra("return-data", true);
+            // start the activity - we handle returning in onActivityResult
+            startActivityForResult(cropIntent, RESULT_CROP);
+        }
+        // respond to users whose devices do not support the crop action
+        catch (ActivityNotFoundException anfe) {
+            // display an error message
+            String errorMessage = "your device doesn't support the crop action!";
+            Toast toast = Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
+    private void setHelperText() {
+
+        firstNameTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        lastNameTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+
+        phoneMobileTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
+                + getResources().getString(R.string.non_repetitive));
+
+        birthDayTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
+                + getResources().getString(R.string.date_format_error));
+
+        customerDescriptionTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        emailTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        phoneWorkTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        phoneHomeTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        phoneOtherTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        phoneFaxTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        addressCountryTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        addressCityTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        addressStreetTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        addressPostalCodeTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+    }
+
+    // this method check the validation and correct entries. its check fill first and then check the validation rules.
+    private boolean checkValidityWithChangeColorOfHelperText() {
+
+        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), firstName)) {
+            Utility.changeColorOfHelperText(getActivity(), firstNameTextInputLayout, Utility.mIdOfColorSetError);
+            firstName.setSelectAllOnFocus(true);
+            firstName.selectAll();
+            firstName.requestFocus();
+            return false;
+        } else
+            Utility.changeColorOfHelperText(getActivity(), firstNameTextInputLayout, Utility.mIdOfColorGetError);
+
+        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), lastName)) {
+            Utility.changeColorOfHelperText(getActivity(), lastNameTextInputLayout, Utility.mIdOfColorSetError);
+            lastName.setSelectAllOnFocus(true);
+            lastName.selectAll();
+            lastName.requestFocus();
+            return false;
+        } else
+            Utility.changeColorOfHelperText(getActivity(), lastNameTextInputLayout, Utility.mIdOfColorGetError);
+
+        if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), phoneMobile)) {
+            Utility.changeColorOfHelperText(getActivity(), phoneMobileTextInputLayout, Utility.mIdOfColorSetError);
+            phoneMobile.setSelectAllOnFocus(true);
+            phoneMobile.selectAll();
+            phoneMobile.requestFocus();
+            return false;
+        } else
+            Utility.changeColorOfHelperText(getActivity(), lastNameTextInputLayout, Utility.mIdOfColorGetError);
+
+        if (!birthDay.getText().toString().equals("") && !birthDay.getText().toString().equals(null) &&
+                !Utility.checkForValidityForEditTextDate(getActivity(), birthDay)) {
+            Utility.changeColorOfHelperText(getActivity(), birthDayTextInputLayout, Utility.mIdOfColorSetError);
+            birthDay.setSelectAllOnFocus(true);
+            birthDay.selectAll();
+            birthDay.requestFocus();
+            return false;
+        } else
+            Utility.changeColorOfHelperText(getActivity(), birthDayTextInputLayout, Utility.mIdOfColorGetError);
+
+        if (!email.getText().toString().equals("") && !email.getText().toString().equals(null) &&
+                !Utility.validateEmail(email.getText().toString())) {
+            Utility.changeColorOfHelperText(getActivity(), emailTextInputLayout, Utility.mIdOfColorSetError);
+            email.setSelectAllOnFocus(true);
+            email.selectAll();
+            email.requestFocus();
+            return false;
+        } else
+            Utility.changeColorOfHelperText(getActivity(), emailTextInputLayout, Utility.mIdOfColorGetError);
+
+        return true;
+    }
 }
