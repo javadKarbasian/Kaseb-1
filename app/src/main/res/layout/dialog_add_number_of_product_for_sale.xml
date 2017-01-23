@@ -1,39 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
+    android:layout_height="200dp"
     android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout_number_of_product_for_sale_number"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/design_snackbar_padding_vertical_2lines"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_layout_number_of_product_for_sale_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/add_number_of_product_for_sale_number"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:inputType="number"
-                android:maxLength="10"
-                android:textColor="@color/colorBlack"
-                android:textColorHint="@color/colorAccent"
-                android:visibility="gone" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <ListView
-            android:id="@+id/list_view_product_for_sale_number"
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/add_number_of_product_for_sale_number"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:divider="@null" />
-    </LinearLayout>
+            android:gravity="start"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorAccent"
+            android:visibility="gone" />
 
+    </android.support.design.widget.TextInputLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/divider_list"
+        android:elevation="5dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/design_snackbar_padding_vertical_2lines"
+            android:divider="@drawable/divider_list"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/list_view_product_for_sale_number"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:divider="@null" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/divider_list"
+        android:elevation="5dp" />
 </LinearLayout>

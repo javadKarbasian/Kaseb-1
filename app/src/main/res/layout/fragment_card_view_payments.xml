@@ -8,6 +8,6 @@
         android:id="@+id/list_view_fragment_card_view_payments"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@null" />
+        android:divider="@drawable/divider_list" />
 
 </FrameLayout>

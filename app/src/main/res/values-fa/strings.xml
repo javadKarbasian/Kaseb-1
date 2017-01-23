@@ -343,7 +343,7 @@
     <string name="not_minus_number">این مقدار نباید کم تر از صفر باشد.</string>
     <string name="more_than_balance_amount">این مقدار نباید از مانده فاکتور بیشتر باشد.</string>
     <string name="more_than_total_amount">این مقدار نباید از مبلغ کل بیشتر باشد.</string>
-    <string name="stock_product">تعداد (مقدار) موجود : </string>
+    <string name="stock_product">میزان موجودی: </string>
     <string name="not_enough_stock">مقدار (تعداد) کالای موجود، کافی نیست.</string>
     <string name="less_than_stock_explain_text">تعداد (مقدار) کالای انتخاب شده را وارد کنید.\nاین عدد نباید از موجودی انبار بیشتر باشد.</string>
     <string name="edit_quantity">تغییر تعداد (مقدار) کالا</string>

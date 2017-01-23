@@ -431,9 +431,9 @@
     <string name="choose_customer_error_for_sale">You must choose a customer from list.</string>
     <string name="cheque_title">Cheque</string>
     <string name="confirm_delete_payment">"Do You Really Want to Delete This PAYMENT?\n\nPayment Amount : "</string>
-    <string name="stock_product">"Stock is : "</string>
+    <string name="stock_product">"in Stock: "</string>
     <string name="not_enough_stock">There is not enough good in stock.</string>
-    <string name="less_than_stock_explain_text">Enter quantity/amount of selected product.\ninput must be less than good in stock.</string>
+    <string name="less_than_stock_explain_text">Select product to add in items.</string>
     <string name="edit_quantity">Change quantity</string>
     <string name="discard_button">Discard</string>
     <string name="state_type_image_box_title">stateType</string>
