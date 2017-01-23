@@ -102,6 +102,8 @@
                         android:onClick="fab_detail_sale_add_customer"
                         android:orientation="horizontal">
 
+
+
                         <TextView
                             android:id="@+id/detail_sales_info_customer_name"
                             android:layout_width="match_parent"
@@ -171,10 +173,8 @@
 
                         <ImageButton
                             android:id="@+id/content_detail_sale_insert_add_product_image_button"
-                            android:layout_width="30dp"
-                            android:layout_height="@dimen/height_of_card_view_title"
-                            android:layout_marginStart="4dp"
-                            android:background="@color/colorPrimary"
+                            style="@style/sales_card_view_fab"
+                            android:background="@drawable/oval_ripple"
                             android:contentDescription="@string/content_detail_sale_insert_add_product_image_button"
                             android:onClick="fab_detail_sale_add_product"
                             android:src="@drawable/plus" />
@@ -287,10 +287,7 @@
 
                         <ImageButton
                             android:id="@+id/content_detail_sale_insert_add_payment_image_button"
-                            android:layout_width="30dp"
-                            android:layout_height="@dimen/height_of_card_view_title"
-                            android:layout_marginStart="4dp"
-                            android:background="@color/colorPrimary"
+                            style="@style/sales_card_view_fab"
                             android:onClick="fab_detail_sale_add_payment"
                             android:src="@drawable/plus" />
 
@@ -391,10 +388,7 @@
 
                         <ImageButton
                             android:id="@+id/content_detail_sale_insert_add_taxDiscount_image_button"
-                            android:layout_width="30dp"
-                            android:layout_height="@dimen/height_of_card_view_title"
-                            android:layout_marginStart="4dp"
-                            android:background="@color/colorPrimary"
+                            style="@style/sales_card_view_fab"
                             android:onClick="fab_detail_sale_add_taxDiscount"
                             android:src="@drawable/plus" />
 

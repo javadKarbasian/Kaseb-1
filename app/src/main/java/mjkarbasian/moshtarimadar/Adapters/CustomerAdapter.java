@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import mjkarbasian.moshtarimadar.Customers.Customers;
 import mjkarbasian.moshtarimadar.Data.KasebContract;
+import mjkarbasian.moshtarimadar.Helpers.RoundImageView;
 import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.R;
 
@@ -40,7 +41,7 @@ public class CustomerAdapter extends CursorAdapter {
         TextView textViewName = (TextView) view.findViewById(R.id.item_list_customer_name);
         TextView textViewAmount = (TextView) view.findViewById(R.id.item_list_purchase_amount);
         ImageView imageViewState = (ImageView) view.findViewById(R.id.item_list_customer_state);
-        final ImageView imageViewAvatar = (ImageView) view.findViewById(R.id.item_list_customer_avatar);
+        final RoundImageView imageViewAvatar = (RoundImageView) view.findViewById(R.id.item_list_customer_avatar);
         final Long _id = cursor.getLong(cursor.getColumnIndex(KasebContract.Customers._ID));
         final byte[] imagegBytes = cursor.getBlob(cursor.getColumnIndex(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE));
 

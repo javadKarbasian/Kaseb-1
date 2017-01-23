@@ -19,5 +19,5 @@
     <dimen name="text_size_in_list_sub_title">15sp</dimen>
     <dimen name="height_of_card_view_title">40dp</dimen>
     <dimen name="buttom_of_card_view">24dp</dimen>
-    <dimen name="padding_left_text_view">18dp</dimen>
+    <dimen name="padding_left_text_view">16dp</dimen>
 </resources>

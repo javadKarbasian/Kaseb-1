@@ -354,7 +354,7 @@
     <string name="detail_sales_products_items_total">کل</string>
     <string name="buy_date">تاریخ خرید</string>
     <string name="choose_customer_error_for_sale">لازمه یک مشتری از توی لیست انتخاب کنی</string>
-    <string name="click_here_choose_customer">یک مشتری انتخاب کن</string>
+    <string name="click_here_choose_customer">اینجا کلیک کن و یک مشتری انتخاب کن</string>
     <string name="detail_customer_toolbar_title">مشخصات مشتری</string>
     <string name="intro_kaseb_slang">هوای مشتریها رو داشته باش</string>
     <string name="no_data_text_customers_states">مشتری را مشخص نکردی</string>
