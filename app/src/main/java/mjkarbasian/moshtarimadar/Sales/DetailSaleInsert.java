@@ -396,7 +396,19 @@ public class DetailSaleInsert extends AppCompatActivity {
                 KasebContract.Customers.COLUMN_STATE_ID,
                 KasebContract.Customers.COLUMN_CUSTOMER_PICTURE};
 
-        modeList = new ListView(DetailSaleInsert.this);
+        builder = new AlertDialog.Builder(DetailSaleInsert.this)
+                .setView(getLayoutInflater().inflate(R.layout.dialog_add_customers_for_sale, null))
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                });
+        builder.setTitle(R.string.fab_add_customer);
+
+        dialogView = builder.create();
+        dialogView.show();
+
+        modeList = (ListView) dialogView.findViewById(R.id.list_view_customers_for_detail_sale);
         mCAdapter = new CustomerAdapter(
                 DetailSaleInsert.this,
                 getContentResolver().query(
@@ -407,15 +419,6 @@ public class DetailSaleInsert extends AppCompatActivity {
                         null),
                 0);
         modeList.setAdapter(mCAdapter);
-
-        builder = new AlertDialog.Builder(DetailSaleInsert.this)
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        dialog.dismiss();
-                    }
-                });
-        builder.setTitle(R.string.fab_add_customer);
-
         modeList.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
@@ -451,11 +454,6 @@ public class DetailSaleInsert extends AppCompatActivity {
                     }
                 }
         );
-
-        builder.setView(modeList);
-        dialogView = builder.create();
-
-        dialogView.show();
     }
 
     public void fab_detail_sale_add_product(View v) {
@@ -564,11 +562,10 @@ public class DetailSaleInsert extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        for(int i = 0 ; i<parent.getChildCount();i++)
-                        {
+                        for (int i = 0; i < parent.getChildCount(); i++) {
                             parent.getChildAt(i).setBackgroundColor(0x000000);
                         }
-                        view.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorAccent));
+                        view.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorAccent));
                         Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                         if (cursor != null) {
                             _idOfProduct = cursor.getString(

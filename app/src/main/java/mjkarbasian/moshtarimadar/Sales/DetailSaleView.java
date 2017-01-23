@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -40,6 +42,7 @@ import mjkarbasian.moshtarimadar.Adapters.TypesSettingAdapter;
 import mjkarbasian.moshtarimadar.Data.KasebContract;
 import mjkarbasian.moshtarimadar.Data.KasebDbHelper;
 import mjkarbasian.moshtarimadar.Data.KasebProvider;
+import mjkarbasian.moshtarimadar.Helpers.RoundImageView;
 import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.R;
 
@@ -150,6 +153,7 @@ public class DetailSaleView extends AppCompatActivity {
     TypesSettingAdapter cursorAdapter = null;
     CostSaleProductAdapter mAdapter = null;
     CustomerAdapter mCAdapter = null;
+    private RoundImageView customerAvatar;
     //endregion declare Values
 
     @Override
@@ -778,7 +782,19 @@ public class DetailSaleView extends AppCompatActivity {
                 KasebContract.Customers.COLUMN_STATE_ID,
                 KasebContract.Customers.COLUMN_CUSTOMER_PICTURE};
 
-        modeList = new ListView(DetailSaleView.this);
+        builder = new AlertDialog.Builder(DetailSaleView.this)
+                .setView(getLayoutInflater().inflate(R.layout.dialog_add_customers_for_sale, null))
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                });
+        builder.setTitle(R.string.fab_add_customer);
+
+        dialogView = builder.create();
+        dialogView.show();
+
+        modeList = (ListView) dialogView.findViewById(R.id.list_view_customers_for_detail_sale);
         mCAdapter = new CustomerAdapter(
                 DetailSaleView.this,
                 getContentResolver().query(
@@ -789,15 +805,6 @@ public class DetailSaleView extends AppCompatActivity {
                         null),
                 0);
         modeList.setAdapter(mCAdapter);
-
-        builder = new AlertDialog.Builder(DetailSaleView.this)
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        dialog.dismiss();
-                    }
-                });
-        builder.setTitle(R.string.fab_add_customer);
-
         modeList.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
@@ -809,6 +816,22 @@ public class DetailSaleView extends AppCompatActivity {
                             nameCustomer.setText(cursor.getString(cursor.getColumnIndex(KasebContract.Customers.COLUMN_FIRST_NAME)));
                             familyCustomer.setText(cursor.getString(cursor.getColumnIndex(KasebContract.Customers.COLUMN_LAST_NAME)));
                             customerId = Long.parseLong(cursor.getString(cursor.getColumnIndex(KasebContract.Customers._ID)));
+                            final byte[] imagegBytes = cursor.getBlob(cursor.getColumnIndex(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE));
+                            try {
+                                Boolean mWhat = false;
+                                if (imagegBytes == null)
+                                    mWhat = true;
+                                else if (imagegBytes.length == 0)
+                                    mWhat = true;
+
+                                if (mWhat)
+                                    customerAvatar.setImageDrawable(mContext.getResources().getDrawable(
+                                            mContext.getResources().getIdentifier("@drawable/kaseb_pic", null, mContext.getPackageName())));
+                                else {
+                                    customerAvatar.setImageBitmap(BitmapFactory.decodeByteArray(imagegBytes, 0, imagegBytes.length));
+                                }
+                            } catch (Exception e) {
+                            }
                             dialogView.dismiss();
                         }
                         cursor.close();
@@ -816,13 +839,7 @@ public class DetailSaleView extends AppCompatActivity {
                         nameCustomer.setError(null);
                     }
                 }
-
         );
-
-        builder.setView(modeList);
-        dialogView = builder.create();
-
-        dialogView.show();
     }
 
     public void fab_detail_sale_add_product(View v) {
@@ -863,8 +880,7 @@ public class DetailSaleView extends AppCompatActivity {
 
                         sTotalAmount += cost * Long.valueOf(num);
 
-                        int mIndex = Utility.
-                                indexOfRowsInMap(mChosenProductListMap, "id", _idOfProduct);
+                        int mIndex = Utility.indexOfRowsInMap(mChosenProductListMap, "id", _idOfProduct);
 
                         if (mIndex == -1) {
                             mChosenProductListMap.add(mProductsRowMap);
@@ -932,13 +948,17 @@ public class DetailSaleView extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        for (int i = 0; i < parent.getChildCount(); i++) {
+                            parent.getChildAt(i).setBackgroundColor(0x000000);
+                        }
+                        view.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorAccent));
                         Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                         if (cursor != null) {
                             _idOfProduct = cursor.getString(
                                     cursor.getColumnIndex(KasebContract.Products._ID));
 
-                            differneceOfBuy_Sale = Utility.checkNumberOfProductsForDetailSale(getBaseContext(),
-                                    whichDetailSaleId, "SaleView", Long.parseLong(_idOfProduct));
+                            differneceOfBuy_Sale = Utility.checkNumberOfProductsForDetailSale(DetailSaleView.this,
+                                    0l, "SaleInsert", Long.parseLong(_idOfProduct));
 
                             _nameOfProduct = cursor.getString(
                                     cursor.getColumnIndex(KasebContract.Products.COLUMN_PRODUCT_NAME));
