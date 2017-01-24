@@ -1,24 +1,16 @@
 package mjkarbasian.moshtarimadar.Setting;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.net.URL;
-import java.net.URLConnection;
 
-import mjkarbasian.moshtarimadar.Helpers.GalleryUtil;
 import mjkarbasian.moshtarimadar.Others.DrawerActivity;
 import mjkarbasian.moshtarimadar.R;
 
@@ -46,84 +38,63 @@ public class MySetting extends DrawerActivity {
         super.onStop();
     }
 
-    public void onActivityResult(int reqCode, int resultCode, Intent data) {
-        super.onActivityResult(reqCode, resultCode, data);
-        switch (reqCode) {
-            case (GALLERY_ACTIVITY_CODE): {
-                if (resultCode == Activity.RESULT_OK) {
-                    String picturePath = data.getStringExtra("picturePath");
-                    //perform Crop on the Image Selected from Gallery
-                    performCrop(picturePath);
-                }
-            }
-            case (RESULT_CROP): {
-                if (resultCode == Activity.RESULT_OK) {
-                    if (data.getExtras() != null) {
-                        photo = data.getExtras().getParcelable("data");
-                        mCustomerAvatar.setImageBitmap(photo);
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == GALLERY_ACTIVITY_CODE) {
+//            if (resultCode == Activity.RESULT_OK) {
+//                String picturePath = data.getStringExtra("picturePath");
+//                //perform Crop on the Image Selected from Gallery
+//                performCrop(picturePath);
+//            }
+//        }
+//        if (requestCode == RESULT_CROP) {
+//            if (resultCode == Activity.RESULT_OK) {
+//                if (data.getExtras() != null) {
+//                    photo = data.getExtras().getParcelable("data");
+//                    mCustomerAvatar.setImageBitmap(photo);
+//
+//                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//                    photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
+//                    byte[] imagegBytes = byteArrayOutputStream.toByteArray();
+//
+//                    ContentValues customerValues = new ContentValues();
+//                    customerValues.put(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE, imagegBytes);
+//
+//                } else if (data.getData() != null) {
+//                    Uri picUri = data.getData();
+//                    BufferedInputStream bufferInputStream = null;
+//                    try {
+//                        URLConnection connection = new URL(picUri.toString()).openConnection();
+//                        connection.connect();
+//                        bufferInputStream = new BufferedInputStream(connection.getInputStream(), 8192);
+//                        photo = BitmapFactory.decodeStream(bufferInputStream);
+//
+//                        mCustomerAvatar.setImageBitmap(photo);
+//
+//                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//                        photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
+//                        byte[] imagegBytes = byteArrayOutputStream.toByteArray();
+//
+//                        ContentValues customerValues = new ContentValues();
+//                        customerValues.put(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE, imagegBytes);
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//                    Toast toast = Toast.makeText(this, R.string.problem_in_crop_image, Toast.LENGTH_LONG);
+//                    toast.show();
+//                }
+//            }
+//        }
+//    }
 
-                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                        photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
-                        byte[] imagegBytes = byteArrayOutputStream.toByteArray();
-                    } else if (data.getData() != null) {
-                        Uri picUri = data.getData();
-                        BufferedInputStream bufferInputStream = null;
-                        try {
-                            URLConnection connection = new URL(picUri.toString()).openConnection();
-                            connection.connect();
-                            bufferInputStream = new BufferedInputStream(connection.getInputStream(), 8192);
-                            photo = BitmapFactory.decodeStream(bufferInputStream);
-
-                            mCustomerAvatar.setImageBitmap(photo);
-
-                            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                            photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
-                            byte[] imagegBytes = byteArrayOutputStream.toByteArray();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Toast toast = Toast.makeText(getBaseContext(), R.string.problem_in_crop_image, Toast.LENGTH_LONG);
-                        toast.show();
-                    }
-                    if (data.getExtras() != null) {
-                        photo = data.getExtras().getParcelable("data");
-                        mCustomerAvatar.setImageBitmap(photo);
-
-                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                        photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
-                        byte[] imagegBytes = byteArrayOutputStream.toByteArray();
-                    } else if (data.getData() != null) {
-                        Uri picUri = data.getData();
-                        BufferedInputStream bufferInputStream = null;
-                        try {
-                            URLConnection connection = new URL(picUri.toString()).openConnection();
-                            connection.connect();
-                            bufferInputStream = new BufferedInputStream(connection.getInputStream(), 8192);
-                            photo = BitmapFactory.decodeStream(bufferInputStream);
-
-                            mCustomerAvatar.setImageBitmap(photo);
-
-                            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                            photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
-                            byte[] imagegBytes = byteArrayOutputStream.toByteArray();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Toast toast = Toast.makeText(getBaseContext(), R.string.problem_in_crop_image, Toast.LENGTH_LONG);
-                        toast.show();
-                    }
-                }
-            }
-        }
-    }
-
-    public void pic_selector_on_profile_kaseb(View view) {
-        mCustomerAvatar = (ImageView) view;
-        Intent gallery_Intent = new Intent(getBaseContext(), GalleryUtil.class);
-        startActivityForResult(gallery_Intent, GALLERY_ACTIVITY_CODE);
-    }
+//    public void pic_selector_on_profile_kaseb(View view) {
+//        mCustomerAvatar = (ImageView) view;
+//        Intent gallery_Intent = new Intent(getBaseContext(), GalleryUtil.class);
+//        startActivityForResult(gallery_Intent, GALLERY_ACTIVITY_CODE);
+//    }
 
     private void performCrop(String picUri) {
         try {

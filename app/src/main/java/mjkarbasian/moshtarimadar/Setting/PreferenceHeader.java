@@ -17,7 +17,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,8 +50,8 @@ import mjkarbasian.moshtarimadar.R;
 public class PreferenceHeader extends Fragment {
 
     //region declare values
-    private static final int RESULT_PICK_CONTACT = 1;
-    private static final int GALLERY_ACTIVITY_CODE = 2;
+    private static final int RESULT_PICK_CONTACT = 660;
+    private static final int GALLERY_ACTIVITY_CODE = 700;
     private static final int RESULT_CROP = 3;
     private static final String LOG_TAG = PreferenceHeader.class.getSimpleName();
     ListView mListView;
@@ -269,6 +268,15 @@ public class PreferenceHeader extends Fragment {
                             addressCity = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_address_city);
                             addressStreet = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_address_street);
                             addressPostalCode = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_address_postal_code);
+                            mCustomerAvatar = (ImageView)dialogView.findViewById(R.id.dialog_edit_profile_kaseb_avatar);
+                            mCustomerAvatar.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    mCustomerAvatar = (ImageView) v;
+                                Intent gallery_Intent = new Intent(getActivity().getApplicationContext(), GalleryUtil.class);
+                                startActivityForResult(gallery_Intent, GALLERY_ACTIVITY_CODE);
+                                }
+                            });
 
                             firstNameTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_first_name);
                             lastNameTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_last_name);
@@ -375,117 +383,57 @@ public class PreferenceHeader extends Fragment {
                 .show();
     }
 
-    public void onActivityResult(int reqCode, int resultCode, Intent data) {
-        super.onActivityResult(reqCode, resultCode, data);
-        String[] displayName = new String[2];
-        String phoneMobile = null;
-        String contactEmail = null;
-        String contactId = null;
-        switch (reqCode) {
-            case (RESULT_PICK_CONTACT): {
-                if (resultCode == Activity.RESULT_OK) {
-                    Uri contactData = data.getData();
-                    Cursor contactCursor = getActivity().getContentResolver().query(contactData, null, null, null, null);
-                    if (contactCursor.moveToFirst()) {
-                        contactId = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts._ID));
-                    }
-                    displayName = getNames(contactId);
-                    if (displayName[0] == null || displayName[1] == null) {
-                        dataError(getActivity().getResources().getString(R.string.dialog_input_import_contact_first_last_name));
-                        break;
-                    }
-                    if (contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)).equals("1"))
-                        phoneMobile = getMobileNumber(contactId);
-                    else {
-                        dataError(getActivity().getResources().getString(R.string.dialog_input_import_contact_phone_mobile));
-                        break;
-                    }
-                    contactEmail = getEmail(contactId);
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GALLERY_ACTIVITY_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                String picturePath = data.getStringExtra("picturePath");
+                //perform Crop on the Image Selected from Gallery
+                performCrop(picturePath);
+            }
+        }
+        if (requestCode == RESULT_CROP) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data.getExtras() != null) {
+                    photo = data.getExtras().getParcelable("data");
+                    mCustomerAvatar.setImageBitmap(photo);
 
-                    if (displayName[0] != null && displayName[1] != null && phoneMobile != null) {
-                        ContentValues contactValue = new ContentValues();
-                        contactValue.put(KasebContract.Customers.COLUMN_FIRST_NAME, displayName[0]);
-                        contactValue.put(KasebContract.Customers.COLUMN_LAST_NAME, displayName[1]);
-                        contactValue.put(KasebContract.Customers.COLUMN_PHONE_MOBILE, phoneMobile);
-                        contactValue.put(KasebContract.Customers.COLUMN_EMAIL, contactEmail);
-                        Uri insertUri = getActivity().getContentResolver().insert(KasebContract.Customers.CONTENT_URI, contactValue);
-                        Log.v(LOG_TAG, "Contact successfully is imported in: " + insertUri.toString());
-                    } else {
-                        dataError(getActivity().getResources().getString(R.string.dialog_input_import_contact_general));
-                    }
-                    break;
-                }
-            }
-            case (GALLERY_ACTIVITY_CODE): {
-                if (resultCode == Activity.RESULT_OK) {
-                    String picturePath = data.getStringExtra("picturePath");
-                    //perform Crop on the Image Selected from Gallery
-                    performCrop(picturePath);
-                }
-            }
-            case (RESULT_CROP): {
-                if (resultCode == Activity.RESULT_OK) {
-                    if (data.getExtras() != null) {
-                        photo = data.getExtras().getParcelable("data");
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
+                    byte[] imagegBytes = byteArrayOutputStream.toByteArray();
+
+                    ContentValues customerValues = new ContentValues();
+                    customerValues.put(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE, imagegBytes);
+
+                } else if (data.getData() != null) {
+                    Uri picUri = data.getData();
+                    BufferedInputStream bufferInputStream = null;
+                    try {
+                        URLConnection connection = new URL(picUri.toString()).openConnection();
+                        connection.connect();
+                        bufferInputStream = new BufferedInputStream(connection.getInputStream(), 8192);
+                        photo = BitmapFactory.decodeStream(bufferInputStream);
+
                         mCustomerAvatar.setImageBitmap(photo);
 
                         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                         photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
                         byte[] imagegBytes = byteArrayOutputStream.toByteArray();
-                    } else if (data.getData() != null) {
-                        Uri picUri = data.getData();
-                        BufferedInputStream bufferInputStream = null;
-                        try {
-                            URLConnection connection = new URL(picUri.toString()).openConnection();
-                            connection.connect();
-                            bufferInputStream = new BufferedInputStream(connection.getInputStream(), 8192);
-                            photo = BitmapFactory.decodeStream(bufferInputStream);
 
-                            mCustomerAvatar.setImageBitmap(photo);
+                        ContentValues customerValues = new ContentValues();
+                        customerValues.put(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE, imagegBytes);
 
-                            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                            photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
-                            byte[] imagegBytes = byteArrayOutputStream.toByteArray();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Toast toast = Toast.makeText(getActivity(), "There is some problem in croping app", Toast.LENGTH_LONG);
-                        toast.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    if (data.getExtras() != null) {
-                        photo = data.getExtras().getParcelable("data");
-                        mCustomerAvatar.setImageBitmap(photo);
-
-                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                        photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
-                        byte[] imagegBytes = byteArrayOutputStream.toByteArray();
-                    } else if (data.getData() != null) {
-                        Uri picUri = data.getData();
-                        BufferedInputStream bufferInputStream = null;
-                        try {
-                            URLConnection connection = new URL(picUri.toString()).openConnection();
-                            connection.connect();
-                            bufferInputStream = new BufferedInputStream(connection.getInputStream(), 8192);
-                            photo = BitmapFactory.decodeStream(bufferInputStream);
-
-                            mCustomerAvatar.setImageBitmap(photo);
-
-                            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                            photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
-                            byte[] imagegBytes = byteArrayOutputStream.toByteArray();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Toast toast = Toast.makeText(getActivity(), "There is some problem in croping app", Toast.LENGTH_LONG);
-                        toast.show();
-                    }
+                } else {
+                    Toast toast = Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.problem_in_crop_image), Toast.LENGTH_LONG);
+                    toast.show();
                 }
             }
         }
     }
-
     private void dataError(String name) {
         new AlertDialog.Builder(getActivity())
                 .setTitle(getActivity().getResources().getString(R.string.dialog_title_import_customer_fail))
@@ -563,12 +511,6 @@ public class PreferenceHeader extends Fragment {
         headerIcons.add(R.drawable.importcontact);
         headerIcons.add(R.drawable.kaseb_profile);
         return headerIcons;
-    }
-
-    public void pic_selector_on_profile_kaseb(View view) {
-        mCustomerAvatar = (ImageView) view;
-        Intent gallery_Intent = new Intent(getContext(), GalleryUtil.class);
-        startActivityForResult(gallery_Intent, GALLERY_ACTIVITY_CODE);
     }
 
     private void performCrop(String picUri) {

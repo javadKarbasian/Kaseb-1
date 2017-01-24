@@ -30,12 +30,11 @@
                 app:cardCornerRadius="40dp">
 
                 <ImageView
-                    android:id="@+id/dialog_edit_profile_kaseb_dialog_edit_profile_kaseb_fragment_customer_insert_picture"
+                    android:id="@+id/dialog_edit_profile_kaseb_avatar"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
                     android:contentDescription="@string/avatar_customer_insert"
-                    android:onClick="pic_selector_on_profile_kaseb"
                     android:src="@drawable/add_image" />
 
             </android.support.v7.widget.CardView>
