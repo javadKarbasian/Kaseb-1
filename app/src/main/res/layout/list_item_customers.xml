@@ -49,11 +49,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical|start"
                 android:paddingStart="@dimen/design_snackbar_padding_vertical_2lines"
-                android:text="@string/kaseb_name"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/colorBlack"
-                android:textColorHint="@color/colorBlack"
-                android:textSize="@dimen/text_size_in_list" />
+                style="@style/Base.TextAppearance.AppCompat.Title" />
 
             <TextView
                 android:id="@+id/item_list_purchase_amount"
@@ -64,10 +60,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@string/sample_text_purchase_of_customer_amount"
-                android:textAppearance="?android:textAppearanceLarge"
-                android:textColor="@color/colorBlack"
-                android:textColorHint="@color/colorBlack"
-                android:textSize="@dimen/text_size_in_list" />
+                style="@style/Base.TextAppearance.AppCompat.Headline" />
 
             <ImageView
                 android:id="@+id/item_list_customer_state"

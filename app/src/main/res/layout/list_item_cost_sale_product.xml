@@ -22,39 +22,29 @@
 
             <TextView
                 android:id="@+id/item_list_name"
+                style="@style/Base.TextAppearance.AppCompat.Title"
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif-condensed"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/colorBlack"
-                android:textColorHint="@color/colorBlack"
-                android:textSize="@dimen/text_size_in_list" />
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/item_list_code"
+                style="@style/Base.TextAppearance.AppCompat.Subhead"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="@dimen/cardview_default_radius"
                 android:layout_weight="2"
                 android:text="@string/sample_2_invoice_code"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/colorBlack"
-                android:textColorHint="@color/colorBlack"
-                android:textSize="@dimen/text_size_in_list"
                 android:transitionName="@string/code_text_transition" />
 
             <TextView
                 android:id="@+id/item_list_date"
+                style="@style/Base.TextAppearance.AppCompat.Caption"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="@dimen/cardview_default_radius"
                 android:layout_weight="1"
                 android:text="@string/sample_due_date_1_day"
-                android:textAppearance="?android:textAppearanceSmall"
-                android:textColor="@color/colorBlack"
-                android:textColorHint="@color/colorBlack"
-                android:textSize="@dimen/text_size_in_list"
                 android:transitionName="@string/code_text_transition" />
 
         </LinearLayout>
@@ -69,8 +59,8 @@
 
             <ImageView
                 android:id="@+id/cost_sale_product_tag_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:contentDescription="@string/cost_sale_product_tag_image_title"
                 android:src="@drawable/open_marked_circle"
                 android:visibility="invisible" />
@@ -90,10 +80,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
                 android:text="@string/sample_text_purchase_of_customer_amount"
-                android:textAppearance="?android:textAppearanceLarge"
-                android:textColor="@color/colorBlack"
-                android:textColorHint="@color/colorBlack"
-                android:textSize="@dimen/text_size_in_list" />
+                style="@style/Base.TextAppearance.AppCompat.Headline" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>
