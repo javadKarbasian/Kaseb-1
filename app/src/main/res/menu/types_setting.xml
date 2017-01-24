@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/add_types_setting"
-        android:icon="@drawable/plus"
+        android:icon="@drawable/fab_layered"
         android:title="@string/add_types_setting"
         app:showAsAction="always" />
 
