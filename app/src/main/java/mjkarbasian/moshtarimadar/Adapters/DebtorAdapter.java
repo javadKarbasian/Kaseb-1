@@ -129,8 +129,11 @@ public class DebtorAdapter extends CursorAdapter {
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_TEXT, finalBalanceAmount);
-                mContext.startActivity(Intent.createChooser(intent, "Share with"));}
-                catch (Exception e){}
+                mContext.startActivity(Intent.createChooser(intent, "Share with"));
+                }
+                catch (Exception e){
+
+                }
             }
         });
         //endCard actions click handler
