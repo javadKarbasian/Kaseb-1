@@ -17,11 +17,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import mjkarbasian.moshtarimadar.Adapters.DetailCustomerAdapter;
 import mjkarbasian.moshtarimadar.Data.KasebContract;
+import mjkarbasian.moshtarimadar.Helpers.RoundImageView;
 import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.R;
 
@@ -30,7 +30,7 @@ public class DetailCustomer extends AppCompatActivity {
 
     //region declare values
     Toolbar mToolbar;
-    ImageView mCustomerAvatar;
+    RoundImageView mCustomerAvatar;
     byte[] imagegBytes;
     ContentValues customerValues = new ContentValues();
 
@@ -102,7 +102,7 @@ public class DetailCustomer extends AppCompatActivity {
         customerAddressCity = (EditText) findViewById(R.id.customer_address_city);
         customerAddressStreet = (EditText) findViewById(R.id.customer_address_street);
         customerAddressPostalCode = (EditText) findViewById(R.id.customer_address_postal_code);
-        mCustomerAvatar = (ImageView) findViewById(R.id.image_toolbar);
+        mCustomerAvatar = (RoundImageView) findViewById(R.id.image_toolbar);
         //endregion
 
         Intent intent = getIntent();
@@ -179,7 +179,7 @@ public class DetailCustomer extends AppCompatActivity {
         customerAddressStreet = (EditText) findViewById(R.id.customer_address_street);
         customerAddressPostalCode = (EditText) findViewById(R.id.customer_address_postal_code);
 
-        mCustomerAvatar = (ImageView) findViewById(R.id.image_toolbar);
+        mCustomerAvatar = (RoundImageView) findViewById(R.id.image_toolbar);
 
         customerFirstName.setText(nameCustomer);
         customerLastName.setText(familyCustomer);

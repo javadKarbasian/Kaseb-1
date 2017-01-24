@@ -30,7 +30,7 @@
                     android:layout_gravity="start"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <mjkarbasian.moshtarimadar.Helpers.RoundImageView
                         android:id="@+id/image_toolbar"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -40,7 +40,7 @@
                         android:layout_marginRight="4dp"
                         android:layout_marginTop="4dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/avatar"
+                        android:src="@drawable/kaseb_pic"
                         android:transitionName="@string/customer_image_transition"
                         app:layout_collapseMode="none" />
 
