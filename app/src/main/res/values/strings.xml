@@ -15,7 +15,7 @@
     <string name="title_costs">Costs</string>
     <string name="title_products">Products</string>
     <string name="title_setting">Setting</string>
-    <string name="title_about_us">About us</string>
+    <string name="title_about_us">Feedback</string>
     <string name="title_exit">Good Bye</string>
     <string name="title_activity_customers">Customers</string>
     <string name="label_total_sale">Total Sale($)</string>
@@ -460,7 +460,7 @@
     <string name="problem_in_crop_image">There is some problem in croping app</string>
     <string name="does_not_support_crop_action">your device doesn\'t support the crop action!</string>
     <string name="complete_profile_kaseb">Your profile must be completed then you can go!</string>
-    <string name="title_take_tour">Take a tour</string>
+    <string name="title_take_tour">Take a Tour</string>
     <string name="insert_customer">Add customer</string>
     <string name="insert_product">Add product</string>
     <string name="insert_sale_and_print">Create Invoice and Print</string>
