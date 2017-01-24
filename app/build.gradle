@@ -20,13 +20,6 @@ android {
     }
 }
 
-repositories {
-    mavenCentral()
-    maven() {
-        url "https://oss.sonatype.org/content/repositories/snapshots"
-    }
-}
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile files('C:/Users/family/AndroidStudioProjects/Kaseb-1/Kaseb-1/app/libs/roozh.jar')

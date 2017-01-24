@@ -56,7 +56,6 @@
                         android:layout_height="56dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/top_of_list_margin_in_row"
-                        android:focusableInTouchMode="true"
                         android:gravity="center_vertical|start"
                         android:nestedScrollingEnabled="false"
                         android:onClick="fab_detail_sale_add_customer"
@@ -76,7 +75,6 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="@dimen/top_of_list_margin"
-                            android:layout_weight="5"
                             android:gravity="center_vertical|start"
                             android:hint="@string/click_here_choose_customer"
                             android:paddingLeft="@dimen/padding_left_text_view"
@@ -91,7 +89,6 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_marginRight="@dimen/activity_horizontal_margin"
-                            android:layout_weight="5"
                             android:gravity="center_vertical|start"
                             android:paddingLeft="@dimen/padding_left_text_view"
                             android:textAppearance="?android:textAppearanceMedium"
@@ -190,7 +187,6 @@
                             style="@style/sales_card_view_fab"
                             android:background="@drawable/oval_ripple"
                             android:contentDescription="@string/content_detail_sale_insert_add_product_image_button"
-                            android:focusableInTouchMode="true"
                             android:onClick="fab_detail_sale_add_product"
                             android:src="@drawable/plus" />
 

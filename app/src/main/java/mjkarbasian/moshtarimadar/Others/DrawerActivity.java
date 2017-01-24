@@ -20,6 +20,7 @@ import mjkarbasian.moshtarimadar.Costs.Costs;
 import mjkarbasian.moshtarimadar.Customers.Customers;
 import mjkarbasian.moshtarimadar.Dashboard;
 import mjkarbasian.moshtarimadar.Debtors.Debtors;
+import mjkarbasian.moshtarimadar.Helpers.RoundImageView;
 import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.Products.Products;
 import mjkarbasian.moshtarimadar.R;
@@ -29,14 +30,27 @@ import mjkarbasian.moshtarimadar.Setting.MySetting;
 public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //region declare values
+    static SharedPreferences kasebSharedPreferences;
+    static TextView kasebProfileTextView;
+    static RoundImageView mKasebAvatar;
+    SharedPreferences.Editor editor;
     Intent intent;
     DrawerLayout mDrawer;
 
-    SharedPreferences kasebSharedPreferences;
-    SharedPreferences.Editor editor;
-
     private ActionBarDrawerToggle mDrawerToggle;
     //endregion declare values
+
+    public static void setInfoOfKaseb() {
+        if (kasebSharedPreferences.getString("firstName", null) != null) {
+            kasebProfileTextView.setText(
+                    String.format("%s  %s", kasebSharedPreferences.getString("firstName", null),
+                            kasebSharedPreferences.getString("lastName", null)));
+
+            if (kasebSharedPreferences.getString("customerAvatar", null) != null)
+                mKasebAvatar.setImageBitmap(
+                        Utility.decodeBase64(kasebSharedPreferences.getString("customerAvatar", null)));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +70,12 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
         //region handle sharepreference
         View header = navigationView.getHeaderView(0);
-        TextView kasebProfileTextView = (TextView) header.findViewById(R.id.kaseb_name_text);
+        kasebProfileTextView = (TextView) header.findViewById(R.id.kaseb_name_text);
+        mKasebAvatar = (RoundImageView) header.findViewById(R.id.kaseb_image);
         kasebSharedPreferences = getSharedPreferences(getResources().getString(R.string.kasebPreference), MODE_PRIVATE);
         editor = kasebSharedPreferences.edit();
 
-        if (kasebSharedPreferences.getString("firstName", null) != null)
-            kasebProfileTextView.setText(
-                    String.format("%s  %s", kasebSharedPreferences.getString("firstName", null),
-                            kasebSharedPreferences.getString("lastName", null)));
+        setInfoOfKaseb();
         //endregion handle sharepreference
     }
 
@@ -139,7 +151,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             finish();
             startActivity(intent);
             Utility.setActivityTransition(this);
-        } else if (id == R.id.nav_about_us) {
+        } else if (id == R.id.nav_contact_us) {
             intent = new Intent(this, AboutUs.class);
             finish();
             startActivity(intent);

@@ -45,6 +45,7 @@ import mjkarbasian.moshtarimadar.Data.KasebContract;
 import mjkarbasian.moshtarimadar.Helpers.GalleryUtil;
 import mjkarbasian.moshtarimadar.Helpers.RoundImageView;
 import mjkarbasian.moshtarimadar.Helpers.Utility;
+import mjkarbasian.moshtarimadar.Others.DrawerActivity;
 import mjkarbasian.moshtarimadar.R;
 
 /**
@@ -241,7 +242,7 @@ public class PreferenceHeader extends Fragment {
                                     editor.putString("addressPostalCode", addressPostalCode.getText().toString());
 
                                     if (photo != null)
-//                                        editor.putString("customerAvatar", Utility.encodeTobase64(photo));
+                                        editor.putString("customerAvatar", Utility.encodeTobase64(photo));
 
                                     editor.apply();
 
@@ -258,7 +259,7 @@ public class PreferenceHeader extends Fragment {
                                         Toast.makeText(getActivity(), R.string.msg_insert_succeed, Toast.LENGTH_SHORT).show();
                                     //endregion save info of kaseb profile
 
-//                                    ((DrawerActivity) getActivity()).setInfoOfKaseb();
+                                    ((DrawerActivity) getActivity()).setInfoOfKaseb();
                                     getHelperText();
                                     wantToCloseDialog = true;
                                 }
@@ -337,8 +338,8 @@ public class PreferenceHeader extends Fragment {
                         addressPostalCode.setText(kasebSharedPreferences.getString("addressPostalCode", null));
 
                         if (kasebSharedPreferences.getString("customerAvatar", null) != null)
-//                            mCustomerAvatar.setImageBitmap(
-//                                    Utility.decodeBase64(kasebSharedPreferences.getString("customerAvatar", null)));
+                            mCustomerAvatar.setImageBitmap(
+                                    Utility.decodeBase64(kasebSharedPreferences.getString("customerAvatar", null)));
                         //endregion show info of kaseb profile
 
                         //endregion define views

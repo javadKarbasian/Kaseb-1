@@ -186,6 +186,7 @@ public class DetailSaleView extends AppCompatActivity {
         balanceSummary = (TextView) findViewById(R.id.card_detail_sale_summary_balance);
         nameCustomer = (TextView) findViewById(R.id.detail_sales_info_customer_name);
         familyCustomer = (TextView) findViewById(R.id.detail_sales_info_customer_family);
+        customerAvatar = (RoundImageView) findViewById(R.id.detail_sale_customer_image);
 
         bundleCardViewFragments = new Bundle();
         bundleCardViewFragments.putString("activity", "view");
@@ -347,7 +348,8 @@ public class DetailSaleView extends AppCompatActivity {
         //region Get Customer Name & Family
         mProjectionInitialize = new String[]{
                 KasebContract.Customers.COLUMN_FIRST_NAME,
-                KasebContract.Customers.COLUMN_LAST_NAME};
+                KasebContract.Customers.COLUMN_LAST_NAME,
+                KasebContract.Customers.COLUMN_CUSTOMER_PICTURE};
 
         mCursorInitialize = getContentResolver().query(
                 KasebContract.Customers.buildCustomerUri(customerId),
@@ -355,6 +357,8 @@ public class DetailSaleView extends AppCompatActivity {
                 null,
                 null,
                 null);
+
+        byte[] imagegBytes = null;
 
         if (mCursorInitialize != null)
             if (mCursorInitialize.moveToFirst()) {
@@ -366,7 +370,27 @@ public class DetailSaleView extends AppCompatActivity {
                         mCursorInitialize.getString(
                                 mCursorInitialize.getColumnIndex(
                                         KasebContract.Customers.COLUMN_LAST_NAME)));
+
+                imagegBytes = mCursorInitialize.getBlob(mCursorInitialize.getColumnIndex(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE));
             }
+
+        //region set Image Avavtar
+        try {
+            Boolean mWhat = false;
+            if (imagegBytes == null)
+                mWhat = true;
+            else if (imagegBytes.length == 0)
+                mWhat = true;
+
+            if (mWhat)
+                customerAvatar.setImageDrawable(getResources().getDrawable(
+                        getResources().getIdentifier("@drawable/kaseb_pic", null, getPackageName())));
+            else {
+                customerAvatar.setImageBitmap(BitmapFactory.decodeByteArray(imagegBytes, 0, imagegBytes.length));
+            }
+        } catch (Exception e) {
+        }
+        //endregion set Image Avavtar
 
         //endregion Get Customer Name & Family
 
@@ -867,7 +891,7 @@ public class DetailSaleView extends AppCompatActivity {
 
         //region List all products
         builder = new AlertDialog.Builder(DetailSaleView.this)
-                .setView(getLayoutInflater().inflate(R.layout.dialog_add_number_of_product_for_sale, null))
+                .setView(getLayoutInflater().inflate(R.layout.dialog_add_product_for_sale, null))
                 .setNegativeButton(R.string.discard_button, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         dialogView.dismiss();
@@ -1343,7 +1367,7 @@ public class DetailSaleView extends AppCompatActivity {
 
         if (!Utility.checkForValidityForEditTextNullOrEmptyAndItterative(
                 mContext, saleCode, saleCodeTextInputLayout, KasebContract.Sales.CONTENT_URI,
-                KasebContract.Sales.COLUMN_SALE_CODE + " = ? ",
+                KasebContract.Sales.COLUMN_SALE_CODE + " = ? and " + KasebContract.Sales._ID + " != ? ",
                 KasebContract.Sales._ID, new String[]{saleCode.getText().toString()})) {
             saleCodeTextInputLayout.setError(String.format("%s %s",
                     getResources().getString(R.string.example_sale_code),
@@ -1385,7 +1409,7 @@ public class DetailSaleView extends AppCompatActivity {
             return false;
         } else if (sFinalAmount < 0) {
             Utility.setErrorForTextView(finalAmountSummary);
-            Snackbar.make(findViewById(android.R.id.content), R.string.not_minus_number, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(findViewById(android.R.id.content), R.string.final_amount_not_minus_number, Snackbar.LENGTH_INDEFINITE)
                     .setAction(getResources().getString(R.string.ok_button), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -1397,7 +1421,7 @@ public class DetailSaleView extends AppCompatActivity {
             return false;
         } else if (sBalanceAmount < 0) {
             Utility.setErrorForTextView(balanceSummary);
-            Snackbar.make(findViewById(android.R.id.content), R.string.not_minus_number, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(findViewById(android.R.id.content), R.string.balance_amount_not_minus_number, Snackbar.LENGTH_INDEFINITE)
                     .setAction(getResources().getString(R.string.ok_button), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

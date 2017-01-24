@@ -12,13 +12,13 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
-    <ImageView
+    <mjkarbasian.moshtarimadar.Helpers.RoundImageView
         android:id="@+id/kaseb_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:contentDescription="@string/avatar_kaseb"
-        android:src="@drawable/avatar" />
+        android:src="@drawable/kaseb_pic" />
 
     <TextView
         android:id="@+id/kaseb_name_text"

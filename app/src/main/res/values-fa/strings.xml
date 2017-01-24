@@ -13,7 +13,7 @@
     <string name="title_costs">هزینه ها</string>
     <string name="title_products">محصولات</string>
     <string name="title_setting">تنظیمات</string>
-    <string name="title_about_us">درباره ما</string>
+    <string name="title_contact_us">تماس با ما</string>
     <string name="title_Debtors">بدهکاران</string>
     <string name="title_activity_customers">مشتریان</string>
     <string name="title_invoice">فاکتورها</string>
@@ -338,8 +338,6 @@
     <string name="cheque_title">چکی</string>
     //endregion Sales Invoice Print
 
-    <string name="date_format_error">\n(روز/ماه/سال : 01/01/1395)</string>
-    <string name="not_minus_number">این مقدار نباید کم تر از صفر باشد.</string>
     <string name="more_than_balance_amount">این مقدار نباید از مانده فاکتور بیشتر باشد.</string>
     <string name="more_than_total_amount">این مقدار نباید از مبلغ کل بیشتر باشد.</string>
     <string name="stock_product">میزان موجودی: </string>
@@ -383,6 +381,7 @@
     <string name="forward_tour">بعدی</string>
     <string name="back_tour">قبلی</string>
     <string name="cancel_tour">لغو</string>
+    <string name="title_set_profile">اطلاعات کاسب</string>
 
     <string name="explain_tour_insert_customer">راهنمایی جهت افزودن یک مشتری جدید و مشاهده آن در لیست مشتریان.</string>
     <string name="explain_tour_insert_product">راهنمایی جهت افزودن یک کالا یا خدمات جدید و مشاهده آن در لیست اقلام انبار.</string>
@@ -425,5 +424,8 @@
     <string name="tour_text_first">برای استفاده کردن از این نرم افزار باید مراحل اصلی زیر را که از منوی اصلی در دسترس هستند، طی کنید :</string>
     <string name="tour_text_second">1. افزودن مشتری جدید\n2. افزودن کالا یا خدمات مربوطه\n3. درج یک فاکتور جدید برای مشتری به کمک کالا یا خدمات موجود در لیست کالاها، چاپ و مشاهده آن\n4. مشاهده وضعیت کسب و کار</string>
 
+    <string name="final_amount_not_minus_number">مبلغ نهایی نباید کم تر از صفر باشد.</string>
+    <string name="balance_amount_not_minus_number">مبلغ مانده نباید کم تر از صفر باشد.</string>
+    <string name="message_add_profile">لطفا اطلاعات خود را وارد کنید.</string>
 
 </resources>

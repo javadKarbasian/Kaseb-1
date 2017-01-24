@@ -15,7 +15,7 @@
     <string name="title_costs">Costs</string>
     <string name="title_products">Products</string>
     <string name="title_setting">Setting</string>
-    <string name="title_about_us">Feedback</string>
+    <string name="title_contact_us">Contact us</string>
     <string name="title_exit">Good Bye</string>
     <string name="title_activity_customers">Customers</string>
     <string name="label_total_sale">Total Sale($)</string>
@@ -425,8 +425,6 @@
     <string name="confirm_delete_product_list">"Do You Really Want to Delete This PRODUCT?\n\nProduct Name : "</string>
     <string name="confirm_delete_tax">"Do You Really Want to Delete This TAX?\n\nTax Amount : "</string>
     <string name="payment_model_cheque">Cheque</string>
-    <string name="date_format_error">\n(YYYY/M/D : 1990/1/1)</string>
-    <string name="not_minus_number">Can\'t be less than zero.</string>
     <string name="choose_customer_error_for_sale">You must choose a customer from list.</string>
     <string name="cheque_title">Cheque</string>
     <string name="confirm_delete_payment">"Do You Really Want to Delete This PAYMENT?\n\nPayment Amount : "</string>
@@ -483,7 +481,7 @@
     <string name="explain_tour_dashboard">This tour show you how to see some your Dashboard about number of customers,
         classify and amount of their bills.</string>
     <string name="start_tour">Start</string>
-    <string name="title_change_profile">Change Profile</string>
+    <string name="title_set_profile">Set Profile</string>
     <string name="first_guide_at_change_profile">After set your profile data and save it, Tap the button at the top left corner to Get Started!</string>
     <string name="kasebPreference">kasebProfile</string>
     <string name="finish_tour">Finish</string>
@@ -518,10 +516,14 @@
     <string name="tour_text_welcome">Welcome to This Tour!</string>
     <string name="tour_text_first">To use of this app you should go this way, step by step :</string>
     <string name="tour_text_second">1. Add a customer.\n2. Add a product.\n3. Insert Sale for a customer and print it.\n4.Check Dashboard.</string>
+
+    <string name="final_amount_not_minus_number">Final Amount Can\'t be less than zero.</string>
+    <string name="balance_amount_not_minus_number">Balance Amount Can\'t be less than zero.</string>
+    <string name="message_add_profile">Please add your information.</string>
+
     <string name="empty_list_text">No data to show</string>
     <string name="empty_list_text_detail_sale">There is no item</string>
     <string name="close_activity_dialog_title">Closing Activity</string>
     <string name="close_activity_dialog_message">Are you sure you want to close this activity?</string>
-    <string name="title_set_profile">Set Profile</string>
 
 </resources>

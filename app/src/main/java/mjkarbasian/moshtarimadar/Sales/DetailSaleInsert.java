@@ -556,7 +556,7 @@ public class DetailSaleInsert extends AppCompatActivity {
 
         //region List all products
         builder = new AlertDialog.Builder(DetailSaleInsert.this)
-                .setView(getLayoutInflater().inflate(R.layout.dialog_add_number_of_product_for_sale, null))
+                .setView(getLayoutInflater().inflate(R.layout.dialog_add_product_for_sale, null))
                 .setNegativeButton(R.string.discard_button, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         dialogView.dismiss();
@@ -1071,7 +1071,7 @@ public class DetailSaleInsert extends AppCompatActivity {
             return false;
         } else if (sFinalAmount < 0) {
             Utility.setErrorForTextView(finalAmountSummary);
-            Snackbar.make(findViewById(android.R.id.content), R.string.not_minus_number, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(findViewById(android.R.id.content), R.string.final_amount_not_minus_number, Snackbar.LENGTH_INDEFINITE)
                     .setAction(getResources().getString(R.string.ok_button), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -1083,7 +1083,7 @@ public class DetailSaleInsert extends AppCompatActivity {
             return false;
         } else if (sBalanceAmount < 0) {
             Utility.setErrorForTextView(balanceSummary);
-            Snackbar.make(findViewById(android.R.id.content), R.string.not_minus_number, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(findViewById(android.R.id.content), R.string.balance_amount_not_minus_number, Snackbar.LENGTH_INDEFINITE)
                     .setAction(getResources().getString(R.string.ok_button), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

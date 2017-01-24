@@ -43,7 +43,6 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
     final static int FRAGMENT_CUSTOMER_LOADER = 2;
     private final String LOG_TAG = CustomersLists.class.getSimpleName();
     String searchQuery;
-    Intent intent;
     FloatingActionButton fab;
     CustomerAdapter mCustomerAdapter = null;
     ListView mListView;
@@ -58,7 +57,6 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
     AlertDialog.Builder builderTour;
     AlertDialog dialogViewTour;
 
-    FrameLayout mFrameLayout;
     private String sortOrder = null;
     //endregion declare values
 
@@ -94,17 +92,21 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
 
         mListView = (ListView) rootView.findViewById(R.id.list_view_customers);
         mListView.setAdapter(mCustomerAdapter);
+
         TextView emptyText = (TextView) rootView.findViewById(R.id.empty_text_view);
         emptyText.setText(getActivity().getResources().getString(R.string.empty_list_text));
         emptyText.setVisibility(View.VISIBLE);
         mListView.setEmptyView(emptyText);
-        mFrameLayout = (FrameLayout) rootView.findViewById(R.id.frameLayoutCustomerList);
 
         //hide fab to show it as animation
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab_customers);
 
         try {
             if (kasebSharedPreferences.getBoolean("getStarted", false)) {
+
+                getActivity().getWindow().setSoftInputMode(
+                        WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+                );
 
                 //region create alertdialog tour
                 builderTour = new AlertDialog.Builder(getActivity())

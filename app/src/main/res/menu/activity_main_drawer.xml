@@ -4,23 +4,28 @@
     <group
         android:id="@+id/drawer_report"
         android:checkableBehavior="single">
+        
         <item
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/gauge"
             android:title="@string/title_dashboard" />
+
         <item
             android:id="@+id/nav_debtors"
             android:icon="@drawable/ic_menu_account_alert"
             android:title="@string/title_debtors" />
+
     </group>
 
     <group
         android:id="@+id/drawer_entities"
         android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav_customers"
             android:icon="@drawable/ic_menu_account_multiple"
             android:title="@string/title_customer" />
+
         <item
             android:id="@+id/nav_products"
             android:icon="@drawable/ic_factory"
@@ -40,14 +45,17 @@
     <group
         android:id="@+id/drawer_settings"
         android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav_take_tour"
             android:icon="@drawable/help_icon"
             android:title="@string/title_take_tour" />
+
         <item
-            android:id="@+id/nav_about_us"
+            android:id="@+id/nav_contact_us"
             android:icon="@drawable/information"
-            android:title="@string/title_about_us" />
+            android:title="@string/title_contact_us" />
+
         <item
             android:id="@+id/nav_setting"
             android:icon="@drawable/ic_menu_manage"
@@ -55,6 +63,5 @@
 
 
     </group>
-
 
 </menu>
