@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -46,8 +47,8 @@ public class Customers extends DrawerActivity {
     Fragment customerInsert = new CustomerInsert();
     Bitmap photo;
     Long customerId;
-
-
+    SharedPreferences kasebSharedPreferences;
+    SharedPreferences.Editor editor;
 
     android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
     private String LOG_TAG = Customers.class.getSimpleName();
@@ -62,14 +63,27 @@ public class Customers extends DrawerActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mContext = this;
+
+        //region handle sharepreference
+        kasebSharedPreferences = getSharedPreferences(getResources().getString(R.string.kasebPreference), MODE_PRIVATE);
+        editor = kasebSharedPreferences.edit();
+        //endregion handle sharepreference
+
         //region handle search query
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             handleIntent(intent);
-        } else {
+        } else
             fragmentManager.beginTransaction().replace(R.id.container, customersFragment, "customersList").commit();
-        }
-        //endregion
+
+        //endregion handle search query
+    }
+
+    @Override
+    public void onBackPressed() {
+        editor.putBoolean("getStarted", false);
+        editor.apply();
+        super.onBackPressed();
     }
 
     @Override
@@ -91,6 +105,7 @@ public class Customers extends DrawerActivity {
     }
 
     public void fab_customers(View v) {
+
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down, R.anim.slide_in_down, R.anim.slide_out_up);
         fragmentTransaction.replace(R.id.container, customerInsert);
@@ -123,7 +138,7 @@ public class Customers extends DrawerActivity {
             public boolean onQueryTextSubmit(String query) {
                 mQuery = query;
                 //Here u can get the value "query" which is entered in the search box.
-                return (query != null) ? true : false;
+                return (query != null);
             }
         };
         searchView.setOnQueryTextListener(queryTextListener);

@@ -20,6 +20,13 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+    maven(){
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile files('C:/Users/family/AndroidStudioProjects/Kaseb-1/Kaseb-1/app/libs/roozh.jar')
@@ -28,7 +35,7 @@ dependencies {
     compile 'com.android.support:support-v4:23.2.1'
     compile 'com.android.support:recyclerview-v7:23.2.1'
     compile 'com.android.support:cardview-v7:23.2.1'
-    compile 'com.pes.materialcolorpicker:library:1.0.2'
+    compile 'com.pes.materialcolorpicker:library:1.0.3'
     compile 'com.itextpdf:itextg:5.5.10'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
 }

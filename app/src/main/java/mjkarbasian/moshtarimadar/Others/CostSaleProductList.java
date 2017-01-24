@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -25,6 +26,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -35,13 +37,16 @@ import android.widget.Toast;
 
 import mjkarbasian.moshtarimadar.Adapters.CostSaleProductAdapter;
 import mjkarbasian.moshtarimadar.Adapters.TypesSettingAdapter;
+import mjkarbasian.moshtarimadar.Customers.Customers;
 import mjkarbasian.moshtarimadar.Data.KasebContract;
 import mjkarbasian.moshtarimadar.Data.KasebDbHelper;
 import mjkarbasian.moshtarimadar.Data.KasebProvider;
 import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.Products.DetailProducts;
+import mjkarbasian.moshtarimadar.Products.Products;
 import mjkarbasian.moshtarimadar.R;
 import mjkarbasian.moshtarimadar.Sales.DetailSaleView;
+import mjkarbasian.moshtarimadar.Sales.Sales;
 
 /**
  * Created by Unique on 10/11/2016.
@@ -52,6 +57,8 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
     final static int FRAGMENT_COST_SALE_PRODUCT_LOADER = 1;
     private final String LOG_TAG = CostSaleProductList.class.getSimpleName();
     FragmentManager fragmentManager;
+    SharedPreferences kasebSharedPreferences;
+    SharedPreferences.Editor editor;
 
     DetailProducts productHistory = new DetailProducts();
     Bundle productHistoryBundle = new Bundle();
@@ -61,6 +68,8 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
 
     AlertDialog.Builder builder;
     AlertDialog dialogView;
+    AlertDialog.Builder builderTour;
+    AlertDialog dialogViewTour;
 
     CostSaleProductAdapter mAdapter = null;
     ListView mListView;
@@ -83,7 +92,6 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
     private String searchQuery;
     private String sortOrder;
     private int sortId;
-
     //endregion declare Values
 
     public CostSaleProductList() {
@@ -92,6 +100,8 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        String mTitleTourDialog = "";
+
         switch (getArguments().getString("witchActivity")) {
             case "cost": {
                 //region cost
@@ -112,6 +122,8 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
                         null,
                         KasebContract.Sales.COLUMN_CUSTOMER_ID,
                         KasebContract.Sales.COLUMN_SALE_CODE};
+
+                mTitleTourDialog = getResources().getString(R.string.title_sales);
                 break;
                 //endregion sale
             }
@@ -124,12 +136,36 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
 
                 mOpenHelper = KasebProvider.mOpenHelper;
                 mDb = mOpenHelper.getWritableDatabase();
+                mTitleTourDialog = getResources().getString(R.string.title_products);
                 break;
                 //endregion product
             }
             default:
                 break;
         }
+
+        //region handle sharepreference
+        kasebSharedPreferences = getActivity().getSharedPreferences(getString(R.string.kasebPreference), getActivity().MODE_PRIVATE);
+        editor = kasebSharedPreferences.edit();
+        //endregion handle sharepreference
+
+        //region create alertdialog tour
+        builderTour = new AlertDialog.Builder(getActivity())
+                .setNegativeButton(R.string.back_tour, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                }).setPositiveButton(R.string.next_tour, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                })
+                .setNeutralButton(R.string.cancel_tour, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                })
+                .setTitle(mTitleTourDialog);
+
+        dialogViewTour = builderTour.create();
+        //endregion create alertdialog tour
 
         super.onCreate(savedInstanceState);
     }
@@ -149,6 +185,7 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
 
         //hide fab to show it as animation
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab_cost_sale_product);
+
         fab.hide();
 
         //region mListView setOnItemClickListener
@@ -203,6 +240,7 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
                                                 getContext().getResources().getString(R.string.msg_update_succeed), Toast.LENGTH_LONG).show();
 
                                         wantToCloseDialog = true;
+                                        getHelperText();
                                     }
                                     //endregion update cost
 
@@ -225,14 +263,34 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
                             costAmountTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.text_input_layout_dialog_edit_cost_amount);
                             costDateTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.text_input_layout_dialog_edit_cost_date);
 
-                            setHelperText();
-
                             costName.setText(mCursor.getString(mCursor.getColumnIndex(KasebContract.Costs.COLUMN_COST_NAME)));
                             costAmount.setText(mCursor.getString(mCursor.getColumnIndex(KasebContract.Costs.COLUMN_AMOUNT)));
                             costCode.setText(mCursor.getString(mCursor.getColumnIndex(KasebContract.Costs.COLUMN_COST_CODE)));
                             costDate.setText(mCursor.getString(mCursor.getColumnIndex(KasebContract.Costs.COLUMN_DATE)));
                             costDescription.setText(mCursor.getString(mCursor.getColumnIndex(KasebContract.Costs.COLUMN_DESCRIPTION)));
                             String costTypeid = mCursor.getString(mCursor.getColumnIndex(KasebContract.Costs.COLUMN_COST_TYPE_ID));
+
+                            //region handle asterisk for necessary fields
+
+                            //region cost name
+                            Utility.setAsteriskToTextInputLayout(costNameTextInputLayout, getResources().getString(R.string.hint_cost_name), true);
+                            //endregion cost name
+
+                            costName.requestFocus();
+
+                            //region cost code
+                            Utility.setAsteriskToTextInputLayout(costCodeTextInputLayout, getResources().getString(R.string.hint_cost_code), true);
+                            //endregion cost code
+
+                            //region cost amount
+                            Utility.setAsteriskToTextInputLayout(costAmountTextInputLayout, getResources().getString(R.string.hint_cost_amount), true);
+                            //endregion cost amount
+
+                            //region cost date
+                            Utility.setAsteriskToTextInputLayout(costDateTextInputLayout, getResources().getString(R.string.hint_date_picker), true);
+                            //endregion cost date
+
+                            //endregion handle asterisk for necessary fields
 
                             Cursor mCursor1 = getContext().getContentResolver().query(
                                     KasebContract.CostTypes.CONTENT_URI,
@@ -503,6 +561,140 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
         Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
         fab.startAnimation(hyperspaceJumpAnimation);
         fab.show();
+
+        //region tryCatch tour
+        try {
+            if (kasebSharedPreferences.getBoolean("getStarted", false)) {
+
+                String mMessage = "";
+                switch (getArguments().getString("witchActivity")) {
+                    case "cost": {
+                        //region cost
+                        break;
+                        //endregion cost
+                    }
+                    case "sale": {
+                        //region sale
+                        mMessage = getResources().getString(R.string.tour_text_sale_list);
+                        break;
+                        //endregion sale
+                    }
+                    case "product": {
+                        //region product
+                        mMessage = getResources().getString(R.string.tour_text_product_list);
+                        break;
+                        //endregion product
+                    }
+                    default:
+                        break;
+                }
+
+                dialogViewTour.setMessage(mMessage);
+                dialogViewTour.show();
+                dialogViewTour.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+
+                switch (getArguments().getString("witchActivity")) {
+                    case "cost": {
+                        //region cost
+                        break;
+                        //endregion cost
+                    }
+                    case "sale": {
+                        //region sale
+
+                        dialogViewTour.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                ((Sales) getActivity()).fab_cost_sale_product(getView());
+
+                                dialogViewTour.dismiss();
+                            }
+                        });
+
+                        dialogViewTour.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                //region back tour
+                                getFragmentManager().popBackStackImmediate();
+
+                                Intent intent = new Intent(getActivity(), Products.class);
+                                startActivity(intent);
+                                Utility.setActivityTransition(getActivity());
+
+                                dialogViewTour.dismiss();
+                                //endregion back tour
+                            }
+                        });
+
+                        break;
+                        //endregion sale
+                    }
+                    case "product": {
+                        //region product
+
+                        dialogViewTour.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                ((Products) getActivity()).fab_cost_sale_product(getView());
+
+                                dialogViewTour.dismiss();
+                            }
+                        });
+
+                        dialogViewTour.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                //region back tour
+                                getFragmentManager().popBackStackImmediate();
+
+                                Intent intent = new Intent(getActivity(), Customers.class);
+                                startActivity(intent);
+                                Utility.setActivityTransition(getActivity());
+
+                                dialogViewTour.dismiss();
+                                //endregion back tour
+                            }
+                        });
+
+                        break;
+                        //endregion product
+                    }
+                    default:
+                        break;
+                }
+
+                dialogViewTour.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        //region end tour
+                        editor.putBoolean("getStarted", false);
+                        editor.apply();
+
+                        dialogViewTour.dismiss();
+                        //endregion end tour
+
+                    }
+                });
+
+                dialogViewTour.setCancelable(false);
+                dialogViewTour.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        //region end tour
+                        editor.putBoolean("getStarted", false);
+                        editor.apply();
+                        //endregion end tour
+                    }
+                });
+            }
+        } catch (Exception e) {
+        }
+        //endregion tryCatch tour
     }
 
     @Override
@@ -568,9 +760,6 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
                     case R.id.menu_sort_code:
                         sortOrder = KasebContract.Sales.COLUMN_SALE_CODE + " ASC";
                         break;
-//                    case R.id.menu_sort_name:
-//                        sortOrder = null;
-//                        break;
                 }
                 break;
             }
@@ -613,56 +802,53 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
         mAdapter.swapCursor(null);
     }
 
-    private void setHelperText() {
+    private void getHelperText() {
 
-        costNameTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        costNameTextInputLayout.setError(null);
+        costCodeTextInputLayout.setError(null);
+        costAmountTextInputLayout.setError(null);
+        costDateTextInputLayout.setError(null);
 
-        costCodeTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-
-        costAmountTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-
-        costDateTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
-                + getResources().getString(R.string.date_format_error));
     }
 
     // this method check the validation and correct entries. its check fill first and then check the validation rules.
     private boolean checkValidityWithChangeColorOfHelperText() {
 
         if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), costName)) {
-            Utility.changeColorOfHelperText(getActivity(), costNameTextInputLayout, Utility.mIdOfColorSetError);
+            costNameTextInputLayout.setError(getResources().getString(R.string.example_cost_name));
             costName.setSelectAllOnFocus(true);
             costName.selectAll();
             costName.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), costNameTextInputLayout, Utility.mIdOfColorGetError);
+            costNameTextInputLayout.setError(null);
 
         if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), costCode)) {
-            Utility.changeColorOfHelperText(getActivity(), costCodeTextInputLayout, Utility.mIdOfColorSetError);
+            costCodeTextInputLayout.setError(getResources().getString(R.string.example_cost_code));
             costCode.setSelectAllOnFocus(true);
             costCode.selectAll();
             costCode.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), costCodeTextInputLayout, Utility.mIdOfColorGetError);
+            costCodeTextInputLayout.setError(null);
 
         if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), costAmount)) {
-            Utility.changeColorOfHelperText(getActivity(), costAmountTextInputLayout, Utility.mIdOfColorSetError);
+            costAmountTextInputLayout.setError(getResources().getString(R.string.example_price));
             costAmount.setSelectAllOnFocus(true);
             costAmount.selectAll();
             costAmount.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), costAmountTextInputLayout, Utility.mIdOfColorGetError);
+            costAmountTextInputLayout.setError(null);
 
         if (!Utility.checkForValidityForEditTextDate(getActivity(), costDate)) {
-            Utility.changeColorOfHelperText(getActivity(), costDateTextInputLayout, Utility.mIdOfColorSetError);
+            costDateTextInputLayout.setError(getResources().getString(R.string.example_date));
             costDate.setSelectAllOnFocus(true);
             costDate.selectAll();
             costDate.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), costDateTextInputLayout, Utility.mIdOfColorGetError);
+            costDateTextInputLayout.setError(null);
 
         return true;
     }

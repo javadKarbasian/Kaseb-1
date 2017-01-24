@@ -193,17 +193,13 @@ public class TypeSettingFragment extends Fragment implements LoaderManager.Loade
                 dialogView.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Boolean wantToCloseDialog = false;
 
                         //region insert CostTypes
                         mType = typeTitle.getText().toString();
                         insertData();
-
-                        wantToCloseDialog = true;
                         //endregion insert CostTypes
 
-                        if (wantToCloseDialog)
-                            dialogView.dismiss();
+                        dialogView.dismiss();
                     }
                 });
 

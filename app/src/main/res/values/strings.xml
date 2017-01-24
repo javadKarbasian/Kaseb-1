@@ -8,9 +8,9 @@
     <string name="kaseb_hadith">Tradesman Habib Allah</string>
     <string name="kaseb_name">Not Set</string>
     <string name="title_customer">Customers</string>
-    <string name="title_Debtors">Debaters</string>
+    <string name="title_Debtors">Debtors</string>
     <string name="title_invoice">Invoices</string>
-    <string name="title_debtors">Debaters</string>
+    <string name="title_debtors">Debtors</string>
     <string name="title_sales">Sales</string>
     <string name="title_costs">Costs</string>
     <string name="title_products">Products</string>
@@ -163,7 +163,7 @@
     <string name="states_instart">New</string>
 
     <!-- CustomerInsert Hints-->
-    <string name="hint_first_name">First name</string>
+    <string name="hint_first_name">  First name</string>
     <string name="hint_last_name">Last name</string>
     <string name="hint_birth_day">BirthDay</string>
     <string-array name="state_types">
@@ -367,7 +367,6 @@
     <string name="title_of_discounts">Invoice Discounts</string>
     <string name="title_of_payments">Invoice Payments</string>
     <string name="title_of_invoice_summary">Invoice Summary</string>
-    <string name="choose_appropriate_data">Choose appropriate data. </string>
     <string name="more_than_balance_amount">Can\'t be more than balance amount.</string>
     <string name="more_than_total_amount">Can\'t be more than total amount.</string>
     <string name="save_factor_then_print">Please Save Invoice Then RETRY.</string>
@@ -438,7 +437,8 @@
     <string name="discard_button">Discard</string>
     <string name="state_type_image_box_title">stateType</string>
     <string name="not_more_hundred">The percent can\'t be more than hundred.</string>
-    <string name="not_more_than_sale_price">Discount amount can\'t be more than sale price.</string>
+    <string name="discount_amount_not_more_than_sale_price">Discount amount can\'t be more than sale price.</string>
+    <string name="amount_not_less_than_sale_price">Amount can\'t be less than sale price.</string>
     <string name="cost_sale_product_tag_image_title">costSaleProductTagImage</string>
     <string name="click_here_choose_customer">Tap here to Choose a customer</string>
     <string name="image_avatar_title">image_avatar_title</string>
@@ -452,7 +452,7 @@
     <string name="customer_image_transition">customer_image_transition</string>
     <string name="code_text_transition">code_text_transition</string>
     <string name="pref_header_edit_profile">Edit Profile</string>
-    <string name="no_data_text_customers_states">no customers...! please add some.</string>
+    <string name="no_data_text_customers_states">no customers…! please add some.</string>
     <string name="no_data_text_sale">No Sale..! please add ones.</string>
     <string name="import_successful">Import Successful!</string>
     <string name="import_contact_failed">Import Failed!</string>
@@ -460,4 +460,63 @@
     <string name="problem_in_crop_image">There is some problem in croping app</string>
     <string name="does_not_support_crop_action">your device doesn\'t support the crop action!</string>
     <string name="complete_profile_kaseb">Your profile must be completed then you can go!</string>
+    <string name="title_take_tour">Take a tour</string>
+    <string name="insert_customer">Add customer</string>
+    <string name="insert_product">Add product</string>
+    <string name="insert_sale_and_print">Create Invoice and Print</string>
+    <string name="insert_cost">Add cost</string>
+    <string name="change_setting">Change Setting</string>
+    <string name="view_sale_and_print">View invoice and print</string>
+    <string name="contact_debtors">Contact debtors</string>
+    <string name="view_reports">View reports</string>
+    <string name="tour_slide_show">Tour Slideshow</string>
+    <string name="next_tour">Next</string>
+    <string name="back_tour">Back</string>
+    <string name="cancel_tour">Cancel</string>
+    <string name="explain_tour_insert_customer">This tour show you how to save a Customer and see him/her in list.</string>
+    <string name="explain_tour_insert_product">This tour show you how to save a Product and see it in list.</string>
+    <string name="explain_tour_create_invoice">This tour show you how to create an Invoice and Print it.</string>
+    <string name="explain_tour_insert_costs">This tour show you how to insert your Costs in list.</string>
+    <string name="explain_tour_change_setting">This tour show you how to change some Setting step by step.</string>
+    <string name="explain_tour_view_invoices_print">This tour show you how to see your saved Invoices, Edit or Print them.</string>
+    <string name="explain_tour_contact_debtors">This tour show you how to see your Debtors and contact with them.</string>
+    <string name="explain_tour_dashboard">This tour show you how to see some your Dashboard about number of customers,
+        classify and amount of their bills.</string>
+    <string name="start_tour">Start</string>
+    <string name="title_change_profile">Change Profile</string>
+    <string name="first_guide_at_change_profile">After set your profile data and save it, Tap the button at the top left corner to Get Started!</string>
+    <string name="kasebPreference">kasebProfile</string>
+    <string name="finish_tour">Finish</string>
+    <string name="title_customer_insert">Add New Customer</string>
+    <string name="title_product_insert">Add New Product/Service</string>
+    <string name="title_sale_insert">Create New Sale</string>
+    <string name="choose_member_ship_of_customer">Choose MemberShip of customer :</string>
+    <string name="choose_type_of_cost">Choose type of cost :</string>
+    <string name="ok_button">OK</string>
+    <string name="kaseb_intro_page_animation">Kaseb Intro Page Animation</string>
+    <string name="avatar_kaseb">Avatar Kaseb</string>
+
+    <string name="example_first_name">Example : Ali</string>
+    <string name="example_last_name">Example : Watson</string>
+    <string name="example_mobile_number">Example : 09121234567</string>
+    <string name="example_date">Example : 2017/1/1</string>
+    <string name="example_email">Example : kaseb@gmail.com</string>
+    <string name="example_product_name">Example : Samsung S7</string>
+    <string name="example_product_code">Example : P-1</string>
+    <string name="example_price">Example : 150000</string>
+    <string name="example_quantity">Example : 15</string>
+    <string name="example_cost_name">Example : Gas Bill</string>
+    <string name="example_cost_code">Example : C-1</string>
+    <string name="example_sale_code">Example : INV-1</string>
+
+    <string name="tour_text_customer_list">This page show your customers And you can add a customer here!</string>
+    <string name="tour_text_customer_insert">In this page you insert necessary data of customer and choose a picture arbitrary then save him/her from top right corner with save button.</string>
+    <string name="tour_text_sale_list">In this page you can see your sales, insert one, click each one to edit or print.</string>
+    <string name="tour_text_product_list">In this page you can see your products and services, insert one, click each one to edit or add a purchase.</string>
+    <string name="tour_text_product_insert">In this page you insert necessary data of product then save it from top right corner with save button.</string>
+    <string name="tour_text_sale_insert">In this page you insert a sale step by step :\n1. Add products.\n2. Add taxes and discounts.\n3. Add payments.\n4. Save it from top right corner with save button.\n5. Print it Automatically.</string>
+    <string name="tour_text_welcome">Welcome to This Tour!</string>
+    <string name="tour_text_first">To use of this app you should go this way, step by step :</string>
+    <string name="tour_text_second">1. Add a customer.\n2. Add a product.\n3. Insert Sale for a customer and print it.\n4.Check Dashboard.</string>
+
 </resources>

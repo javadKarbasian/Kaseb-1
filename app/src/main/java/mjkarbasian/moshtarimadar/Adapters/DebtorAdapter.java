@@ -19,13 +19,13 @@ import mjkarbasian.moshtarimadar.R;
 /**
  * Created by family on 12/19/2016.
  */
-public class DebaterAdapter extends CursorAdapter {
+public class DebtorAdapter extends CursorAdapter {
 
     private LayoutInflater cursorInflater;
     private android.content.Context mContext;
 
 
-    public DebaterAdapter(Context context, Cursor c, int flags) {
+    public DebtorAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
         cursorInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mContext = context;
@@ -33,7 +33,7 @@ public class DebaterAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return cursorInflater.inflate(R.layout.list_item_debaters, parent, false);
+        return cursorInflater.inflate(R.layout.list_item_debtors, parent, false);
     }
 
     @Override

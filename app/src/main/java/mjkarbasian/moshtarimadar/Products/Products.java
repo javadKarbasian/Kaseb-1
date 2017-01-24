@@ -2,6 +2,7 @@ package mjkarbasian.moshtarimadar.Products;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SearchView;
@@ -17,12 +18,16 @@ import mjkarbasian.moshtarimadar.R;
 
 public class Products extends DrawerActivity {
 
+    //region declare values
     CostSaleProductList costsSaleProductFragment = new CostSaleProductList();
     Bundle productsBundle = new Bundle();
     Fragment productInsert = new ProductInsert();
+    SharedPreferences kasebSharedPreferences;
+    SharedPreferences.Editor editor;
 
     android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
     private String mQuery;
+    //endregion declare values
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +37,26 @@ public class Products extends DrawerActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
 
+        //region handle sharepreference
+        kasebSharedPreferences = getSharedPreferences(getString(R.string.kasebPreference), MODE_PRIVATE);
+        editor = kasebSharedPreferences.edit();
+        //endregion handle sharepreference
+
         productsBundle.putString("witchActivity", "product");
         costsSaleProductFragment.setArguments(productsBundle);
 
         Intent intent = getIntent();
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) handleIntent(intent);
+        if (Intent.ACTION_SEARCH.equals(intent.getAction()))
+            handleIntent(intent);
         else
             fragmentManager.beginTransaction().replace(R.id.container, costsSaleProductFragment, "CostSaleProductList").commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        editor.putBoolean("getStarted", false);
+        editor.apply();
+        super.onBackPressed();
     }
 
     @Override
@@ -60,6 +78,7 @@ public class Products extends DrawerActivity {
     }
 
     public void fab_cost_sale_product(View v) {
+
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down, R.anim.slide_in_down, R.anim.slide_out_up);
         fragmentTransaction.replace(R.id.container, productInsert);

@@ -164,6 +164,7 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                             wantToCloseDialog = true;
 
                             Utility.setHeightOfListView(mListView);
+                            getHelperText();
                         }
                         //endregion edit product
 
@@ -190,7 +191,25 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
 
                 buyDate.setText(Utility.preInsertDate(getActivity()));
 
-                setHelperTextForProductHistory();
+                //region handle asterisk for necessary fields
+
+                //region sale price
+                Utility.setAsteriskToTextInputLayout(salePriceTextInputLayout, getResources().getString(R.string.hint_sale_price), false);
+                //endregion sale price
+
+                //region quantity
+                Utility.setAsteriskToTextInputLayout(quantityTextInputLayout, getResources().getString(R.string.hint_quantity), false);
+                //endregion quantity
+
+                //region buy price
+                Utility.setAsteriskToTextInputLayout(buyPriceTextInputLayout, getResources().getString(R.string.hint_buy_price), false);
+                //endregion buy price
+
+                //region buy date
+                Utility.setAsteriskToTextInputLayout(buyDateTextInputLayout, getResources().getString(R.string.hint_date_picker), true);
+                //endregion buy date
+
+                //endregion handle asterisk for necessary fields
 
                 //region discountAmount addTextChangedListener
                 discountAmount.addTextChangedListener(new TextWatcher() {
@@ -206,19 +225,17 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
 
                             if (mDiscountAmount > mSalePrice) {
                                 discountAmount.setText(salePrice.getText().toString());
-                                discountAmountTextInputLayout.setError(getResources().getString(R.string.not_more_than_sale_price));
+                                discountAmountTextInputLayout.setError(getResources().getString(R.string.discount_amount_not_more_than_sale_price));
                                 discountAmount.setSelectAllOnFocus(true);
                                 discountAmount.selectAll();
                                 discountAmount.requestFocus();
                             }
                         } catch (Exception e) {
                             if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
-                                Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
+                                salePriceTextInputLayout.setError(getResources().getString(R.string.example_price));
                                 salePrice.requestFocus();
-                            } else {
-                                discountAmount.setError(getResources().getString(R.string.choose_appropriate_data));
-                                Utility.changeColorOfHelperText(getActivity(), discountAmountTextInputLayout, R.color.colorPrimaryLight);
-                            }
+                            } else
+                                discountAmountTextInputLayout.setError(getResources().getString(R.string.example_price));
                         }
                     }
 
@@ -231,12 +248,10 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                             buyPrice.setText(String.format("%.2f", Float.valueOf(mSalePrice - mDiscountAmount)));
                         } catch (Exception e) {
                             if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
-                                Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
+                                salePriceTextInputLayout.setError(getResources().getString(R.string.example_price));
                                 salePrice.requestFocus();
-                            } else {
-                                discountAmountTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-                                Utility.changeColorOfHelperText(getActivity(), discountAmountTextInputLayout, R.color.colorPrimaryLight);
-                            }
+                            } else
+                                discountAmountTextInputLayout.setError(getResources().getString(R.string.example_price));
                         }
                     }
                 });
@@ -264,12 +279,10 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                             }
                         } catch (Exception e) {
                             if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
-                                Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
+                                salePriceTextInputLayout.setError(getResources().getString(R.string.example_price));
                                 salePrice.requestFocus();
-                            } else {
-                                discountPercentTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-                                Utility.changeColorOfHelperText(getActivity(), discountPercentTextInputLayout, R.color.colorPrimaryLight);
-                            }
+                            } else
+                                discountPercentTextInputLayout.setError(getResources().getString(R.string.example_quantity));
                         }
                     }
 
@@ -284,12 +297,10 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                             discountAmount.setText(String.format("%.2f", Float.valueOf(mDiscountPercent * mSalePrice / 100)));
                         } catch (Exception e) {
                             if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
-                                Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, R.color.colorRed);
+                                salePriceTextInputLayout.setError(getResources().getString(R.string.example_price));
                                 salePrice.requestFocus();
-                            } else {
-                                discountPercentTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-                                Utility.changeColorOfHelperText(getActivity(), discountPercentTextInputLayout, R.color.colorPrimaryLight);
-                            }
+                            } else
+                                discountPercentTextInputLayout.setError(getResources().getString(R.string.example_quantity));
                         }
                     }
                 });
@@ -339,6 +350,18 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
 
                 Utility.setHeightOfListView(mListView);
 
+                //region product name
+                Utility.setAsteriskToTextInputLayout(productNameTextInputLayout, getResources().getString(R.string.hint_product_name), true);
+                //endregion product name
+
+                productName.requestFocus();
+
+                //region product code
+                Utility.setAsteriskToTextInputLayout(productCodeTextInputLayout, getResources().getString(R.string.hint_product_code), true);
+                //endregion product code
+
+                //endregion handle asterisk for necessary fields
+
                 break;
             case R.id.action_detail_product_save:
                 if (checkValidityWithChangeColorOfHelperTextForProductInsert()) {
@@ -365,6 +388,8 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                     productCode.setEnabled(false);
                     productUnit.setEnabled(false);
                     productDescription.setEnabled(false);
+
+                    getHelperText();
                 }
                 break;
             default:
@@ -387,8 +412,6 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
         productCodeTextInputLayout = (TextInputLayout) getActivity().findViewById(R.id.text_input_layout_detail_product_code);
         productUnitTextInputLayout = (TextInputLayout) getActivity().findViewById(R.id.text_input_layout_detail_product_unit);
         productDescriptionTextInputLayout = (TextInputLayout) getActivity().findViewById(R.id.text_input_layout_detail_product_description);
-
-        setHelperTextForProduct();
 
         //in this line does not matter post 0l to second parameter of function because not use in this case
         stockProduct = Utility.checkNumberOfProductsForDetailSale(getActivity(),
@@ -461,32 +484,16 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
         mAdapter.swapCursor(null);
     }
 
-    private void setHelperTextForProduct() {
+    private void getHelperText() {
 
-        productNameTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
-                + getResources().getString(R.string.non_repetitive));
-
-        productCodeTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        productUnitTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        productDescriptionTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-    }
-
-    private void setHelperTextForProductHistory() {
-
-        salePriceTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        quantityTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-
-        buyPriceTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
-                + getResources().getString(R.string.not_more_than_sale_price));
-
-        buyDateTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
-                + getResources().getString(R.string.date_format_error));
-
-        discountAmountTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
-                + getResources().getString(R.string.not_more_than_sale_price));
-
-        discountPercentTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
-                + getResources().getString(R.string.not_more_hundred));
+        productNameTextInputLayout.setError(null);
+        productCodeTextInputLayout.setError(null);
+        salePriceTextInputLayout.setError(null);
+        quantityTextInputLayout.setError(null);
+        buyPriceTextInputLayout.setError(null);
+        buyDateTextInputLayout.setError(null);
+        discountAmountTextInputLayout.setError(null);
+        discountPercentTextInputLayout.setError(null);
     }
 
     // this method check the validation and correct entries. its check fill first and then check the validation rules.
@@ -495,18 +502,21 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
         if (!Utility.checkForValidityForEditTextNullOrEmptyAndItterative(
                 getActivity(), productName, productNameTextInputLayout, KasebContract.Products.CONTENT_URI,
                 KasebContract.Products.COLUMN_PRODUCT_NAME + " = ? and " + KasebContract.Products._ID + " != ? ",
-                KasebContract.Products._ID, new String[]{productName.getText().toString(), String.valueOf(productId)}))
+                KasebContract.Products._ID, new String[]{productName.getText().toString(), String.valueOf(productId)})) {
+            productNameTextInputLayout.setError(String.format("%s %s",
+                    getResources().getString(R.string.example_product_name),
+                    getResources().getString(R.string.non_repetitive)));
             return false;
+        }
 
         if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), productCode)) {
-            Utility.changeColorOfHelperText(getActivity(), productCodeTextInputLayout, Utility.mIdOfColorSetError);
+            productCodeTextInputLayout.setError(getResources().getString(R.string.example_product_code));
             productCode.setSelectAllOnFocus(true);
             productCode.selectAll();
             productCode.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), productCodeTextInputLayout, Utility.mIdOfColorGetError);
-
+            productCodeTextInputLayout.setError(null);
         return true;
     }
 
@@ -514,25 +524,27 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
     private boolean checkValidityWithChangeColorOfHelperTextForProductHistoryInsert() {
 
         if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), salePrice)) {
-            Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, Utility.mIdOfColorSetError);
+            salePriceTextInputLayout.setError(getResources().getString(R.string.example_price));
             salePrice.setSelectAllOnFocus(true);
             salePrice.selectAll();
             salePrice.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), salePriceTextInputLayout, Utility.mIdOfColorGetError);
+            salePriceTextInputLayout.setError(null);
 
         if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), quantity)) {
-            Utility.changeColorOfHelperText(getActivity(), quantityTextInputLayout, Utility.mIdOfColorSetError);
+            quantityTextInputLayout.setError(getResources().getString(R.string.example_quantity));
             quantity.setSelectAllOnFocus(true);
             quantity.selectAll();
             quantity.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), quantityTextInputLayout, Utility.mIdOfColorGetError);
+            quantityTextInputLayout.setError(null);
 
         if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), buyPrice)) {
-            Utility.changeColorOfHelperText(getActivity(), buyPriceTextInputLayout, Utility.mIdOfColorSetError);
+            buyPriceTextInputLayout.setError(String.format("%s %s",
+                    getResources().getString(R.string.example_price),
+                    getResources().getString(R.string.amount_not_less_than_sale_price)));
             buyPrice.setSelectAllOnFocus(true);
             buyPrice.selectAll();
             buyPrice.requestFocus();
@@ -542,23 +554,25 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
             Float mSalePrice = Float.valueOf(salePrice.getText().toString());
 
             if (mBuyPrice > mSalePrice) {
-                Utility.changeColorOfHelperText(getActivity(), buyPriceTextInputLayout, Utility.mIdOfColorSetError);
+                buyPriceTextInputLayout.setError(String.format("%s %s",
+                        getResources().getString(R.string.example_price),
+                        getResources().getString(R.string.amount_not_less_than_sale_price)));
                 buyPrice.setSelectAllOnFocus(true);
                 buyPrice.selectAll();
                 buyPrice.requestFocus();
                 return false;
             } else
-                Utility.changeColorOfHelperText(getActivity(), buyPriceTextInputLayout, Utility.mIdOfColorGetError);
+                buyPriceTextInputLayout.setError(null);
         }
 
         if (!Utility.checkForValidityForEditTextDate(getActivity(), buyDate)) {
-            Utility.changeColorOfHelperText(getActivity(), buyDateTextInputLayout, Utility.mIdOfColorSetError);
+            buyDateTextInputLayout.setError(getResources().getString(R.string.example_date));
             buyDate.setSelectAllOnFocus(true);
             buyDate.selectAll();
             buyDate.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), buyDateTextInputLayout, Utility.mIdOfColorGetError);
+            buyDateTextInputLayout.setError(null);
 
         return true;
     }

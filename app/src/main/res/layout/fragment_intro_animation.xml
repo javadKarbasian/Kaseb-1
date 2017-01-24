@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:contentDescription="@string/kaseb_intro_page_animation"
             android:src="@drawable/kaseb_center" />
 
         <TextView
@@ -30,6 +31,7 @@
             android:textSize="32sp"
             android:textStyle="bold|italic"
             android:typeface="sans" />
+
     </LinearLayout>
 
 </FrameLayout>

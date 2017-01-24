@@ -19,7 +19,7 @@ import mjkarbasian.moshtarimadar.AboutUs.AboutUs;
 import mjkarbasian.moshtarimadar.Costs.Costs;
 import mjkarbasian.moshtarimadar.Customers.Customers;
 import mjkarbasian.moshtarimadar.Dashboard;
-import mjkarbasian.moshtarimadar.Debaters.Debaters;
+import mjkarbasian.moshtarimadar.Debtors.Debtors;
 import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.Products.Products;
 import mjkarbasian.moshtarimadar.R;
@@ -27,8 +27,16 @@ import mjkarbasian.moshtarimadar.Sales.Sales;
 import mjkarbasian.moshtarimadar.Setting.MySetting;
 
 public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    //region declare values
+    Intent intent;
     DrawerLayout mDrawer;
+
+    SharedPreferences kasebSharedPreferences;
+    SharedPreferences.Editor editor;
+
     private ActionBarDrawerToggle mDrawerToggle;
+    //endregion declare values
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +57,13 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         //region handle sharepreference
         View header = navigationView.getHeaderView(0);
         TextView kasebProfileTextView = (TextView) header.findViewById(R.id.kaseb_name_text);
-        String kasebPREFERENCES = "kasebProfile";
-        SharedPreferences kasebSharedPreferences = getSharedPreferences(kasebPREFERENCES, MODE_PRIVATE);
+        kasebSharedPreferences = getSharedPreferences(getResources().getString(R.string.kasebPreference), MODE_PRIVATE);
+        editor = kasebSharedPreferences.edit();
 
         if (kasebSharedPreferences.getString("firstName", null) != null)
             kasebProfileTextView.setText(
-                    kasebSharedPreferences.getString("firstName", null) + "  " +
-                            kasebSharedPreferences.getString("lastName", null));
+                    String.format("%s  %s", kasebSharedPreferences.getString("firstName", null),
+                            kasebSharedPreferences.getString("lastName", null)));
         //endregion handle sharepreference
     }
 
@@ -93,9 +101,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Intent intent;
+
         if (id == R.id.nav_dashboard) {
-            // Handle the camera action
             intent = new Intent(this, Dashboard.class);
             finish();
             startActivity(intent);
@@ -103,13 +110,12 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         }
 
         if (id == R.id.nav_customers) {
-            // Handle the camera action
             intent = new Intent(this, Customers.class);
             finish();
             startActivity(intent);
             Utility.setActivityTransition(this);
         } else if (id == R.id.nav_debtors) {
-            intent = new Intent(this, Debaters.class);
+            intent = new Intent(this, Debtors.class);
             finish();
             startActivity(intent);
             Utility.setActivityTransition(this);
@@ -137,6 +143,22 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             intent = new Intent(this, AboutUs.class);
             finish();
             startActivity(intent);
+            Utility.setActivityTransition(this);
+        } else if (id == R.id.nav_take_tour) {
+
+            try {
+                //region start tour
+                editor.putBoolean("getStarted", true);
+                editor.apply();
+
+                intent = new Intent(DrawerActivity.this, Customers.class);
+                finish();
+                startActivity(intent);
+                Utility.setActivityTransition(DrawerActivity.this);
+                //endregion start tour
+            } catch (Exception e) {
+            }
+
             Utility.setActivityTransition(this);
         }
 

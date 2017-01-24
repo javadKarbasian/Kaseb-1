@@ -1,4 +1,4 @@
-package mjkarbasian.moshtarimadar.Debaters;
+package mjkarbasian.moshtarimadar.Debtors;
 
 import android.app.SearchManager;
 import android.content.Intent;
@@ -14,10 +14,10 @@ import android.view.View;
 import mjkarbasian.moshtarimadar.Others.DrawerActivity;
 import mjkarbasian.moshtarimadar.R;
 
-public class Debaters extends DrawerActivity {
+public class Debtors extends DrawerActivity {
 
     FragmentManager fragmentManager = getSupportFragmentManager();
-    Fragment debatersList = new DebatersList();
+    Fragment debatersList = new DebtorsList();
 
 
     @Override
@@ -44,7 +44,7 @@ public class Debaters extends DrawerActivity {
     }
 
     private void doMySearch(String query) {
-        DebatersList queryFragment = (DebatersList) fragmentManager.findFragmentByTag("debatersList");
+        DebtorsList queryFragment = (DebtorsList) fragmentManager.findFragmentByTag("debatersList");
         queryFragment.getSearchQuery(query);
     }
 
@@ -69,7 +69,6 @@ public class Debaters extends DrawerActivity {
                 .setAction("Action", null).show();
         view.getId();
         view.getTag();
-        
     }
 
     public void message_dabator(View view) {

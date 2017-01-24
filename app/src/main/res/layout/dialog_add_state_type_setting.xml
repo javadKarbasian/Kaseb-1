@@ -14,7 +14,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorTextAppearance="@style/text_input_layout_style_not_error">
+            app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
                 android:id="@+id/add_types_setting_name"

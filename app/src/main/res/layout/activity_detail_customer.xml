@@ -40,7 +40,7 @@
                         android:layout_marginRight="4dp"
                         android:layout_marginTop="4dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/kaseb_pic"
+                        android:src="@drawable/avatar"
                         android:transitionName="@string/customer_image_transition"
                         app:layout_collapseMode="none" />
 
@@ -66,7 +66,7 @@
                                 app:counterEnabled="true"
                                 app:counterMaxLength="30"
                                 app:errorEnabled="true"
-                                app:errorTextAppearance="@style/text_input_layout_style_not_error">
+                                app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                                 <EditText
                                     android:id="@+id/customer_first_name"
@@ -98,7 +98,7 @@
                                 app:counterEnabled="true"
                                 app:counterMaxLength="30"
                                 app:errorEnabled="true"
-                                app:errorTextAppearance="@style/text_input_layout_style_not_error">
+                                app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                                 <EditText
                                     android:id="@+id/customer_last_name"

@@ -1,4 +1,4 @@
-package mjkarbasian.moshtarimadar.Debaters;
+package mjkarbasian.moshtarimadar.Debtors;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import mjkarbasian.moshtarimadar.Adapters.DebaterAdapter;
+import mjkarbasian.moshtarimadar.Adapters.DebtorAdapter;
 import mjkarbasian.moshtarimadar.Customers.DetailCustomer;
 import mjkarbasian.moshtarimadar.Data.KasebContract;
 import mjkarbasian.moshtarimadar.R;
@@ -24,12 +24,12 @@ import mjkarbasian.moshtarimadar.R;
 /**
  * Created by family on 12/19/2016.
  */
-public class DebatersList extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-    DebaterAdapter mDebaterAdapter;
+public class DebtorsList extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+    DebtorAdapter mDebaterAdapter;
     ListView mListView;
     private String searchQuery;
     private int FRAGMENT_DEBATERS_LIST_LOADER = 9;
-    private String LOG_TAG = DebatersList.class.getSimpleName();
+    private String LOG_TAG = DebtorsList.class.getSimpleName();
     private String[] mProjection = new String[]{
             KasebContract.Sales.TABLE_NAME + "." + KasebContract.Sales._ID,
             KasebContract.Sales.TABLE_NAME + "."+ KasebContract.Sales.COLUMN_CUSTOMER_ID,
@@ -38,7 +38,7 @@ public class DebatersList extends Fragment implements LoaderManager.LoaderCallba
     };
     private String sortOrder;
 
-    public DebatersList() {
+    public DebtorsList() {
         super();
     }
 
@@ -51,9 +51,9 @@ public class DebatersList extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.activity_debaters, container, false);
+        View rootView = inflater.inflate(R.layout.activity_debtors, container, false);
         mListView =(ListView) rootView.findViewById(R.id.list_view_debater);
-        mDebaterAdapter = new DebaterAdapter(getActivity(),null,0);
+        mDebaterAdapter = new DebtorAdapter(getActivity(),null,0);
         mListView.setAdapter(mDebaterAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

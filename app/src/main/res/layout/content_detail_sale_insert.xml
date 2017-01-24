@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_view_content_detail_sale_insert"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbarAlwaysDrawVerticalTrack="true"
@@ -34,8 +35,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:divider="@drawable/divider_list"
-                    android:showDividers="middle"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:showDividers="middle">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -55,6 +56,7 @@
                         android:layout_height="56dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/top_of_list_margin_in_row"
+                        android:focusableInTouchMode="true"
                         android:gravity="center_vertical|start"
                         android:nestedScrollingEnabled="false"
                         android:onClick="fab_detail_sale_add_customer"
@@ -104,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/top_of_list_margin"
                         android:paddingLeft="@dimen/padding_left_text_view"
-                        app:errorTextAppearance="@style/text_input_layout_style_not_error">
+                        app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                         <EditText
                             android:id="@+id/detail_sales_info_sale_code"
@@ -128,7 +130,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/top_of_list_margin_in_row"
                         android:paddingLeft="@dimen/padding_left_text_view"
-                        app:errorTextAppearance="@style/text_input_layout_style_not_error">
+                        app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                         <EditText
                             android:id="@+id/detail_sales_info_sale_date"
@@ -137,14 +139,13 @@
                             android:layout_marginTop="@dimen/top_of_list_margin"
                             android:ems="10"
                             android:gravity="center_vertical|start"
-                            android:hint="@string/hint_date"
+                            android:hint="@string/hint_date_picker"
                             android:inputType="date"
                             android:maxLength="10"
                             android:nestedScrollingEnabled="false"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
 
                     </android.support.design.widget.TextInputLayout>
-
 
                 </LinearLayout>
 
@@ -189,6 +190,7 @@
                             style="@style/sales_card_view_fab"
                             android:background="@drawable/oval_ripple"
                             android:contentDescription="@string/content_detail_sale_insert_add_product_image_button"
+                            android:focusableInTouchMode="true"
                             android:onClick="fab_detail_sale_add_product"
                             android:src="@drawable/plus" />
 

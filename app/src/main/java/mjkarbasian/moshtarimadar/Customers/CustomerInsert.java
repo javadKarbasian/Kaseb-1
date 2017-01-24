@@ -1,9 +1,12 @@
 package mjkarbasian.moshtarimadar.Customers;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -32,6 +36,7 @@ import mjkarbasian.moshtarimadar.Adapters.TypesSettingAdapter;
 import mjkarbasian.moshtarimadar.Data.KasebContract;
 import mjkarbasian.moshtarimadar.Helpers.GalleryUtil;
 import mjkarbasian.moshtarimadar.Helpers.Utility;
+import mjkarbasian.moshtarimadar.Products.Products;
 import mjkarbasian.moshtarimadar.R;
 
 /**
@@ -39,17 +44,26 @@ import mjkarbasian.moshtarimadar.R;
  */
 public class CustomerInsert extends Fragment {
 
+    //region declare values
     private static final int GALLERY_ACTIVITY_CODE = 200;
     private static final int RESULT_CROP = 400;
 
+    Spinner stateType;
     View rootView;
+    View tourView;
     ContentValues customerValues = new ContentValues();
     ImageView mCustomerAvatar;
     Bitmap photo;
+
+    SharedPreferences kasebSharedPreferences;
+    SharedPreferences.Editor editor;
+
+    AlertDialog.Builder builderTour;
+    AlertDialog dialogViewTour;
+
     EditText firstName;
     EditText lastName;
     EditText birthDay;
-    Spinner stateType;
     EditText phoneMobile;
     EditText customerDescription;
     EditText email;
@@ -61,6 +75,7 @@ public class CustomerInsert extends Fragment {
     EditText addressCity;
     EditText addressStreet;
     EditText addressPostalCode;
+
     TextInputLayout firstNameTextInputLayout;
     TextInputLayout lastNameTextInputLayout;
     TextInputLayout phoneMobileTextInputLayout;
@@ -76,14 +91,14 @@ public class CustomerInsert extends Fragment {
     TextInputLayout addressStreetTextInputLayout;
     TextInputLayout addressPostalCodeTextInputLayout;
     private Uri insertUri;
+    //endregion declare values
 
     public CustomerInsert() {
         setHasOptionsMenu(true);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_customer_insert, container, false);
 
@@ -96,8 +111,28 @@ public class CustomerInsert extends Fragment {
             }
         });
 
+        //region handle sharepreference
+        kasebSharedPreferences = getActivity().getSharedPreferences(getResources().getString(R.string.kasebPreference), getActivity().MODE_PRIVATE);
+        editor = kasebSharedPreferences.edit();
+        //endregion handle sharepreference
+
+        //region create alertdialog tour
+        builderTour = new AlertDialog.Builder(getActivity())
+                .setNegativeButton(R.string.back_tour, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                }).setPositiveButton(R.string.next_tour, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                }).setNeutralButton(R.string.cancel_tour, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                }).setTitle(R.string.title_customer_insert);
+
+        dialogViewTour = builderTour.create();
+        //endregion create alertdialog tour
+
         stateType = (Spinner) rootView.findViewById(R.id.input_state_type_spinner);
-        stateType.setPadding(Utility.dipConverter(4, getActivity()), Utility.dipConverter(4, getActivity()), Utility.dipConverter(4, getActivity()), Utility.dipConverter(4, getActivity()));
         firstName = (EditText) rootView.findViewById(R.id.input_first_name);
         lastName = (EditText) rootView.findViewById(R.id.input_last_name);
         birthDay = (EditText) rootView.findViewById(R.id.input_birth_day);
@@ -128,7 +163,23 @@ public class CustomerInsert extends Fragment {
         addressStreetTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_address_street);
         addressPostalCodeTextInputLayout = (TextInputLayout) rootView.findViewById(R.id.text_input_layout_input_address_postal_code);
 
-        setHelperText();
+        //region handle asterisk for necessary fields
+
+        //region first name
+        Utility.setAsteriskToTextInputLayout(firstNameTextInputLayout, getResources().getString(R.string.hint_first_name), false);
+        //endregion first name
+
+        firstName.requestFocus();
+
+        //region last name
+        Utility.setAsteriskToTextInputLayout(lastNameTextInputLayout, getResources().getString(R.string.hint_last_name), false);
+        //endregion last name
+
+        //region mobile number
+        Utility.setAsteriskToTextInputLayout(phoneMobileTextInputLayout, getResources().getString(R.string.hint_mobile_number), false);
+        //endregion mobile number
+
+        //endregion handle asterisk for necessary fields
 
         Cursor cursor = getContext().getContentResolver().query(KasebContract.State.CONTENT_URI
                 , null, null, null, KasebContract.State._ID + " DESC");
@@ -143,14 +194,73 @@ public class CustomerInsert extends Fragment {
         TypesSettingAdapter cursorAdapter = new TypesSettingAdapter(
                 getActivity(), cursor, 0, KasebContract.State.COLUMN_STATE_POINTER);
         stateType.setAdapter(cursorAdapter);
+
+        try {
+            if (kasebSharedPreferences.getBoolean("getStarted", false)) {
+
+                dialogViewTour.setMessage(getResources().getString(R.string.tour_text_customer_insert));
+                dialogViewTour.show();
+
+                dialogViewTour.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                dialogViewTour.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent(getActivity(), Products.class);
+                        startActivity(intent);
+                        Utility.setActivityTransition(getActivity());
+
+                        dialogViewTour.dismiss();
+                    }
+                });
+
+                dialogViewTour.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        //region back tour
+                        backToLastPage();
+
+                        dialogViewTour.dismiss();
+                        //endregion back tour
+                    }
+                });
+
+                dialogViewTour.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        //region end tour
+                        editor.putBoolean("getStarted", false);
+                        editor.apply();
+
+                        dialogViewTour.dismiss();
+                        //endregion end tour
+                    }
+                });
+
+                dialogViewTour.setCancelable(false);
+                dialogViewTour.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        //region end tour
+                        editor.putBoolean("getStarted", false);
+                        editor.apply();
+                        //endregion end tour
+                    }
+                });
+            }
+        } catch (Exception e) {
+        }
+
         return rootView;
     }
 
     @Override
-    public void onCreateOptionsMenu(
-            Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.removeItem(R.id.sort_button);
         menu.removeItem(R.id.search_button);
+        tourView = (View) menu.findItem(R.id.save_inputs);
         inflater.inflate(R.menu.fragments_for_insert, menu);
     }
 
@@ -212,6 +322,7 @@ public class CustomerInsert extends Fragment {
 
     private void backToLastPage() {
         Utility.clearForm((ViewGroup) rootView);
+        getHelperText();
         getFragmentManager().popBackStackImmediate();
     }
 
@@ -237,6 +348,10 @@ public class CustomerInsert extends Fragment {
                     photo = data.getExtras().getParcelable("data");
                     mCustomerAvatar.setImageBitmap(photo);
 
+                    firstName.setSelectAllOnFocus(true);
+                    firstName.selectAll();
+                    firstName.requestFocus();
+
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
                     byte[] imagegBytes = byteArrayOutputStream.toByteArray();
@@ -251,6 +366,10 @@ public class CustomerInsert extends Fragment {
                         photo = BitmapFactory.decodeStream(bufferInputStream);
 
                         mCustomerAvatar.setImageBitmap(photo);
+
+                        firstName.setSelectAllOnFocus(true);
+                        firstName.selectAll();
+                        firstName.requestFocus();
 
                         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                         photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
@@ -267,6 +386,10 @@ public class CustomerInsert extends Fragment {
                     photo = data.getExtras().getParcelable("data");
                     mCustomerAvatar.setImageBitmap(photo);
 
+                    firstName.setSelectAllOnFocus(true);
+                    firstName.selectAll();
+                    firstName.requestFocus();
+
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
                     byte[] imagegBytes = byteArrayOutputStream.toByteArray();
@@ -281,6 +404,10 @@ public class CustomerInsert extends Fragment {
                         photo = BitmapFactory.decodeStream(bufferInputStream);
 
                         mCustomerAvatar.setImageBitmap(photo);
+
+                        firstName.setSelectAllOnFocus(true);
+                        firstName.selectAll();
+                        firstName.requestFocus();
 
                         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                         photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
@@ -329,75 +456,66 @@ public class CustomerInsert extends Fragment {
         }
     }
 
-    private void setHelperText() {
+    private void getHelperText() {
 
-        firstNameTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        lastNameTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-
-        phoneMobileTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
-                + getResources().getString(R.string.non_repetitive));
-
-        birthDayTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
-                + getResources().getString(R.string.date_format_error));
-
-        customerDescriptionTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        emailTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        phoneWorkTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        phoneHomeTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        phoneOtherTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        phoneFaxTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        addressCountryTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        addressCityTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        addressStreetTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        addressPostalCodeTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        firstNameTextInputLayout.setError(null);
+        lastNameTextInputLayout.setError(null);
+        phoneMobileTextInputLayout.setError(null);
+        birthDayTextInputLayout.setError(null);
+        emailTextInputLayout.setError(null);
     }
 
     // this method check the validation and correct entries. its check fill first and then check the validation rules.
     private boolean checkValidityWithChangeColorOfHelperText() {
 
         if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), firstName)) {
-            Utility.changeColorOfHelperText(getActivity(), firstNameTextInputLayout, Utility.mIdOfColorSetError);
+            firstNameTextInputLayout.setError(getResources().getString(R.string.example_first_name));
             firstName.setSelectAllOnFocus(true);
             firstName.selectAll();
             firstName.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), firstNameTextInputLayout, Utility.mIdOfColorGetError);
+            firstNameTextInputLayout.setError(null);
 
         if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), lastName)) {
-            Utility.changeColorOfHelperText(getActivity(), lastNameTextInputLayout, Utility.mIdOfColorSetError);
+            lastNameTextInputLayout.setError(getResources().getString(R.string.example_last_name));
             lastName.setSelectAllOnFocus(true);
             lastName.selectAll();
             lastName.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), lastNameTextInputLayout, Utility.mIdOfColorGetError);
+            lastNameTextInputLayout.setError(null);
 
         if (!Utility.checkForValidityForEditTextNullOrEmptyAndItterative(
                 getActivity(), phoneMobile, phoneMobileTextInputLayout, KasebContract.Customers.CONTENT_URI,
                 KasebContract.Customers.COLUMN_PHONE_MOBILE + " = ? ",
-                KasebContract.Customers._ID, new String[]{phoneMobile.getText().toString()}))
+                KasebContract.Customers._ID, new String[]{phoneMobile.getText().toString()})) {
+            phoneMobileTextInputLayout.setError(String.format("%s %s",
+                    getResources().getString(R.string.example_mobile_number),
+                    getResources().getString(R.string.non_repetitive)));
             return false;
+        }
 
         if (!birthDay.getText().toString().equals("") && !birthDay.getText().toString().equals(null) &&
                 !Utility.checkForValidityForEditTextDate(getActivity(), birthDay)) {
-            Utility.changeColorOfHelperText(getActivity(), birthDayTextInputLayout, Utility.mIdOfColorSetError);
+            birthDayTextInputLayout.setError(getResources().getString(R.string.example_date));
             birthDay.setSelectAllOnFocus(true);
             birthDay.selectAll();
             birthDay.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), birthDayTextInputLayout, Utility.mIdOfColorGetError);
+            birthDayTextInputLayout.setError(null);
 
         if (!email.getText().toString().equals("") && !email.getText().toString().equals(null) &&
                 !Utility.validateEmail(email.getText().toString())) {
-            Utility.changeColorOfHelperText(getActivity(), emailTextInputLayout, Utility.mIdOfColorSetError);
+
+            emailTextInputLayout.setError(getResources().getString(R.string.example_email));
             email.setSelectAllOnFocus(true);
             email.selectAll();
             email.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), emailTextInputLayout, Utility.mIdOfColorGetError);
+            emailTextInputLayout.setError(null);
 
         return true;
     }

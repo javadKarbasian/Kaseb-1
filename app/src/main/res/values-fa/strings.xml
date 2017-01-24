@@ -175,7 +175,7 @@
     <string name="hint_address_country">کشور</string>
     <string name="hint_address_postal_code">کد پستی</string>
     <string name="hint_address_street">خیابان</string>
-    <string name="hint_birth_day">تاریخ تولد: روز/ماه/سال</string>
+    <string name="hint_birth_day">تاریخ تولد</string>
     <string name="hint_buy_price">قیمت خرید</string>
     <string name="hint_buy_price_discount_amount">مبلغ تخفیف</string>
     <string name="hint_buy_price_discount_percent">درصد تخفیف</string>
@@ -183,7 +183,7 @@
     <string name="hint_cost_code">کد هزینه</string>
     <string name="hint_cost_name">نام هزینه</string>
     <string name="hint_date">تاریخ: روز/ماه/سال</string>
-    <string name="hint_date_picker">تاریخ: روز/ماه/سال</string>
+    <string name="hint_date_picker">تاریخ</string>
     <string name="hint_description">توضیحات</string>
     <string name="hint_discount_amount">مبلغ تخفیف</string>
     <string name="hint_discount_percent">درصد تخفیف</string>
@@ -324,7 +324,6 @@
     <string name="invoice_sale_code">کد فروش :  </string>
     <string name="good_title">محصول</string>
     <string name="customer_info">مشتری : </string>
-    <string name="choose_appropriate_data">داده مناسب وارد کنید. </string>
     <string name="buyer_title">خریدار</string>
     <string name="amount_title">مبلغ</string>
     <string name="seller_address">آدرس کاسب : </string>
@@ -349,7 +348,7 @@
     <string name="edit_quantity">تغییر تعداد (مقدار) کالا</string>
     <string name="discard_button">انصراف</string>
     <string name="not_more_hundred">درصد مشخص شده نمی تواند بیشتر از 100 باشد.</string>
-    <string name="not_more_than_sale_price">تخفیف گرفته شده در خرید کالا نمی تواند بیشتر از قیمت فروش باشد.</string>
+    <string name="discount_amount_not_more_than_sale_price">تخفیف گرفته شده در خرید کالا نمی تواند بیشتر از قیمت فروش باشد.</string>
     <string name="pref_header_edit_profile">اطلاعات کاسب</string>
     <string name="detail_sales_products_items_total">کل</string>
     <string name="buy_date">تاریخ خرید</string>
@@ -371,4 +370,60 @@
     <string name="problem_in_crop_image">تعیین محدوده تصویر با مشکل مواجه شد.</string>
     <string name="does_not_support_crop_action">تلفن همراه شما، از عملیات تعیین محدوده تصویر پشتیبانی نمی کند.</string>
     <string name="complete_profile_kaseb">ابتدا باید اطلاعات ضروری خود را ذخیره کنید، سپس وارد برنامه شوید.</string>
+    <string name="title_take_tour">راهنمای کاربردی</string>
+
+    <string name="insert_customer">افزودن مشتری</string>
+    <string name="insert_product">افزودن کالا (خدمات)</string>
+    <string name="insert_sale_and_print">صدور فاکتور فروش و پرینت آن</string>
+    <string name="insert_cost">افزودن هزینه</string>
+    <string name="change_setting">تغییر تنظیمات</string>
+    <string name="view_sale_and_print">مشاهده و پرینت فاکتورهای فروش</string>
+    <string name="contact_debtors">ارتباط با بدهکاران</string>
+    <string name="view_reports">گزارش گیری</string>
+    <string name="forward_tour">بعدی</string>
+    <string name="back_tour">قبلی</string>
+    <string name="cancel_tour">لغو</string>
+
+    <string name="explain_tour_insert_customer">راهنمایی جهت افزودن یک مشتری جدید و مشاهده آن در لیست مشتریان.</string>
+    <string name="explain_tour_insert_product">راهنمایی جهت افزودن یک کالا یا خدمات جدید و مشاهده آن در لیست اقلام انبار.</string>
+    <string name="explain_tour_create_invoice">راهنمایی جهت صادرکردن یک فاکتور فروش و چاپ آن.</string>
+    <string name="explain_tour_insert_costs">راهنمایی جهت افزودن هزینه های خود به لیست هزینه ها.</string>
+    <string name="explain_tour_change_setting">راهنمایی مرحله به مرحله جهت تغییر تنظیمات، مثل اطلاعات کاسب، انواع دسته بندی مشتریان و … .</string>
+    <string name="explain_tour_view_invoices_print">راهنمایی جهت مشاهده فاکتورهای صادر شده، ایجاد تغییرات و چاپ آن ها.</string>
+    <string name="explain_tour_contact_debtors">راهنمایی جهت مشاهده لیست بدهکاران و وضعیت تصفیه آن ها و تماس با آن ها.</string>
+    <string name="explain_tour_dashboard">راهنمایی جهت مشاهده چند گزارش در رابطه با تعداد مشتریانتان، دسته بندی آن ها و میزان خرید و فروش آن ها.</string>
+    <string name="start_tour">شروع</string>
+    <string name="first_guide_at_change_profile">بعد از واردکردن اطلاعات ضروری و ذخیره آن ها، با ضربه زدن به گزینه سمت راست بالای برنامه، می توانید کار با برنامه را شروع کنید.</string>
+    <string name="finish_tour">پایان</string>
+    <string name="title_customer_insert">افزودن مشتری جدید</string>
+    <string name="title_product_insert">افزودن کالا (خدمات) جدید</string>
+    <string name="title_sale_insert">صدور فاکتور جدید</string>
+    <string name="choose_member_ship_of_customer">وضعیت مشتری را انتخاب کنید :</string>
+    <string name="choose_type_of_cost">نوع هزینه را انتخاب کنید :</string>
+    <string name="ok_button">تأیید</string>
+
+    <string name="example_first_name">مثال : علی</string>
+    <string name="example_last_name">مثال : یعقوبی</string>
+    <string name="example_mobile_number">مثال : 09121234567</string>
+    <string name="example_date">مثال : 1/1/1395</string>
+    <string name="example_email">مثال : kaseb@gmail.com</string>
+    <string name="example_product_name">مثال : مانیتور سایز بزرگ</string>
+    <string name="example_product_code">مثال : کد-1</string>
+    <string name="example_price">مثال : 150000</string>
+    <string name="example_quantity">مثال : 15</string>
+    <string name="example_cost_name">مثال : قبض گاز</string>
+    <string name="example_cost_code">مثال : کد-1</string>
+    <string name="example_sale_code">مثال : کد-1</string>
+
+    <string name="tour_text_customer_list">در این صفحه لیست مشتریان را مشاهده می کنید، همچنین می توانید یک مشتری جدید اضافه کنید.</string>
+    <string name="tour_text_customer_insert">در این صفحه پس از واردکردن اطلاعات ضروری یک مشتری و انتخاب یک تصویر برای آن (که البته اختیاری است!) از منوی بالا سمت چپ، می توانید اطلاعات واردشده را ذخیره کنید.</string>
+    <string name="tour_text_sale_list">در این صفحه می توانید لیست فاکتورهای ثبت شده را ببینید، فاکتور جدیدی ثبت کنید، جزئیات فاکتورهای قبلی را مشاهده کنید و آن ها را چاپ کنید.</string>
+    <string name="tour_text_product_list">ددر این صفحه لیست کالا و خدمات خود را می بینید، کالا یا خدمات جدیدی ثبت می کنید، کالاهای قبلی را مشاهده کرده، تغییر دهید و برای یک کالا خرید جدید ثبت کنید.</string>
+    <string name="tour_text_product_insert">در این صفحه با واردکردن اطلاعات ضروری یک کالا یا خدمات، به کمک گزینه ذخیره کردن در منوی بالا سمت چپ، آن را ثبت می کنید.</string>
+    <string name="tour_text_sale_insert">در این صفحه شما می توانید مرحله به مرحله، یک فاکتور جدید ثبت کنید :\n1. ابتدا کالا یا خدمات مربوطه را اضافه می کنید.\n2. تخفیف یا مالیات های مورد نظر را ثبت می کنید.\n3. سپس، پرداخت های فاکتور را درج می کنید.\n4. در انتها، به کمک گزینه ذخیره کردن در منوی بالا سمت چپ، فاکتور واردشده را ثبت می کنید.\n5.پس از ذخیره کردن، فاکتور به طور خودکار چاپ می شود.</string>
+    <string name="tour_text_welcome">به این تور خوش آمدید!</string>
+    <string name="tour_text_first">برای استفاده کردن از این نرم افزار باید مراحل اصلی زیر را که از منوی اصلی در دسترس هستند، طی کنید :</string>
+    <string name="tour_text_second">1. افزودن مشتری جدید\n2. افزودن کالا یا خدمات مربوطه\n3. درج یک فاکتور جدید برای مشتری به کمک کالا یا خدمات موجود در لیست کالاها، چاپ و مشاهده آن\n4. مشاهده وضعیت کسب و کار</string>
+
+
 </resources>

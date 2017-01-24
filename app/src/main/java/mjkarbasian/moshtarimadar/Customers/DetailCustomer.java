@@ -27,6 +27,8 @@ import mjkarbasian.moshtarimadar.R;
 
 
 public class DetailCustomer extends AppCompatActivity {
+
+    //region declare values
     Toolbar mToolbar;
     ImageView mCustomerAvatar;
     byte[] imagegBytes;
@@ -71,6 +73,7 @@ public class DetailCustomer extends AppCompatActivity {
     TextInputLayout addressCityTextInputLayout;
     TextInputLayout addressStreetTextInputLayout;
     TextInputLayout addressPostalCodeTextInputLayout;
+    //endregion declare values
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +84,9 @@ public class DetailCustomer extends AppCompatActivity {
         getSupportActionBar().setTitle(getResources().getString(R.string.detail_customer_toolbar_title));
         if (!(Utility.getLocale(this).equals("IR"))) {
             mToolbar.setNavigationIcon(R.drawable.arrow_left);
-        } else {
+        } else
             mToolbar.setNavigationIcon(R.drawable.arrow_right);
-        }
+
         //region define and cast views
         customerFirstName = (EditText) findViewById(R.id.customer_first_name);
         customerLastName = (EditText) findViewById(R.id.customer_last_name);
@@ -246,8 +249,6 @@ public class DetailCustomer extends AppCompatActivity {
             case R.id.item_save_customer:
                 if (checkValidityWithChangeColorOfHelperText()) {
 
-                    getHelperText();
-
                     saveItem.setVisible(false);
                     editItem.setVisible(true);
 
@@ -291,6 +292,8 @@ public class DetailCustomer extends AppCompatActivity {
                     customerAddressCity.setEnabled(false);
                     customerAddressStreet.setEnabled(false);
                     customerAddressPostalCode.setEnabled(false);
+
+                    getHelperText();
                 }
                 break;
             case R.id.item_edit_customer:
@@ -328,7 +331,25 @@ public class DetailCustomer extends AppCompatActivity {
                 addressStreetTextInputLayout = (TextInputLayout) findViewById(R.id.text_input_layout_customer_address_street);
                 addressPostalCodeTextInputLayout = (TextInputLayout) findViewById(R.id.text_input_layout_customer_address_postal_code);
 
-                setHelperText();
+                //region handle asterisk for necessary fields
+
+                //region first name
+                Utility.setAsteriskToTextInputLayout(firstNameTextInputLayout, getResources().getString(R.string.hint_first_name), true);
+                //endregion first name
+
+                customerFirstName.requestFocus();
+
+                //region last name
+                Utility.setAsteriskToTextInputLayout(lastNameTextInputLayout, getResources().getString(R.string.hint_last_name), true);
+                //endregion last name
+
+                //region mobile number
+                Utility.setAsteriskToTextInputLayout(phoneMobileTextInputLayout, getResources().getString(R.string.hint_mobile_number), true);
+                //endregion mobile number
+
+                //endregion handle asterisk for necessary fields
+
+                //endregion handle asterisk for necessary fields
 
                 customerFirstName.setEnabled(true);
                 customerLastName.setEnabled(true);
@@ -394,94 +415,70 @@ public class DetailCustomer extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setHelperText() {
-
-        firstNameTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        lastNameTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-
-        phoneMobileTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
-                + getResources().getString(R.string.non_repetitive));
-
-        birthDayTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
-                + getResources().getString(R.string.date_format_error));
-
-        customerDescriptionTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        emailTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        phoneWorkTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        phoneHomeTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        phoneOtherTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        phoneFaxTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        addressCountryTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        addressCityTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        addressStreetTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        addressPostalCodeTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-    }
-
     private void getHelperText() {
 
         firstNameTextInputLayout.setError(null);
         lastNameTextInputLayout.setError(null);
         phoneMobileTextInputLayout.setError(null);
         birthDayTextInputLayout.setError(null);
-        customerDescriptionTextInputLayout.setError(null);
         emailTextInputLayout.setError(null);
-        phoneWorkTextInputLayout.setError(null);
-        phoneHomeTextInputLayout.setError(null);
-        phoneOtherTextInputLayout.setError(null);
-        phoneFaxTextInputLayout.setError(null);
-        addressCountryTextInputLayout.setError(null);
-        addressCityTextInputLayout.setError(null);
-        addressStreetTextInputLayout.setError(null);
-        addressPostalCodeTextInputLayout.setError(null);
     }
 
     // this method check the validation and correct entries. its check fill first and then check the validation rules.
     private boolean checkValidityWithChangeColorOfHelperText() {
 
         if (!Utility.checkForValidityForEditTextNullOrEmpty(getBaseContext(), customerFirstName)) {
-            Utility.changeColorOfHelperText(getBaseContext(), firstNameTextInputLayout, Utility.mIdOfColorSetError);
+            firstNameTextInputLayout.setError(getResources().getString(R.string.example_first_name));
             customerFirstName.setSelectAllOnFocus(true);
             customerFirstName.selectAll();
             customerFirstName.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getBaseContext(), firstNameTextInputLayout, Utility.mIdOfColorGetError);
+            firstNameTextInputLayout.setError(null);
 
         if (!Utility.checkForValidityForEditTextNullOrEmpty(getBaseContext(), customerLastName)) {
-            Utility.changeColorOfHelperText(getBaseContext(), lastNameTextInputLayout, Utility.mIdOfColorSetError);
+            lastNameTextInputLayout.setError(getResources().getString(R.string.example_last_name));
             customerLastName.setSelectAllOnFocus(true);
             customerLastName.selectAll();
             customerLastName.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getBaseContext(), lastNameTextInputLayout, Utility.mIdOfColorGetError);
+            lastNameTextInputLayout.setError(null);
 
         if (!Utility.checkForValidityForEditTextNullOrEmptyAndItterative(
                 getBaseContext(), customerPhoneMobile, phoneMobileTextInputLayout, KasebContract.Customers.CONTENT_URI,
                 KasebContract.Customers.COLUMN_PHONE_MOBILE + " = ? and " + KasebContract.Customers._ID + " != ? ",
                 KasebContract.Customers._ID,
-                new String[]{customerPhoneMobile.getText().toString(), String.valueOf(mCustomerId)}))
-            return false;
+                new String[]{customerPhoneMobile.getText().toString(), String.valueOf(mCustomerId)})) {
 
-        if (!customerBirthDay.getText().toString().equals("") && !customerBirthDay.getText().toString().equals(null) &&
-                !Utility.checkForValidityForEditTextDate(getBaseContext(), customerBirthDay)) {
-            Utility.changeColorOfHelperText(getBaseContext(), birthDayTextInputLayout, Utility.mIdOfColorSetError);
-            customerBirthDay.setSelectAllOnFocus(true);
-            customerBirthDay.selectAll();
-            customerBirthDay.requestFocus();
+            phoneMobileTextInputLayout.setError(String.format("%s %s",
+                    getResources().getString(R.string.example_mobile_number),
+                    getResources().getString(R.string.non_repetitive)));
             return false;
-        } else
-            Utility.changeColorOfHelperText(getBaseContext(), birthDayTextInputLayout, Utility.mIdOfColorGetError);
+        }
 
         if (!customerEmail.getText().toString().equals("") && !customerEmail.getText().toString().equals(null) &&
                 !Utility.validateEmail(customerEmail.getText().toString())) {
-            Utility.changeColorOfHelperText(getBaseContext(), emailTextInputLayout, Utility.mIdOfColorSetError);
+
+            emailTextInputLayout.setError(getResources().getString(R.string.example_email));
             customerEmail.setSelectAllOnFocus(true);
             customerEmail.selectAll();
             customerEmail.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getBaseContext(), emailTextInputLayout, Utility.mIdOfColorGetError);
+            emailTextInputLayout.setError(null);
+
+        if (!customerBirthDay.getText().toString().equals("") && !customerBirthDay.getText().toString().equals(null) &&
+                !Utility.checkForValidityForEditTextDate(getBaseContext(), customerBirthDay)) {
+
+            birthDayTextInputLayout.setError(getResources().getString(R.string.example_date));
+
+            customerBirthDay.setSelectAllOnFocus(true);
+            customerBirthDay.selectAll();
+            customerBirthDay.requestFocus();
+            return false;
+        } else
+            birthDayTextInputLayout.setError(null);
 
         return true;
     }

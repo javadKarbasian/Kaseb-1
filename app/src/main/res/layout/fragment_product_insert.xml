@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             app:counterEnabled="true"
             app:counterMaxLength="30"
-            app:errorTextAppearance="@style/text_input_layout_style_not_error">
+            app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
                 android:id="@+id/input_product_name"
@@ -34,7 +34,7 @@
             android:id="@+id/text_input_layout_input_product_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorTextAppearance="@style/text_input_layout_style_not_error"
+            app:errorTextAppearance="@style/text_input_layout_style_has_error"
             app:hintAnimationEnabled="true">
 
             <EditText
@@ -51,7 +51,7 @@
             android:id="@+id/text_input_layout_input_product_unit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorTextAppearance="@style/text_input_layout_style_not_error">
+            app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
                 android:id="@+id/input_product_unit"
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             app:counterEnabled="true"
             app:counterMaxLength="50"
-            app:errorTextAppearance="@style/text_input_layout_style_not_error">
+            app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
                 android:id="@+id/input_product_description"
@@ -83,7 +83,7 @@
             android:id="@+id/text_input_layout_input_sale_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorTextAppearance="@style/text_input_layout_style_not_error">
+            app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
                 android:id="@+id/input_sale_price"
@@ -99,7 +99,7 @@
             android:id="@+id/text_input_layout_input_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorTextAppearance="@style/text_input_layout_style_not_error">
+            app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
                 android:id="@+id/input_quantity"
@@ -115,7 +115,7 @@
             android:id="@+id/text_input_layout_input_buy_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorTextAppearance="@style/text_input_layout_style_not_error">
+            app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
                 android:id="@+id/input_buy_price"
@@ -131,13 +131,13 @@
             android:id="@+id/text_input_layout_input_buy_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorTextAppearance="@style/text_input_layout_style_not_error">
+            app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
                 android:id="@+id/dialog_add_payment_for_sale_input_due_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_date"
+                android:hint="@string/hint_date_picker"
                 android:inputType="date"
                 android:maxLength="10" />
 
@@ -147,7 +147,7 @@
             android:id="@+id/text_input_layout_input_discount_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorTextAppearance="@style/text_input_layout_style_not_error">
+            app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
                 android:id="@+id/input_discount_amount"
@@ -164,7 +164,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            app:errorTextAppearance="@style/text_input_layout_style_not_error">
+            app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
                 android:id="@+id/input_discount_percent"

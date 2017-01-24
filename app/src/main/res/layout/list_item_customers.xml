@@ -18,7 +18,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/design_snackbar_padding_vertical_2lines"
+            android:layout_gravity="start"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -36,7 +36,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/top_of_list_margin"
+            android:layout_gravity="start"
             android:layout_weight="9"
             android:orientation="horizontal">
 
@@ -48,7 +48,7 @@
                 android:layout_weight="4"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical|start"
-                android:maxLength="14"
+                android:paddingStart="@dimen/design_snackbar_padding_vertical_2lines"
                 android:text="@string/kaseb_name"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorBlack"

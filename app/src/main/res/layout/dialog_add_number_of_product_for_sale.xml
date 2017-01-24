@@ -31,8 +31,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:gravity="center">
+        android:gravity="center"
+        android:scrollbarAlwaysDrawVerticalTrack="true">
 
         <LinearLayout
             android:layout_width="match_parent"

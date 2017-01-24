@@ -19,6 +19,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -38,6 +39,7 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 
 import mjkarbasian.moshtarimadar.Adapters.HeaderAdapter;
+import mjkarbasian.moshtarimadar.Customers.Customers;
 import mjkarbasian.moshtarimadar.Data.KasebContract;
 import mjkarbasian.moshtarimadar.Helpers.GalleryUtil;
 import mjkarbasian.moshtarimadar.Helpers.Utility;
@@ -90,7 +92,6 @@ public class PreferenceHeader extends Fragment {
     TextInputLayout addressCityTextInputLayout;
     TextInputLayout addressStreetTextInputLayout;
     TextInputLayout addressPostalCodeTextInputLayout;
-    String kasebPREFERENCES = "kasebProfile";
     SharedPreferences kasebSharedPreferences;
     //endregion declare values
 
@@ -108,7 +109,7 @@ public class PreferenceHeader extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //region handle sharepreference
-        kasebSharedPreferences = getContext().getSharedPreferences(kasebPREFERENCES, getContext().MODE_PRIVATE);
+        kasebSharedPreferences = getContext().getSharedPreferences(getResources().getString(R.string.kasebPreference), getContext().MODE_PRIVATE);
         final SharedPreferences.Editor editor = kasebSharedPreferences.edit();
         //endregion handle sharepreference
 
@@ -189,6 +190,7 @@ public class PreferenceHeader extends Fragment {
                             break;
                         }
                         case 6: {
+
                             //region create alert dialog
                             builder = new android.app.AlertDialog.Builder(getActivity())
                                     .setView(getActivity().getLayoutInflater().inflate(R.layout.dialog_edit_profile_of_kaseb, null))
@@ -199,11 +201,21 @@ public class PreferenceHeader extends Fragment {
                                         public void onClick(DialogInterface dialog, int whichButton) {
                                         }
                                     })
-                                    .setTitle(R.string.fab_add_product)
-                                    .setMessage(R.string.less_than_stock_explain_text);
+                                    .setTitle(R.string.title_change_profile);
 
                             dialogView = builder.create();
+                            dialogView.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
                             dialogView.show();
+
+                            try {
+                                String mTest = kasebSharedPreferences.getString("numberOfEntranceToProfile", null);
+                                editor.putString("numberOfEntranceToProfile",
+                                        String.valueOf(Double.valueOf(kasebSharedPreferences.getString("numberOfEntranceToProfile", null)) + 1));
+                                editor.apply();
+                            } catch (Exception e) {
+                                editor.putString("numberOfEntranceToProfile", "1");
+                                editor.apply();
+                            }
 
                             dialogView.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -211,6 +223,7 @@ public class PreferenceHeader extends Fragment {
                                     Boolean wantToCloseDialog = false;
 
                                     if (checkValidityWithChangeColorOfHelperText()) {
+
                                         //region save info of kaseb profile
                                         editor.putString("firstName", firstName.getText().toString());
                                         editor.putString("lastName", lastName.getText().toString());
@@ -225,11 +238,22 @@ public class PreferenceHeader extends Fragment {
                                         editor.putString("addressCity", addressCity.getText().toString());
                                         editor.putString("addressStreet", addressStreet.getText().toString());
                                         editor.putString("addressPostalCode", addressPostalCode.getText().toString());
-                                        editor.commit();
+                                        editor.apply();
 
-                                        Toast.makeText(getActivity(), R.string.msg_insert_succeed, Toast.LENGTH_SHORT).show();
+                                        if (kasebSharedPreferences.getString("numberOfEntranceToProfile", null).equals("1")) {
+                                            //region start tour
+                                            editor.putBoolean("getStarted", true);
+                                            editor.apply();
+
+                                            Intent intent = new Intent(getActivity(), Customers.class);
+                                            startActivity(intent);
+                                            Utility.setActivityTransition(getActivity());
+                                            //endregion start tour
+                                        } else
+                                            Toast.makeText(getActivity(), R.string.msg_insert_succeed, Toast.LENGTH_SHORT).show();
                                         //endregion save info of kaseb profile
 
+                                        getHelperText();
                                         wantToCloseDialog = true;
                                     }
 
@@ -247,10 +271,6 @@ public class PreferenceHeader extends Fragment {
                                         Toast.makeText(getActivity(), R.string.complete_profile_kaseb, Toast.LENGTH_LONG).show();
                                 }
                             });
-
-                            if (kasebSharedPreferences.getString("firstName", null) == null)
-                                dialogView.setCancelable(false);
-
                             //endregion create alert dialog
 
                             //region define views
@@ -291,7 +311,8 @@ public class PreferenceHeader extends Fragment {
                             addressStreetTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_address_street);
                             addressPostalCodeTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_text_input_layout_input_address_postal_code);
 
-                            setHelperText();
+                            if (kasebSharedPreferences.getString("firstName", null) == null)
+                                dialogView.setCancelable(false);
 
                             //region show info of kaseb profile
                             firstName.setText(kasebSharedPreferences.getString("firstName", null));
@@ -539,77 +560,66 @@ public class PreferenceHeader extends Fragment {
         }
     }
 
-    private void setHelperText() {
+    private void getHelperText() {
 
-        firstNameTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        lastNameTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-
-        phoneMobileTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
-                + getResources().getString(R.string.non_repetitive));
-
-        birthDayTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data)
-                + getResources().getString(R.string.date_format_error));
-
-        customerDescriptionTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        emailTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        phoneWorkTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        phoneOtherTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        phoneFaxTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        addressCountryTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        addressCityTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        addressStreetTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
-        addressPostalCodeTextInputLayout.setError(getResources().getString(R.string.choose_appropriate_data));
+        firstNameTextInputLayout.setError(null);
+        lastNameTextInputLayout.setError(null);
+        phoneMobileTextInputLayout.setError(null);
+        birthDayTextInputLayout.setError(null);
+        emailTextInputLayout.setError(null);
     }
 
     // this method check the validation and correct entries. its check fill first and then check the validation rules.
     private boolean checkValidityWithChangeColorOfHelperText() {
 
         if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), firstName)) {
-            Utility.changeColorOfHelperText(getActivity(), firstNameTextInputLayout, Utility.mIdOfColorSetError);
+            firstNameTextInputLayout.setError(getResources().getString(R.string.example_first_name));
             firstName.setSelectAllOnFocus(true);
             firstName.selectAll();
             firstName.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), firstNameTextInputLayout, Utility.mIdOfColorGetError);
+            firstNameTextInputLayout.setError(null);
 
         if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), lastName)) {
-            Utility.changeColorOfHelperText(getActivity(), lastNameTextInputLayout, Utility.mIdOfColorSetError);
+            lastNameTextInputLayout.setError(getResources().getString(R.string.example_last_name));
             lastName.setSelectAllOnFocus(true);
             lastName.selectAll();
             lastName.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), lastNameTextInputLayout, Utility.mIdOfColorGetError);
+            lastNameTextInputLayout.setError(null);
 
         if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), phoneMobile)) {
-            Utility.changeColorOfHelperText(getActivity(), phoneMobileTextInputLayout, Utility.mIdOfColorSetError);
+            phoneMobileTextInputLayout.setError(String.format("%s %s",
+                    getResources().getString(R.string.example_mobile_number),
+                    getResources().getString(R.string.non_repetitive)));
             phoneMobile.setSelectAllOnFocus(true);
             phoneMobile.selectAll();
             phoneMobile.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), lastNameTextInputLayout, Utility.mIdOfColorGetError);
+            phoneMobileTextInputLayout.setError(null);
 
         if (!birthDay.getText().toString().equals("") && !birthDay.getText().toString().equals(null) &&
                 !Utility.checkForValidityForEditTextDate(getActivity(), birthDay)) {
-            Utility.changeColorOfHelperText(getActivity(), birthDayTextInputLayout, Utility.mIdOfColorSetError);
+            birthDayTextInputLayout.setError(getResources().getString(R.string.example_date));
             birthDay.setSelectAllOnFocus(true);
             birthDay.selectAll();
             birthDay.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), birthDayTextInputLayout, Utility.mIdOfColorGetError);
+            birthDayTextInputLayout.setError(null);
 
         if (!email.getText().toString().equals("") && !email.getText().toString().equals(null) &&
                 !Utility.validateEmail(email.getText().toString())) {
-            Utility.changeColorOfHelperText(getActivity(), emailTextInputLayout, Utility.mIdOfColorSetError);
+            emailTextInputLayout.setError(getResources().getString(R.string.example_email));
             email.setSelectAllOnFocus(true);
             email.selectAll();
             email.requestFocus();
             return false;
         } else
-            Utility.changeColorOfHelperText(getActivity(), emailTextInputLayout, Utility.mIdOfColorGetError);
+            emailTextInputLayout.setError(null);
 
         return true;
     }

@@ -7,14 +7,22 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.design.widget.TextInputLayout;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,7 +48,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -108,7 +115,7 @@ public class Utility {
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final Pattern mPattern = Pattern.compile(EMAIL_PATTERN);
     public static int mIdOfColorSetError = R.color.colorRed;
-    public static int mIdOfColorGetError = R.color.colorPrimaryLight;
+    public static int mIdOfColorGetError = R.color.colorPrimaryDark;
     private static int mSmallSize = 14;
     private static int mMiddleSize = 16;
     private static int mBigSize = 20;
@@ -116,6 +123,78 @@ public class Utility {
     private static BaseColor mainTitleColorTables = new BaseColor(255, 255, 255);
     private static Context _mContext;
     private static Document _mDocument;
+
+    public static void setAsteriskToTextInputLayout(final TextInputLayout mTextInputLayout, final String mHint, Boolean mFillable) {
+        if (!mFillable || mTextInputLayout.getEditText().length() == 0) {
+            mTextInputLayout.setHint(String.format("  %s", mHint));
+            mTextInputLayout.getEditText().setHint(Utility.setAsteriskToView(""));
+        } else {
+            mTextInputLayout.setHint(String.format("* %s", mHint));
+            mTextInputLayout.getEditText().setHint("");
+        }
+
+        mTextInputLayout.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    mTextInputLayout.setHint(String.format("* %s", mHint));
+                    mTextInputLayout.getEditText().setHint("");
+                } else if (mTextInputLayout.getEditText().getText().length() == 0) {
+                    mTextInputLayout.setHint(String.format("  %s", mHint));
+                    mTextInputLayout.getEditText().setHint(Utility.setAsteriskToView(""));
+                }
+            }
+        });
+    }
+
+    public static SpannableStringBuilder setAsteriskToView(String mMessage) {
+
+        SpannableStringBuilder mSpannableStringBuilder = new SpannableStringBuilder();
+
+        mSpannableStringBuilder.append(mMessage);
+        int start = mSpannableStringBuilder.length();
+        mSpannableStringBuilder.append("*");
+        int end = mSpannableStringBuilder.length();
+
+        mSpannableStringBuilder.setSpan(new ForegroundColorSpan(Color.RED), start, end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        return mSpannableStringBuilder;
+    }
+
+    public static void ImageViewAnimatedChange(Context c, final ImageView v, final Bitmap new_image) {
+        final Animation anim_out = AnimationUtils.loadAnimation(c, android.R.anim.fade_out);
+        final Animation anim_in = AnimationUtils.loadAnimation(c, android.R.anim.fade_in);
+        anim_out.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                v.setImageBitmap(new_image);
+                anim_in.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                    }
+                });
+                v.startAnimation(anim_in);
+            }
+        });
+        v.startAnimation(anim_out);
+    }
 
     public static boolean validateEmail(String email) {
         Matcher mMatcher = mPattern.matcher(email);
@@ -225,9 +304,9 @@ public class Utility {
 
     public static boolean checkForValidityForEditTextNullOrEmpty(Context mContext, EditText mEditText) {
         _mContext = mContext;
-        if (mEditText.getText().toString().equals("") || mEditText.getText().toString().equals(null)) {
+        if (mEditText.getText().toString().equals("") || mEditText.getText().toString().equals(null))
             return false;
-        }
+
         return true;
     }
 
@@ -263,7 +342,6 @@ public class Utility {
             Context mContext, EditText mEditText, TextInputLayout mTextInputLayout, Uri mUri, String mWhereStatment,
             String mProjectionColumnName, String[] mSelection) {
         if (!checkForValidityForEditTextNullOrEmpty(mContext, mEditText)) {
-            changeColorOfHelperText(mContext, mTextInputLayout, mIdOfColorSetError);
             mEditText.setSelectAllOnFocus(true);
             mEditText.selectAll();
             mEditText.requestFocus();
@@ -279,7 +357,6 @@ public class Utility {
             if (mCursor != null) {
                 if (mCursor.moveToFirst())
                     if (mCursor.getCount() > 0) {
-                        changeColorOfHelperText(mContext, mTextInputLayout, mIdOfColorSetError);
                         mEditText.setSelectAllOnFocus(true);
                         mEditText.selectAll();
                         mEditText.requestFocus();
@@ -287,19 +364,8 @@ public class Utility {
                     }
             }
 
-            changeColorOfHelperText(mContext, mTextInputLayout, mIdOfColorGetError);
+            mTextInputLayout.setError(null);
             return true;
-        }
-    }
-
-    public static void changeColorOfHelperText(Context mContext, TextInputLayout mTextInputLayout, int mIdOfColor) {
-        try {
-            Field mField = TextInputLayout.class.getDeclaredField("mErrorView");
-            mField.setAccessible(true);
-            TextView mTextView = (TextView) mField.get(mTextInputLayout);
-            mTextView.setTextColor(mContext.getResources().getColor(mIdOfColor));
-            mTextView.requestLayout();
-        } catch (Exception ignored) {
         }
     }
 
@@ -1289,7 +1355,7 @@ public class Utility {
 
                 mCell3 = new PdfPCell(new Phrase(
                         createFloatNumberWithString(_mContext, mTaxListMap.get(i).get("percent").toString())
-                        + " %", createFontWithSize(mSmallSize)));
+                                + " %", createFontWithSize(mSmallSize)));
 
                 setBackGroundColor_P_BW_HA_VA(mCell3, mainTitleColorTables, 5, 3, Element.ALIGN_CENTER, Element.ALIGN_CENTER);
 
@@ -1362,7 +1428,7 @@ public class Utility {
 
                 mCell3 = new PdfPCell(new Phrase(
                         createFloatNumberWithString(_mContext, mTaxListMap.get(i).get("percent"))
-                        + " %", createFontWithSize(mSmallSize)));
+                                + " %", createFontWithSize(mSmallSize)));
 
                 mCell3.setHorizontalAlignment(Element.ALIGN_CENTER);
                 mCell3.setVerticalAlignment(Element.ALIGN_CENTER);
@@ -1733,5 +1799,12 @@ public class Utility {
         pieLegend.setTextSize(14f);
         if (pieLegend != null)
             pieLegend.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
+    }
+
+    public static Typeface createFontForTexts(Context mContext) {
+        if (mContext.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL)
+            return Typeface.createFromAsset(mContext.getAssets(), "fonts/bmitra.ttf");
+
+        return Typeface.create(Typeface.DEFAULT, 16);
     }
 }

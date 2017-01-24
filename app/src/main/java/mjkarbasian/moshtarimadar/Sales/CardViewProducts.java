@@ -115,7 +115,7 @@ public class CardViewProducts extends Fragment {
                             if (wantToCloseDialog)
                                 dialogView.dismiss();
                         } catch (Exception e) {
-                            textInputLayouthowManyEditTextForEdit.setError(getResources().getString(R.string.choose_appropriate_data));
+                            textInputLayouthowManyEditTextForEdit.setError(getResources().getString(R.string.example_quantity));
                             howManyEditTextForEdit.setSelectAllOnFocus(true);
                             howManyEditTextForEdit.selectAll();
                             howManyEditTextForEdit.requestFocus();

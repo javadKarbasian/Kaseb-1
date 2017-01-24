@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Debaters.Debaters">
+    tools:context=".Debtors.Debtors">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/image_avatar_title"
                 android:gravity="center"
-                android:src="@drawable/kaseb_pic"
+                android:src="@drawable/avatar"
                 android:transitionName="@string/customer_image_transition" />
 
             <TextView

@@ -4,6 +4,7 @@ import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,9 +20,11 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,15 +38,28 @@ import mjkarbasian.moshtarimadar.R;
  */
 public class CustomersLists extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    //region declare values
     final static int FRAGMENT_CUSTOMER_LOADER = 2;
     private final String LOG_TAG = CustomersLists.class.getSimpleName();
     String searchQuery;
+    Intent intent;
     FloatingActionButton fab;
     CustomerAdapter mCustomerAdapter = null;
     ListView mListView;
     String[] mProjection;
-    private String sortOrder = null;
+    String kasebPREFERENCES = "kasebProfile";
 
+    SharedPreferences kasebSharedPreferences;
+    SharedPreferences.Editor editor;
+
+    AlertDialog.Builder builder;
+    AlertDialog dialogView;
+    AlertDialog.Builder builderTour;
+    AlertDialog dialogViewTour;
+
+    FrameLayout mFrameLayout;
+    private String sortOrder = null;
+    //endregion declare values
 
     public CustomersLists() {
         super();
@@ -57,6 +73,11 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
                 KasebContract.Customers.COLUMN_STATE_ID,
                 KasebContract.Customers.COLUMN_CUSTOMER_PICTURE};
 
+        //region handle sharepreference
+        kasebSharedPreferences = getActivity().getSharedPreferences(kasebPREFERENCES, getActivity().MODE_PRIVATE);
+        editor = kasebSharedPreferences.edit();
+        //endregion handle sharepreference
+
         super.onCreate(savedInstanceState);
     }
 
@@ -69,8 +90,127 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
                 0);
 
         View rootView = inflater.inflate(R.layout.fragment_customers, container, false);
+
+        mListView = (ListView) rootView.findViewById(R.id.list_view_customers);
+        mListView.setAdapter(mCustomerAdapter);
+
+        mFrameLayout = (FrameLayout) rootView.findViewById(R.id.frameLayoutCustomerList);
+
         //hide fab to show it as animation
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab_customers);
+
+        try {
+            if (kasebSharedPreferences.getBoolean("getStarted", false)) {
+
+                //region create alertdialog tour
+                builderTour = new AlertDialog.Builder(getActivity())
+                        .setNegativeButton(R.string.cancel_tour, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        }).setPositiveButton(R.string.next_tour, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        }).setTitle(R.string.title_customer);
+
+                dialogViewTour = builderTour.create();
+                //endregion create alertdialog tour
+
+                //region create tour dialog
+                builder = new AlertDialog.Builder(getActivity())
+                        .setView(getActivity().getLayoutInflater().inflate(R.layout.dialog_choose_tour, null))
+                        .setNegativeButton(R.string.discard_button, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        }).setPositiveButton(R.string.start_tour, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        }).setTitle(R.string.title_take_tour);
+
+                dialogView = builder.create();
+                dialogView.show();
+                dialogView.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                dialogView.setCancelable(false);
+                dialogView.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        //region end tour
+                        editor.putBoolean("getStarted", false);
+                        editor.apply();
+                        //endregion end tour
+                    }
+                });
+
+                dialogView.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        //region end tour
+                        editor.putBoolean("getStarted", false);
+                        editor.apply();
+                        //endregion end tour
+
+                        dialogView.dismiss();
+                    }
+                });
+
+                dialogView.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        //region start tour
+                        editor.putBoolean("getStarted", true);
+                        editor.apply();
+                        //region
+
+                        dialogViewTour.setMessage(getResources().getString(R.string.tour_text_customer_list));
+                        dialogViewTour.show();
+
+                        dialogViewTour.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                        dialogViewTour.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                ((Customers) getActivity()).fab_customers(getView());
+
+                                dialogViewTour.dismiss();
+                            }
+                        });
+
+                        dialogViewTour.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                //region end tour
+                                editor.putBoolean("getStarted", false);
+                                editor.apply();
+
+                                dialogViewTour.dismiss();
+                                //endregion end tour
+                            }
+                        });
+
+                        dialogViewTour.setCancelable(false);
+                        dialogViewTour.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                            @Override
+                            public void onCancel(DialogInterface dialog) {
+                                //region end tour
+                                editor.putBoolean("getStarted", false);
+                                editor.apply();
+                                //endregion end tour
+                            }
+                        });
+
+                        dialogView.dismiss();
+                        //endregion
+
+                        //endregion start tour
+                    }
+                });
+                //endregion create tour dialog
+            }
+        } catch (Exception e) {
+        }
+
         fab.hide();
         final Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_on_click);
         fab.setAnimation(hyperspaceJumpAnimation);
@@ -82,8 +222,6 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
                 return false;
             }
         });
-        mListView = (ListView) rootView.findViewById(R.id.list_view_customers);
-        mListView.setAdapter(mCustomerAdapter);
 
         //region mListView setOnItemClickListener
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -153,6 +291,7 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
             }
         });
         //endregion mListView setOnItemLongClickListener
+
         return rootView;
     }
 

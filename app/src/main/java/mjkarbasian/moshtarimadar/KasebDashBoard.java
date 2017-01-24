@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +27,7 @@ import mjkarbasian.moshtarimadar.Setting.PreferenceHeader;
 /**
  * Created by family on 12/30/2016.
  */
-public class KasebDashBoard extends android.support.v4.app.Fragment {
+public class KasebDashBoard extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +38,7 @@ public class KasebDashBoard extends android.support.v4.app.Fragment {
         SharedPreferences kasebSharedPreferences = getContext().getSharedPreferences(kasebPREFERENCES, getContext().MODE_PRIVATE);
         SharedPreferences.Editor editor = kasebSharedPreferences.edit();
 
-        android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
         if (kasebSharedPreferences.getString("firstName", null) == null)
             fragmentManager.beginTransaction().replace(R.id.container, new PreferenceHeader()).commit();

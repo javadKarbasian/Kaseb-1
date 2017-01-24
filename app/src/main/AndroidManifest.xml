@@ -68,7 +68,7 @@
         </activity>
 
         <activity
-            android:name=".Debaters.Debaters"
+            android:name=".Debtors.Debtors"
             android:label="@string/title_debator"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"

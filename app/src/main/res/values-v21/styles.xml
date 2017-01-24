@@ -150,8 +150,8 @@
     </style>
 
     <!--Error label text style-->
-    <style name="text_input_layout_style_not_error" parent="TextAppearance.AppCompat.Small">
-        <item name="android:textColor">@color/colorPrimaryLight</item>
+    <style name="text_input_layout_style_has_error" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/colorRed</item>
     </style>
 
     <style name="sales_card_view_fab">
@@ -162,6 +162,7 @@
         <item name="android:padding">8dp</item>
         <item name="android:background">@drawable/oval_ripple</item>
     </style>
+
 
 </resources>
 

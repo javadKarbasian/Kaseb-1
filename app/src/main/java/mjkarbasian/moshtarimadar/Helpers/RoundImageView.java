@@ -28,30 +28,6 @@ public class RoundImageView extends ImageView {
         super(context, attrs, defStyle);
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-
-        Drawable drawable = getDrawable();
-
-        if (drawable == null) {
-            return;
-        }
-
-        if (getWidth() == 0 || getHeight() == 0) {
-            return;
-        }
-        Bitmap b = ((BitmapDrawable) drawable).getBitmap();
-        Bitmap bitmap = b.copy(Bitmap.Config.ARGB_8888, true);
-
-        int w = getWidth();
-        @SuppressWarnings("unused")
-        int h = getHeight();
-
-        Bitmap roundBitmap = getCroppedBitmap(bitmap, w);
-        canvas.drawBitmap(roundBitmap, 0, 0, null);
-
-    }
-
     public static Bitmap getCroppedBitmap(Bitmap bmp, int radius) {
         Bitmap sbmp;
 
@@ -83,6 +59,30 @@ public class RoundImageView extends ImageView {
         canvas.drawBitmap(sbmp, rect, rect, paint);
 
         return output;
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+
+        Drawable drawable = getDrawable();
+
+        if (drawable == null) {
+            return;
+        }
+
+        if (getWidth() == 0 || getHeight() == 0) {
+            return;
+        }
+        Bitmap b = ((BitmapDrawable) drawable).getBitmap();
+        Bitmap bitmap = b.copy(Bitmap.Config.ARGB_8888, true);
+
+        int w = getWidth();
+        @SuppressWarnings("unused")
+        int h = getHeight();
+
+        Bitmap roundBitmap = getCroppedBitmap(bitmap, w);
+        canvas.drawBitmap(roundBitmap, 0, 0, null);
+
     }
 
 }
