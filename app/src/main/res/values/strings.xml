@@ -522,5 +522,6 @@
     <string name="empty_list_text_detail_sale">There is no item</string>
     <string name="close_activity_dialog_title">Closing Activity</string>
     <string name="close_activity_dialog_message">Are you sure you want to close this activity?</string>
+    <string name="title_set_profile">Set Profile</string>
 
 </resources>
