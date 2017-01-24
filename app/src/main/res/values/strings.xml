@@ -518,5 +518,7 @@
     <string name="tour_text_welcome">Welcome to This Tour!</string>
     <string name="tour_text_first">To use of this app you should go this way, step by step :</string>
     <string name="tour_text_second">1. Add a customer.\n2. Add a product.\n3. Insert Sale for a customer and print it.\n4.Check Dashboard.</string>
+    <string name="empty_list_text">No data to show</string>
+    <string name="empty_list_text_detail_sale">There is no item</string>
 
 </resources>

@@ -509,24 +509,26 @@ public class Utility {
         if (cursor.getCount() == 0) paymentsMethodinit(context);
         cursor = context.getContentResolver().query(KasebContract.State.CONTENT_URI, null, null, null, null);
         if (cursor.getCount() == 0) stateInits(context);
-        cursor = context.getContentResolver().query(KasebContract.Customers.CONTENT_URI, null, null, null, null);
-        if (cursor.getCount() == 0) customerInits(context);
-        cursor = context.getContentResolver().query(KasebContract.Products.CONTENT_URI, null, null, null, null);
-        if (cursor.getCount() == 0) productInits(context);
-        cursor = context.getContentResolver().query(KasebContract.Costs.CONTENT_URI, null, null, null, null);
-        if (cursor.getCount() == 0) costsInits(context);
-        cursor = context.getContentResolver().query(KasebContract.Sales.CONTENT_URI, null, null, null, null);
-        if (cursor.getCount() == 0) salesInits(context);
-        cursor = context.getContentResolver().query(KasebContract.DetailSale.CONTENT_URI, null, null, null, null);
-        if (cursor.getCount() == 0) detailSaleInits(context);
-        cursor = context.getContentResolver().query(KasebContract.DetailSaleProducts.CONTENT_URI, null, null, null, null);
-        if (cursor.getCount() == 0) dSaleProductInits(context);
-        cursor = context.getContentResolver().query(KasebContract.DetailSalePayments.CONTENT_URI, null, null, null, null);
-        if (cursor.getCount() == 0) dSalePaymentInits(context);
-        cursor = context.getContentResolver().query(KasebContract.DetailSaleTaxes.CONTENT_URI, null, null, null, null);
-        if (cursor.getCount() == 0) dSaleTaxInits(context);
-        cursor = context.getContentResolver().query(KasebContract.ProductHistory.CONTENT_URI, null, null, null, null);
-        if (cursor.getCount() == 0) productHistoryInits(context);
+        //region initialize sample data
+//        cursor = context.getContentResolver().query(KasebContract.Customers.CONTENT_URI, null, null, null, null);
+//        if (cursor.getCount() == 0) customerInits(context);
+//        cursor = context.getContentResolver().query(KasebContract.Products.CONTENT_URI, null, null, null, null);
+//        if (cursor.getCount() == 0) productInits(context);
+//        cursor = context.getContentResolver().query(KasebContract.Costs.CONTENT_URI, null, null, null, null);
+//        if (cursor.getCount() == 0) costsInits(context);
+//        cursor = context.getContentResolver().query(KasebContract.Sales.CONTENT_URI, null, null, null, null);
+//        if (cursor.getCount() == 0) salesInits(context);
+//        cursor = context.getContentResolver().query(KasebContract.DetailSale.CONTENT_URI, null, null, null, null);
+//        if (cursor.getCount() == 0) detailSaleInits(context);
+//        cursor = context.getContentResolver().query(KasebContract.DetailSaleProducts.CONTENT_URI, null, null, null, null);
+//        if (cursor.getCount() == 0) dSaleProductInits(context);
+//        cursor = context.getContentResolver().query(KasebContract.DetailSalePayments.CONTENT_URI, null, null, null, null);
+//        if (cursor.getCount() == 0) dSalePaymentInits(context);
+//        cursor = context.getContentResolver().query(KasebContract.DetailSaleTaxes.CONTENT_URI, null, null, null, null);
+//        if (cursor.getCount() == 0) dSaleTaxInits(context);
+//        cursor = context.getContentResolver().query(KasebContract.ProductHistory.CONTENT_URI, null, null, null, null);
+//        if (cursor.getCount() == 0) productHistoryInits(context);
+//endregio
         cursor.close();
 
         if (Samples.productCode.size() == 0) {

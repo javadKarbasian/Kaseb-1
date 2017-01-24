@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import mjkarbasian.moshtarimadar.Adapters.CustomerBillAdapter;
 import mjkarbasian.moshtarimadar.Data.KasebContract;
@@ -65,6 +66,10 @@ public class DetailCustomerBill extends Fragment implements LoaderManager.Loader
         View rootView = inflater.inflate(R.layout.customer_bill, container, false);
         mListView = (ListView) rootView.findViewById(R.id.list_view_customer_bills);
         mListView.setAdapter(mCustomerAdapter);
+        TextView emptyText = (TextView) rootView.findViewById(R.id.empty_text_view);
+        emptyText.setText(getActivity().getResources().getString(R.string.empty_list_text));
+        emptyText.setVisibility(View.VISIBLE);
+        mListView.setEmptyView(emptyText);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

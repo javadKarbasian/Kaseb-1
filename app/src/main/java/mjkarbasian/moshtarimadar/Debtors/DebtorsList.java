@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import mjkarbasian.moshtarimadar.Adapters.DebtorAdapter;
 import mjkarbasian.moshtarimadar.Customers.DetailCustomer;
@@ -55,6 +56,10 @@ public class DebtorsList extends Fragment implements LoaderManager.LoaderCallbac
         mListView =(ListView) rootView.findViewById(R.id.list_view_debater);
         mDebaterAdapter = new DebtorAdapter(getActivity(), null, 0);
         mListView.setAdapter(mDebaterAdapter);
+        TextView emptyText = (TextView) rootView.findViewById(R.id.empty_text_view);
+        emptyText.setText(getActivity().getResources().getString(R.string.empty_list_text));
+        emptyText.setVisibility(View.VISIBLE);
+        mListView.setEmptyView(emptyText);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

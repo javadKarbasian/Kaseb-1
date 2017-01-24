@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -38,6 +39,10 @@ public class CardViewTaxes extends Fragment {
         mTaxAdapter = new TaxAdapter(getActivity(), mTaxListHashMap);
         taxListView = (ListView) view.findViewById(R.id.list_view_fragment_card_view_taxes);
         taxListView.setAdapter(mTaxAdapter);
+        TextView emptyText = (TextView) view.findViewById(R.id.empty_text_view);
+        emptyText.setText(getActivity().getResources().getString(R.string.empty_list_text_detail_sale));
+        emptyText.setVisibility(View.VISIBLE);
+        taxListView.setEmptyView(emptyText);
 
         //region TaxListView OnItemClickListener
         taxListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

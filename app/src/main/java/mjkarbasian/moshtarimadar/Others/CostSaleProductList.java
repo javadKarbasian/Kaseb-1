@@ -33,6 +33,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import mjkarbasian.moshtarimadar.Adapters.CostSaleProductAdapter;
@@ -182,6 +183,10 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
         View rootView = inflater.inflate(R.layout.fragment_cost_sale_product, container, false);
         mListView = (ListView) rootView.findViewById(R.id.list_view_cost_sale_product);
         mListView.setAdapter(mAdapter);
+        TextView emptyText = (TextView) rootView.findViewById(R.id.empty_text_view);
+        emptyText.setText(getActivity().getResources().getString(R.string.empty_list_text));
+        emptyText.setVisibility(View.VISIBLE);
+        mListView.setEmptyView(emptyText);
 
         //hide fab to show it as animation
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab_cost_sale_product);

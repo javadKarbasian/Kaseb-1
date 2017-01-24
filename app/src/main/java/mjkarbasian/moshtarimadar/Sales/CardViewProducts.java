@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -51,6 +52,10 @@ public class CardViewProducts extends Fragment {
         mChosenProductAdapter = new ProductAdapter(getActivity(), mProductListHashMap);
         productListView = (ListView) view.findViewById(R.id.list_view_fragment_card_view_products);
         productListView.setAdapter(mChosenProductAdapter);
+        TextView emptyText = (TextView) view.findViewById(R.id.empty_text_view);
+        emptyText.setText(getActivity().getResources().getString(R.string.empty_list_text_detail_sale));
+        emptyText.setVisibility(View.VISIBLE);
+        productListView.setEmptyView(emptyText);
 
         try {
             mDetailSaleId = getArguments().getLong("detailSaleId");

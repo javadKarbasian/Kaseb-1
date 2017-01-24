@@ -107,6 +107,10 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
         View rootView = inflater.inflate(R.layout.fragment_detail_products, container, false);
         mListView = (ListView) rootView.findViewById(R.id.listview_detail_product);
         mListView.setAdapter(mAdapter);
+        TextView emptyText = (TextView) rootView.findViewById(R.id.empty_text_view);
+        emptyText.setText(getActivity().getResources().getString(R.string.empty_list_text));
+        emptyText.setVisibility(View.VISIBLE);
+        mListView.setEmptyView(emptyText);
 
         mListView.post(new Runnable() {
             public void run() {

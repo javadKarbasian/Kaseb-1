@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -41,6 +42,11 @@ public class CardViewPayments extends Fragment {
         mPaymentAdapter = new PaymentAdapter(getActivity(), mPaymentListHashMap);
         paymentListView = (ListView) view.findViewById(R.id.list_view_fragment_card_view_payments);
         paymentListView.setAdapter(mPaymentAdapter);
+        TextView emptyText = (TextView) view.findViewById(R.id.empty_text_view);
+        emptyText.setText(getActivity().getResources().getString(R.string.empty_list_text_detail_sale));
+        emptyText.setVisibility(View.VISIBLE);
+        paymentListView.setEmptyView(emptyText);
+
 
         //region PaymentListView OnItemClickListener
         paymentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

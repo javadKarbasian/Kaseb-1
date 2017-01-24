@@ -26,6 +26,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import mjkarbasian.moshtarimadar.Adapters.CustomerAdapter;
@@ -93,7 +94,10 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
 
         mListView = (ListView) rootView.findViewById(R.id.list_view_customers);
         mListView.setAdapter(mCustomerAdapter);
-
+        TextView emptyText = (TextView) rootView.findViewById(R.id.empty_text_view);
+        emptyText.setText(getActivity().getResources().getString(R.string.empty_list_text));
+        emptyText.setVisibility(View.VISIBLE);
+        mListView.setEmptyView(emptyText);
         mFrameLayout = (FrameLayout) rootView.findViewById(R.id.frameLayoutCustomerList);
 
         //hide fab to show it as animation
