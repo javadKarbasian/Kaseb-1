@@ -2,7 +2,6 @@ package mjkarbasian.moshtarimadar.Setting;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -268,13 +267,13 @@ public class PreferenceHeader extends Fragment {
                             addressCity = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_address_city);
                             addressStreet = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_address_street);
                             addressPostalCode = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_address_postal_code);
-                            mCustomerAvatar = (ImageView)dialogView.findViewById(R.id.dialog_edit_profile_kaseb_avatar);
+                            mCustomerAvatar = (ImageView) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_avatar);
                             mCustomerAvatar.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     mCustomerAvatar = (ImageView) v;
-                                Intent gallery_Intent = new Intent(getActivity().getApplicationContext(), GalleryUtil.class);
-                                startActivityForResult(gallery_Intent, GALLERY_ACTIVITY_CODE);
+                                    Intent gallery_Intent = new Intent(getActivity().getApplicationContext(), GalleryUtil.class);
+                                    startActivityForResult(gallery_Intent, GALLERY_ACTIVITY_CODE);
                                 }
                             });
 
@@ -385,7 +384,6 @@ public class PreferenceHeader extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GALLERY_ACTIVITY_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 String picturePath = data.getStringExtra("picturePath");
@@ -398,13 +396,9 @@ public class PreferenceHeader extends Fragment {
                 if (data.getExtras() != null) {
                     photo = data.getExtras().getParcelable("data");
                     mCustomerAvatar.setImageBitmap(photo);
-
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
                     byte[] imagegBytes = byteArrayOutputStream.toByteArray();
-
-                    ContentValues customerValues = new ContentValues();
-                    customerValues.put(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE, imagegBytes);
 
                 } else if (data.getData() != null) {
                     Uri picUri = data.getData();
@@ -421,8 +415,6 @@ public class PreferenceHeader extends Fragment {
                         photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
                         byte[] imagegBytes = byteArrayOutputStream.toByteArray();
 
-                        ContentValues customerValues = new ContentValues();
-                        customerValues.put(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE, imagegBytes);
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -434,6 +426,7 @@ public class PreferenceHeader extends Fragment {
             }
         }
     }
+
     private void dataError(String name) {
         new AlertDialog.Builder(getActivity())
                 .setTitle(getActivity().getResources().getString(R.string.dialog_title_import_customer_fail))
