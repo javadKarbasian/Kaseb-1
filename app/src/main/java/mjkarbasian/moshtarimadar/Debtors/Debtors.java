@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 
+import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.Others.DrawerActivity;
 import mjkarbasian.moshtarimadar.R;
 
@@ -79,5 +80,10 @@ public class Debtors extends DrawerActivity {
     public void share_dabator(View view) {
         Snackbar.make(view, "share intent", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Utility.activityOnBackExit(this);
     }
 }

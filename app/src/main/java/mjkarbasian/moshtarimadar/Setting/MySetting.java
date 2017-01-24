@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
+import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.Others.DrawerActivity;
 import mjkarbasian.moshtarimadar.R;
 
@@ -126,5 +127,10 @@ public class MySetting extends DrawerActivity {
             Toast toast = Toast.makeText(getBaseContext(), R.string.does_not_support_crop_action, Toast.LENGTH_SHORT);
             toast.show();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Utility.activityOnBackExit(this);
     }
 }

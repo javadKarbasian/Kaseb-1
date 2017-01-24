@@ -1,8 +1,10 @@
 package mjkarbasian.moshtarimadar.Helpers;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -1808,5 +1810,24 @@ public class Utility {
             return Typeface.createFromAsset(mContext.getAssets(), "fonts/bmitra.ttf");
 
         return Typeface.create(Typeface.DEFAULT, 16);
+    }
+
+
+    public static void activityOnBackExit(final Activity activity) {
+        new AlertDialog.Builder(activity)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(R.string.close_activity_dialog_title)
+                .setMessage(R.string.close_activity_dialog_message)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        activity.finish();
+                    }
+
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .show();
+
     }
 }

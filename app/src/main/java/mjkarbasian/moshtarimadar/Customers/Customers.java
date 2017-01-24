@@ -32,6 +32,7 @@ import java.net.URLConnection;
 
 import mjkarbasian.moshtarimadar.Data.KasebContract;
 import mjkarbasian.moshtarimadar.Helpers.GalleryUtil;
+import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.Others.DrawerActivity;
 import mjkarbasian.moshtarimadar.R;
 
@@ -81,9 +82,7 @@ public class Customers extends DrawerActivity {
 
     @Override
     public void onBackPressed() {
-        editor.putBoolean("getStarted", false);
-        editor.apply();
-        super.onBackPressed();
+        Utility.activityOnBackExit(this);
     }
 
     @Override

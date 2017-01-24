@@ -520,5 +520,7 @@
     <string name="tour_text_second">1. Add a customer.\n2. Add a product.\n3. Insert Sale for a customer and print it.\n4.Check Dashboard.</string>
     <string name="empty_list_text">No data to show</string>
     <string name="empty_list_text_detail_sale">There is no item</string>
+    <string name="close_activity_dialog_title">Closing Activity</string>
+    <string name="close_activity_dialog_message">Are you sure you want to close this activity?</string>
 
 </resources>
