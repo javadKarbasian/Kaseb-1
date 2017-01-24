@@ -23,10 +23,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -1197,7 +1194,7 @@ public class Utility {
         PdfPTable table = new PdfPTable(5);
         table.setWidths(new int[]{25, 50, 40, 45, 45});
 
-        if (_mContext.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+        if (_mContext.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL)
             table.setWidths(new int[]{45, 45, 40, 50, 25});
 
             //region Add Titles For Items In Invoice
@@ -1290,7 +1287,7 @@ public class Utility {
             //endregion Add Data For Items In Invoice
 
             _mDocument.add(table);
-        }
+
     }
 
     private static void createTableTaxesForSalesInvoice(ArrayList<Map<String, String>> mTaxListMap)

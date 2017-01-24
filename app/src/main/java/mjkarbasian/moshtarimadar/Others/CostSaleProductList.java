@@ -372,7 +372,7 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
                             fragmentManager.beginTransaction()
                                     .addSharedElement(sharedView, sharedView.getTransitionName())
                                     .addToBackStack(null)
-                                    .replace(R.id.container, productHistory).commit();
+                                    .replace(R.id.container, productHistory,"productFragment2Detail").commit();
                         }
                         //endregion Product
                         break;

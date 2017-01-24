@@ -151,7 +151,7 @@ public class PreferenceHeader extends Fragment {
                     }
                     typeFragment.setArguments(columnName);
                     android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.container, typeFragment);
+                    fragmentTransaction.replace(R.id.container, typeFragment, "typeFragments");
                     fragmentTransaction.addToBackStack(null);
                     int callBackStack = fragmentTransaction.commit();
                 } else switch (position) {

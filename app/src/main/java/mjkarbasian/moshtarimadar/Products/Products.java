@@ -55,7 +55,14 @@ public class Products extends DrawerActivity {
 
     @Override
     public void onBackPressed() {
-        Utility.activityOnBackExit(this);
+        try {
+            if (!fragmentManager.findFragmentByTag("productFragment2Detail").isResumed())
+                Utility.activityOnBackExit(this);
+            else
+                super.onBackPressed();
+        } catch (Exception e) {
+            Utility.activityOnBackExit(this);
+        }
     }
 
     @Override
