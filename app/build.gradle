@@ -22,7 +22,7 @@ android {
 
 repositories {
     mavenCentral()
-    maven(){
+    maven() {
         url "https://oss.sonatype.org/content/repositories/snapshots"
     }
 }
