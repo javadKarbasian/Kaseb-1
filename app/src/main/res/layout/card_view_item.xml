@@ -24,15 +24,15 @@
             android:clickable="false"
             android:orientation="horizontal">
 
-            <ImageView
+            <mjkarbasian.moshtarimadar.Helpers.RoundImageView
                 android:id="@+id/item_card_customer_avater"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="56dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:contentDescription="@string/image_avatar_title"
                 android:gravity="center"
-                android:src="@drawable/avatar"
+                android:src="@drawable/kaseb_pic"
                 android:transitionName="@string/customer_image_transition" />
 
             <TextView
