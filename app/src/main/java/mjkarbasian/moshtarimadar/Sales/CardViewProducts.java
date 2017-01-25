@@ -54,7 +54,8 @@ public class CardViewProducts extends Fragment {
         productListView.setAdapter(mChosenProductAdapter);
         TextView emptyText = (TextView) view.findViewById(R.id.empty_text_view);
         emptyText.setText(getActivity().getResources().getString(R.string.empty_list_text_detail_sale));
-        emptyText.setVisibility(View.VISIBLE);
+        if(productListView.getCount()==0)emptyText.setVisibility(View.VISIBLE);
+        else emptyText.setVisibility(View.INVISIBLE);
         productListView.setEmptyView(emptyText);
 
         try {

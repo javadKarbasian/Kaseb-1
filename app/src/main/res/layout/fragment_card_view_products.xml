@@ -9,6 +9,7 @@
         android:id="@+id/list_view_fragment_card_view_products"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:divider="@drawable/divider_list" />
     <TextView
         android:id="@+id/empty_text_view"
