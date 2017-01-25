@@ -58,7 +58,6 @@ public class Products extends DrawerActivity {
         try {
             CostSaleProductList productList = (CostSaleProductList) fragmentManager.findFragmentByTag("CostSaleProductList");
             if (productList != null && fragmentManager.findFragmentByTag("CostSaleProductList").isResumed())
-
                 Utility.activityOnBackExit(this);
             else
                 super.onBackPressed();
