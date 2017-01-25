@@ -63,18 +63,22 @@
 
                         <mjkarbasian.moshtarimadar.Helpers.RoundImageView
                             android:id="@+id/detail_sale_customer_image"
-                            android:layout_width="48dp"
+                            android:layout_width="0dp"
                             android:layout_height="48dp"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
                             android:scaleType="fitXY"
                             android:src="@drawable/kaseb_pic" />
 
                         <TextView
                             android:id="@+id/detail_sales_info_customer_name"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="@dimen/top_of_list_margin"
+                            android:layout_weight="4"
                             android:gravity="center_vertical|start"
                             android:hint="@string/click_here_choose_customer"
                             android:paddingLeft="@dimen/padding_left_text_view"
