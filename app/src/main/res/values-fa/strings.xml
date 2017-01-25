@@ -34,8 +34,8 @@
     <string name="fab_add_customer">ثبت مشتری</string>
     <string name="fab_add_sale">ثبت فروش</string>
     <string name="sample_due_date_1_day">95/8/2</string>
-    <string name="column_title_Bill_code">کد فاکتور</string>
-    <string name="column_title_account_balance">مانده ریال</string>
+    <string name="column_title_Bill_code">کد </string>
+    <string name="column_title_account_balance">مانده</string>
     <string name="column_title_day_of_maturity">سر رسید</string>
     <string name="sample_invoice_2_ballance">300000</string>
     <string name="sample_invoice_ballance">1200000</string>
@@ -75,7 +75,7 @@
     <string name="customer_tab_bill">صورت حساب</string>
     <string name="customer_tab_dash">وضعیت</string>
     <string name="customer_tab_info">اطلاعات</string>
-    <string name="back_arrow">برگشت</string>
+    <string name="back_arrow">قبلی</string>
     <string name="edit_action_description">این دکمه شما را به صفحه تغییر اطلاعات مشتری هدایت می کند.</string>
     <string name="bronze_member">عضو برنزی</string>
     <string name="gold_member">عضو طلایی</string>
@@ -128,13 +128,13 @@
     </string>
 
     <string name="Add">افزودن</string>
-    <string name="about_us_hint_your_email">ایمیلت رو یادداشت کن</string>
-    <string name="about_us_hint_your_text">ایده ات رو یادداشت کن</string>
-    <string name="add_new_type">یک نوع جدید اضافه کن</string>
+    <string name="about_us_hint_your_email">ایمیلت رو وارد کن</string>
+    <string name="about_us_hint_your_text">نظراتت رو یادداشت کن</string>
+    <string name="add_new_type">عنوان</string>
     <string name="add_types_setting">یک مورد اضافه کن</string>
-    <string name="cancel_button">انصراف</string>
+    <string name="cancel_button">لغو</string>
     <string name="card_dashboard_customers">وضعیت مشتریان</string>
-    <string name="card_dashboard_other">وضعیت مطالبات</string>
+    <string name="card_dashboard_other">وضعیت طلب ها</string>
     <string name="card_dashboard_sales">وضعیت فروش</string>
     <string name="cost_types_bill">صورت حساب</string>
     <string name="cost_types_others">سایر</string>
@@ -287,8 +287,8 @@
     <string name="product_code_prefix">کد- </string>
     <string name="validity_error_dsale_select_product">برای ثبت فروش باید محصول وارد کنی.</string>
     <string name="confirm_delete_customer_list_factors">فاکتور ثبت شده </string>
-    <string name="confirm_delete_customer_list_it_has">نمیتونی پاکش کنی، چون این مشتری در </string>
-    <string name="confirm_delete_product_list">میخوای این محصول رو پاک کنی؟\n</string>
+    <string name="confirm_delete_customer_list_it_has">این مشتری در</string>
+    <string name="confirm_delete_product_list">محصول پاک بشه؟\n\n نام محصول</string>
     <string name="confirm_delete_product_list_it_has">نمی تونی پاکش کنی، چون این در </string>
     <string name="confirm_message_delete_customer_image">میخوای عکس این مشتری رو پاک کنی؟\n</string>
     <string name="confirm_message_delete_sale">می خوای این فروش رو پاک کنی؟\n</string>
@@ -296,7 +296,7 @@
     <string name="confirm_title">پیغام تأیید</string>
     <string name="confirm_want_delete_customer_info">می خوای اطلاعات این مشتری رو پاک کنی؟\n</string>
     <string name="confirm_delete_tax">می خوای این تخفیف/مالیات رو پاک کنی؟\n</string>
-    <string name="confirm_delete_payment">می خوای این پرداخت رو پاک کنی؟\n</string>
+    <string name="confirm_delete_payment">پرداخت پاک بشه؟\n\n مبلغ پرداخت:</string>
 
     //region Sales Invoice Print
     <string name="title_of_print_invoice">فاکتور فروش</string>
@@ -335,7 +335,7 @@
     <string name="discount_title">تخفیف</string>
     <string name="passed_cheque_title">" : پاس شده"</string>
     <string name="not_passed_cheque_title">" : پاس نشده"</string>
-    <string name="cheque_title">چکی</string>
+    <string name="cheque_title">چک</string>
     //endregion Sales Invoice Print
 
     <string name="more_than_balance_amount">این مقدار نباید از مانده فاکتور بیشتر باشد.</string>
@@ -350,8 +350,8 @@
     <string name="pref_header_edit_profile">اطلاعات کاسب</string>
     <string name="detail_sales_products_items_total">کل</string>
     <string name="buy_date">تاریخ خرید</string>
-    <string name="choose_customer_error_for_sale">لازمه یک مشتری از توی لیست انتخاب کنی</string>
-    <string name="click_here_choose_customer">اینجا کلیک کن و یک مشتری انتخاب کن</string>
+    <string name="choose_customer_error_for_sale">یک مشتری انتخاب کن</string>
+    <string name="click_here_choose_customer">برای انتخاب مشتری، اینجا کلیک کن</string>
     <string name="detail_customer_toolbar_title">مشخصات مشتری</string>
     <string name="intro_kaseb_slang">هوای مشتریها رو داشته باش</string>
     <string name="no_data_text_customers_states">مشتری را مشخص نکردی</string>
@@ -367,7 +367,7 @@
     <string name="backup_successful">پشتیبان گیری موفق بود!</string>
     <string name="problem_in_crop_image">تعیین محدوده تصویر با مشکل مواجه شد.</string>
     <string name="does_not_support_crop_action">تلفن همراه شما، از عملیات تعیین محدوده تصویر پشتیبانی نمی کند.</string>
-    <string name="complete_profile_kaseb">ابتدا باید اطلاعات ضروری خود را ذخیره کنید، سپس وارد برنامه شوید.</string>
+    <string name="complete_profile_kaseb">برای ادامه، اطلاعات ضروری را وارد کن</string>
     <string name="title_take_tour">راهنمای کاربردی</string>
 
     <string name="insert_customer">افزودن مشتری</string>
@@ -397,8 +397,8 @@
     <string name="title_customer_insert">افزودن مشتری جدید</string>
     <string name="title_product_insert">افزودن کالا (خدمات) جدید</string>
     <string name="title_sale_insert">صدور فاکتور جدید</string>
-    <string name="choose_member_ship_of_customer">وضعیت مشتری را انتخاب کنید :</string>
-    <string name="choose_type_of_cost">نوع هزینه را انتخاب کنید :</string>
+    <string name="choose_member_ship_of_customer">عضویت مشتری را تعیین کن </string>
+    <string name="choose_type_of_cost">نوع هزینه را انتخاب کن </string>
     <string name="ok_button">تأیید</string>
 
     <string name="example_first_name">مثال : علی</string>
@@ -425,9 +425,12 @@
     <string name="tour_text_second">1. افزودن مشتری جدید\n2. افزودن کالا یا خدمات مربوطه\n3. درج یک فاکتور جدید برای مشتری به کمک کالا یا خدمات موجود در لیست کالاها، چاپ و مشاهده آن\n4. مشاهده وضعیت کسب و کار</string>
 
     <string name="final_amount_not_minus_number">مبلغ نهایی نباید کم تر از صفر باشد.</string>
-    <string name="balance_amount_not_minus_number">مبلغ مانده نباید کم تر از صفر باشد.</string>
+    <string name="balance_amount_not_minus_number">مبلغ مانده کم تر از صفر شده</string>
     <string name="message_add_profile">لطفا اطلاعات خود را وارد کنید.</string>
 
     <string name="title_activity_dashboard">وضعیت کاسبی</string>
+    <string name="amount_not_less_than_sale_price">مبلغ کمتر از صفر شده</string>
+    <string name="close_activity_dialog_message">می خوای از کاسب خارج شی؟</string>
+    <string name="close_activity_dialog_title">خروج</string>
 
 </resources>

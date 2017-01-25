@@ -39,9 +39,9 @@
     <string name="sample_invoice_code">12420</string>
     <string name="sample_invoice_ballance">1200000</string>
     <string name="sample_due_date_1_day">6/27/16</string>
-    <string name="column_title_account_balance">Balance($)</string>
+    <string name="column_title_account_balance">Balance</string>
     <string name="column_title_Bill_code">Code</string>
-    <string name="column_title_day_of_maturity">Due date</string>
+    <string name="column_title_day_of_maturity">Due Date</string>
     <string name="sample_2_invoice_code">13120</string>
     <string name="sample_due_date_2_day">8/27/16</string>
     <string name="sample_invoice_2_ballance">300000</string>
@@ -79,7 +79,7 @@
     <string name="customer_tab_info">Info</string>
     <string name="customer_tab_dash">Dashboard</string>
     <string name="customer_tab_bill">Bills</string>
-    <string name="back_arrow">back</string>
+    <string name="back_arrow">Back</string>
     <string name="edit_action_description">This icon let you modify customer data</string>
     <string name="set_membership">set membership</string>
     <string name="gold_member">Gold Member</string>
@@ -267,7 +267,7 @@
     <string name="pref_header_kaseb">Kaseb</string>
     <string name="add_types_setting">Add item</string>
     <string name="title_activity_my_setting">Setting</string>
-    <string name="add_new_type">Add new type</string>
+    <string name="add_new_type">Type name</string>
 
     <string name="sample_product_name_7">LG 290</string>
     <string name="sample_product_name_8">LG 478</string>
@@ -333,8 +333,8 @@
     <string name="cancel_button">Cancel</string>
     <string name="title_product_description">Description</string>
     <string name="card_dashboard_customers">Customers Status</string>
-    <string name="card_dashboard_sales">Sales status</string>
-    <string name="card_dashboard_other">Recievables</string>
+    <string name="card_dashboard_sales">Sales Status</string>
+    <string name="card_dashboard_other">Recievables Status</string>
     <string name="kaseb_dashboard_customer_qty">Total</string>
     <string name="kaseb_dashboard_customer_qty_gold">Golden</string>
     <string name="kaseb_dashboard_customer_qty_silver">Silver</string>
@@ -354,8 +354,8 @@
         CRM : Customer Relationship Management softwares are our main discuss.
 
         We hope this app help you Dear user in marketing, sales management and customer management.</string>
-    <string name="about_us_hint_your_text">Your mind …</string>
-    <string name="about_us_hint_your_email">Write Your Email …</string>
+    <string name="about_us_hint_your_text">Write your feedback</string>
+    <string name="about_us_hint_your_email">Enter your email address</string>
     <string name="search_title_sale">Enter Sale Code</string>
     <string name="search_title_products">Enter Product name</string>
     <string name="search_title_cost">Enter Cost Name</string>
@@ -416,18 +416,18 @@
     <string name="validity_error_dsale_select_product">Choose some PRODUCTS for SALE.</string>
     <string name="confirm_title">Confirmation</string>
     <string name="confirm_message_delete_customer_image">"Do You Really Want to Delete This Customer's Image?\n\nCustomer Name : "</string>
-    <string name="confirm_delete_customer_list_it_has">"This Customer Has "</string>
-    <string name="confirm_delete_customer_list_factors">" Factor(s)!"</string>
+    <string name="confirm_delete_customer_list_it_has">This customer has</string>
+    <string name="confirm_delete_customer_list_factors">factor(s)</string>
     <string name="confirm_want_delete_customer_info">"Do You Really Want to Delete This CUSTOMER?\n\nCustomer Info : "</string>
     <string name="confirm_message_delete_this_cost">"Do You Really Want to Delete This COST?\n\nCost Name : "</string>
     <string name="confirm_message_delete_sale">"Do You Really Want to Delete This Sale?\n\nSale Code : "</string>
-    <string name="confirm_delete_product_list_it_has">"This Product Is INUSE In "</string>
-    <string name="confirm_delete_product_list">"Do You Really Want to Delete This PRODUCT?\n\nProduct Name : "</string>
+    <string name="confirm_delete_product_list_it_has">This Product Is INUSE In</string>
+    <string name="confirm_delete_product_list">Delete product?\n\nProduct Name :</string>
     <string name="confirm_delete_tax">"Do You Really Want to Delete This TAX?\n\nTax Amount : "</string>
     <string name="payment_model_cheque">Cheque</string>
-    <string name="choose_customer_error_for_sale">You must choose a customer from list.</string>
+    <string name="choose_customer_error_for_sale">Choose customer</string>
     <string name="cheque_title">Cheque</string>
-    <string name="confirm_delete_payment">"Do You Really Want to Delete This PAYMENT?\n\nPayment Amount : "</string>
+    <string name="confirm_delete_payment">Delete payment?\n\nPayment Amount :</string>
     <string name="stock_product">"in Stock: "</string>
     <string name="not_enough_stock">There is not enough good in stock.</string>
     <string name="less_than_stock_explain_text">Select product to add in items.</string>
@@ -436,28 +436,28 @@
     <string name="state_type_image_box_title">stateType</string>
     <string name="not_more_hundred">The percent can\'t be more than hundred.</string>
     <string name="discount_amount_not_more_than_sale_price">Discount amount can\'t be more than sale price.</string>
-    <string name="amount_not_less_than_sale_price">Amount can\'t be less than sale price.</string>
+    <string name="amount_not_less_than_sale_price">Amount is less than zero</string>
     <string name="cost_sale_product_tag_image_title">costSaleProductTagImage</string>
-    <string name="click_here_choose_customer">Tap here to Choose a customer</string>
+    <string name="click_here_choose_customer">To choose customer, tap here</string>
     <string name="image_avatar_title">image_avatar_title</string>
     <string name="content_detail_sale_insert_add_product_image_button">content_detail_sale_insert_add_product_image_button</string>
     <string name="detail_sales_products_items_total">Total</string>
-    <string name="avatar_customer_insert">avatar_customer_insert</string>
+    <string name="avatar_customer_insert" translatable="false">avatar_customer_insert</string>
     <string name="title_product_stock">Stock</string>
-    <string name="buy_date">Buy Date :</string>
+    <string name="buy_date">Buy Date</string>
     <string name="intro_kaseb_slang">care your customers</string>
     <string name="detail_customer_toolbar_title">Customer Info</string>
     <string name="customer_image_transition">customer_image_transition</string>
-    <string name="code_text_transition">code_text_transition</string>
+    <string name="code_text_transition" translatable="false">code_text_transition</string>
     <string name="pref_header_edit_profile">Edit Profile</string>
     <string name="no_data_text_customers_states">no customers…! please add some.</string>
     <string name="no_data_text_sale">No Sale..! please add ones.</string>
     <string name="import_successful">Import Successful!</string>
     <string name="import_contact_failed">Import Failed!</string>
-    <string name="backup_successful">BackUp Successful!</string>
+    <string name="backup_successful">Backup Successful!</string>
     <string name="problem_in_crop_image">There is some problem in croping app</string>
     <string name="does_not_support_crop_action">your device doesn\'t support the crop action!</string>
-    <string name="complete_profile_kaseb">Your profile must be completed then you can go!</string>
+    <string name="complete_profile_kaseb">To continue, enter required fields</string>
     <string name="title_take_tour">Take a Tour</string>
     <string name="insert_customer">Add customer</string>
     <string name="insert_product">Add product</string>
@@ -488,11 +488,11 @@
     <string name="title_customer_insert">Add New Customer</string>
     <string name="title_product_insert">Add New Product/Service</string>
     <string name="title_sale_insert">Create New Sale</string>
-    <string name="choose_member_ship_of_customer">Choose MemberShip of customer :</string>
-    <string name="choose_type_of_cost">Choose type of cost :</string>
+    <string name="choose_member_ship_of_customer">Choose membership </string>
+    <string name="choose_type_of_cost">Choose cost type</string>
     <string name="ok_button">OK</string>
     <string name="kaseb_intro_page_animation">Kaseb Intro Page Animation</string>
-    <string name="avatar_kaseb">Avatar Kaseb</string>
+    <string name="avatar_kaseb" translatable="false">Avatar Kaseb</string>
 
     <string name="example_first_name">Example : Ali</string>
     <string name="example_last_name">Example : Watson</string>
@@ -518,13 +518,13 @@
     <string name="tour_text_second">1. Add a customer.\n2. Add a product.\n3. Insert Sale for a customer and print it.\n4.Check Dashboard.</string>
 
     <string name="final_amount_not_minus_number">Final Amount Can\'t be less than zero.</string>
-    <string name="balance_amount_not_minus_number">Balance Amount Can\'t be less than zero.</string>
+    <string name="balance_amount_not_minus_number">Balance Amount is less than zero</string>
     <string name="message_add_profile">Please add your information.</string>
 
     <string name="empty_list_text">No data to show</string>
     <string name="empty_list_text_detail_sale">There is no item</string>
-    <string name="close_activity_dialog_title">Closing Activity</string>
-    <string name="close_activity_dialog_message">Are you sure you want to close this activity?</string>
+    <string name="close_activity_dialog_title">Exit</string>
+    <string name="close_activity_dialog_message">Exit Kaseb?</string>
     <string name="title_activity_dashboard">Dashboard</string>
 
 </resources>
