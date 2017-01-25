@@ -56,7 +56,8 @@ public class Products extends DrawerActivity {
     @Override
     public void onBackPressed() {
         try {
-            if (!fragmentManager.findFragmentByTag("productFragment2Detail").isResumed())
+             CostSaleProductList productList=(CostSaleProductList)fragmentManager.findFragmentByTag("CostSaleProductList");
+             if(productList!=null && fragmentManager.findFragmentByTag("CostSaleProductList").isResumed())
                 Utility.activityOnBackExit(this);
             else
                 super.onBackPressed();
@@ -87,7 +88,7 @@ public class Products extends DrawerActivity {
 
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down, R.anim.slide_in_down, R.anim.slide_out_up);
-        fragmentTransaction.replace(R.id.container, productInsert);
+        fragmentTransaction.replace(R.id.container, productInsert,"productInsertTag");
         fragmentTransaction.addToBackStack(null);
         int callBackStack = fragmentTransaction.commit();
     }

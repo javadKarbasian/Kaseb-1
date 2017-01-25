@@ -120,7 +120,11 @@ public class Sales extends DrawerActivity {
 
     @Override
     public void onBackPressed() {
-        Utility.activityOnBackExit(this);
+        CostSaleProductList productList=(CostSaleProductList)fragmentManager.findFragmentByTag("CostSaleProductList");
+        if(productList!=null && fragmentManager.findFragmentByTag("CostSaleProductList").isResumed())
+            Utility.activityOnBackExit(this);
+        else
+            super.onBackPressed();
     }
 
 }
