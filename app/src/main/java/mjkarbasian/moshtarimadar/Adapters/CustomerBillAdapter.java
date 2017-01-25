@@ -18,14 +18,17 @@ import mjkarbasian.moshtarimadar.R;
  */
 public class CustomerBillAdapter extends CursorAdapter {
 
-    Context mContext;
-    String saleId;
+    //region declare values
     String[] mProjection;
+
+    String saleId;
     String saleCode;
     String dueDate;
+
     Long totalDue;
     Cursor mCursor;
     private LayoutInflater cursorInflater;
+    //endregion declare values
 
     public CustomerBillAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
@@ -66,7 +69,7 @@ public class CustomerBillAdapter extends CursorAdapter {
                 dueDate = mCursor.getString(mCursor.getColumnIndex(KasebContract.DetailSale.COLUMN_DATE));
                 totalDue = mCursor.getLong(mCursor.getColumnIndex(KasebContract.DetailSale.COLUMN_TOTAL_DUE));
                 tagImageView.setVisibility(View.VISIBLE);
-                if(mCursor.getString(mCursor.getColumnIndex(KasebContract.DetailSale.COLUMN_IS_BALANCED)).equals("1"))
+                if (mCursor.getString(mCursor.getColumnIndex(KasebContract.DetailSale.COLUMN_IS_BALANCED)).equals("1"))
                     tagImageView.setImageResource(R.drawable.marked_circle);
                 else
                     tagImageView.setImageResource(R.drawable.open_marked_circle);

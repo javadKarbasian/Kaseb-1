@@ -1,14 +1,15 @@
 package mjkarbasian.moshtarimadar.Setting;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,34 +17,29 @@ import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 
 import mjkarbasian.moshtarimadar.Adapters.HeaderAdapter;
 import mjkarbasian.moshtarimadar.Customers.Customers;
 import mjkarbasian.moshtarimadar.Data.KasebContract;
-import mjkarbasian.moshtarimadar.Helpers.GalleryUtil;
-import mjkarbasian.moshtarimadar.Helpers.RoundImageView;
 import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.Others.DrawerActivity;
 import mjkarbasian.moshtarimadar.R;
@@ -55,20 +51,19 @@ public class PreferenceHeader extends Fragment {
 
     //region declare values
     private static final int RESULT_PICK_CONTACT = 1;
-    private static final int GALLERY_ACTIVITY_CODE = 2;
-    private static final int RESULT_CROP = 3;
+    private static final int PICK_FROM_GALLERY = 2;
     private static final String LOG_TAG = PreferenceHeader.class.getSimpleName();
+
     ListView mListView;
     HeaderAdapter headerAdaper;
     ArrayList<Integer> headerIcons = new ArrayList<>();
     ArrayList<String> headerTitle = new ArrayList<>();
     ArrayList<String> headerSummary = new ArrayList<>();
 
-    android.app.AlertDialog.Builder builder;
-    android.app.AlertDialog dialogView;
+    AlertDialog.Builder builder;
+    AlertDialog dialogView;
 
-    RoundImageView mCustomerAvatar;
-    Bitmap photo;
+    ImageView mCustomerAvatar;
     EditText firstName;
     EditText lastName;
     EditText birthDay;
@@ -95,7 +90,9 @@ public class PreferenceHeader extends Fragment {
     TextInputLayout addressCityTextInputLayout;
     TextInputLayout addressStreetTextInputLayout;
     TextInputLayout addressPostalCodeTextInputLayout;
+
     SharedPreferences kasebSharedPreferences;
+    SharedPreferences.Editor editor;
     //endregion declare values
 
     @Override
@@ -113,7 +110,7 @@ public class PreferenceHeader extends Fragment {
 
         //region handle sharepreference
         kasebSharedPreferences = getContext().getSharedPreferences(getResources().getString(R.string.kasebPreference), getContext().MODE_PRIVATE);
-        final SharedPreferences.Editor editor = kasebSharedPreferences.edit();
+        editor = kasebSharedPreferences.edit();
         //endregion handle sharepreference
 
         View rootView = inflater.inflate(R.layout.fragment_setting_types, container, false);
@@ -155,12 +152,6 @@ public class PreferenceHeader extends Fragment {
                     fragmentTransaction.addToBackStack(null);
                     int callBackStack = fragmentTransaction.commit();
                 } else switch (position) {
-                    case 5: {
-                        Intent contactPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                        contactPickerIntent.setType(ContactsContract.Contacts.CONTENT_ITEM_TYPE);
-                        startActivityForResult(contactPickerIntent, RESULT_PICK_CONTACT);
-                        break;
-                    }
                     case 4: {
                         new AlertDialog.Builder(getActivity())
                                 .setTitle(getActivity().getResources().getString(R.string.pref_header_backup))
@@ -189,6 +180,12 @@ public class PreferenceHeader extends Fragment {
                                 })
                                 .show();
 
+                        break;
+                    }
+                    case 5: {
+                        Intent contactPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                        contactPickerIntent.setType(ContactsContract.Contacts.CONTENT_ITEM_TYPE);
+                        startActivityForResult(contactPickerIntent, RESULT_PICK_CONTACT);
                         break;
                     }
                     case 6: {
@@ -241,8 +238,9 @@ public class PreferenceHeader extends Fragment {
                                     editor.putString("addressStreet", addressStreet.getText().toString());
                                     editor.putString("addressPostalCode", addressPostalCode.getText().toString());
 
-                                    if (photo != null)
-                                        editor.putString("customerAvatar", Utility.encodeTobase64(photo));
+                                    if (mCustomerAvatar.getDrawable() != null)
+                                        editor.putString("customerAvatar",
+                                                Utility.encodeTobase64(((BitmapDrawable) mCustomerAvatar.getDrawable()).getBitmap()));
 
                                     editor.apply();
 
@@ -266,6 +264,13 @@ public class PreferenceHeader extends Fragment {
                                     ((DrawerActivity) getActivity()).setInfoOfKaseb();
                                     getHelperText();
                                     wantToCloseDialog = true;
+
+                                    View view = dialogView.getCurrentFocus();
+                                    if (view != null) {
+                                        InputMethodManager imm = (InputMethodManager)
+                                                getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                                    }
                                 }
 
                                 if (wantToCloseDialog)
@@ -299,13 +304,22 @@ public class PreferenceHeader extends Fragment {
                         addressStreet = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_address_street);
                         addressPostalCode = (EditText) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_input_address_postal_code);
 
-                        mCustomerAvatar = (RoundImageView) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_customer_picture);
+                        mCustomerAvatar = (ImageView) dialogView.findViewById(R.id.dialog_edit_profile_kaseb_customer_picture);
                         mCustomerAvatar.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                mCustomerAvatar = (RoundImageView) v;
-                                Intent gallery_Intent = new Intent(getActivity().getApplicationContext(), GalleryUtil.class);
-                                startActivityForResult(gallery_Intent, GALLERY_ACTIVITY_CODE);
+
+                                Intent intent = new Intent();
+                                intent.setType("image/*");
+                                intent.setAction(Intent.ACTION_GET_CONTENT);
+                                intent.putExtra("crop", "true");
+                                intent.putExtra("aspectX", 0);
+                                intent.putExtra("aspectY", 0);
+                                try {
+                                    intent.putExtra("return-data", true);
+                                    startActivityForResult(Intent.createChooser(intent, "Complete action using"), PICK_FROM_GALLERY);
+                                } catch (ActivityNotFoundException e) {
+                                }
                             }
                         });
 
@@ -362,9 +376,8 @@ public class PreferenceHeader extends Fragment {
         super.onStart();
 
         //region check exist profile kaseb in preference header
-        android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-        if (kasebSharedPreferences.getString("firstName", null) == null)
+        if (kasebSharedPreferences.getString("firstName", null) == null &&
+                kasebSharedPreferences.getString("customerAvatar", null) == null)
             mListView.performItemClick(
                     mListView.getAdapter().getView(6, null, null),
                     6, mListView.getAdapter().getItemId(6));
@@ -460,52 +473,22 @@ public class PreferenceHeader extends Fragment {
                     break;
                 }
             }
-            case (GALLERY_ACTIVITY_CODE): {
-                if (resultCode == Activity.RESULT_OK) {
-                    String picturePath = data.getStringExtra("picturePath");
-                    //perform Crop on the Image Selected from Gallery
-                    performCrop(picturePath);
+            case (PICK_FROM_GALLERY): {
+
+                try {
+                    mCustomerAvatar.setImageURI(data.getData());
+
+                    editor.putString("customerAvatar",
+                            Utility.encodeTobase64(((BitmapDrawable) mCustomerAvatar.getDrawable()).getBitmap()));
+                    editor.apply();
+
+                    mCustomerAvatar.setImageBitmap(
+                            Utility.decodeBase64(kasebSharedPreferences.getString("customerAvatar", null)));
+
+                } catch (Exception e) {
                 }
-            }
-            case (RESULT_CROP): {
-                if (resultCode == Activity.RESULT_OK) {
-                    if (data.getExtras() != null) {
-                        photo = data.getExtras().getParcelable("data");
-                        mCustomerAvatar.setImageBitmap(photo);
 
-                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                        photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
-                        byte[] imagegBytes = byteArrayOutputStream.toByteArray();
-
-                        ContentValues customerValues = new ContentValues();
-                        customerValues.put(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE, imagegBytes);
-
-                    } else if (data.getData() != null) {
-                        Uri picUri = data.getData();
-                        BufferedInputStream bufferInputStream = null;
-                        try {
-                            URLConnection connection = new URL(picUri.toString()).openConnection();
-                            connection.connect();
-                            bufferInputStream = new BufferedInputStream(connection.getInputStream(), 8192);
-                            photo = BitmapFactory.decodeStream(bufferInputStream);
-
-                            mCustomerAvatar.setImageBitmap(photo);
-
-                            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                            photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
-                            byte[] imagegBytes = byteArrayOutputStream.toByteArray();
-
-                            ContentValues customerValues = new ContentValues();
-                            customerValues.put(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE, imagegBytes);
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Toast toast = Toast.makeText(getActivity(), R.string.problem_in_crop_image, Toast.LENGTH_LONG);
-                        toast.show();
-                    }
-                }
+                break;
             }
         }
     }
@@ -587,39 +570,6 @@ public class PreferenceHeader extends Fragment {
         headerIcons.add(R.drawable.importcontact);
         headerIcons.add(R.drawable.kaseb_profile);
         return headerIcons;
-    }
-
-    private void performCrop(String picUri) {
-        try {
-            //Start Crop Activity
-
-            Intent cropIntent = new Intent("com.android.camera.action.CROP");
-            // indicate image type and Uri
-            File f = new File(picUri);
-            Uri contentUri = Uri.fromFile(f);
-
-            cropIntent.setDataAndType(contentUri, "image/*");
-            // set crop properties
-            cropIntent.putExtra("crop", "true");
-            // indicate aspect of desired crop
-            cropIntent.putExtra("aspectX", 1);
-            cropIntent.putExtra("aspectY", 1);
-            // indicate output X and Y
-            cropIntent.putExtra("outputX", 280);
-            cropIntent.putExtra("outputY", 280);
-
-            // retrieve data on return
-            cropIntent.putExtra("return-data", true);
-            // start the activity - we handle returning in onActivityResult
-            startActivityForResult(cropIntent, RESULT_CROP);
-        }
-        // respond to users whose devices do not support the crop action
-        catch (ActivityNotFoundException anfe) {
-            // display an error message
-            String errorMessage = "your device doesn't support the crop action!";
-            Toast toast = Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT);
-            toast.show();
-        }
     }
 
     private void getHelperText() {

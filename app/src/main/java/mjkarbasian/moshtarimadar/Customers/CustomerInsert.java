@@ -121,13 +121,16 @@ public class CustomerInsert extends Fragment {
                 .setNegativeButton(R.string.back_tour, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                     }
-                }).setPositiveButton(R.string.next_tour, new DialogInterface.OnClickListener() {
+                })
+                .setPositiveButton(R.string.next_tour, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                     }
-                }).setNeutralButton(R.string.cancel_tour, new DialogInterface.OnClickListener() {
+                })
+                .setNeutralButton(R.string.cancel_tour, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                     }
-                }).setTitle(R.string.title_customer_insert);
+                })
+                .setTitle(R.string.title_customer_insert);
 
         dialogViewTour = builderTour.create();
         //endregion create alertdialog tour
@@ -207,6 +210,7 @@ public class CustomerInsert extends Fragment {
                     public void onClick(View v) {
 
                         Intent intent = new Intent(getActivity(), Products.class);
+                        getActivity().finish();
                         startActivity(intent);
                         Utility.setActivityTransition(getActivity());
 

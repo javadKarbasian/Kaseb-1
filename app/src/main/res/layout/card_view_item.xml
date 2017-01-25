@@ -103,9 +103,7 @@
                 android:clickable="true"
                 android:onClick="message_dabator"
                 android:padding="2dp"
-                android:src="@drawable/message"
-
-                />
+                android:src="@drawable/message" />
 
             <ImageView
                 android:id="@+id/debtor_share"
@@ -117,6 +115,7 @@
                 android:onClick="share_dabator"
                 android:padding="2dp"
                 android:src="@drawable/share_variant" />
+
         </LinearLayout>
 
     </LinearLayout>

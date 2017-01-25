@@ -22,9 +22,11 @@ import mjkarbasian.moshtarimadar.R;
  */
 public class DebtorAdapter extends CursorAdapter {
 
+    //region declare values
     private LayoutInflater cursorInflater;
     private android.content.Context mContext;
 
+    //endregion declare values
 
     public DebtorAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
@@ -47,9 +49,11 @@ public class DebtorAdapter extends CursorAdapter {
                 KasebContract.Customers.COLUMN_CUSTOMER_PICTURE,
                 KasebContract.Customers.COLUMN_PHONE_MOBILE
         };
+
         Uri customerUri = KasebContract.Customers.buildCustomerUri(cursor.
                 getLong(cursor.getColumnIndex(KasebContract.Sales.COLUMN_CUSTOMER_ID)));
-        final Cursor adapterCursor = mContext.getContentResolver().query(customerUri, null, null, null, null);
+
+        final Cursor adapterCursor = mContext.getContentResolver().query(customerUri, customersProjection, null, null, null);
         String firstName = null;
         String lastName = null;
         byte[] imagegBytes = null;
@@ -96,11 +100,29 @@ public class DebtorAdapter extends CursorAdapter {
         phoneImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel",
-                        adapterCursor.getString(adapterCursor.getColumnIndex(KasebContract.Customers.COLUMN_PHONE_MOBILE)), null));
-                mContext.startActivity(intent);}
-                catch (Exception e){
+                try {
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel",
+                            adapterCursor.getString(adapterCursor.getColumnIndex(KasebContract.Customers.COLUMN_PHONE_MOBILE)), null));
+                    mContext.startActivity(intent);
+                } catch (Exception e) {
+                }
+            }
+        });
+
+        ImageView shareImage = (ImageView) view.findViewById(R.id.debtor_share);
+        final String finalBalanceAmount;
+        finalBalanceAmount = String.format("%s %s", mContext.getResources().getString(R.string.debtor_share_text_to_send),
+                Utility.formatPurchase(mContext, Utility.DecimalSeperation(mContext, totalBalance)));
+
+        shareImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_TEXT, finalBalanceAmount);
+                    mContext.startActivity(Intent.createChooser(intent, "Share with"));
+                } catch (Exception e) {
 
                 }
             }
@@ -113,26 +135,9 @@ public class DebtorAdapter extends CursorAdapter {
                 try {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms",
                             adapterCursor.getString(adapterCursor.getColumnIndex(KasebContract.Customers.COLUMN_PHONE_MOBILE)), null));
+                    intent.putExtra(Intent.EXTRA_TEXT, finalBalanceAmount);
                     mContext.startActivity(intent);
-                }
-                catch (Exception e){}
-            }
-        });
-
-        ImageView shareImage = (ImageView) view.findViewById(R.id.debtor_share);
-        final String finalBalanceAmount;
-        finalBalanceAmount = String.format("%s%s", mContext.getResources().getString(R.string.debtor_share_text_to_send), "Hello");
-        shareImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, finalBalanceAmount);
-                mContext.startActivity(Intent.createChooser(intent, "Share with"));
-                }
-                catch (Exception e){
-
+                } catch (Exception e) {
                 }
             }
         });

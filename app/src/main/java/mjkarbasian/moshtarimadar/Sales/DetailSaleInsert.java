@@ -45,7 +45,7 @@ import java.util.Map;
 import mjkarbasian.moshtarimadar.Adapters.CostSaleProductAdapter;
 import mjkarbasian.moshtarimadar.Adapters.CustomerAdapter;
 import mjkarbasian.moshtarimadar.Adapters.TypesSettingAdapter;
-import mjkarbasian.moshtarimadar.Customers.Customers;
+import mjkarbasian.moshtarimadar.Dashboard;
 import mjkarbasian.moshtarimadar.Data.KasebContract;
 import mjkarbasian.moshtarimadar.Data.KasebDbHelper;
 import mjkarbasian.moshtarimadar.Data.KasebProvider;
@@ -293,7 +293,8 @@ public class DetailSaleInsert extends AppCompatActivity {
 
                         dialogViewTour.dismiss();
 
-                        Intent intent = new Intent(DetailSaleInsert.this, Customers.class);
+                        Intent intent = new Intent(DetailSaleInsert.this, Dashboard.class);
+                        finish();
                         startActivity(intent);
                         Utility.setActivityTransition(DetailSaleInsert.this);
                         //endregion end tour

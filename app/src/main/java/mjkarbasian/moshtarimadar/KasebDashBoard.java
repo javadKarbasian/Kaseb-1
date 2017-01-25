@@ -1,11 +1,11 @@
 package mjkarbasian.moshtarimadar;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +22,7 @@ import java.util.List;
 
 import mjkarbasian.moshtarimadar.Data.KasebContract;
 import mjkarbasian.moshtarimadar.Helpers.Utility;
-import mjkarbasian.moshtarimadar.Setting.PreferenceHeader;
+import mjkarbasian.moshtarimadar.Setting.MySetting;
 
 /**
  * Created by family on 12/30/2016.
@@ -38,10 +38,10 @@ public class KasebDashBoard extends Fragment {
         SharedPreferences kasebSharedPreferences = getContext().getSharedPreferences(kasebPREFERENCES, getContext().MODE_PRIVATE);
         SharedPreferences.Editor editor = kasebSharedPreferences.edit();
 
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-        if (kasebSharedPreferences.getString("firstName", null) == null)
-            fragmentManager.beginTransaction().replace(R.id.container, new PreferenceHeader()).commit();
+        if (kasebSharedPreferences.getString("firstName", null) == null) {
+            Intent intent = new Intent(getActivity(), MySetting.class);
+            startActivity(intent);
+        }
         //endregion handle sharepreference
     }
 
@@ -106,7 +106,6 @@ public class KasebDashBoard extends Fragment {
         String[] recievProj = new String[]{"sum(" + KasebContract.DetailSale.TABLE_NAME + "." + KasebContract.DetailSale.COLUMN_TOTAL_PAID + ") as total"};
         String selection = KasebContract.Sales.TABLE_NAME + "." + KasebContract.Sales.COLUMN_IS_DELETED + " =? ";
         String[] selectArg = new String[]{"0"};
-//        TextView totalRecievable = (TextView) rootView.findViewById(R.id.kaseb_dashboard_others_total_recievables);
 
         Cursor recievCurs = null;
         cursor = getContext().getContentResolver().query(KasebContract.Sales.saleDetailSaleJoin(), projection, selection, selectArg, null);
@@ -114,11 +113,9 @@ public class KasebDashBoard extends Fragment {
 
         assert cursor != null;
         if (cursor.moveToFirst())
-//            totalSales.setText(cursor.getString(0) == null ? Utility.formatPurchase(getActivity(), "0") : Utility.formatPurchase(getActivity(), Utility.DecimalSeperation(getActivity(), cursor.getLong(0))));
             totalSales = cursor.getString(0) == null ? 0f : cursor.getLong(0);
         assert recievCurs != null;
         if (recievCurs.moveToFirst())
-//            totalRecievable.setText(recievCurs.getString(0) == null ? Utility.formatPurchase(getActivity(), cursor.getString(0)) : Utility.formatPurchase(getActivity(), Utility.DecimalSeperation(getActivity(), cursor.getLong(0) - recievCurs.getLong(0))));
             totalRec = cursor.getString(0) == null ? 0f : cursor.getLong(0) - recievCurs.getLong(0);
 
 
@@ -156,6 +153,7 @@ public class KasebDashBoard extends Fragment {
                     totalPaid[i] += recievCurs.getLong(0);
             }
         }
+
         //region setViews of membership
         totalSalesGold = totalDue[1] == null ? 0f : totalDue[1];
         totalSalesSilv = totalDue[2] == null ? 0f : totalDue[2];

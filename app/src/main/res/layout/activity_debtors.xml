@@ -14,6 +14,7 @@
         android:layout_marginTop="4dp"
         android:divider="@null"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
     <TextView
         android:id="@+id/empty_text_view"
         style="@style/Base.TextAppearance.AppCompat.Body1"
@@ -21,6 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/activity_vertical_Large_margin"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </FrameLayout>

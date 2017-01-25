@@ -23,19 +23,19 @@
 
             <TextView
                 android:id="@+id/item_list_bill_sale_code"
+                style="@style/Base.TextAppearance.AppCompat.Title"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@string/sample_2_invoice_code"
-              style="@style/Base.TextAppearance.AppCompat.Title" />
+                android:text="@string/sample_2_invoice_code" />
 
             <TextView
                 android:id="@+id/item_list_bill_due_date"
+                style="@style/Base.TextAppearance.AppCompat.Caption"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@string/sample_due_date_1_day"
-            style="@style/Base.TextAppearance.AppCompat.Caption" />
+                android:text="@string/sample_due_date_1_day" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,12 +63,12 @@
 
             <TextView
                 android:id="@+id/item_list_bill_purchase_amount"
+                style="@style/Base.TextAppearance.AppCompat.Headline"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-condensed"
-                android:gravity="center"
-                style="@style/Base.TextAppearance.AppCompat.Headline" />
+                android:gravity="center" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

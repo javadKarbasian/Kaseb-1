@@ -46,7 +46,7 @@
     <string name="sample_due_date_2_day">8/27/16</string>
     <string name="sample_invoice_2_ballance">300000</string>
     <string name="title_debator">Debaters</string>
-    <string name="debtor_share_text_to_send">your total balance is: </string>
+    <string name="debtor_share_text_to_send">Hi Dear customer, your total balance is :</string>
     <string name="title_activity_sales">Sales</string>
     <string name="sort_date">Date</string>
     <string name="sort_code">Sales code</string>
@@ -307,7 +307,7 @@
     <string name="tax_list_for_sale_amount_title">Tax Amount :</string>
     <string name="tax_list_for_sale_percent_title">Tax Percent :</string>
     <string name="tax_list_for_sale_tax_type_title">Tax Type :</string>
-    <string name="Add">ADD</string>
+    <string name="Add">Add</string>
     <string name="sale_date">Sale Date :</string>
     <string name="quantity">Quantity :</string>
     <string name="sort_name">Sort Name</string>
@@ -525,5 +525,6 @@
     <string name="empty_list_text_detail_sale">There is no item</string>
     <string name="close_activity_dialog_title">Closing Activity</string>
     <string name="close_activity_dialog_message">Are you sure you want to close this activity?</string>
+    <string name="title_activity_dashboard">Dashboard</string>
 
 </resources>

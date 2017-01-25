@@ -123,15 +123,18 @@ public class DetailCustomerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
+        Bundle mBundle;
         switch (position) {
             case 0:
-                DetailCustomerInfo tab1 = new DetailCustomerInfo(uriCursor);
-                return tab1;
+                return new DetailCustomerInfo(uriCursor);
             case 1:
-                DetailCustomerDash tab2 = new DetailCustomerDash(uriCursor);
+                mBundle = new Bundle();
+                mBundle.putString("uriCursor", uriCursor.toString());
+                DetailCustomerDash tab2 = new DetailCustomerDash();
+                tab2.setArguments(mBundle);
                 return tab2;
             case 2:
-                Bundle mBundle = new Bundle();
+                mBundle = new Bundle();
                 mBundle.putString("customerId",uriCursor.getLastPathSegment());
 
                 DetailCustomerBill tab3 = new DetailCustomerBill();

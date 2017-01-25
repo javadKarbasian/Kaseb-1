@@ -18,23 +18,26 @@ import mjkarbasian.moshtarimadar.R;
  * Created by family on 7/27/2016.
  */
 public class DetailCustomerDash extends Fragment {
+
+    //region declare values
+    int salesCount;
+    Uri uriCursor;
+    Cursor mCursor;
+
     String[] mProjectionCustomerCursor;
     String[] mProjectionDetailSaleCursor;
     String[] mSelectionDetailSaleCursor;
-    Uri uriCursor;
+
     Long totalBalanceCustomer = 0l;
     Long totalDueCustomer = 0l;
     Long totalPaidCustomer = 0l;
-    String numberPurchaseCustomer;
-    Long subTotalCustomer;
-    String stateId;
-    int salesCount;
-    String mWhereStatement;
-    Cursor mCursor;
 
-    public DetailCustomerDash(Uri uri) {
+    String stateId;
+    String mWhereStatement;
+    //endregion declare values
+
+    public DetailCustomerDash() {
         super();
-        uriCursor = uri;
     }
 
 
@@ -46,6 +49,8 @@ public class DetailCustomerDash extends Fragment {
         TextView customerPurchase = (TextView) view.findViewById(R.id.customer_dash_total_purchase);
         TextView customerBalance = (TextView) view.findViewById(R.id.customer_dash_total_balance);
         TextView customerNumberPurchase = (TextView) view.findViewById(R.id.customer_dash_number_purchase);
+
+        uriCursor = Uri.parse(getArguments().getString("uriCursor"));
 
         mProjectionCustomerCursor = new String[]{
                 KasebContract.Customers._ID,
@@ -66,8 +71,7 @@ public class DetailCustomerDash extends Fragment {
 
         salesCount = mCursor.getCount();
 
-        if (salesCount > 0)
-        {
+        if (salesCount > 0) {
             mSelectionDetailSaleCursor = new String[salesCount];
 
             mCursor.moveToFirst();
@@ -116,9 +120,7 @@ public class DetailCustomerDash extends Fragment {
                                     totalBalanceCustomer)));
 
             customerNumberPurchase.setText(Utility.doubleFormatter(salesCount));
-        }
-        else
-        {
+        } else {
             customerPurchase.setText(
                     Utility.formatPurchase(getActivity(),
                             Utility.DecimalSeperation(getContext(),
@@ -131,7 +133,6 @@ public class DetailCustomerDash extends Fragment {
 
             customerNumberPurchase.setText(String.valueOf(salesCount));
         }
-
 
 
         Cursor customerCursor = getContext().getContentResolver().query(
@@ -149,8 +150,8 @@ public class DetailCustomerDash extends Fragment {
         String selection = KasebContract.State._ID + " = ?";
         String[] selecArg = new String[]{String.valueOf(customerCursor.getInt(customerCursor.getColumnIndex(KasebContract.Customers.COLUMN_STATE_ID)))};
         Cursor colorCursor = getContext().getContentResolver().query(KasebContract.State.CONTENT_URI,
-                new String[]{KasebContract.State._ID ,KasebContract.State.COLUMN_STATE_COLOR},selection,selecArg,null);
-        if(colorCursor.moveToFirst())
+                new String[]{KasebContract.State._ID, KasebContract.State.COLUMN_STATE_COLOR}, selection, selecArg, null);
+        if (colorCursor.moveToFirst())
             imageViewState.setColorFilter(colorCursor.getInt(colorCursor.getColumnIndex(KasebContract.State.COLUMN_STATE_COLOR)));
         //endregion
         colorCursor.close();

@@ -164,6 +164,7 @@ public class ProductInsert extends Fragment {
                     public void onClick(View v) {
 
                         Intent intent = new Intent(getActivity(), Sales.class);
+                        getActivity().finish();
                         startActivity(intent);
                         Utility.setActivityTransition(getActivity());
 

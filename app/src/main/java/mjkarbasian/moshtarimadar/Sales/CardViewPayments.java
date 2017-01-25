@@ -44,7 +44,7 @@ public class CardViewPayments extends Fragment {
         paymentListView.setAdapter(mPaymentAdapter);
         TextView emptyText = (TextView) view.findViewById(R.id.empty_text_view);
         emptyText.setText(getActivity().getResources().getString(R.string.empty_list_text_detail_sale));
-        if(paymentListView.getCount()==0)emptyText.setVisibility(View.VISIBLE);
+        if (paymentListView.getCount() == 0) emptyText.setVisibility(View.VISIBLE);
         else emptyText.setVisibility(View.INVISIBLE);
         paymentListView.setEmptyView(emptyText);
 

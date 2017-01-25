@@ -114,7 +114,7 @@ public class Customers extends DrawerActivity {
 
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down, R.anim.slide_in_down, R.anim.slide_out_up);
-        fragmentTransaction.replace(R.id.container, customerInsert,"customerInsertTag");
+        fragmentTransaction.replace(R.id.container, customerInsert, "customerInsertTag");
         fragmentTransaction.addToBackStack(null);
         int callBackStack = fragmentTransaction.commit();
     }

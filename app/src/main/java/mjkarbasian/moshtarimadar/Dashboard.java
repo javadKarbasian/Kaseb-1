@@ -13,7 +13,7 @@ public class Dashboard extends DrawerActivity {
     //region declare values
     String kasebPREFERENCES = "kasebProfile";
     SharedPreferences kasebSharedPreferences;
-
+    SharedPreferences.Editor editor;
     private KasebDashBoard kasebDashBoard = new KasebDashBoard();
     private FragmentManager fragmentManager = getSupportFragmentManager();
     //endregion declare values
@@ -28,7 +28,7 @@ public class Dashboard extends DrawerActivity {
 
         //region handle sharepreference
         kasebSharedPreferences = getSharedPreferences(kasebPREFERENCES, MODE_PRIVATE);
-        SharedPreferences.Editor editor = kasebSharedPreferences.edit();
+        editor = kasebSharedPreferences.edit();
 
         try {
             String mTest = kasebSharedPreferences.getString("numberOfEntrance", null);
@@ -42,12 +42,6 @@ public class Dashboard extends DrawerActivity {
         //endregion handle sharepreference
 
         fragmentManager.beginTransaction().replace(R.id.container, kasebDashBoard, "KasebDashBoard").commit();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        finish();
     }
 
     @Override

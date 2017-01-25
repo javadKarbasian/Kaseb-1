@@ -499,7 +499,8 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
             buyDateTextInputLayout.setError(null);
             discountAmountTextInputLayout.setError(null);
             discountPercentTextInputLayout.setError(null);
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
     }
 
     // this method check the validation and correct entries. its check fill first and then check the validation rules.

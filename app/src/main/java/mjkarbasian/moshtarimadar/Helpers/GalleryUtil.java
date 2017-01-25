@@ -12,15 +12,9 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import java.io.File;
-
 public class GalleryUtil extends Activity {
     private final static int RESULT_SELECT_IMAGE = 100;
-    public static final int MEDIA_TYPE_IMAGE = 1;
     private static final String TAG = "GalleryUtil";
-
-    String mCurrentPhotoPath;
-    File photoFile = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
