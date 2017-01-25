@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:style="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_linear_layout"
     android:layout_width="match_parent"
@@ -11,9 +10,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/top_of_list_margin"
         android:orientation="vertical">
 
         <LinearLayout
@@ -25,16 +21,23 @@
             android:clickable="false"
             android:orientation="horizontal">
 
-            <mjkarbasian.moshtarimadar.Helpers.RoundImageView
-                android:id="@+id/item_card_customer_avater"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:contentDescription="@string/image_avatar_title"
-                android:gravity="center"
-                android:src="@drawable/kaseb_pic"
-                android:transitionName="@string/customer_image_transition" />
+            <LinearLayout
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:orientation="vertical">
+
+                <mjkarbasian.moshtarimadar.Helpers.RoundImageView
+                    android:id="@+id/item_card_customer_avater"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/avatar_customer_insert"
+                    android:onClick="pic_selector"
+                    android:src="@drawable/add_image"
+                    android:transitionName="@string/customer_image_transition" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/item_card_debator_name"
@@ -44,7 +47,9 @@
                 android:layout_marginLeft="@dimen/text_in_list_horizontal_margin"
                 android:layout_weight="4"
                 android:fontFamily="sans-serif-condensed"
-                android:gravity="center_vertical" />
+                android:gravity="start|center_vertical"
+                android:maxLength="@integer/max_length_list_item_headline"
+                android:maxLines="@integer/max_line_list_item_headline" />
 
             <TextView
                 android:id="@+id/item_card_balance_amount"
@@ -53,9 +58,11 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/text_in_list_horizontal_margin"
-                android:layout_weight="4"
+                android:layout_weight="3"
                 android:fontFamily="sans-serif-condensed"
-                android:gravity="center"
+                android:gravity="end|center_vertical"
+                android:maxLength="@integer/max_length_list_item_headline"
+                android:maxLines="@integer/max_line_list_item_headline"
                 android:text="@string/sample_text_purchase_of_customer_amount" />
 
         </LinearLayout>

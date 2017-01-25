@@ -25,7 +25,9 @@
                 style="@style/Base.TextAppearance.AppCompat.Title"
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:maxLength="@integer/max_length_list_item_headline"
+                android:maxLines="@integer/max_line_list_item_headline" />
 
             <TextView
                 android:id="@+id/item_list_code"
@@ -74,13 +76,13 @@
 
             <TextView
                 android:id="@+id/item_list_amount"
+                style="@style/Base.TextAppearance.AppCompat.Headline"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="6"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
-                android:text="@string/sample_text_purchase_of_customer_amount"
-                style="@style/Base.TextAppearance.AppCompat.Headline" />
+                android:text="@string/sample_text_purchase_of_customer_amount" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

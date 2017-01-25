@@ -10,7 +10,7 @@
     <dimen name="item_horizontal_large_margin">32dp</dimen>
     <dimen name="activity_vertical_Large_margin">24dp</dimen>
     <dimen name="debate_table_cell_height">40dp</dimen>
-    <dimen name="text_in_list_horizontal_margin">56dp</dimen>
+    <dimen name="text_in_list_horizontal_margin">16dp</dimen>
     <dimen name="top_of_list_margin">8dp</dimen>
     <dimen name="top_of_list_margin_in_row">4dp</dimen>
     <dimen name="text_height_in_list">56dp</dimen>
@@ -20,4 +20,7 @@
     <dimen name="height_of_card_view_title">40dp</dimen>
     <dimen name="buttom_of_card_view">24dp</dimen>
     <dimen name="padding_left_text_view">16dp</dimen>
+    <dimen name="activity_horizontal_short_margin">8dp</dimen>
+    <integer name="max_length_list_item_headline">20</integer>
+    <integer name="max_line_list_item_headline">2</integer>
 </resources>

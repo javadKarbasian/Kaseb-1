@@ -2,67 +2,66 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginRight="@dimen/activity_horizontal_short_margin"
+    android:layout_marginTop="@dimen/activity_horizontal_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/top_of_list_margin"
+        android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:baselineAligned="false"
         android:gravity="center"
-        android:layout_gravity="center_vertical"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
-            android:layout_weight="1"
             android:orientation="vertical">
 
             <mjkarbasian.moshtarimadar.Helpers.RoundImageView
                 android:id="@+id/item_list_customer_avatar"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_vertical"
                 android:contentDescription="@string/avatar_customer_insert"
                 android:onClick="pic_selector"
-                android:layout_gravity="center_vertical"
                 android:src="@drawable/add_image"
                 android:transitionName="@string/customer_image_transition" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:layout_weight="9"
+            android:layout_gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/item_list_customer_name"
+                style="@style/Base.TextAppearance.AppCompat.Title"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_weight="4"
                 android:fontFamily="sans-serif-condensed"
-                android:gravity="center_vertical|start"
-                android:paddingStart="@dimen/design_snackbar_padding_vertical_2lines"
-                style="@style/Base.TextAppearance.AppCompat.Title" />
+                android:gravity="start|center_vertical"
+                android:maxLength="@integer/max_length_list_item_headline"
+                android:maxLines="@integer/max_line_list_item_headline" />
 
             <TextView
                 android:id="@+id/item_list_purchase_amount"
+                style="@style/Base.TextAppearance.AppCompat.Headline"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="4"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="@string/sample_text_purchase_of_customer_amount"
-                style="@style/Base.TextAppearance.AppCompat.Headline" />
+                android:text="@string/sample_text_purchase_of_customer_amount" />
 
             <ImageView
                 android:id="@+id/item_list_customer_state"
