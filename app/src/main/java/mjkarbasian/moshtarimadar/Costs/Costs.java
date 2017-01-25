@@ -119,7 +119,7 @@ public class Costs extends DrawerActivity {
 
     @Override
     public void onBackPressed() {
-        
+
         CostSaleProductList productList=(CostSaleProductList)fragmentManager.findFragmentByTag("CostSaleProductList");
         if(productList!=null && fragmentManager.findFragmentByTag("CostSaleProductList").isResumed())
             Utility.activityOnBackExit(this);

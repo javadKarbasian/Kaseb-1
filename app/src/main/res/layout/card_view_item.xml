@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:style="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,6 +20,7 @@
             android:id="@+id/debator_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:background="?attr/selectableItemBackground"
             android:clickable="false"
             android:orientation="horizontal">
@@ -43,11 +44,11 @@
                 android:layout_marginLeft="@dimen/text_in_list_horizontal_margin"
                 android:layout_weight="4"
                 android:fontFamily="sans-serif-condensed"
-                android:gravity="center_vertical"
-                />
+                android:gravity="center_vertical" />
 
             <TextView
                 android:id="@+id/item_card_balance_amount"
+                style="@style/Base.TextAppearance.AppCompat.Headline"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
@@ -55,8 +56,7 @@
                 android:layout_weight="4"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
-                android:text="@string/sample_text_purchase_of_customer_amount"
-                style="@style/Base.TextAppearance.AppCompat.Headline" />
+                android:text="@string/sample_text_purchase_of_customer_amount" />
 
         </LinearLayout>
 

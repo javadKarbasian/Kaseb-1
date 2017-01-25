@@ -3,9 +3,9 @@ package mjkarbasian.moshtarimadar.AboutUs;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
+import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.Others.DrawerActivity;
 import mjkarbasian.moshtarimadar.R;
-import mjkarbasian.moshtarimadar.Setting.PreferenceHeader;
 
 /**
  * Created by Unique on 01/01/2017.
@@ -25,6 +25,11 @@ public class AboutUs extends DrawerActivity {
     @Override
     protected void onStop() {
         super.onStop();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Utility.activityOnBackExit(this);
     }
 }
 

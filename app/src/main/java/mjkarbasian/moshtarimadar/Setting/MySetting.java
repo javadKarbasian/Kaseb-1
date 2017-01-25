@@ -132,10 +132,10 @@ public class MySetting extends DrawerActivity {
     @Override
     public void onBackPressed() {
         try {
-            if (!fragmentManager.findFragmentByTag("typeFragments").isResumed())
-                Utility.activityOnBackExit(this);
-            else
+            if (fragmentManager.findFragmentByTag("typeFragments").isResumed())
                 super.onBackPressed();
+            else
+                Utility.activityOnBackExit(this);
         } catch (Exception e) {
             Utility.activityOnBackExit(this);
         }
