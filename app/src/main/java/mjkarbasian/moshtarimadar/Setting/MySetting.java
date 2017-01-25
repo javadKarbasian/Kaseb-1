@@ -136,6 +136,7 @@ public class MySetting extends DrawerActivity {
                 super.onBackPressed();
             else
                 Utility.activityOnBackExit(this);
+
         } catch (Exception e) {
             Utility.activityOnBackExit(this);
         }
