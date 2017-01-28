@@ -5,6 +5,9 @@
         android:name="k"
         android:animation="@anim/k_anim" />
     <target
+        android:name="k_2"
+        android:animation="@anim/k_2_anim" />
+    <target
         android:name="a"
         android:animation="@anim/a_anim" />
     <target
