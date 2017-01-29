@@ -36,6 +36,11 @@ public class DetailCustomer extends AppCompatActivity {
 
     MenuItem saveItem;
     MenuItem editItem;
+    MenuItem membershipItem;
+    MenuItem goldItem;
+    MenuItem silverItem;
+    MenuItem bronzeItem;
+    MenuItem ordinaryItem;
 
     String[] mProjection;
     String nameCustomer;
@@ -82,6 +87,7 @@ public class DetailCustomer extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.customer_detail_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.detail_customer_toolbar_title));
+
         if (!(Utility.getLocale(this).equals("IR"))) {
             mToolbar.setNavigationIcon(R.drawable.arrow_left);
         } else
@@ -205,8 +211,28 @@ public class DetailCustomer extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_detail_customer, menu);
+
         saveItem = (MenuItem) menu.findItem(R.id.item_save_customer);
         editItem = (MenuItem) menu.findItem(R.id.item_edit_customer);
+        membershipItem = (MenuItem) menu.findItem(R.id.customer_detail_membership_icon);
+
+        switch (mStateId) {
+            case 1:
+                membershipItem.setIcon(getResources().getDrawable(R.drawable.star_gold));
+                break;
+            case 2:
+                membershipItem.setIcon(getResources().getDrawable(R.drawable.star_silver));
+                break;
+            case 3:
+                membershipItem.setIcon(getResources().getDrawable(R.drawable.star_bronze));
+                break;
+            case 4:
+                membershipItem.setIcon(getResources().getDrawable(R.drawable.star_ordinary));
+                break;
+            default:
+                break;
+        }
+
         saveItem.setVisible(false);
 
         customerFirstName = (EditText) findViewById(R.id.customer_first_name);
@@ -376,6 +402,7 @@ public class DetailCustomer extends AppCompatActivity {
                     value = cursor.getInt(cursor.getColumnIndex(KasebContract.State._ID));
                 contentValues.put(key, value);
                 getContentResolver().update(uri, contentValues, updateSelect, updSelArg);
+                membershipItem.setIcon(getResources().getDrawable(R.drawable.star_gold));
                 break;
             case R.id.silver_member:
                 selectArg = new String[]{String.valueOf(Color.rgb(192, 192, 192))};
@@ -386,6 +413,7 @@ public class DetailCustomer extends AppCompatActivity {
                     value = cursor.getInt(cursor.getColumnIndex(KasebContract.State._ID));
                 contentValues.put(key, value);
                 getContentResolver().update(uri, contentValues, updateSelect, updSelArg);
+                membershipItem.setIcon(getResources().getDrawable(R.drawable.star_silver));
                 break;
             case R.id.bronze_member:
                 selectArg = new String[]{String.valueOf(Color.rgb(218, 165, 32))};
@@ -396,6 +424,7 @@ public class DetailCustomer extends AppCompatActivity {
                     value = cursor.getInt(cursor.getColumnIndex(KasebContract.State._ID));
                 contentValues.put(key, value);
                 getContentResolver().update(uri, contentValues, updateSelect, updSelArg);
+                membershipItem.setIcon(getResources().getDrawable(R.drawable.star_bronze));
                 break;
             case R.id.non_member:
                 selectArg = new String[]{String.valueOf(Color.rgb(176, 224, 230))};
@@ -406,6 +435,7 @@ public class DetailCustomer extends AppCompatActivity {
                     value = cursor.getInt(cursor.getColumnIndex(KasebContract.State._ID));
                 contentValues.put(key, value);
                 this.getContentResolver().update(uri, contentValues, updateSelect, updSelArg);
+                membershipItem.setIcon(getResources().getDrawable(R.drawable.star_ordinary));
                 break;
             default:
                 return true;

@@ -22,7 +22,7 @@
             android:layout_weight="5"
             android:orientation="vertical">
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/type_setting_state_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,7 +50,9 @@
                 android:padding="3dp"
                 android:src="@drawable/star"
                 android:tint="@color/colorBlack" />
+
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

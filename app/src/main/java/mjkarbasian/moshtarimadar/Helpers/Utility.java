@@ -367,7 +367,8 @@ public class Utility {
         }
 
         ViewGroup.LayoutParams par = mListView.getLayoutParams();
-        par.height = totalHeight + (mListView.getDividerHeight() * (adapter.getCount() - 1));
+        int dpValue = totalHeight + (mListView.getDividerHeight() * (adapter.getCount() - 1));
+        par.height = dipConverter(dpValue, mListView.getContext());
         mListView.setLayoutParams(par);
         mListView.requestLayout();
     }
@@ -1332,12 +1333,12 @@ public class Utility {
                         Utility.formatPurchase(
                                 _mContext,
                                 Utility.DecimalSeperation(_mContext,
-                                        Double.parseDouble(mTaxListMap.get(i).get("amount").toString())
+                                        Double.parseDouble(convertFarsiNumbersToDecimal(mTaxListMap.get(i).get("amount").toString()))
                                 )), createFontWithSize(mSmallSize)));
                 setBackGroundColor_P_BW_HA_VA(mCell2, mainTitleColorTables, 5, 3, Element.ALIGN_CENTER, Element.ALIGN_CENTER);
 
                 mCell3 = new PdfPCell(new Phrase(
-                        createFloatNumberWithString(_mContext, mTaxListMap.get(i).get("percent").toString())
+                        createFloatNumberWithString(_mContext, convertFarsiNumbersToDecimal(mTaxListMap.get(i).get("percent").toString()))
                                 + " %", createFontWithSize(mSmallSize)));
 
                 setBackGroundColor_P_BW_HA_VA(mCell3, mainTitleColorTables, 5, 3, Element.ALIGN_CENTER, Element.ALIGN_CENTER);
@@ -1405,12 +1406,12 @@ public class Utility {
                         Utility.formatPurchase(
                                 _mContext,
                                 Utility.DecimalSeperation(_mContext,
-                                        Double.parseDouble(mTaxListMap.get(i).get("amount"))
+                                        Double.parseDouble(convertFarsiNumbersToDecimal(mTaxListMap.get(i).get("amount")))
                                 )), createFontWithSize(mSmallSize)));
                 setBackGroundColor_P_BW_HA_VA(mCell2, mainTitleColorTables, 5, 3, Element.ALIGN_CENTER, Element.ALIGN_CENTER);
 
                 mCell3 = new PdfPCell(new Phrase(
-                        createFloatNumberWithString(_mContext, mTaxListMap.get(i).get("percent"))
+                        createFloatNumberWithString(_mContext, convertFarsiNumbersToDecimal(mTaxListMap.get(i).get("percent")))
                                 + " %", createFontWithSize(mSmallSize)));
 
                 mCell3.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -1792,7 +1793,7 @@ public class Utility {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        activity.finish();
+                        activity.finishAffinity();
                     }
 
                 })

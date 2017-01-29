@@ -13,7 +13,8 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:baselineAligned="false"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/top_of_list_margin">
 
         <LinearLayout
             android:layout_width="48dp"
@@ -39,20 +40,20 @@
             android:layout_gravity="center_vertical"
             android:orientation="horizontal">
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/item_list_customer_name"
                 style="@style/Base.TextAppearance.AppCompat.Title"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="start|center_vertical"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_weight="4"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="start|center_vertical"
                 android:maxLength="@integer/max_length_list_item_headline"
-                android:maxLines="@integer/max_line_list_item_headline" />
+                android:maxLines="@integer/max_line_list_item_headline"
+                android:paddingStart="@dimen/activity_horizontal_margin" />
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/item_list_purchase_amount"
                 style="@style/Base.TextAppearance.AppCompat.Headline"
                 android:layout_width="0dp"

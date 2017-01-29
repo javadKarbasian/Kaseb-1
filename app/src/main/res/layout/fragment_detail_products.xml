@@ -65,6 +65,7 @@
                                 android:layout_height="wrap_content"
                                 app:counterEnabled="true"
                                 app:counterMaxLength="30"
+                                app:errorEnabled="true"
                                 app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                                 <EditText
@@ -95,6 +96,7 @@
                                 android:id="@+id/text_input_layout_detail_product_code"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                app:errorEnabled="true"
                                 app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                                 <EditText
@@ -125,6 +127,7 @@
                                 android:id="@+id/text_input_layout_detail_product_unit"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                app:errorEnabled="true"
                                 app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                                 <EditText
@@ -157,6 +160,7 @@
                                 android:layout_height="wrap_content"
                                 app:counterEnabled="true"
                                 app:counterMaxLength="50"
+                                app:errorEnabled="true"
                                 app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                                 <EditText
@@ -197,6 +201,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.5"
+                                app:errorEnabled="true"
                                 app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                                 <TextView

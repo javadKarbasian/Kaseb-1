@@ -132,6 +132,7 @@
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/colorBlack"
             android:textColorHint="@color/colorBlack" />
+
     </LinearLayout>
 
 </LinearLayout>

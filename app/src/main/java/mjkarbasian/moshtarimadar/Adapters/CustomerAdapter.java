@@ -23,7 +23,6 @@ import mjkarbasian.moshtarimadar.R;
 public class CustomerAdapter extends CursorAdapter {
 
     String name;
-    String stateId;
     private LayoutInflater cursorInflater;
 
     public CustomerAdapter(Context context, Cursor c, int flags) {
@@ -96,7 +95,6 @@ public class CustomerAdapter extends CursorAdapter {
         if (colorCursor.moveToFirst())
             imageViewState.setColorFilter(colorCursor.getInt(colorCursor.getColumnIndex(KasebContract.State.COLUMN_STATE_COLOR)));
 
-        stateId = cursor.getString(cursor.getColumnIndex(KasebContract.Customers.COLUMN_STATE_ID));
         name = cursor.getString(cursor.getColumnIndex(KasebContract.Customers.COLUMN_FIRST_NAME)) + "   " +
                 cursor.getString(cursor.getColumnIndex(KasebContract.Customers.COLUMN_LAST_NAME));
 

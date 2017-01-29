@@ -25,7 +25,7 @@
             android:src="@drawable/add_image"
             android:transitionName="@string/customer_image_transition" />
 
-        <TextView
+        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
             android:id="@+id/item_list_tour_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"

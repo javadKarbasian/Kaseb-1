@@ -17,6 +17,7 @@
             android:id="@+id/text_input_layout_dialog_edit_cost_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:errorEnabled="true"
             app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
@@ -32,6 +33,7 @@
             android:id="@+id/text_input_layout_dialog_edit_cost_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:errorEnabled="true"
             app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
@@ -47,6 +49,7 @@
             android:id="@+id/text_input_layout_dialog_edit_cost_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:errorEnabled="true"
             app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
@@ -76,13 +79,14 @@
             android:id="@+id/text_input_layout_dialog_edit_cost_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:errorEnabled="true"
             app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
                 android:id="@+id/dialog_edit_cost_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_date_picker"
+                android:hint="@string/hint_date"
                 android:inputType="date"
                 android:maxLength="10" />
 
@@ -91,6 +95,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:errorEnabled="true"
             app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText

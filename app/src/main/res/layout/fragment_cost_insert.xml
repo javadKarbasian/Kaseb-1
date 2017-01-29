@@ -14,6 +14,7 @@
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         app:counterEnabled="true"
         app:counterMaxLength="30"
+        app:errorEnabled="true"
         app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
         <EditText
@@ -31,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
+        app:errorEnabled="true"
         app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
         <EditText
@@ -49,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
+        app:errorEnabled="true"
         app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
         <EditText
@@ -87,6 +90,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:errorEnabled="true"
         app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
         <EditText
@@ -94,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:hint="@string/hint_date_picker"
+            android:hint="@string/hint_date"
             android:inputType="date"
             android:maxLength="10" />
 
@@ -107,6 +111,7 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         app:counterEnabled="true"
         app:counterMaxLength="50"
+        app:errorEnabled="true"
         app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
         <EditText

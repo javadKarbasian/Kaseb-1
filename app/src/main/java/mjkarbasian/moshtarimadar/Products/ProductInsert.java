@@ -21,6 +21,8 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.ParseException;
+
 import mjkarbasian.moshtarimadar.Costs.CostInsert;
 import mjkarbasian.moshtarimadar.Data.KasebContract;
 import mjkarbasian.moshtarimadar.Helpers.Utility;
@@ -36,6 +38,7 @@ public class ProductInsert extends Fragment {
     //region declare values
     private static final String LOG_TAG = CostInsert.class.getSimpleName();
     View rootView;
+    Boolean firstCome = false;
 
     AlertDialog.Builder builderTour;
     AlertDialog dialogViewTour;
@@ -147,7 +150,7 @@ public class ProductInsert extends Fragment {
         //endregion buy price
 
         //region buy date
-        Utility.setAsteriskToTextInputLayout(buyDateTextInputLayout, getResources().getString(R.string.hint_date_picker), true);
+        Utility.setAsteriskToTextInputLayout(buyDateTextInputLayout, getResources().getString(R.string.hint_date), true);
         //endregion buy date
 
         //endregion handle asterisk for necessary fields
@@ -220,39 +223,43 @@ public class ProductInsert extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    Float mDiscountAmount = Float.valueOf(discountAmount.getText().toString());
-                    Float mSalePrice = Float.valueOf(salePrice.getText().toString());
+                if (firstCome) {
+                    try {
+                        Float mDiscountAmount = Float.valueOf(discountAmount.getText().toString());
+                        Float mSalePrice = Float.valueOf(salePrice.getText().toString());
 
-                    if (mDiscountAmount > mSalePrice) {
-                        discountAmount.setText(salePrice.getText().toString());
-                        discountAmountTextInputLayout.setError(getResources().getString(R.string.discount_amount_not_more_than_sale_price));
-                        discountAmount.setSelectAllOnFocus(true);
-                        discountAmount.selectAll();
-                        discountAmount.requestFocus();
+                        if (mDiscountAmount > mSalePrice) {
+                            discountAmount.setText(salePrice.getText().toString());
+                            discountAmountTextInputLayout.setError(getResources().getString(R.string.discount_amount_not_more_than_sale_price));
+                            discountAmount.setSelectAllOnFocus(true);
+                            discountAmount.selectAll();
+                            discountAmount.requestFocus();
+                        }
+                    } catch (Exception e) {
+                        if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
+                            salePriceTextInputLayout.setError(getResources().getString(R.string.example_price));
+                            salePrice.requestFocus();
+                        } else
+                            discountAmountTextInputLayout.setError(getResources().getString(R.string.example_price));
                     }
-                } catch (Exception e) {
-                    if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
-                        salePriceTextInputLayout.setError(getResources().getString(R.string.example_price));
-                        salePrice.requestFocus();
-                    } else
-                        discountAmountTextInputLayout.setError(getResources().getString(R.string.example_price));
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                try {
-                    Float mDiscountAmount = Float.valueOf(discountAmount.getText().toString());
-                    Float mSalePrice = Float.valueOf(salePrice.getText().toString());
+                if (firstCome) {
+                    try {
+                        Float mDiscountAmount = Float.valueOf(discountAmount.getText().toString());
+                        Float mSalePrice = Float.valueOf(salePrice.getText().toString());
 
-                    buyPrice.setText(String.format("%.2f", Float.valueOf(mSalePrice - mDiscountAmount)));
-                } catch (Exception e) {
-                    if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
-                        salePriceTextInputLayout.setError(getResources().getString(R.string.example_price));
-                        salePrice.requestFocus();
-                    } else
-                        discountAmountTextInputLayout.setError(getResources().getString(R.string.example_price));
+                        buyPrice.setText(String.format("%.2f", Float.valueOf(mSalePrice - mDiscountAmount)));
+                    } catch (Exception e) {
+                        if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
+                            salePriceTextInputLayout.setError(getResources().getString(R.string.example_price));
+                            salePrice.requestFocus();
+                        } else
+                            discountAmountTextInputLayout.setError(getResources().getString(R.string.example_price));
+                    }
                 }
             }
         });
@@ -266,42 +273,46 @@ public class ProductInsert extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    Float mDiscountPercent = Float.valueOf(discountPercent.getText().toString());
-                    Float mSalePrice = Float.valueOf(salePrice.getText().toString());
+                if (firstCome) {
+                    try {
+                        Float mDiscountPercent = Float.valueOf(discountPercent.getText().toString());
+                        Float mSalePrice = Float.valueOf(salePrice.getText().toString());
 
-                    if (mDiscountPercent > 100) {
-                        discountAmount.setText(String.format("%.2f", Float.valueOf(mDiscountPercent * mSalePrice / 100)));
+                        if (mDiscountPercent > 100) {
+                            discountAmount.setText(String.format("%.2f", Float.valueOf(mDiscountPercent * mSalePrice / 100)));
 
-                        discountPercent.setText(Utility.doubleFormatter(100));
-                        discountPercentTextInputLayout.setError(getResources().getString(R.string.not_more_hundred));
-                        discountPercent.setSelectAllOnFocus(true);
-                        discountPercent.selectAll();
+                            discountPercent.setText(Utility.doubleFormatter(100));
+                            discountPercentTextInputLayout.setError(getResources().getString(R.string.not_more_hundred));
+                            discountPercent.setSelectAllOnFocus(true);
+                            discountPercent.selectAll();
+                        }
+                    } catch (Exception e) {
+                        if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
+                            salePriceTextInputLayout.setError(getResources().getString(R.string.example_price));
+                            salePrice.requestFocus();
+                        } else
+                            discountPercentTextInputLayout.setError(getResources().getString(R.string.example_quantity));
                     }
-                } catch (Exception e) {
-                    if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
-                        salePriceTextInputLayout.setError(getResources().getString(R.string.example_price));
-                        salePrice.requestFocus();
-                    } else
-                        discountPercentTextInputLayout.setError(getResources().getString(R.string.example_quantity));
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                try {
-                    Float mDiscountPercent = Float.valueOf(discountPercent.getText().toString());
-                    Float mSalePrice = Float.valueOf(salePrice.getText().toString());
+                if (firstCome) {
+                    try {
+                        Float mDiscountPercent = Float.valueOf(discountPercent.getText().toString());
+                        Float mSalePrice = Float.valueOf(salePrice.getText().toString());
 
-                    buyPrice.setText(String.format("%.2f",
-                            Float.valueOf((float) ((Float.valueOf(100 - mDiscountPercent) / 100.0) * mSalePrice))));
-                    discountAmount.setText(String.format("%.2f", Float.valueOf(mDiscountPercent * mSalePrice / 100)));
-                } catch (Exception e) {
-                    if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
-                        salePriceTextInputLayout.setError(getResources().getString(R.string.example_price));
-                        salePrice.requestFocus();
-                    } else
-                        discountPercentTextInputLayout.setError(getResources().getString(R.string.example_quantity));
+                        buyPrice.setText(String.format("%.2f",
+                                Float.valueOf((float) ((Float.valueOf(100 - mDiscountPercent) / 100.0) * mSalePrice))));
+                        discountAmount.setText(String.format("%.2f", Float.valueOf(mDiscountPercent * mSalePrice / 100)));
+                    } catch (Exception e) {
+                        if (salePrice.getText().toString().equals(null) || salePrice.getText().toString().equals("")) {
+                            salePriceTextInputLayout.setError(getResources().getString(R.string.example_price));
+                            salePrice.requestFocus();
+                        } else
+                            discountPercentTextInputLayout.setError(getResources().getString(R.string.example_quantity));
+                    }
                 }
             }
         });
@@ -317,6 +328,8 @@ public class ProductInsert extends Fragment {
         productName.requestFocus();
         productCode.setText(Utility.preInsertProductCode(getActivity()));
         buyDate.setText(Utility.preInsertDate(getActivity()));
+
+        firstCome = true;
         super.onResume();
     }
 
@@ -330,47 +343,51 @@ public class ProductInsert extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.save_inputs: {
-                if (checkValidityWithChangeColorOfHelperText()) {
+                try {
+                    if (checkValidityWithChangeColorOfHelperText()) {
 
-                    productValues.put(KasebContract.Products.COLUMN_PRODUCT_NAME, productName.getText().toString());
-                    productValues.put(KasebContract.Products.COLUMN_PRODUCT_CODE, productCode.getText().toString());
-                    productValues.put(KasebContract.Products.COLUMN_UNIT, unit.getText().toString());
-                    productValues.put(KasebContract.Products.COLUMN_DESCRIPTION, productDescription.getText().toString());
-                    insertUri = getActivity().getContentResolver().insert(
-                            KasebContract.Products.CONTENT_URI,
-                            productValues
-                    );
+                        productValues.put(KasebContract.Products.COLUMN_PRODUCT_NAME, productName.getText().toString());
+                        productValues.put(KasebContract.Products.COLUMN_PRODUCT_CODE, productCode.getText().toString());
+                        productValues.put(KasebContract.Products.COLUMN_UNIT, unit.getText().toString());
+                        productValues.put(KasebContract.Products.COLUMN_DESCRIPTION, productDescription.getText().toString());
+                        insertUri = getActivity().getContentResolver().insert(
+                                KasebContract.Products.CONTENT_URI,
+                                productValues
+                        );
 
-                    productHistoryValues.put(KasebContract.ProductHistory.COLUMN_COST,
-                            Utility.convertFarsiNumbersToDecimal(buyPrice.getText().toString()));
-                    productHistoryValues.put(KasebContract.ProductHistory.COLUMN_QUANTITY,
-                            Utility.convertFarsiNumbersToDecimal(quantity.getText().toString()));
-                    productHistoryValues.put(KasebContract.ProductHistory.COLUMN_SALE_PRICE,
-                            Utility.convertFarsiNumbersToDecimal(salePrice.getText().toString()));
-                    productHistoryValues.put(KasebContract.ProductHistory.COLUMN_DATE, buyDate.getText().toString());
-                    productHistoryValues.put(KasebContract.ProductHistory.COLUMN_PRODUCT_ID, insertUri.getLastPathSegment());
+                        productHistoryValues.put(KasebContract.ProductHistory.COLUMN_COST,
+                                Utility.convertFarsiNumbersToDecimal(buyPrice.getText().toString()));
+                        productHistoryValues.put(KasebContract.ProductHistory.COLUMN_QUANTITY,
+                                Utility.convertFarsiNumbersToDecimal(quantity.getText().toString()));
+                        productHistoryValues.put(KasebContract.ProductHistory.COLUMN_SALE_PRICE,
+                                Utility.convertFarsiNumbersToDecimal(salePrice.getText().toString()));
+                        productHistoryValues.put(KasebContract.ProductHistory.COLUMN_DATE, buyDate.getText().toString());
+                        productHistoryValues.put(KasebContract.ProductHistory.COLUMN_PRODUCT_ID, insertUri.getLastPathSegment());
 
-                    insertUri = getActivity().getContentResolver().insert(
-                            KasebContract.ProductHistory.CONTENT_URI,
-                            productHistoryValues
-                    );
+                        insertUri = getActivity().getContentResolver().insert(
+                                KasebContract.ProductHistory.CONTENT_URI,
+                                productHistoryValues
+                        );
 
-                    //region disabling edit
-                    productName.setEnabled(false);
-                    productCode.setEnabled(false);
-                    unit.setEnabled(false);
-                    productDescription.setEnabled(false);
-                    buyPrice.setEnabled(false);
-                    quantity.setEnabled(false);
-                    salePrice.setEnabled(false);
-                    buyDate.setEnabled(false);
+                        //region disabling edit
+                        productName.setEnabled(false);
+                        productCode.setEnabled(false);
+                        unit.setEnabled(false);
+                        productDescription.setEnabled(false);
+                        buyPrice.setEnabled(false);
+                        quantity.setEnabled(false);
+                        salePrice.setEnabled(false);
+                        buyDate.setEnabled(false);
 
-                    //just a message to show everything are under control
-                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.msg_insert_succeed),
-                            Toast.LENGTH_LONG).show();
+                        //just a message to show everything are under control
+                        Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.msg_insert_succeed),
+                                Toast.LENGTH_LONG).show();
 
-                    getHelperText();
-                    backToLastPage();
+                        getHelperText();
+                        backToLastPage();
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
 
                 break;
@@ -382,6 +399,8 @@ public class ProductInsert extends Fragment {
     // this method back to the activity view. this must be a utility method.
     private void backToLastPage() {
         Utility.clearForm((ViewGroup) rootView);
+        productValues = new ContentValues();
+        productHistoryValues = new ContentValues();
         getFragmentManager().popBackStackImmediate();
     }
 
@@ -398,7 +417,7 @@ public class ProductInsert extends Fragment {
     }
 
     // this method check the validation and correct entries. its check fill first and then check the validation rules.
-    private boolean checkValidityWithChangeColorOfHelperText() {
+    private boolean checkValidityWithChangeColorOfHelperText() throws ParseException {
 
         if (!Utility.checkForValidityForEditTextNullOrEmptyAndItterative(
                 getActivity(), productName, productNameTextInputLayout, KasebContract.Products.CONTENT_URI,
@@ -446,8 +465,8 @@ public class ProductInsert extends Fragment {
             buyPrice.requestFocus();
             return false;
         } else {
-            Float mBuyPrice = Float.valueOf(buyPrice.getText().toString());
-            Float mSalePrice = Float.valueOf(salePrice.getText().toString());
+            Float mBuyPrice = Utility.createFloatNumberWithString(getActivity(), buyPrice.getText().toString());
+            Float mSalePrice = Utility.createFloatNumberWithString(getActivity(), salePrice.getText().toString());
 
             if (mBuyPrice > mSalePrice) {
                 buyPriceTextInputLayout.setError(String.format("%s %s",

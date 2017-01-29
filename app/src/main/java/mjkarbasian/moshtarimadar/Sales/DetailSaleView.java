@@ -150,9 +150,9 @@ public class DetailSaleView extends AppCompatActivity {
     TextInputLayout taxDiscountPercentTextInputLayout;
 
     ListView modeList;
-    ListView mProductListView;
-    ListView mPaymentListView;
-    ListView mTaxListView;
+    LinearLayout mProductLinearLayout;
+    LinearLayout mPaymentLinearLayout;
+    LinearLayout mTaxLinearLayout;
 
     TypesSettingAdapter cursorAdapter = null;
     CostSaleProductAdapter mAdapter = null;
@@ -262,9 +262,9 @@ public class DetailSaleView extends AppCompatActivity {
         imageButtonPayments = (ImageButton) findViewById(R.id.content_detail_sale_insert_add_payment_image_button);
         imageButtonTaxes = (ImageButton) findViewById(R.id.content_detail_sale_insert_add_taxDiscount_image_button);
 
-        mProductListView = (ListView) findViewById(R.id.list_view_fragment_card_view_products);
-        mPaymentListView = (ListView) findViewById(R.id.list_view_fragment_card_view_payments);
-        mTaxListView = (ListView) findViewById(R.id.list_view_fragment_card_view_taxes);
+        mProductLinearLayout = (LinearLayout) findViewById(R.id.linear_layout_fragment_card_view_products);
+        mPaymentLinearLayout = (LinearLayout) findViewById(R.id.linear_layout_fragment_card_view_payments);
+        mTaxLinearLayout = (LinearLayout) findViewById(R.id.linear_layout_fragment_card_view_taxes);
         //endregion Initialize Some Views
 
         //region Disable Views
@@ -273,9 +273,9 @@ public class DetailSaleView extends AppCompatActivity {
 
         addCustomerLayout.setEnabled(false);
 
-        mProductListView.setEnabled(false);
-        mPaymentListView.setEnabled(false);
-        mTaxListView.setEnabled(false);
+        mProductLinearLayout.setEnabled(false);
+        mPaymentLinearLayout.setEnabled(false);
+        mTaxLinearLayout.setEnabled(false);
 
         imageButtonProducts.setEnabled(false);
         imageButtonPayments.setEnabled(false);
@@ -535,10 +535,6 @@ public class DetailSaleView extends AppCompatActivity {
                 mCardViewTaxes.getTaxAdapter(mTaxListMap);
             }
         //endregion Get Taxes
-
-        Utility.setHeightOfListView(mProductListView);
-        Utility.setHeightOfListView(mPaymentListView);
-        Utility.setHeightOfListView(mTaxListView);
     }
 
     @Override
@@ -575,6 +571,8 @@ public class DetailSaleView extends AppCompatActivity {
                         e.printStackTrace();
                     } catch (DocumentException e) {
                         e.printStackTrace();
+                    } catch (Exception e) {
+                        Toast.makeText(DetailSaleView.this, R.string.problem_in_pdf_reader, Toast.LENGTH_LONG).show();
                     }
                     //endregion Print
                 } else
@@ -750,9 +748,10 @@ public class DetailSaleView extends AppCompatActivity {
                     saleCode.setEnabled(false);
                     saleDate.setEnabled(false);
 
-                    mProductListView.setEnabled(false);
-                    mPaymentListView.setEnabled(false);
-                    mTaxListView.setEnabled(false);
+
+                    mProductLinearLayout.setClickable(false);
+                    mPaymentLinearLayout.setEnabled(false);
+                    mTaxLinearLayout.setEnabled(false);
 
                     imageButtonProducts.setEnabled(false);
                     imageButtonPayments.setEnabled(false);
@@ -775,6 +774,8 @@ public class DetailSaleView extends AppCompatActivity {
                         e.printStackTrace();
                     } catch (DocumentException e) {
                         e.printStackTrace();
+                    } catch (Exception e) {
+                        Toast.makeText(DetailSaleView.this, R.string.problem_in_pdf_reader, Toast.LENGTH_LONG).show();
                     }
                     //endregion Print
 
@@ -793,10 +794,9 @@ public class DetailSaleView extends AppCompatActivity {
                 saleCode.setEnabled(true);
                 saleDate.setEnabled(true);
 
-                mProductListView.setEnabled(true);
-                mPaymentListView.setEnabled(true);
-                mTaxListView.setEnabled(true);
-
+                mProductLinearLayout.setClickable(true);
+                mPaymentLinearLayout.setEnabled(true);
+                mTaxLinearLayout.setEnabled(true);
 
                 imageButtonProducts.setEnabled(true);
                 imageButtonPayments.setEnabled(true);
@@ -809,7 +809,7 @@ public class DetailSaleView extends AppCompatActivity {
                 //endregion sale code
 
                 //region sale date
-                Utility.setAsteriskToTextInputLayout(saleDateTextInputLayout, getResources().getString(R.string.hint_date_picker), true);
+                Utility.setAsteriskToTextInputLayout(saleDateTextInputLayout, getResources().getString(R.string.hint_date), true);
                 //endregion sale date
 
                 //endregion handle asterisk for necessary fields
@@ -1049,7 +1049,7 @@ public class DetailSaleView extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                     }
                 })
-                .setTitle(R.string.fab_add_product);
+                .setTitle(R.string.fab_add_payment);
         dialogView = builder.create();
         dialogView.show();
 

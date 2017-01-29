@@ -38,7 +38,7 @@
                     android:orientation="vertical"
                     android:showDividers="middle">
 
-                    <TextView
+                    <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/height_of_card_view_title"
                         android:background="@color/colorPrimary"
@@ -72,7 +72,7 @@
                             android:scaleType="fitXY"
                             android:src="@drawable/kaseb_pic" />
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:id="@+id/detail_sales_info_customer_name"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -87,7 +87,7 @@
                             android:textColorHint="@color/colorAccent"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:id="@+id/detail_sales_info_customer_family"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
@@ -107,6 +107,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/top_of_list_margin"
                         android:paddingLeft="@dimen/padding_left_text_view"
+                        app:errorEnabled="false"
                         app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                         <EditText
@@ -131,6 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/top_of_list_margin_in_row"
                         android:paddingLeft="@dimen/padding_left_text_view"
+                        app:errorEnabled="false"
                         app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                         <EditText
@@ -140,7 +142,7 @@
                             android:layout_marginTop="@dimen/top_of_list_margin"
                             android:ems="10"
                             android:gravity="center_vertical|start"
-                            android:hint="@string/hint_date_picker"
+                            android:hint="@string/hint_date"
                             android:inputType="date"
                             android:maxLength="10"
                             android:nestedScrollingEnabled="false"
@@ -173,7 +175,7 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:id="@+id/text_view_title_list_items"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/height_of_card_view_title"
@@ -207,7 +209,7 @@
                             android:layout_height="match_parent"
                             android:orientation="horizontal">
 
-                            <TextView
+                            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginRight="@dimen/top_of_list_margin_in_row"
@@ -219,7 +221,7 @@
                                 android:textColorHint="@color/colorWhite"
                                 android:textSize="@dimen/text_size_in_list" />
 
-                            <TextView
+                            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginRight="@dimen/top_of_list_margin_in_row"
@@ -229,9 +231,9 @@
                                 android:textAppearance="?android:textAppearanceMedium"
                                 android:textColor="@color/colorWhite"
                                 android:textColorHint="@color/colorWhite"
-                                android:textSize="@dimen/text_size_in_list" />
+                                android:textSize="@dimen/abc_text_size_menu_material" />
 
-                            <TextView
+                            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginRight="@dimen/top_of_list_margin_in_row"
@@ -243,7 +245,7 @@
                                 android:textColorHint="@color/colorWhite"
                                 android:textSize="@dimen/text_size_in_list" />
 
-                            <TextView
+                            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginRight="@dimen/top_of_list_margin_in_row"
@@ -268,7 +270,6 @@
 
             </android.support.v7.widget.CardView>
 
-
             <android.support.v7.widget.CardView
                 android:id="@+id/card_detail_sale_insert_tax_discounts"
                 style="@style/card_view"
@@ -289,7 +290,7 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/height_of_card_view_title"
                             android:background="@color/colorPrimary"
@@ -321,7 +322,7 @@
                             android:layout_gravity="center_horizontal"
                             android:orientation="horizontal">
 
-                            <TextView
+                            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginRight="@dimen/top_of_list_margin_in_row"
@@ -334,7 +335,7 @@
                                 android:textColorHint="@color/colorWhite"
                                 android:textSize="@dimen/text_size_in_list" />
 
-                            <TextView
+                            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginRight="@dimen/top_of_list_margin_in_row"
@@ -346,7 +347,7 @@
                                 android:textColorHint="@color/colorWhite"
                                 android:textSize="@dimen/text_size_in_list" />
 
-                            <TextView
+                            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginRight="@dimen/top_of_list_margin_in_row"
@@ -359,6 +360,7 @@
                                 android:textSize="@dimen/text_size_in_list" />
 
                         </LinearLayout>
+
                     </LinearLayout>
 
                     <FrameLayout
@@ -366,7 +368,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:layout_below="@+id/My_Container_2_ID"></FrameLayout>
+                        android:layout_below="@+id/My_Container_2_ID" />
 
                 </LinearLayout>
 
@@ -392,7 +394,7 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/height_of_card_view_title"
                             android:background="@color/colorPrimary"
@@ -424,7 +426,7 @@
                             android:layout_gravity="center"
                             android:orientation="horizontal">
 
-                            <TextView
+                            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginRight="@dimen/top_of_list_margin_in_row"
@@ -437,7 +439,7 @@
                                 android:textColorHint="@color/colorWhite"
                                 android:textSize="@dimen/text_size_in_list" />
 
-                            <TextView
+                            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginRight="@dimen/top_of_list_margin_in_row"
@@ -449,7 +451,7 @@
                                 android:textColorHint="@color/colorWhite"
                                 android:textSize="@dimen/text_size_in_list" />
 
-                            <TextView
+                            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginRight="@dimen/top_of_list_margin_in_row"
@@ -462,6 +464,7 @@
                                 android:textSize="@dimen/text_size_in_list" />
 
                         </LinearLayout>
+
                     </LinearLayout>
 
                     <FrameLayout
@@ -469,8 +472,10 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:layout_below="@+id/My_Container_1_ID"></FrameLayout>
+                        android:layout_below="@+id/My_Container_1_ID" />
+
                 </LinearLayout>
+
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -491,7 +496,7 @@
                     android:orientation="vertical"
                     android:showDividers="middle">
 
-                    <TextView
+                    <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/height_of_card_view_title"
                         android:background="@color/colorPrimary"
@@ -508,7 +513,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/top_of_list_margin"
@@ -517,13 +522,12 @@
                             android:layout_weight="1"
                             android:gravity="start"
                             android:text="@string/detail_sales_summary_total_amount"
-
                             android:textAppearance="?android:textAppearanceMedium"
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:id="@+id/card_detail_sale_summary_total_amount"
                             android:layout_width="0dp"
                             android:layout_height="fill_parent"
@@ -531,10 +535,10 @@
                             android:layout_weight="1"
                             android:gravity="start"
                             android:textAppearance="?android:textAppearanceMedium"
-
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -542,7 +546,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/top_of_list_margin"
@@ -557,7 +561,7 @@
                             android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:id="@+id/card_detail_sale_summary_tax"
                             android:layout_width="0dp"
                             android:layout_height="fill_parent"
@@ -565,10 +569,10 @@
                             android:layout_weight="1"
                             android:gravity="start"
                             android:textAppearance="?android:textAppearanceMedium"
-
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -576,7 +580,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/top_of_list_margin"
@@ -585,13 +589,12 @@
                             android:layout_weight="1"
                             android:gravity="start"
                             android:text="@string/detail_sales_summary_discount"
-
                             android:textAppearance="?android:textAppearanceMedium"
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:id="@+id/card_detail_sale_summary_discount"
                             android:layout_width="0dp"
                             android:layout_height="fill_parent"
@@ -599,10 +602,10 @@
                             android:layout_weight="1"
                             android:gravity="start"
                             android:textAppearance="?android:textAppearanceMedium"
-
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -611,7 +614,7 @@
                         android:layout_marginTop="3dp"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/top_of_list_margin"
@@ -625,7 +628,7 @@
                             android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:id="@+id/card_detail_sale_summary_final_amount"
                             android:layout_width="0dp"
                             android:layout_height="fill_parent"
@@ -636,6 +639,7 @@
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -643,7 +647,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/top_of_list_margin"
@@ -657,7 +661,7 @@
                             android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:id="@+id/card_detail_sale_summary_payed"
                             android:layout_width="0dp"
                             android:layout_height="fill_parent"
@@ -668,6 +672,7 @@
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -677,7 +682,7 @@
                         android:layout_marginTop="3dp"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/top_of_list_margin"
@@ -691,7 +696,7 @@
                             android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
 
-                        <TextView
+                        <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                             android:id="@+id/card_detail_sale_summary_balance"
                             android:layout_width="0dp"
                             android:layout_height="fill_parent"
@@ -702,8 +707,11 @@
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorBlack"
                             android:textSize="@dimen/text_size_in_list_sub_title" />
+
                     </LinearLayout>
+
                 </LinearLayout>
+
             </android.support.v7.widget.CardView>
 
         </LinearLayout>

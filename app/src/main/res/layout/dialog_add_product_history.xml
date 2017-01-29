@@ -15,6 +15,7 @@
             android:id="@+id/text_input_layout_add_product_history_sale_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:errorEnabled="true"
             app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
@@ -31,6 +32,7 @@
             android:id="@+id/text_input_layout_add_product_history_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:errorEnabled="true"
             app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
@@ -47,6 +49,7 @@
             android:id="@+id/text_input_layout_add_product_history_buy_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:errorEnabled="true"
             app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
@@ -63,13 +66,14 @@
             android:id="@+id/text_input_layout_add_product_history_buy_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:errorEnabled="true"
             app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
                 android:id="@+id/add_product_history_buy_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_date_picker"
+                android:hint="@string/hint_date"
                 android:inputType="date"
                 android:maxLength="10" />
 
@@ -79,6 +83,7 @@
             android:id="@+id/text_input_layout_add_product_history_discount_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:errorEnabled="true"
             app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText
@@ -95,6 +100,7 @@
             android:id="@+id/text_input_layout_add_product_history_discount_percent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:errorEnabled="true"
             app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
             <EditText

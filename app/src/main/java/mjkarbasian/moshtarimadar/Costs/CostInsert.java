@@ -31,15 +31,18 @@ public class CostInsert extends Fragment {
     ContentValues costValues = new ContentValues();
     View rootView;
     Spinner costType;
+
     EditText costName;
     EditText costCode;
     EditText costAmount;
     EditText costDate;
     EditText costDescription;
+
     TextInputLayout costNameTextInputLayout;
     TextInputLayout costAmountTextInputLayout;
     TextInputLayout costDateTextInputLayout;
     TextInputLayout costCodeTextInputLayout;
+
     private Uri insertUri;
     //endregion declare values
 
@@ -95,7 +98,7 @@ public class CostInsert extends Fragment {
         //endregion cost amount
 
         //region cost date
-        Utility.setAsteriskToTextInputLayout(costDateTextInputLayout, getResources().getString(R.string.hint_date_picker), true);
+        Utility.setAsteriskToTextInputLayout(costDateTextInputLayout, getResources().getString(R.string.hint_date), true);
         //endregion cost date
 
         //endregion handle asterisk for necessary fields
@@ -142,6 +145,7 @@ public class CostInsert extends Fragment {
     // this method back to the activity view. this must be a utility method.
     private void backToLastPage() {
         Utility.clearForm((ViewGroup) rootView);
+        costValues = new ContentValues();
         getFragmentManager().popBackStackImmediate();
     }
 

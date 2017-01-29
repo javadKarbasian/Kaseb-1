@@ -228,10 +228,8 @@ public class Customers extends DrawerActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    Toast toast = Toast.makeText(this, R.string.problem_in_crop_image, Toast.LENGTH_LONG);
-                    toast.show();
-                }
+                } else
+                    Toast.makeText(this, R.string.problem_in_crop_image, Toast.LENGTH_LONG).show();
             }
         }
     }

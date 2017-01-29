@@ -61,6 +61,7 @@
                     android:layout_height="wrap_content"
                     app:counterEnabled="true"
                     app:counterMaxLength="30"
+                    app:errorEnabled="true"
                     app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                     <EditText
@@ -79,6 +80,7 @@
                     android:layout_height="wrap_content"
                     app:counterEnabled="true"
                     app:counterMaxLength="30"
+                    app:errorEnabled="true"
                     app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                     <EditText
@@ -95,6 +97,7 @@
                     android:id="@+id/dialog_edit_profile_kaseb_text_input_layout_input_phone_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:errorEnabled="true"
                     app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                     <EditText
@@ -111,6 +114,7 @@
                     android:id="@+id/dialog_edit_profile_kaseb_text_input_layout_input_birth_day"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:errorEnabled="true"
                     app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                     <EditText
@@ -129,6 +133,7 @@
                     android:layout_height="wrap_content"
                     app:counterEnabled="true"
                     app:counterMaxLength="40"
+                    app:errorEnabled="true"
                     app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                     <EditText
@@ -145,6 +150,7 @@
                     android:id="@+id/dialog_edit_profile_kaseb_text_input_layout_input_phone_work"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:errorEnabled="true"
                     app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                     <EditText
@@ -161,6 +167,7 @@
                     android:id="@+id/dialog_edit_profile_kaseb_text_input_layout_input_phone_fax"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:errorEnabled="true"
                     app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                     <EditText
@@ -177,6 +184,7 @@
                     android:id="@+id/dialog_edit_profile_kaseb_text_input_layout_input_phone_other"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:errorEnabled="true"
                     app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                     <EditText
@@ -195,6 +203,7 @@
                     android:layout_height="wrap_content"
                     app:counterEnabled="true"
                     app:counterMaxLength="20"
+                    app:errorEnabled="true"
                     app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                     <EditText
@@ -213,6 +222,7 @@
                     android:layout_height="wrap_content"
                     app:counterEnabled="true"
                     app:counterMaxLength="20"
+                    app:errorEnabled="true"
                     app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                     <EditText
@@ -231,6 +241,7 @@
                     android:layout_height="wrap_content"
                     app:counterEnabled="true"
                     app:counterMaxLength="50"
+                    app:errorEnabled="true"
                     app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                     <EditText
@@ -249,6 +260,7 @@
                     android:layout_height="wrap_content"
                     app:counterEnabled="true"
                     app:counterMaxLength="15"
+                    app:errorEnabled="true"
                     app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                     <EditText
@@ -268,6 +280,7 @@
                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                     app:counterEnabled="true"
                     app:counterMaxLength="50"
+                    app:errorEnabled="true"
                     app:errorTextAppearance="@style/text_input_layout_style_has_error">
 
                     <EditText

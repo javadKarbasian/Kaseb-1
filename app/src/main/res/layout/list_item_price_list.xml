@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/price_list_buy_price"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
                 android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorBlack" />
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/price_list_sale_price"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -37,6 +37,7 @@
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorBlack" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -52,7 +53,7 @@
                 android:layout_marginRight="@dimen/top_of_list_margin_in_row"
                 android:orientation="vertical">
 
-                <TextView
+                <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                     android:id="@+id/price_list_date_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,7 +62,7 @@
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorBlack" />
 
-                <TextView
+                <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                     android:id="@+id/price_list_quantity_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -70,6 +71,7 @@
                     android:text="@string/quantity"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorBlack" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -77,22 +79,25 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
+                <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                     android:id="@+id/price_list_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorBlack" />
 
-                <TextView
+                <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                     android:id="@+id/price_list_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/top_of_list_margin_in_row"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorBlack" />
+
             </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
+
 </ScrollView>

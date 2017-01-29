@@ -327,6 +327,7 @@ public class CustomerInsert extends Fragment {
     private void backToLastPage() {
         Utility.clearForm((ViewGroup) rootView);
         getHelperText();
+        customerValues = new ContentValues();
         getFragmentManager().popBackStackImmediate();
     }
 
@@ -382,48 +383,8 @@ public class CustomerInsert extends Fragment {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-                    Toast toast = Toast.makeText(getActivity(), R.string.problem_in_crop_image, Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                if (data.getExtras() != null) {
-                    photo = data.getExtras().getParcelable("data");
-                    mCustomerAvatar.setImageBitmap(photo);
-
-                    firstName.setSelectAllOnFocus(true);
-                    firstName.selectAll();
-                    firstName.requestFocus();
-
-                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                    photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
-                    byte[] imagegBytes = byteArrayOutputStream.toByteArray();
-                    customerValues.put(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE, imagegBytes);
-                } else if (data.getData() != null) {
-                    Uri picUri = data.getData();
-                    BufferedInputStream bufferInputStream = null;
-                    try {
-                        URLConnection connection = new URL(picUri.toString()).openConnection();
-                        connection.connect();
-                        bufferInputStream = new BufferedInputStream(connection.getInputStream(), 8192);
-                        photo = BitmapFactory.decodeStream(bufferInputStream);
-
-                        mCustomerAvatar.setImageBitmap(photo);
-
-                        firstName.setSelectAllOnFocus(true);
-                        firstName.selectAll();
-                        firstName.requestFocus();
-
-                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                        photo.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
-                        byte[] imagegBytes = byteArrayOutputStream.toByteArray();
-                        customerValues.put(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE, imagegBytes);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    Toast toast = Toast.makeText(getActivity(), R.string.problem_in_crop_image, Toast.LENGTH_LONG);
-                    toast.show();
-                }
+                } else
+                    Toast.makeText(getActivity(), R.string.problem_in_crop_image, Toast.LENGTH_LONG).show();
             }
         }
     }

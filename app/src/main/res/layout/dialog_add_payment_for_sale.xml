@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -13,7 +14,8 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/text_input_layout_dialog_add_payment_for_sale_payment_amount"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
 
             <EditText
                 android:id="@+id/dialog_add_payment_for_sale_payment_amount"
@@ -29,7 +31,8 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/text_input_layout_dialog_add_payment_for_sale_input_due_date"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
 
             <EditText
                 android:id="@+id/dialog_add_payment_for_sale_input_due_date"

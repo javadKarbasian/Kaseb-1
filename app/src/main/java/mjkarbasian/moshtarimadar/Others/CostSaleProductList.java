@@ -292,7 +292,7 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
                             //endregion cost amount
 
                             //region cost date
-                            Utility.setAsteriskToTextInputLayout(costDateTextInputLayout, getResources().getString(R.string.hint_date_picker), true);
+                            Utility.setAsteriskToTextInputLayout(costDateTextInputLayout, getResources().getString(R.string.hint_date), true);
                             //endregion cost date
 
                             //endregion handle asterisk for necessary fields
@@ -467,10 +467,10 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
                                     null, null, null).getCount();
 
                             if (numberUseOfThisProduct > 0)
-                                Toast.makeText(getContext(),
-                                        getActivity().getResources().getString(R.string.confirm_delete_product_list_it_has)
-                                                + numberUseOfThisProduct
-                                                + getActivity().getResources().getString(R.string.confirm_delete_customer_list_factors), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), String.format("%s %d %s",
+                                                getActivity().getResources().getString(R.string.confirm_delete_product_list_it_has_factor),
+                                                numberUseOfThisProduct, getActivity().getResources().getString(R.string.confirm_delete_product_list_it_has)),
+                                        Toast.LENGTH_LONG).show();
                             else {
                                 new AlertDialog.Builder(getActivity())
                                         .setTitle(getActivity().getResources().getString(R.string.confirm_title))
@@ -555,6 +555,10 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
     @Override
     public void onStart() {
         Log.d(LOG_TAG, "onStart");
+
+        costValues = new ContentValues();
+        saleValues = new ContentValues();
+
         super.onStart();
         updateList();
     }

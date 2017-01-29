@@ -21,7 +21,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/item_list_bill_sale_code"
                 style="@style/Base.TextAppearance.AppCompat.Title"
                 android:layout_width="match_parent"
@@ -29,13 +29,14 @@
                 android:layout_weight="1"
                 android:text="@string/sample_2_invoice_code" />
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/item_list_bill_due_date"
                 style="@style/Base.TextAppearance.AppCompat.Caption"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/sample_due_date_1_day" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -44,7 +45,8 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:orientation="vertical">
-            <ImageView
+
+        <ImageView
                 android:id="@+id/item_list_bill_tag_image"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
@@ -52,6 +54,7 @@
                 android:layout_weight="1"
                 android:src="@drawable/open_marked_circle"
                 android:visibility="invisible" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -61,7 +64,7 @@
             android:layout_weight="6"
             android:orientation="vertical">
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/item_list_bill_purchase_amount"
                 style="@style/Base.TextAppearance.AppCompat.Headline"
                 android:layout_width="match_parent"
@@ -69,6 +72,9 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center" />
+
         </LinearLayout>
+
     </LinearLayout>
+
 </FrameLayout>

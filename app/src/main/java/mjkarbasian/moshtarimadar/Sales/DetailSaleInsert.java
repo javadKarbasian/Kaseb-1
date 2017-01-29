@@ -127,7 +127,6 @@ public class DetailSaleInsert extends AppCompatActivity {
     TextView finalAmountSummary;
     TextView paidSummary;
     TextView balanceSummary;
-    EditText saleDate;
     TextView nameCustomer;
     TextView familyCustomer;
     TextView listItemsTitle;
@@ -141,6 +140,7 @@ public class DetailSaleInsert extends AppCompatActivity {
     TextInputLayout taxDiscountPercentTextInputLayout;
 
     EditText saleCode;
+    EditText saleDate;
     EditText paymentAmount;
     EditText paymentDueDate;
     EditText taxAmount;
@@ -200,7 +200,7 @@ public class DetailSaleInsert extends AppCompatActivity {
         //endregion sale code
 
         //region sale date
-        Utility.setAsteriskToTextInputLayout(saleDateTextInputLayout, getResources().getString(R.string.hint_date_picker), true);
+        Utility.setAsteriskToTextInputLayout(saleDateTextInputLayout, getResources().getString(R.string.hint_date), true);
         //endregion sale date
 
         //endregion handle asterisk for necessary fields
@@ -473,6 +473,8 @@ public class DetailSaleInsert extends AppCompatActivity {
                         e.printStackTrace();
                     } catch (DocumentException e) {
                         e.printStackTrace();
+                    } catch (Exception e) {
+                        Toast.makeText(DetailSaleInsert.this, R.string.problem_in_pdf_reader, Toast.LENGTH_LONG).show();
                     }
                     //endregion Print Factor
 
@@ -715,7 +717,7 @@ public class DetailSaleInsert extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                     }
                 })
-                .setTitle(R.string.fab_add_product);
+                .setTitle(R.string.fab_add_payment);
         dialogView = builder.create();
         dialogView.show();
 

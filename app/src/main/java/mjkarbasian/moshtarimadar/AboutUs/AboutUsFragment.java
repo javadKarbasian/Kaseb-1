@@ -2,6 +2,7 @@ package mjkarbasian.moshtarimadar.AboutUs;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import mjkarbasian.moshtarimadar.R;
 
@@ -27,11 +27,11 @@ public class AboutUsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_about_us, container, false);
         yourText = (EditText) view.findViewById(R.id.about_us_your_text);
-        // Inflate the layout for this fragment
+
         return view;
     }
 
@@ -45,17 +45,34 @@ public class AboutUsFragment extends Fragment {
             case R.id.menu_about_us_send: {
 
                 if (yourText.getText().toString().equals("") || yourText.getText().toString().equals(null))
-                    Toast.makeText(getContext(), "Please write your Opinion, Next try send it!", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(yourText.getRootView(), R.string.write_your_mind, Snackbar.LENGTH_INDEFINITE)
+                            .setAction(getResources().getString(R.string.ok_button), new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    yourText.requestFocus();
+                                }
+                            })
+                            .setActionTextColor(getResources().getColor(R.color.colorAccent))
+                            .show();
                 else {
                     Intent emailIntent = new Intent(Intent.ACTION_SEND);
                     emailIntent.setType("message/rfc822");
                     emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"androidteam@chmail.ir"});
-                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Opinion from customer");
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.opinion_email_title));
                     emailIntent.putExtra(Intent.EXTRA_TEXT, yourText.getText().toString());
+                    emailIntent.putExtra(Intent.EXTRA_PHONE_NUMBER, "+989194930521");
                     try {
                         startActivity(Intent.createChooser(emailIntent, "Send mail..."));
                     } catch (android.content.ActivityNotFoundException ex) {
-                        Toast.makeText(getContext(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(yourText.getRootView(), R.string.no_email_app, Snackbar.LENGTH_INDEFINITE)
+                                .setAction(getResources().getString(R.string.ok_button), new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        yourText.requestFocus();
+                                    }
+                                })
+                                .setActionTextColor(getResources().getColor(R.color.colorAccent))
+                                .show();
                     }
                 }
                 break;

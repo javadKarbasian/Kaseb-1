@@ -50,9 +50,8 @@ public class PaymentAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        if (convertView == null) {
+        if (convertView == null)
             view = inflater.inflate(R.layout.list_item_payment_for_sale, null);
-        }
 
         TextView amountText = (TextView) view.findViewById(R.id.payment_list_for_sale_amount);
         TextView duedateText = (TextView) view.findViewById(R.id.payment_list_for_sale_due_date);
@@ -69,14 +68,13 @@ public class PaymentAdapter extends BaseAdapter {
         typeText.setText(
                 mPaymentDetailsListHashMap.get(position).get("type"));
 
-        if(mPaymentDetailsListHashMap.get(position).get("type").equals("Cheque"))
-        {    isPassCheckBox.setVisibility(View.VISIBLE);
-             isPassCheckBox.setChecked(Boolean.parseBoolean(mPaymentDetailsListHashMap.get(position).get("isPass")));
-             isPassCheckBox.setEnabled(parent.isEnabled());
+        if (mPaymentDetailsListHashMap.get(position).get("type").equals(mContext.getString(R.string.cheque_title))) {
+            isPassCheckBox.setVisibility(View.VISIBLE);
+            isPassCheckBox.setChecked(Boolean.parseBoolean(mPaymentDetailsListHashMap.get(position).get("isPass")));
+            isPassCheckBox.setEnabled(false);
         }
         return view;
     }
-
 
     @Override
     public boolean isEnabled(int position) {

@@ -5,20 +5,23 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
-    <ListView
-        android:id="@+id/list_view_fragment_card_view_products"
+    <LinearLayout
+        android:id="@+id/linear_layout_fragment_card_view_products"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:divider="@drawable/divider_list" />
+        android:divider="@drawable/divider_list"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/empty_text_view"
-        style="@style/Base.TextAppearance.AppCompat.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:visibility="gone" />
+        <TextView
+            android:id="@+id/empty_text_view"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:visibility="gone" />
+
+    </LinearLayout>
 
 </FrameLayout>

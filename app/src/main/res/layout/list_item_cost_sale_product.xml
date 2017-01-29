@@ -20,7 +20,7 @@
             android:layout_weight="6"
             android:orientation="vertical">
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/item_list_name"
                 style="@style/Base.TextAppearance.AppCompat.Title"
                 android:layout_width="fill_parent"
@@ -29,7 +29,7 @@
                 android:maxLength="@integer/max_length_list_item_headline"
                 android:maxLines="@integer/max_line_list_item_headline" />
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/item_list_code"
                 style="@style/Base.TextAppearance.AppCompat.Subhead"
                 android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                 android:text="@string/sample_2_invoice_code"
                 android:transitionName="@string/code_text_transition" />
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/item_list_date"
                 style="@style/Base.TextAppearance.AppCompat.Caption"
                 android:layout_width="match_parent"
@@ -66,6 +66,7 @@
                 android:contentDescription="@string/cost_sale_product_tag_image_title"
                 android:src="@drawable/open_marked_circle"
                 android:visibility="invisible" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -74,7 +75,7 @@
             android:layout_weight="6"
             android:orientation="vertical">
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/item_list_amount"
                 style="@style/Base.TextAppearance.AppCompat.Headline"
                 android:layout_width="match_parent"
@@ -83,6 +84,9 @@
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
                 android:text="@string/sample_text_purchase_of_customer_amount" />
+
         </LinearLayout>
+
     </LinearLayout>
+
 </FrameLayout>

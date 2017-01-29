@@ -21,7 +21,7 @@
             android:gravity="start"
             android:orientation="vertical">
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/item_list_cost_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                 android:textColorHint="@color/colorBlack"
                 android:textSize="@dimen/text_size_in_list" />
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/item_list_cost_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                 android:textColorHint="@color/colorBlack"
                 android:textSize="@dimen/text_size_in_list" />
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/item_list_cost_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
+            <mjkarbasian.moshtarimadar.Helpers.AutoResizeTextView
                 android:id="@+id/item_list_cost_amount"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -73,6 +73,9 @@
                 android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorBlack"
                 android:textSize="@dimen/text_size_in_list" />
+
         </LinearLayout>
+
     </LinearLayout>
+
 </FrameLayout>

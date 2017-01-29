@@ -23,24 +23,36 @@
         android:showAsAction="ifRoom"
         android:title="@string/set_membership"
         app:showAsAction="always">
+
         <menu>
+
             <item
                 android:checkable="false"
                 android:enabled="false"
-                android:title="@string/set_membership"></item>
+                android:title="@string/set_membership" />
+
             <item
                 android:id="@+id/gold_member"
+                android:icon="@drawable/star_gold"
                 android:title="@string/gold_member" />
+
             <item
                 android:id="@+id/silver_member"
+                android:icon="@drawable/star_silver"
                 android:title="@string/silver_memer" />
+
             <item
                 android:id="@+id/bronze_member"
+                android:icon="@drawable/star_bronze"
                 android:title="@string/bronze_member" />
+
             <item
                 android:id="@+id/non_member"
+                android:icon="@drawable/star_ordinary"
                 android:title="@string/non_member" />
+
         </menu>
+
     </item>
 
 </menu>

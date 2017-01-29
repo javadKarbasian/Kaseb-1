@@ -29,6 +29,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+
 import mjkarbasian.moshtarimadar.Adapters.DetailProductAdapter;
 import mjkarbasian.moshtarimadar.Data.KasebContract;
 import mjkarbasian.moshtarimadar.Helpers.Utility;
@@ -46,8 +48,12 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
     DetailProductAdapter mAdapter = null;
     Long productId;
     FloatingActionButton fab;
+    TextView productStock;
+    Long stockProduct = 0l;
+
     ContentValues productHistoryValues = new ContentValues();
     ContentValues productValues = new ContentValues();
+
     EditText productName;
     EditText productCode;
     EditText productUnit;
@@ -58,12 +64,13 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
     EditText buyDate;
     EditText discountAmount;
     EditText discountPercent;
-    TextView productStock;
+
     MenuItem saveItem;
     MenuItem editItem;
+
     AlertDialog.Builder builder;
     AlertDialog dialogView;
-    Long stockProduct = 0l;
+
     TextInputLayout productNameTextInputLayout;
     TextInputLayout productCodeTextInputLayout;
     TextInputLayout productUnitTextInputLayout;
@@ -74,6 +81,7 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
     TextInputLayout buyDateTextInputLayout;
     TextInputLayout discountAmountTextInputLayout;
     TextInputLayout discountPercentTextInputLayout;
+
     private Uri insertUri;
     //endregion Declare Values & Views
 
@@ -149,26 +157,30 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                         Boolean wantToCloseDialog = false;
 
                         //region edit product
-                        if (checkValidityWithChangeColorOfHelperTextForProductHistoryInsert()) {
-                            productHistoryValues.put(KasebContract.ProductHistory.COLUMN_COST,
-                                    Utility.convertFarsiNumbersToDecimal(buyPrice.getText().toString()));
-                            productHistoryValues.put(KasebContract.ProductHistory.COLUMN_QUANTITY,
-                                    Utility.convertFarsiNumbersToDecimal(quantity.getText().toString()));
-                            productHistoryValues.put(KasebContract.ProductHistory.COLUMN_SALE_PRICE,
-                                    Utility.convertFarsiNumbersToDecimal(salePrice.getText().toString()));
-                            productHistoryValues.put(KasebContract.ProductHistory.COLUMN_DATE, buyDate.getText().toString());
-                            productHistoryValues.put(KasebContract.ProductHistory.COLUMN_PRODUCT_ID, productId);
+                        try {
+                            if (checkValidityWithChangeColorOfHelperTextForProductHistoryInsert()) {
+                                productHistoryValues.put(KasebContract.ProductHistory.COLUMN_COST,
+                                        Utility.convertFarsiNumbersToDecimal(buyPrice.getText().toString()));
+                                productHistoryValues.put(KasebContract.ProductHistory.COLUMN_QUANTITY,
+                                        Utility.convertFarsiNumbersToDecimal(quantity.getText().toString()));
+                                productHistoryValues.put(KasebContract.ProductHistory.COLUMN_SALE_PRICE,
+                                        Utility.convertFarsiNumbersToDecimal(salePrice.getText().toString()));
+                                productHistoryValues.put(KasebContract.ProductHistory.COLUMN_DATE, buyDate.getText().toString());
+                                productHistoryValues.put(KasebContract.ProductHistory.COLUMN_PRODUCT_ID, productId);
 
-                            insertUri = getActivity().getContentResolver().insert(
-                                    KasebContract.ProductHistory.CONTENT_URI,
-                                    productHistoryValues
-                            );
-                            Toast.makeText(getActivity(), getResources().getString(R.string.msg_insert_succeed), Toast.LENGTH_LONG).show();
+                                insertUri = getActivity().getContentResolver().insert(
+                                        KasebContract.ProductHistory.CONTENT_URI,
+                                        productHistoryValues
+                                );
+                                Toast.makeText(getActivity(), getResources().getString(R.string.msg_insert_succeed), Toast.LENGTH_LONG).show();
 
-                            wantToCloseDialog = true;
+                                wantToCloseDialog = true;
 
-                            Utility.setHeightOfListView(mListView);
-                            getHelperText();
+                                Utility.setHeightOfListView(mListView);
+                                getHelperText();
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
                         }
                         //endregion edit product
 
@@ -210,7 +222,7 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
                 //endregion buy price
 
                 //region buy date
-                Utility.setAsteriskToTextInputLayout(buyDateTextInputLayout, getResources().getString(R.string.hint_date_picker), true);
+                Utility.setAsteriskToTextInputLayout(buyDateTextInputLayout, getResources().getString(R.string.hint_date), true);
                 //endregion buy date
 
                 //endregion handle asterisk for necessary fields
@@ -406,6 +418,9 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
     public void onStart() {
         Log.d(LOG_TAG, "onStart");
 
+        productHistoryValues = new ContentValues();
+        productValues = new ContentValues();
+
         productName = (EditText) getActivity().findViewById(R.id.detail_product_name);
         productCode = (EditText) getActivity().findViewById(R.id.detail_product_code);
         productUnit = (EditText) getActivity().findViewById(R.id.detail_product_unit);
@@ -528,7 +543,7 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
     }
 
     // this method check the validation and correct entries. its check fill first and then check the validation rules.
-    private boolean checkValidityWithChangeColorOfHelperTextForProductHistoryInsert() {
+    private boolean checkValidityWithChangeColorOfHelperTextForProductHistoryInsert() throws ParseException {
 
         if (!Utility.checkForValidityForEditTextNullOrEmpty(getActivity(), salePrice)) {
             salePriceTextInputLayout.setError(getResources().getString(R.string.example_price));
@@ -557,8 +572,8 @@ public class DetailProducts extends Fragment implements LoaderManager.LoaderCall
             buyPrice.requestFocus();
             return false;
         } else {
-            Float mBuyPrice = Float.valueOf(buyPrice.getText().toString());
-            Float mSalePrice = Float.valueOf(salePrice.getText().toString());
+            Float mBuyPrice = Utility.createFloatNumberWithString(getActivity(), buyPrice.getText().toString());
+            Float mSalePrice = Utility.createFloatNumberWithString(getActivity(), salePrice.getText().toString());
 
             if (mBuyPrice > mSalePrice) {
                 buyPriceTextInputLayout.setError(String.format("%s %s",
