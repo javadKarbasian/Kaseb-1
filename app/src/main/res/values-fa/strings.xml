@@ -348,7 +348,7 @@
     <string name="choose_customer_error_for_sale">یک مشتری انتخاب کن</string>
     <string name="click_here_choose_customer">برای انتخاب مشتری، اینجا کلیک کن</string>
     <string name="detail_customer_toolbar_title">مشخصات مشتری</string>
-    <string name="intro_kaseb_slang">هوای مشتری ها رو داشته باش</string>
+    <string name="intro_kaseb_slang">هوای مشتری هاتو داشته باش</string>
     <string name="no_data_text_customers_states">مشتری های خود را ثبت کنید</string>
     <string name="no_data_text_sale">فاکتور فروش های خود را ثبت کنید</string>
     <string name="sales_pdf_meta_data_author">کاسب</string>

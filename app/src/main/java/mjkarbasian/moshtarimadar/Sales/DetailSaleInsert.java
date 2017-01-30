@@ -128,7 +128,6 @@ public class DetailSaleInsert extends AppCompatActivity {
     TextView paidSummary;
     TextView balanceSummary;
     TextView nameCustomer;
-    TextView familyCustomer;
     TextView listItemsTitle;
 
     TextInputLayout saleCodeTextInputLayout;
@@ -179,7 +178,6 @@ public class DetailSaleInsert extends AppCompatActivity {
         paidSummary = (TextView) findViewById(R.id.card_detail_sale_summary_payed);
         balanceSummary = (TextView) findViewById(R.id.card_detail_sale_summary_balance);
         nameCustomer = (TextView) findViewById(R.id.detail_sales_info_customer_name);
-        familyCustomer = (TextView) findViewById(R.id.detail_sales_info_customer_family);
         customerAvatar = (RoundImageView) findViewById(R.id.detail_sale_customer_image);
         saleCode = (EditText) findViewById(R.id.detail_sales_info_sale_code);
         saleCodeTextInputLayout = (TextInputLayout) findViewById(R.id.text_input_layout_detail_sales_info_sale_code);
@@ -330,6 +328,7 @@ public class DetailSaleInsert extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case R.id.save:
+
                 //region Save
                 //region SetValues
                 saleCode = (EditText) findViewById(R.id.detail_sales_info_sale_code);
@@ -417,6 +416,7 @@ public class DetailSaleInsert extends AppCompatActivity {
                                 Utility.convertFarsiNumbersToDecimal(String.valueOf(
                                         Long.valueOf(mPaymentListMap.get(i).get("amount").toString()))));
                         paymentValues.put(KasebContract.DetailSalePayments.COLUMN_PAYMENT_METHOD_ID, mPaymentListMap.get(i).get("id").toString());
+                        paymentValues.put(KasebContract.DetailSalePayments.COLUMN_IS_PASS, Boolean.parseBoolean(mPaymentListMap.get(i).get("isPass")));
 
                         paymentValuesArray[i] = paymentValues;
                     }
@@ -450,8 +450,7 @@ public class DetailSaleInsert extends AppCompatActivity {
                     //endregion Insert DetailSaleTaxes
 
                     //just a message to show everything are under control
-                    Toast.makeText(DetailSaleInsert.this,
-                            getApplicationContext().getResources().getString(R.string.msg_insert_succeed), Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailSaleInsert.this, getApplicationContext().getResources().getString(R.string.msg_insert_succeed), Toast.LENGTH_LONG).show();
 
                     mDb.setTransactionSuccessful();
                     mDb.endTransaction();
@@ -466,7 +465,7 @@ public class DetailSaleInsert extends AppCompatActivity {
 
                     try {
                         Utility.printInvoice(mContext, saleDate.getText().toString(), saleCode.getText().toString(),
-                                nameCustomer.getText().toString(), familyCustomer.getText().toString(),
+                                nameCustomer.getText().toString(),
                                 mSummaryOfInvoice, customerId, insertUri.getLastPathSegment().toString(),
                                 mChosenProductListMap, mTaxListMap, mPaymentListMap);
                     } catch (IOException e) {
@@ -526,8 +525,8 @@ public class DetailSaleInsert extends AppCompatActivity {
 
                         Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                         if (cursor != null) {
-                            nameCustomer.setText(cursor.getString(cursor.getColumnIndex(KasebContract.Customers.COLUMN_FIRST_NAME)));
-                            familyCustomer.setText(cursor.getString(cursor.getColumnIndex(KasebContract.Customers.COLUMN_LAST_NAME)));
+                            nameCustomer.setText(cursor.getString(cursor.getColumnIndex(KasebContract.Customers.COLUMN_FIRST_NAME))
+                                    + " " + cursor.getString(cursor.getColumnIndex(KasebContract.Customers.COLUMN_LAST_NAME)));
                             customerId = Long.parseLong(cursor.getString(cursor.getColumnIndex(KasebContract.Customers._ID)));
                             final byte[] imagegBytes = cursor.getBlob(cursor.getColumnIndex(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE));
                             try {

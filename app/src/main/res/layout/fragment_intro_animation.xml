@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:alpha="0.7"
+    android:background="@drawable/back_ground_mall"
     tools:context=".MainActivity">
 
     <LinearLayout

@@ -131,7 +131,6 @@ public class DetailSaleView extends AppCompatActivity {
     TextView paidSummary;
     TextView balanceSummary;
     TextView nameCustomer;
-    TextView familyCustomer;
 
     EditText paymentAmount;
     EditText paymentDueDate;
@@ -185,7 +184,6 @@ public class DetailSaleView extends AppCompatActivity {
         paidSummary = (TextView) findViewById(R.id.card_detail_sale_summary_payed);
         balanceSummary = (TextView) findViewById(R.id.card_detail_sale_summary_balance);
         nameCustomer = (TextView) findViewById(R.id.detail_sales_info_customer_name);
-        familyCustomer = (TextView) findViewById(R.id.detail_sales_info_customer_family);
         customerAvatar = (RoundImageView) findViewById(R.id.detail_sale_customer_image);
 
         bundleCardViewFragments = new Bundle();
@@ -272,11 +270,6 @@ public class DetailSaleView extends AppCompatActivity {
         saleDate.setEnabled(false);
 
         addCustomerLayout.setEnabled(false);
-
-        mProductLinearLayout.setEnabled(false);
-        mPaymentLinearLayout.setEnabled(false);
-        mTaxLinearLayout.setEnabled(false);
-
         imageButtonProducts.setEnabled(false);
         imageButtonPayments.setEnabled(false);
         imageButtonTaxes.setEnabled(false);
@@ -365,11 +358,11 @@ public class DetailSaleView extends AppCompatActivity {
                 nameCustomer.setText(
                         mCursorInitialize.getString(
                                 mCursorInitialize.getColumnIndex(
-                                        KasebContract.Customers.COLUMN_FIRST_NAME)));
-                familyCustomer.setText(
-                        mCursorInitialize.getString(
-                                mCursorInitialize.getColumnIndex(
-                                        KasebContract.Customers.COLUMN_LAST_NAME)));
+                                        KasebContract.Customers.COLUMN_FIRST_NAME))
+                                + " " +
+                                mCursorInitialize.getString(
+                                        mCursorInitialize.getColumnIndex(
+                                                KasebContract.Customers.COLUMN_LAST_NAME)));
 
                 imagegBytes = mCursorInitialize.getBlob(mCursorInitialize.getColumnIndex(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE));
             }
@@ -535,6 +528,10 @@ public class DetailSaleView extends AppCompatActivity {
                 mCardViewTaxes.getTaxAdapter(mTaxListMap);
             }
         //endregion Get Taxes
+
+        Utility.setStatusEnableForAllChildrenOfLinearLayout(mProductLinearLayout, false);
+        Utility.setStatusEnableForAllChildrenOfLinearLayout(mPaymentLinearLayout, false);
+        Utility.setStatusEnableForAllChildrenOfLinearLayout(mTaxLinearLayout, false);
     }
 
     @Override
@@ -564,7 +561,7 @@ public class DetailSaleView extends AppCompatActivity {
 
                     try {
                         Utility.printInvoice(mContext, saleDate.getText().toString(), saleCode.getText().toString(),
-                                nameCustomer.getText().toString(), familyCustomer.getText().toString(),
+                                nameCustomer.getText().toString(),
                                 mSummaryOfInvoice, customerId, String.valueOf(whichDetailSaleId),
                                 mChosenProductListMap, mTaxListMap, mPaymentListMap);
                     } catch (IOException e) {
@@ -688,7 +685,6 @@ public class DetailSaleView extends AppCompatActivity {
                     count = mPaymentListMap.size();
                     paymentValuesArray = new ContentValues[count];
 
-
                     for (int i = 0; i < count; i++) {
                         paymentValues = new ContentValues();
 
@@ -699,6 +695,7 @@ public class DetailSaleView extends AppCompatActivity {
                                         Long.valueOf(mPaymentListMap.get(i).get("amount").toString()))));
                         paymentValues.put(KasebContract.DetailSalePayments.COLUMN_PAYMENT_METHOD_ID, mPaymentListMap.get(i).get("id").toString());
                         paymentValues.put(KasebContract.DetailSalePayments.COLUMN_IS_PASS, Boolean.parseBoolean(mPaymentListMap.get(i).get("isPass")));
+                        paymentValues.put(KasebContract.DetailSalePayments.COLUMN_MODIFIED_DATE, Utility.preInsertDate(mContext));
 
                         paymentValuesArray[i] = paymentValues;
                     }
@@ -749,9 +746,9 @@ public class DetailSaleView extends AppCompatActivity {
                     saleDate.setEnabled(false);
 
 
-                    mProductLinearLayout.setClickable(false);
-                    mPaymentLinearLayout.setEnabled(false);
-                    mTaxLinearLayout.setEnabled(false);
+                    Utility.setStatusEnableForAllChildrenOfLinearLayout(mProductLinearLayout, false);
+                    Utility.setStatusEnableForAllChildrenOfLinearLayout(mPaymentLinearLayout, false);
+                    Utility.setStatusEnableForAllChildrenOfLinearLayout(mTaxLinearLayout, false);
 
                     imageButtonProducts.setEnabled(false);
                     imageButtonPayments.setEnabled(false);
@@ -767,7 +764,7 @@ public class DetailSaleView extends AppCompatActivity {
 
                     try {
                         Utility.printInvoice(mContext, saleDate.getText().toString(), saleCode.getText().toString(),
-                                nameCustomer.getText().toString(), familyCustomer.getText().toString(),
+                                nameCustomer.getText().toString(),
                                 mSummaryOfInvoice, customerId, String.valueOf(whichDetailSaleId),
                                 mChosenProductListMap, mTaxListMap, mPaymentListMap);
                     } catch (IOException e) {
@@ -794,9 +791,9 @@ public class DetailSaleView extends AppCompatActivity {
                 saleCode.setEnabled(true);
                 saleDate.setEnabled(true);
 
-                mProductLinearLayout.setClickable(true);
-                mPaymentLinearLayout.setEnabled(true);
-                mTaxLinearLayout.setEnabled(true);
+                Utility.setStatusEnableForAllChildrenOfLinearLayout(mProductLinearLayout, true);
+                Utility.setStatusEnableForAllChildrenOfLinearLayout(mPaymentLinearLayout, true);
+                Utility.setStatusEnableForAllChildrenOfLinearLayout(mTaxLinearLayout, true);
 
                 imageButtonProducts.setEnabled(true);
                 imageButtonPayments.setEnabled(true);
@@ -858,8 +855,8 @@ public class DetailSaleView extends AppCompatActivity {
 
                         Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                         if (cursor != null) {
-                            nameCustomer.setText(cursor.getString(cursor.getColumnIndex(KasebContract.Customers.COLUMN_FIRST_NAME)));
-                            familyCustomer.setText(cursor.getString(cursor.getColumnIndex(KasebContract.Customers.COLUMN_LAST_NAME)));
+                            nameCustomer.setText(cursor.getString(cursor.getColumnIndex(KasebContract.Customers.COLUMN_FIRST_NAME))
+                                    + " " + cursor.getString(cursor.getColumnIndex(KasebContract.Customers.COLUMN_LAST_NAME)));
                             customerId = Long.parseLong(cursor.getString(cursor.getColumnIndex(KasebContract.Customers._ID)));
                             final byte[] imagegBytes = cursor.getBlob(cursor.getColumnIndex(KasebContract.Customers.COLUMN_CUSTOMER_PICTURE));
                             try {

@@ -57,7 +57,7 @@ public class AboutUsFragment extends Fragment {
                 else {
                     Intent emailIntent = new Intent(Intent.ACTION_SEND);
                     emailIntent.setType("message/rfc822");
-                    emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"androidteam@chmail.ir"});
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"kaseb.team@gmail.com"});
                     emailIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.opinion_email_title));
                     emailIntent.putExtra(Intent.EXTRA_TEXT, yourText.getText().toString());
                     emailIntent.putExtra(Intent.EXTRA_PHONE_NUMBER, "+989194930521");

@@ -12,6 +12,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.design.widget.TextInputLayout;
@@ -23,6 +24,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -184,7 +186,7 @@ public class Utility {
     }
 
     public static void printInvoice(Context mContext, String mSaleDate, String mSaleCode, String mNameCustomer,
-                                    String mFamilyCustomer, ArrayList<Long> mSummaryOfInvoice,
+                                    ArrayList<Long> mSummaryOfInvoice,
                                     Long mCustomerId, String mDetailSaleId,
                                     ArrayList<Map<String, String>> mChosenProductListMap,
                                     ArrayList<Map<String, String>> mTaxListMap,
@@ -232,7 +234,7 @@ public class Utility {
 
         mTextFactor.put("saleCode", mSaleCode);
         mTextFactor.put("saleDate", mSaleDate);
-        mTextFactor.put("customerInfo", mNameCustomer + "   " + mFamilyCustomer);
+        mTextFactor.put("customerInfo", mNameCustomer);
 
         mTextFactor.put("totalAmount",
                 Utility.formatPurchase(
@@ -1800,5 +1802,21 @@ public class Utility {
                 .setNegativeButton(android.R.string.no, null)
                 .show();
 
+    }
+
+    public static void createTypeFaceWithSize(TextView mTextView) throws IOException, DocumentException {
+        Typeface mTypeface;
+        if (mTextView.getContext().getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+            mTypeface = Typeface.createFromAsset(
+                    mTextView.getContext().getApplicationContext().getAssets(), "fonts/bmitra.ttf");
+        } else
+            mTypeface = Typeface.create("sans-serif-light", Typeface.BOLD);
+
+        mTextView.setTypeface(mTypeface);
+    }
+
+    public static void setStatusEnableForAllChildrenOfLinearLayout(LinearLayout mLinearLayout, Boolean mEnabled) {
+        for (int i = 0; i < mLinearLayout.getChildCount(); i++)
+            mLinearLayout.getChildAt(i).setEnabled(mEnabled);
     }
 }
