@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 
-import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.Others.DrawerActivity;
 import mjkarbasian.moshtarimadar.R;
 
@@ -84,6 +83,8 @@ public class Debtors extends DrawerActivity {
 
     @Override
     public void onBackPressed() {
-        Utility.activityOnBackExit(this);
+//        Utility.activityOnBackExit(this);
+        super.onBackPressed();
+
     }
 }

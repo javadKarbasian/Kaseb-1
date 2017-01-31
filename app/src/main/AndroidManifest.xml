@@ -27,7 +27,8 @@
             android:parentActivityName=".Sales.Sales"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:launchMode="singleTask">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -41,7 +42,8 @@
             android:parentActivityName=".Sales.Sales"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:launchMode="singleTask">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -52,10 +54,10 @@
         <activity
             android:name=".Customers.Customers"
             android:label="@string/title_customer"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:launchMode="singleTask">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -73,7 +75,8 @@
             android:label="@string/title_debator"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:launchMode="singleTask">
 
             <meta-data
                 android:name="android.app.searchable"
@@ -84,11 +87,11 @@
         <activity
             android:name=".Sales.Sales"
             android:label="@string/title_activity_sales"
-            android:launchMode="singleTop"
             android:parentActivityName=".Customers.Customers"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:launchMode="singleTask">
 
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -107,10 +110,10 @@
         <activity
             android:name=".Costs.Costs"
             android:label="@string/title_activity_costs"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:launchMode="singleTask">
 
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -129,11 +132,11 @@
         <activity
             android:name=".Products.Products"
             android:label="@string/title_activity_products"
-            android:launchMode="singleTop"
             android:parentActivityName=".Customers.Customers"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:launchMode="singleTask">
 
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -153,7 +156,8 @@
             android:name=".Customers.DetailCustomer"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:launchMode="singleTask">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -177,20 +181,23 @@
             android:label="@string/title_activity_my_setting"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:launchMode="singleTask"/>
 
         <activity
             android:name=".Dashboard"
             android:label="@string/title_activity_dashboard"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:launchMode="singleTask"/>
 
         <activity
             android:name=".AboutUs.AboutUs"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:launchMode="singleTask">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -201,7 +208,8 @@
         <activity
             android:name=".Others.Kaseb"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:launchMode="singleTask">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

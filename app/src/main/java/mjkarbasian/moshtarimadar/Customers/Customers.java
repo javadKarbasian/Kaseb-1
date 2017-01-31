@@ -32,7 +32,6 @@ import java.net.URLConnection;
 
 import mjkarbasian.moshtarimadar.Data.KasebContract;
 import mjkarbasian.moshtarimadar.Helpers.GalleryUtil;
-import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.Others.DrawerActivity;
 import mjkarbasian.moshtarimadar.R;
 
@@ -84,11 +83,15 @@ public class Customers extends DrawerActivity {
     public void onBackPressed() {
         try {
             if (!fragmentManager.findFragmentByTag("customerInsertTag").isResumed())
-                Utility.activityOnBackExit(this);
+//                Utility.activityOnBackExit(this);
+                super.onBackPressed();
+
             else
                 super.onBackPressed();
         } catch (Exception e) {
-            Utility.activityOnBackExit(this);
+//            Utility.activityOnBackExit(this);
+            super.onBackPressed();
+
         }
     }
 
