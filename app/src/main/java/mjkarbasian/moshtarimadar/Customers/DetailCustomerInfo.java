@@ -56,13 +56,10 @@ public class DetailCustomerInfo extends Fragment {
         super();
     }
 
-    public DetailCustomerInfo(Uri uri) {
-        super();
-        uriCursor = uri;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        uriCursor =Uri.parse(getArguments().getString("uriCursor"));
         View view = inflater.inflate(R.layout.customer_info, container, false);
 
         customerFirstName = (EditText) view.findViewById(R.id.customer_first_name);

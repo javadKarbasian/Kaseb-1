@@ -126,7 +126,11 @@ public class DetailCustomerAdapter extends FragmentStatePagerAdapter {
         Bundle mBundle;
         switch (position) {
             case 0:
-                return new DetailCustomerInfo(uriCursor);
+                mBundle = new Bundle();
+                mBundle.putString("uriCursor", uriCursor.toString());
+                DetailCustomerInfo tab1 = new DetailCustomerInfo();
+                tab1.setArguments(mBundle);
+                return tab1;
             case 1:
                 mBundle = new Bundle();
                 mBundle.putString("uriCursor", uriCursor.toString());

@@ -116,7 +116,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
         if (id == R.id.nav_dashboard) {
             intent = new Intent(this, Dashboard.class);
-//            finish();
+            finish();
             startActivity(intent);
             Utility.setActivityTransition(this);
         }
