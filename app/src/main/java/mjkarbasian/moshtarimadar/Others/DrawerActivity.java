@@ -15,6 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.itextpdf.text.DocumentException;
+
+import java.io.IOException;
+
 import mjkarbasian.moshtarimadar.AboutUs.AboutUs;
 import mjkarbasian.moshtarimadar.Costs.Costs;
 import mjkarbasian.moshtarimadar.Customers.Customers;
@@ -40,7 +44,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     private ActionBarDrawerToggle mDrawerToggle;
     //endregion declare values
 
-    public static void setInfoOfKaseb() {
+    public static void setInfoOfKaseb() throws IOException, DocumentException {
+        Utility.createTypeFaceWithSize(kasebProfileTextView);
         if (kasebSharedPreferences.getString("firstName", null) != null) {
             kasebProfileTextView.setText(
                     String.format("%s  %s", kasebSharedPreferences.getString("firstName", null),
@@ -75,7 +80,13 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         kasebSharedPreferences = getSharedPreferences(getResources().getString(R.string.kasebPreference), MODE_PRIVATE);
         editor = kasebSharedPreferences.edit();
 
-        setInfoOfKaseb();
+        try {
+            setInfoOfKaseb();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
         //endregion handle sharepreference
     }
 
