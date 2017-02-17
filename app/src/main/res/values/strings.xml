@@ -151,7 +151,7 @@
     <string name="states_gold">Golden</string>
     <string name="states_silver">Silver</string>
     <string name="states_bronze">Bronze</string>
-    <string name="states_instart">Ordinary</string>
+    <string name="states_instart">Lead</string>
 
     <!-- CustomerInsert Hints-->
     <string name="hint_first_name">First Name</string>
@@ -463,7 +463,7 @@
     <string name="balance_amount_not_minus_number">Balance Amount is less than zero</string>
     <string name="message_add_profile">Add your information</string>
 
-    <string name="empty_list_text">Not saved data</string>
+    <string name="empty_list_text">There are not any records to show</string>
     <string name="close_activity_dialog_title">Exit</string>
     <string name="close_activity_dialog_message">Exit Kaseb?</string>
     <string name="title_activity_dashboard">Dashboard</string>
