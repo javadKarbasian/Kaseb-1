@@ -45,6 +45,12 @@ public class Dashboard extends DrawerActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+    }
+
+    @Override
     public void onBackPressed() {
 //        Utility.activityOnBackExit(this);
         super.onBackPressed();

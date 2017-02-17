@@ -3,7 +3,6 @@ package mjkarbasian.moshtarimadar.Setting;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import mjkarbasian.moshtarimadar.Helpers.Utility;
 import mjkarbasian.moshtarimadar.Others.DrawerActivity;
 import mjkarbasian.moshtarimadar.R;
 
@@ -29,14 +28,6 @@ public class MySetting extends DrawerActivity {
 
     @Override
     public void onBackPressed() {
-        try {
-            if (fragmentManager.findFragmentByTag("typeFragments").isResumed())
-                super.onBackPressed();
-            else
-                Utility.activityOnBackExit(this);
-
-        } catch (Exception e) {
-            Utility.activityOnBackExit(this);
-        }
+        super.onBackPressed();
     }
 }
