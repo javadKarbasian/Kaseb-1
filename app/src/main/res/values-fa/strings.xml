@@ -1,5 +1,5 @@
 <resources xmlns:xliff="http://schemas.android.com/tools">
-    <string name="app_name">کاسب</string>
+    <string name="app_name">موبایل سی ار ام</string>
 
     <string name="navigation_drawer_open">بازکردن منو</string>
     <string name="navigation_drawer_close">بستن منو</string>
@@ -269,7 +269,7 @@
     <string name="title_activity_settings">تنظیمات</string>
     <string name="title_add_product_for_sale">کالا/خدمات رو انتخاب کن</string>
     <string name="title_add_product_history">تاریخچه قیمت محصول</string>
-    <string name="title_dashboard">وضعیت کاسبی</string>
+    <string name="title_dashboard">وضعیت فروش</string>
     <string name="title_edit_cost">ویرایش هزینه ها</string>
     <string name="title_product_description">توضیحات</string>
     <string name="update_button">ویرایش</string>
@@ -277,7 +277,7 @@
     <string name="title_dialog_add_payment_methods">افزودن مدل پرداخت</string>
     <string name="title_dialog_add_state">افزودن نوع عضویت</string>
     <string name="title_dialog_add_tax_types">افزودن نوع مالیات و تخفیف</string>
-    <string name="pref_header_kaseb">کاسب</string>
+    <string name="pref_header_kaseb">موبایل CRM</string>
     <string name="cost_code_prefix">کد- </string>
     <string name="product_code_prefix">کد- </string>
     <string name="validity_error_dsale_select_product">کالا/خدمات انتخاب نشده است</string>
@@ -310,7 +310,7 @@
     <string name="total_unpaied_title">مجموع پرداخت نشده</string>
     <string name="type_title">نوع</string>
     <string name="quantity_title">تعداد</string>
-    <string name="register_message_copyright">ثبت شده توسط کاسب. ©</string>
+    <string name="register_message_copyright">ثبت شده توسط موبایل CRM. ©</string>
     <string name="row_title">سطر</string>
     <string name="price_title">قیمت</string>
     <string name="percent_title">درصد</string>
@@ -321,9 +321,9 @@
     <string name="customer_info">مشتری:</string>
     <string name="buyer_title">خریدار</string>
     <string name="amount_title">مبلغ</string>
-    <string name="seller_address">آدرس کاسب : </string>
-    <string name="seller_info">کاسب : </string>
-    <string name="seller_tell">تلفن کاسب : </string>
+    <string name="seller_address">آدرس  :</string>
+    <string name="seller_info">فروشنده :</string>
+    <string name="seller_tell">تلفن  :</string>
     <string name="seller_title">فروشنده</string>
     <string name="stamp_and_signature">مهر و امضا</string>
     <string name="vas_title">ارزش افزوده</string>
@@ -342,7 +342,7 @@
     <string name="discard_button">انصراف</string>
     <string name="not_more_hundred">درصد مشخص شده، بیشتر از 100 است</string>
     <string name="discount_amount_not_more_than_sale_price">تخفیف گرفته شده بیشتر از قیمت فروش است</string>
-    <string name="pref_header_edit_profile">اطلاعات کاسب</string>
+    <string name="pref_header_edit_profile">اطلاعات کاربر</string>
     <string name="detail_sales_products_items_total">کل</string>
     <string name="buy_date">تاریخ خرید</string>
     <string name="choose_customer_error_for_sale">یک مشتری انتخاب کن</string>
@@ -351,9 +351,9 @@
     <string name="intro_kaseb_slang">هوای مشتری هاتو داشته باش</string>
     <string name="no_data_text_customers_states">مشتری های خود را ثبت کنید</string>
     <string name="no_data_text_sale">فاکتور فروش های خود را ثبت کنید</string>
-    <string name="sales_pdf_meta_data_author">کاسب</string>
-    <string name="sales_pdf_meta_data_creator">کاسب</string>
-    <string name="sales_pdf_meta_data_kew_words">کاسب، فروش، فاکتور</string>
+    <string name="sales_pdf_meta_data_author">موبایل CRM</string>
+    <string name="sales_pdf_meta_data_creator">موبایل CRM</string>
+    <string name="sales_pdf_meta_data_kew_words">فروش، فاکتور</string>
     <string name="sales_pdf_meta_data_title">فاکتور فروش</string>
     <string name="title_product_stock">موجودی</string>
     <string name="import_successful">مخاطب اضافه شد!</string>
@@ -372,7 +372,7 @@
     <string name="contact_debtors">ارتباط با بدهکاران</string>
     <string name="back_tour">قبلی</string>
     <string name="cancel_tour">لغو</string>
-    <string name="title_set_profile">اطلاعات کاسب</string>
+    <string name="title_set_profile">اطلاعات کاربر</string>
 
     <string name="start_tour">شروع</string>
     <string name="finish_tour">پایان</string>
@@ -387,7 +387,7 @@
     <string name="example_last_name">مثال : یعقوبی</string>
     <string name="example_mobile_number">مثال : 09121234567</string>
     <string name="example_date">مثال : 1/1/1395</string>
-    <string name="example_email">مثال : kaseb@gmail.com</string>
+    <string name="example_email">مثال : user@gmail.com</string>
     <string name="example_product_name">مثال : مانیتور سایز بزرگ</string>
     <string name="example_product_code">مثال : کد-1</string>
     <string name="example_price">مثال : 150000</string>
@@ -410,7 +410,7 @@
     <string name="balance_amount_not_minus_number">مبلغ مانده کم تر از صفر شده</string>
     <string name="message_add_profile">مشخصات خودت رو وارد کن</string>
 
-    <string name="title_activity_dashboard">وضعیت کاسبی</string>
+    <string name="title_activity_dashboard">وضعیت فروش</string>
     <string name="amount_not_less_than_sale_price">مبلغ کمتر از صفر شده</string>
     <string name="close_activity_dialog_message">می خوای از کاسب خارج شی؟</string>
     <string name="close_activity_dialog_title">خروج</string>

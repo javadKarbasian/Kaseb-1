@@ -34,8 +34,7 @@ public class KasebDashBoard extends Fragment {
         super.onCreate(savedInstanceState);
 
         //region handle sharepreference
-        String kasebPREFERENCES = "kasebProfile";
-        SharedPreferences kasebSharedPreferences = getContext().getSharedPreferences(kasebPREFERENCES, getContext().MODE_PRIVATE);
+        SharedPreferences kasebSharedPreferences = getContext().getSharedPreferences(getResources().getString(R.string.kasebPreference), getContext().MODE_PRIVATE);
         SharedPreferences.Editor editor = kasebSharedPreferences.edit();
 
         if (kasebSharedPreferences.getString("firstName", null) == null) {

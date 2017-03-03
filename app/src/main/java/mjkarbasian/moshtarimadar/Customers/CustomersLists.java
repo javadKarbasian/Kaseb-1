@@ -46,7 +46,6 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
     CustomerAdapter mCustomerAdapter = null;
     ListView mListView;
     String[] mProjection;
-    String kasebPREFERENCES = "kasebProfile";
 
     SharedPreferences kasebSharedPreferences;
     SharedPreferences.Editor editor;
@@ -72,7 +71,7 @@ public class CustomersLists extends Fragment implements LoaderManager.LoaderCall
                 KasebContract.Customers.COLUMN_CUSTOMER_PICTURE};
 
         //region handle sharepreference
-        kasebSharedPreferences = getActivity().getSharedPreferences(kasebPREFERENCES, getActivity().MODE_PRIVATE);
+        kasebSharedPreferences = getActivity().getSharedPreferences(getActivity().getResources().getString(R.string.kasebPreference), getActivity().MODE_PRIVATE);
         editor = kasebSharedPreferences.edit();
         //endregion handle sharepreference
 

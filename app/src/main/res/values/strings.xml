@@ -1,5 +1,5 @@
 <resources xmlns:xliff="http://schemas.android.com/tools">
-    <string name="app_name">Kaseb</string>
+    <string name="app_name">Mobile CRM</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -219,7 +219,7 @@
     <string name="pref_header_customer">Customer States</string>
     <string name="pref_header_backup">Backup/Restore</string>
     <string name="pref_header_import_contacts">Import Contacts</string>
-    <string name="pref_header_kaseb">Kaseb</string>
+    <string name="pref_header_kaseb">Mobile CRM</string>
     <string name="add_types_setting">Add item</string>
     <string name="title_activity_my_setting">Setting</string>
     <string name="add_new_type">Type name</string>
@@ -297,15 +297,14 @@
     <string name="kaseb_dashboard_others_total_recievables_bronze">Bronze</string>
     <string name="kaseb_dashboard_others_total_recievables_silver">Silver</string>
     <string name="kaseb_dashboard_others_total_recievables_gold">Golden</string>
-    <string name="title_dashboard">Kaseb Dashboard</string>
+    <string name="title_dashboard">Dashboard</string>
     <string name="kaseb_dashboard_recievables_total">Total Recievables</string>
 
     <string name="about_us_my_info">
-    Dear Kaseb(TradesMan)!\nKaseb is an app to manage your relationship with customers, you should know, it\'s
-    not an accounting one. This is CRM. We developed it in order to give you a more focus on your customers as your main property,
+    Dear User!\n Mobile CRM is an app to manage your relationship with customers.We developed it in order to give you a more focus on your customers as your main property,
     more than ever. With this, Firstly you will be able to schedule better to the future; Secondly you will be able to find out
     how many Golden customer do you have and increase them.\nAt last, we do our best to eliminate any bugs and improve all aspects of quality
-    with your aim, then release updated version as soon as possible.\nSo tell us what\'s wrong with this and your opinion about Kaseb.
+    with your aim, then release updated version as soon as possible.\nSo tell us what\'s wrong with this and your opinion about this app.
     </string>
 
     <string name="about_us_hint_your_text">Write your feedback</string>
@@ -325,10 +324,10 @@
     <string name="more_than_total_amount">Is more than total amount</string>
     <string name="save_factor_then_print">To print, save your sale invoice</string>
     <string name="non_repetitive">\n(Non-repetitive)</string>
-    <string name="register_message_copyright">Registered By KASEB. ©</string>
-    <string name="seller_info">Kaseb : </string>
-    <string name="seller_tell">Kaseb phone : </string>
-    <string name="seller_address">Kaseb Address :</string>
+    <string name="register_message_copyright">Registered By Mobile CRM. ©</string>
+    <string name="seller_info">Seller : </string>
+    <string name="seller_tell">phone : </string>
+    <string name="seller_address">Address :</string>
     <string name="customer_info">Customer:</string>
     <string name="invoice_date">Date</string>
     <string name="invoice_sale_code">Sale Code</string>
@@ -349,11 +348,11 @@
     <string name="seller_title">Seller</string>
     <string name="buyer_title">Buyer</string>
     <string name="sales_pdf_meta_data_title">Sale Invoice</string>
-    <string name="sales_pdf_meta_data_subject" translatable="false">Kaseb Release 1.0</string>
-    <string name="sales_pdf_meta_data_kew_words">Kaseb, Sales, Invoice</string>
-    <string name="sales_pdf_meta_data_author">Kaseb</string>
-    <string name="sales_pdf_meta_data_creator">Kaseb</string>
-    <string name="vas_title">VAS</string>
+    <string name="sales_pdf_meta_data_subject" translatable="false">Mobile CRM Release 1.1</string>
+    <string name="sales_pdf_meta_data_kew_words">Sales, Invoice</string>
+    <string name="sales_pdf_meta_data_author">Mobile CRM</string>
+    <string name="sales_pdf_meta_data_creator">Mobile CRM</string>
+    <string name="vas_title">VAT</string>
     <string name="discount_title">Discount</string>
     <string name="passed_cheque_title">: Is passed</string>
     <string name="not_passed_cheque_title">: Isn\'t passed</string>
@@ -404,7 +403,7 @@
     <string name="detail_customer_toolbar_title">Customer Info</string>
     <string name="customer_image_transition" translatable="false">customer_image_transition</string>
     <string name="code_text_transition" translatable="false">code_text_transition</string>
-    <string name="pref_header_edit_profile">Kaseb Profile</string>
+    <string name="pref_header_edit_profile">Profile</string>
     <string name="no_data_text_customers_states">Add some customers</string>
     <string name="no_data_text_sale">Add some invoices</string>
     <string name="import_successful">Import Successful!</string>
@@ -424,8 +423,8 @@
     <string name="back_tour">Back</string>
     <string name="cancel_tour">Cancel</string>
     <string name="start_tour">Start</string>
-    <string name="title_set_profile">Kaseb Profile</string>
-    <string name="kasebPreference" translatable="false">kasebProfile</string>
+    <string name="title_set_profile">User Profile</string>
+    <string name="kasebPreference" translatable="false">userProfile</string>
     <string name="finish_tour">Finish</string>
     <string name="title_customer_insert">Add new customer</string>
     <string name="title_product_insert">Add New Product/Service</string>
@@ -433,14 +432,14 @@
     <string name="choose_member_ship_of_customer">Choose membership </string>
     <string name="choose_type_of_cost">Choose cost type</string>
     <string name="ok_button">OK</string>
-    <string name="kaseb_intro_page_animation" translatable="false">Kaseb Intro Page Animation</string>
-    <string name="avatar_kaseb" translatable="false">Avatar Kaseb</string>
+    <string name="kaseb_intro_page_animation" translatable="false">User Intro Page Animation</string>
+    <string name="avatar_kaseb" translatable="false">Avatar</string>
 
     <string name="example_first_name">Example : Ali</string>
     <string name="example_last_name">Example : Watson</string>
     <string name="example_mobile_number">Example : 09121234567</string>
     <string name="example_date">Example : 2017/1/1</string>
-    <string name="example_email">Example : kaseb@gmail.com</string>
+    <string name="example_email">Example : user@gmail.com</string>
     <string name="example_product_name">Example : Samsung S7</string>
     <string name="example_product_code">Example : P-1</string>
     <string name="example_price">Example : 150000</string>
@@ -465,7 +464,7 @@
 
     <string name="empty_list_text">There are not any records to show</string>
     <string name="close_activity_dialog_title">Exit</string>
-    <string name="close_activity_dialog_message">Exit Kaseb?</string>
+    <string name="close_activity_dialog_message">Exit Mobile CRM?</string>
     <string name="title_activity_dashboard">Dashboard</string>
     <string name="write_your_mind">Please write your opinion, next try to send</string>
     <string name="opinion_email_title">Opinion from customer</string>
