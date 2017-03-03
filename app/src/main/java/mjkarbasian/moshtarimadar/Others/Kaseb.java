@@ -12,7 +12,7 @@ import mjkarbasian.moshtarimadar.R;
 
 public class Kaseb extends AppCompatActivity {
 
-    private IntroFragment kaserbFragment = new IntroFragment();
+    private IntroFragment kasebFragment = new IntroFragment();
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
     @Override
@@ -21,7 +21,7 @@ public class Kaseb extends AppCompatActivity {
         setContentView(R.layout.activity_kaseb);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        fragmentManager.beginTransaction().replace(R.id.container_kaseb, kaserbFragment, "KasebFragment").commit();
+        fragmentManager.beginTransaction().replace(R.id.container_kaseb, kasebFragment, "KasebFragment").commit();
     }
 
 

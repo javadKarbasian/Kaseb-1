@@ -1,5 +1,6 @@
 package mjkarbasian.moshtarimadar.Helpers;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.support.design.widget.TextInputLayout;
 import android.text.Spannable;
@@ -1127,6 +1129,7 @@ public class Utility {
         //endregion add Register paragraph
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private static void createTableInfoForSalesInvoice(HashMap<String, String> mTextHashMapTitles)
             throws DocumentException, IOException {
         PdfPTable table = new PdfPTable(2);

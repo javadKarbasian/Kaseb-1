@@ -10,13 +10,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/image_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
             android:layout_gravity="center"
+            android:src="@drawable/kaseblogo_128"
             android:contentDescription="@string/kaseb_intro_page_animation"
              />
 
@@ -25,12 +28,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:gravity="center"
             android:padding="2dp"
-            android:text="@string/intro_kaseb_slang"
-            android:textColor="@color/colorAccent"
-            android:textSize="32sp"
+            android:text="@string/app_name"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="48sp"
             android:textStyle="bold|italic"
             android:typeface="sans" />
 
