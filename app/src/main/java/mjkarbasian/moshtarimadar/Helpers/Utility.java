@@ -519,7 +519,6 @@ public class Utility {
             Samples.setProductName(context);
             Samples.setProductDate();
             Samples.setProductPrice();
-            Samples.setProductPicture(context);
             Samples.setProducts();
             Samples.setProductsPriceList();
         }

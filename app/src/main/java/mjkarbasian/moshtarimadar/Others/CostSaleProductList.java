@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -348,7 +349,10 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
                         mCursor = (Cursor) parent.getItemAtPosition(position);
                         if (mCursor != null) {
                             View sharedView = view.findViewById(R.id.item_list_code);
-                            Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity(), sharedView, sharedView.getTransitionName()).toBundle();
+                            Bundle bundle = null;
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                                bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity(), sharedView, sharedView.getTransitionName()).toBundle();
+                            }
 
                             Intent detailSale;
                             detailSale = new Intent(getActivity(), DetailSaleView.class);
@@ -369,10 +373,16 @@ public class CostSaleProductList extends Fragment implements LoaderManager.Loade
                             productHistoryBundle.putString("productId", mCursor.getString(mCursor.getColumnIndex(KasebContract.Products._ID)));
                             productHistory.setArguments(productHistoryBundle);
                             fragmentManager = getActivity().getSupportFragmentManager();
-                            fragmentManager.beginTransaction()
-                                    .addSharedElement(sharedView, sharedView.getTransitionName())
-                                    .addToBackStack(null)
-                                    .replace(R.id.container, productHistory, "productFragment2Detail").commit();
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                fragmentManager.beginTransaction()
+                                        .addSharedElement(sharedView, sharedView.getTransitionName())
+                                        .addToBackStack(null)
+                                        .replace(R.id.container, productHistory, "productFragment2Detail").commit();
+                            }else{
+                                fragmentManager.beginTransaction()
+                                        .addToBackStack(null)
+                                        .replace(R.id.container, productHistory, "productFragment2Detail").commit();
+                            }
                         }
                         //endregion Product
                         break;

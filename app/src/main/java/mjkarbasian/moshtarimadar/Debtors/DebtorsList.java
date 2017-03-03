@@ -66,7 +66,10 @@ public class DebtorsList extends Fragment implements LoaderManager.LoaderCallbac
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                 if (cursor != null) {
                     View sharedView = view.findViewById(R.id.item_card_customer_avater);
-                    Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity(), sharedView, sharedView.getTransitionName()).toBundle();
+                    Bundle bundle = null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity(), sharedView, sharedView.getTransitionName()).toBundle();
+                    }
 
                     Intent intent = new Intent(getActivity(), DetailCustomer.class)
                             .setData(KasebContract.Customers.buildCustomerUri(cursor.

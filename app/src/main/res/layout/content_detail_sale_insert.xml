@@ -68,6 +68,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginBottom="@dimen/top_of_list_margin_in_row"
                             android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
                             android:layout_marginTop="@dimen/top_of_list_margin_in_row"
                             android:contentDescription="@string/avatar_customer_insert"
                             android:src="@drawable/kaseb_pic" />
@@ -82,6 +83,7 @@
                             android:gravity="center_vertical|start"
                             android:hint="@string/click_here_choose_customer"
                             android:paddingStart="@dimen/padding_left_text_view"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
                             android:textAppearance="?android:textAppearanceMedium"
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorAccent"
@@ -179,6 +181,12 @@
                         <ImageButton
                             android:id="@+id/content_detail_sale_insert_add_product_image_button"
                             style="@style/sales_card_view_fab"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginLeft="4dp"
                             android:background="@drawable/oval_ripple"
                             android:contentDescription="@string/content_detail_sale_insert_add_product_image_button"
                             android:onClick="fab_detail_sale_add_product"
@@ -293,6 +301,13 @@
                         <ImageButton
                             android:id="@+id/content_detail_sale_insert_add_taxDiscount_image_button"
                             style="@style/sales_card_view_fab"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginLeft="4dp"
+                            android:background="@drawable/oval_ripple"
                             android:onClick="fab_detail_sale_add_taxDiscount"
                             android:src="@drawable/plus" />
 
@@ -397,6 +412,13 @@
                         <ImageButton
                             android:id="@+id/content_detail_sale_insert_add_payment_image_button"
                             style="@style/sales_card_view_fab"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginLeft="4dp"
+                            android:background="@drawable/oval_ripple"
                             android:onClick="fab_detail_sale_add_payment"
                             android:src="@drawable/plus" />
 

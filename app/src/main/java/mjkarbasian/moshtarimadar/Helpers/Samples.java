@@ -309,12 +309,7 @@ public class Samples {
         productPrice.add("760000");
     }
 
-    public static void setProductPicture(Context context) {
-        int[] productPicture = new int[]{R.raw.pr01, R.raw.pr02, R.raw.pr03, R.raw.pr04, R.raw.pr05, R.raw.pr06};
-        for (int pic : productPicture) {
-            productPics.add(Integer.toString(pic));
-        }
-    }
+
 
     public static void setProducts() {
         Collections.reverse(productCode);
